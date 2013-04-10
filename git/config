@@ -6,3 +6,5 @@
     editor = gvim --nofork
 [alias]
     st = status
+[push]
+    default = simple
