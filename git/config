@@ -1,0 +1,8 @@
+# vim:ft=gitconfig:
+[user]
+    name = aliva
+    email = ali.vakilzade@gmail.com
+[core]
+    editor = gvim --nofork
+[alias]
+    st = status
