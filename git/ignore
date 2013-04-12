@@ -1,0 +1,5 @@
+# vim:ft=gitconfig:
+
+# python
+*.pyc
+__pycache__
