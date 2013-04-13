@@ -3,3 +3,6 @@
 # python
 *.pyc
 __pycache__
+
+# vim
+*.swp
