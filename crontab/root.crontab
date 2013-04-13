@@ -1,0 +1,2 @@
+# vim:set ft=crontab:
+55 6 * * * /sbin/halt -p
