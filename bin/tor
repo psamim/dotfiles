@@ -1,0 +1,3 @@
+#!/bin/sh
+
+$HOME_BIN_PATH/tor-browser_en-US/start-tor-browser
