@@ -1,5 +1,9 @@
 # vim:ft=gitconfig:
 
+# eclipse
+.project
+.pydevproject
+
 # python
 *.pyc
 __pycache__
