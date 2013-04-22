@@ -5,6 +5,7 @@ set -x HOME_BIN_PATH ~/bin
 
 # sudo
 alias s='sudo'
+alias yum='sudo yum'
 
 # python
 alias p2='python2'
