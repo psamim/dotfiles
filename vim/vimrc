@@ -1,3 +1,6 @@
+" general {{{
+let g:vim_data_path = expand("$HOME") . "/.vim/data/"
+" }}
 " fish {{{
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
@@ -6,4 +9,7 @@ endif
 " pathogen {{{
 source ~/.vim/bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+" }}}
+" startup {{{
+source ~/.vim/startup/plugins.vim
 " }}}
