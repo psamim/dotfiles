@@ -12,4 +12,5 @@ execute pathogen#infect()
 " }}}
 " startup {{{
 source ~/.vim/startup/plugins.vim
+source ~/.vim/startup/mappings.vim
 " }}}
