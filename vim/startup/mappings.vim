@@ -2,6 +2,8 @@
 nmap ; :
 " }}}
 " line number {{{
-nmap <F1> :set number!<CR>
-nmap <C-F1> :set relativenumber!<CR>
+nmap <silent>   <F1>      :set number!<CR>
+nmap <silent> <C-F1>      :set relativenumber!<CR>
+imap <silent>   <F1> <ESC>:set number!<CR>a
+imap <silent> <C-F1> <ESC>:set relativenumber!<CR>a
 " }}}
