@@ -1,5 +1,11 @@
 # binary files are here
-set -x PATH ~/Workspace/dotfiles/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin
+set -x PATH ~/Workspace/dotfiles/bin
+set -x PATH $PATH ~/Workspace/dotfiles/bin/local
+set -x PATH $PATH /usr/local/bin
+set -x PATH $PATH /usr/bin
+set -x PATH $PATH /bin
+set -x PATH $PATH /usr/sbin
+set -x PATH $PATH /sbin
 
 set -x HOME_BIN_PATH ~/bin
 

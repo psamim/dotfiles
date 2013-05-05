@@ -1,3 +1,0 @@
-#!/bin/sh
-
-$HOME_BIN_PATH/bitcoin/bin/64/bitcoin-qt
