@@ -1,0 +1,3 @@
+#!/usr/local/bin/fish
+
+killall transmission-gtk

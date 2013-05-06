@@ -22,7 +22,5 @@
 # 
 # m h  dom mon dow   command
 
-#10 2 * * * export DISPLAY=:0 && transmission-gtk
 10 2 * * * ~/Workspace/dotfiles/bin/nightjob
-50 6 * * * killall transmission-gtk
-
+50 6 * * * ~/Workspace/dotfiles/bin/morningjob
