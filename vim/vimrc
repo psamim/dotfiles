@@ -1,6 +1,6 @@
 " general {{{
 let g:vim_data_path = expand("$HOME") . "/.vim/data/"
-" }}
+" }}}
 " fish {{{
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
