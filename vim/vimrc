@@ -17,4 +17,5 @@ execute pathogen#infect()
 source ~/.vim/startup/options.vim
 source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
+source ~/.vim/startup/autocmd.vim
 " }}}
