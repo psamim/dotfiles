@@ -1,3 +1,10 @@
+" 04 displaying text {{{
+if has('gui_running')
+    " start gvim maximized
+    set columns=999
+    set lines=999
+endif
+" }}}
 "  7 multiple tab pages {{{
 set showtabline=2 " always show tabbar
 " }}}
