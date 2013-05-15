@@ -9,6 +9,10 @@ if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
 " }}}
+" leader {{{
+let mapleader = ","
+let maplocalleader = "\\"
+" }}}
 " pathogen {{{
 source ~/.vim/bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
