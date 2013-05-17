@@ -2,3 +2,5 @@
 /fish/fish_history
 /fish/fishd.localhost.localdomain
 /vim/.netrwhist
+/vim/bundle/
+!/vim/bundle/vundle
