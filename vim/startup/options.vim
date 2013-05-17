@@ -5,7 +5,7 @@ if has('gui_running')
     set lines=999
 endif
 " }}}
-"  7 multiple tab pages {{{
+"  07 multiple tab pages {{{
 set showtabline=2 " always show tabbar
 " }}}
 " 10 GUI {{{
