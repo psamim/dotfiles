@@ -1,7 +1,5 @@
 " general {{{
 syntax on
-filetype plugin on
-filetype indent on
 let g:vim_data_path = expand("$HOME") . "/.vim/data/"
 " }}}
 " fish {{{
@@ -12,6 +10,17 @@ endif
 " leader {{{
 let mapleader = ","
 let maplocalleader = "\\"
+" }}}
+" vundle {{{
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'git@bitbucket.org:aliva/vim-fish.git'
+
+filetype plugin on
+filetype indent on
 " }}}
 " startup {{{
 source ~/.vim/startup/options.vim
