@@ -1,9 +1,0 @@
-[submodule "vim/bundle/pathogen"]
-	path = vim/bundle/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/fish-syntax"]
-	path = vim/bundle/fish-syntax
-	url = https://bitbucket.org/aliva/vim-fish.git
-[submodule "vim/bundle/startify"]
-	path = vim/bundle/startify
-	url = https://github.com/mhinz/vim-startify.git

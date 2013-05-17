@@ -13,10 +13,6 @@ endif
 let mapleader = ","
 let maplocalleader = "\\"
 " }}}
-" pathogen {{{
-source ~/.vim/bundle/pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-" }}}
 " startup {{{
 source ~/.vim/startup/options.vim
 source ~/.vim/startup/plugins.vim
