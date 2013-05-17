@@ -26,3 +26,8 @@ source ~/.vim/startup/autocmd.vim
 " colorscheme {{{
 colorscheme koehler
 " }}}
+" if cwd is ~ change it to ~/Workspace {{{
+if getcwd() == expand('$HOME')
+    cd ~/Workspace
+endif
+" }}}
