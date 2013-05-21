@@ -18,6 +18,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'git@bitbucket.org:aliva/vim-fish.git'
+Bundle 'tkztmk/vim-vala'
 
 filetype plugin on
 filetype indent on
