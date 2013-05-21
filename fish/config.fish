@@ -1,3 +1,6 @@
+# fish path
+set -x FISH ~/.config/fish
+
 # binary files are here
 set -x PATH ~/Workspace/dotfiles/bin
 set -x PATH $PATH ~/Workspace/dotfiles/bin/local
