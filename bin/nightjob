@@ -13,7 +13,7 @@ cp list log/
 
 set -l downloads (cat list)
 for i in (seq (count $downloads))
-    echo getting $downloads[$i]
+    echo $downloads[$i]
     axel $downloads[$i] -v > log/$i ^&1
 end
 
