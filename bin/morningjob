@@ -1,4 +1,4 @@
-#!/usr/local/bin/fish
+#!/bin/env fish
 
 killall nightjob
 killall axel
