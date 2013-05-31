@@ -3,7 +3,7 @@ nmap ; :
 " }}}
 " quick change filetype {{{
 map <leader>ft  :set filetype=
-map <leader>ftp :set filetype=python<CR>
+map <leader>ffp :set filetype=python<CR>
 " }}}
 " fold/unfold {{{
 nmap <space> za
