@@ -11,19 +11,14 @@ endif
 let mapleader = ","
 let maplocalleader = "\\"
 " }}}
-" vundle {{{
+" startup {{{
+" vundle
 filetype off
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle 'aliva/vim-fish'
-Bundle 'tkztmk/vim-vala'
-
-filetype plugin on
-filetype indent on
-" }}}
-" startup {{{
+source ~/.vim/startup/bundle.vim
+filetype plugin indent on
+" other scripts
 source ~/.vim/startup/options.vim
 source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
