@@ -13,12 +13,14 @@ set -x PATH $PATH /sbin
 # bin path in home {{{
 set -x HOME_BIN_PATH ~/bin
 # }}}
-
+# alias {{{
 # sudo
 alias s='sudo'
 alias yum='sudo yum'
+alias service='sudo service'
 # python
 alias p2='python2'
 alias p3='python3'
 # wget
 alias wget='wget -c'
+# }}}
