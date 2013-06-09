@@ -1,4 +1,4 @@
-#!/bin/env fish
+#!/usr/local/bin/fish
 
 echo nightjob
 
