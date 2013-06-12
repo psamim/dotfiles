@@ -4,6 +4,9 @@
 .project
 .pydevproject
 
+# komodo
+*.komodoproject
+
 # python
 *.pyc
 __pycache__
