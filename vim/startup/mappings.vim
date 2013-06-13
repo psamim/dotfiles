@@ -9,6 +9,9 @@ map <leader>ffp :set filetype=python<CR>
 nmap <space> za
 vmap <space> za
 " }}}
+" sudo write {{{
+cmap W!! w !sudo tee % >/dev/null
+" }}}
 " toggle line number {{{
 nmap <silent>   <F1>      :set number!<CR>
 nmap <silent> <C-F1>      :set relativenumber!<CR>
