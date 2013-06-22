@@ -22,5 +22,5 @@
 # 
 # m h  dom mon dow   command
 
-10 2 * * * ~/Workspace/dotfiles/bin/nightjob
-50 6 * * * ~/Workspace/dotfiles/bin/morningjob
+#2 2 * * * ~/Workspace/dotfiles/bin/nightjob
+#50 6 * * * ~/Workspace/dotfiles/bin/morningjob
