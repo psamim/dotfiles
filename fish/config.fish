@@ -18,6 +18,9 @@ set -x HOME_BIN_PATH ~/bin
 alias s='sudo'
 alias yum='sudo yum'
 alias service='sudo service'
+alias systemctl='sudo systemctl'
+alias swapoff='sudo swapoff'
+alias swapon='sudo swapon'
 # python
 alias p2='python2'
 alias p3='python3'
