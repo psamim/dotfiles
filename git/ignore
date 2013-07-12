@@ -13,3 +13,6 @@ __pycache__
 
 # vim
 *.swp
+
+# gedit
+*~
