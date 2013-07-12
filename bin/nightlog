@@ -1,3 +1,0 @@
-#!/usr/local/bin/fish
-
-tail -f ~/Downloads/nightjob/log/$argv[1]

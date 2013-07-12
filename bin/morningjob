@@ -1,5 +1,0 @@
-#!/usr/local/bin/fish
-
-killall nightjob
-killall axel
-killall transmission-gtk
