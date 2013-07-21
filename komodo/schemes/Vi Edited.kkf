@@ -1,0 +1,241 @@
+version 35
+binding cmd_left Left
+binding cmd_selectCharPrevious Shift+Left
+binding cmd_historyBack Alt+Left
+binding cmd_wordLeft Ctrl+Left
+binding cmd_selectWordLeft Ctrl+Shift+Left
+binding cmd_backSmart Backspace
+binding cmd_back Shift+Backspace
+binding cmd_right Right
+binding cmd_selectCharNext Shift+Right
+binding cmd_historyForward Alt+Right
+binding cmd_wordRight Ctrl+Right
+binding cmd_selectWordRight Ctrl+Shift+Right
+binding cmd_beginningOfWordExtend Ctrl+Shift+W
+binding cmd_endOfWord Ctrl+E
+binding cmd_newlineExtra Shift+Return
+binding cmd_newline Return
+binding cmd_newlineBare Ctrl+Return
+binding cmd_newlineSame Ctrl+Shift+Return
+binding cmd_linePrevious Up
+binding cmd_lineNext Down
+binding cmd_selectLineNext Shift+Down
+binding cmd_lineScrollDown Ctrl+Down
+binding cmd_lineScrollUp Ctrl+Up
+binding cmd_selectLinePrevious Shift+Up
+binding cmd_pageDown Page_Down
+binding cmd_selectPageDown Shift+Page_Down
+binding cmd_pageUp Page_Up
+binding cmd_selectPageUp Shift+Page_Up
+binding cmd_home Home
+binding cmd_selectHome Shift+Home
+binding cmd_documentHome Ctrl+Home
+binding cmd_selectDocumentHome Ctrl+Shift+Home
+binding cmd_end End
+binding cmd_documentEnd Ctrl+End
+binding cmd_selectEnd Shift+End
+binding cmd_selectDocumentEnd Ctrl+Shift+End
+binding cmd_selectAll Ctrl+A
+binding cmd_blockSelect Ctrl+B
+binding cmd_copy Ctrl+C
+binding cmd_copy Ctrl+Insert
+binding cmd_cut Ctrl+X
+binding cmd_cut Ctrl+Shift+X
+binding cmd_cut Shift+Delete
+binding cmd_paste Ctrl+V
+binding cmd_paste Shift+Insert
+binding cmd_pasteAndSelect Ctrl+Shift+V
+binding cmd_tabAwarePaste Ctrl+Alt+V
+binding cmd_delete Delete
+binding cmd_deleteWordLeft Ctrl+Backspace
+binding cmd_deleteWordRight Ctrl+Delete
+binding cmd_redo Ctrl+Y
+binding cmd_undo Ctrl+Z
+binding cmd_undo Alt+Backspace
+binding cmd_cancel Escape
+binding cmd_editReflow Ctrl+Q
+binding cmd_expandAbbrev Ctrl+T
+binding cmd_toggleOvertype Insert
+binding cmd_convertUpperCase Ctrl+U
+binding cmd_convertLowerCase Ctrl+Alt+U
+binding cmd_join Ctrl+K Ctrl+J
+binding cmd_rawKey Ctrl+M
+binding cmd_repeatNextCommandBy Ctrl+K Ctrl+U
+binding cmd_editProperties Alt+Return
+binding cmd_toolsRunCommand Ctrl+R
+binding cmd_toolsRunCommand Ctrl+Shift+R
+binding cmd_uncomment Ctrl+2
+binding cmd_uncomment Ctrl+Shift+3
+binding cmd_comment Ctrl+3
+binding cmd_viewIndentationGuides Ctrl+5
+binding cmd_viewIndentationGuides Ctrl+Shift+5
+binding cmd_viewLineNumbers F1
+binding cmd_viewEOL Ctrl+7
+binding cmd_viewEOL Ctrl+Shift+7
+binding cmd_viewWhitespace Ctrl+8
+binding cmd_viewWhitespace Ctrl+Shift+8
+binding cmd_wordWrap Ctrl+9
+binding cmd_wordWrap Ctrl+Shift+9
+binding cmd_jumpToMatchingBrace Ctrl+]
+binding cmd_selectToMatchingBrace Ctrl+Shift+]
+binding cmd_gotoLine Ctrl+G
+binding cmd_startIncrementalSearch Ctrl+F
+binding cmd_startIncrementalSearch Ctrl+I
+binding cmd_findNext F3
+binding cmd_findNextSelected Ctrl+F3
+binding cmd_findPrevious Shift+F3
+binding cmd_findNextFunction F8
+binding cmd_findPreviousFunction Shift+F8
+binding cmd_findInFiles Ctrl+Shift+F
+binding cmd_findAllFunctions Ctrl+F8
+binding cmd_findNextResult Ctrl+Shift+F3
+binding cmd_replace Ctrl+H
+binding cmd_replaceInFiles Ctrl+Shift+H
+binding cmd_startIncrementalSearchBackwards Ctrl+Shift+I
+binding cmd_save Ctrl+S
+binding cmd_saveAll Ctrl+Shift+S
+binding cmd_new Ctrl+N
+binding cmd_newTemplate Ctrl+Shift+N
+binding cmd_open Ctrl+Shift+O
+binding cmd_openProject Ctrl+Shift+J
+binding cmd_bufferClose Ctrl+W
+binding cmd_bufferClose Ctrl+F4
+binding cmd_bufferNextMostRecent Ctrl+F6
+binding cmd_bufferNextMostRecent Ctrl+Tab
+binding cmd_bufferNextLeastRecent Ctrl+Shift+F6
+binding cmd_bufferNextLeastRecent Ctrl+Shift+Tab
+binding cmd_bufferNext Ctrl+Page_Down
+binding cmd_bufferPrevious Ctrl+Page_Up
+binding cmd_helpLanguageAlternate Ctrl+F1
+binding cmd_helpLanguage Shift+F1
+binding cmd_bookmarkToggle Ctrl+F2
+binding cmd_bookmarkRemoveAll Ctrl+Shift+F2
+binding cmd_bookmarkGotoNext F2
+binding cmd_bookmarkGotoPrevious Shift+F2
+binding cmd_completeWord Ctrl+Space
+binding cmd_completeWordBack Ctrl+Shift+Space
+binding cmd_triggerPrecedingCompletion Ctrl+J
+binding cmd_focusEditor Ctrl+Shift+E
+binding cmd_browserPreview Ctrl+K Ctrl+V
+binding cmd_reloadBrowserPreview Ctrl+K Ctrl+R
+binding cmd_focusSource Ctrl+K Ctrl+S
+binding cmd_viewBottomPane Ctrl+Shift+M
+binding cmd_viewPlaces Ctrl+Shift+P
+binding cmd_viewToolbox Ctrl+Shift+L
+binding cmd_reopenLastClosedTab Ctrl+Shift+T
+binding cmd_toggleButtonText Ctrl+Shift+B
+binding cmd_fontZoomIn Ctrl++
+binding cmd_fontZoomIn Ctrl+=
+binding cmd_fontZoomIn Ctrl+Shift++
+binding cmd_fontZoomIn Ctrl+Shift+=
+binding cmd_fontZoomOut Ctrl+-
+binding cmd_fontZoomOut Ctrl+Shift+_
+binding cmd_fontZoomOut Ctrl+Shift+-
+binding cmd_fontZoomReset Ctrl+0
+binding cmd_viewFullScreen Ctrl+K F11
+binding cmd_refreshStatus Ctrl+K R
+binding cmd_refreshStatus Ctrl+K r
+binding cmd_startMacroMode Ctrl+K (
+binding cmd_stopMacroMode Ctrl+K )
+binding cmd_executeLastMacro Ctrl+K _
+binding cmd_goToDefinition Ctrl+K Ctrl+G
+binding cmd_selectRectCharPrevious Alt+Shift+Left
+binding cmd_selectRectCharNext Alt+Shift+Right
+binding cmd_selectRectLinePrevious Alt+Shift+Up
+binding cmd_selectRectLineNext Alt+Shift+Down
+binding cmd_selectRectHome Alt+Shift+Home
+binding cmd_selectRectEnd Alt+Shift+End
+binding cmd_selectRectPageUp Alt+Shift+Page_Up
+binding cmd_selectRectPageDown Alt+Shift+Page_Down
+binding cmd_goToFile Ctrl+O
+binding cmd_invokeHyperlink Ctrl+Shift+G
+binding cmd_invokeTool Ctrl+Shift+K
+binding cmd_vim_left h
+binding cmd_vim_right l
+binding cmd_vim_right Space
+binding cmd_vim_linePrevious k
+binding cmd_vim_linePrevious Ctrl+P
+binding cmd_vim_lineNext j
+binding cmd_vim_linePreviousHome -
+binding cmd_vim_wordLeft b
+binding cmd_vim_wordRight w
+binding cmd_vim_wordRightEnd e
+binding cmd_vim_homeAbsolute 0
+binding cmd_vim_homeAbsolute |
+binding cmd_vim_home ^
+binding cmd_vim_end $
+binding cmd_vim_wordRightPastPunctuation W
+binding cmd_vim_wordLeftPastPunctuation B
+binding cmd_vim_wordRightEndPastPunctuation E
+binding cmd_vim_moveToScreenTop H
+binding cmd_vim_moveToScreenCenter M
+binding cmd_vim_moveToScreenBottom L
+binding cmd_vim_moveSentenceBegin (
+binding cmd_vim_moveSentenceEnd )
+binding cmd_vim_moveParagraphBegin {
+binding cmd_vim_moveParagraphEnd }
+binding cmd_vim_moveFunctionPrevious [ [
+binding cmd_vim_moveFunctionNext ] ]
+binding cmd_vim_jumpToLineBeforeLastJump ' '
+binding cmd_vim_jumpToLocBeforeLastJump ` `
+binding cmd_vim_scrollHalfPageDown Ctrl+D
+binding cmd_vim_scrollHalfPageUp Ctrl+U
+binding cmd_vim_pageDown Ctrl+F
+binding cmd_vim_pageUp Ctrl+B
+binding cmd_vim_gotoLine G
+binding cmd_vim_documentHome g g
+binding cmd_vim_lineScrollUp Ctrl+Y
+binding cmd_vim_lineScrollDown Ctrl+E
+binding cmd_vim_yankLine Y
+binding cmd_vim_yankOperation y
+binding cmd_vim_paste P
+binding cmd_vim_pasteAfter p
+binding cmd_vim_insert i
+binding cmd_vim_insertHome I
+binding cmd_vim_append a
+binding cmd_vim_appendEnd A
+binding cmd_vim_insert_newline_previous O
+binding cmd_vim_insert_newline_next o
+binding cmd_vim_changeChar s
+binding cmd_vim_changeLine S
+binding cmd_vim_changeOperation c
+binding cmd_vim_changeLineEnd C
+binding cmd_vim_replaceChar r
+binding cmd_vim_overtype R
+binding cmd_vim_cutChar x
+binding cmd_vim_cutCharLeft X
+binding cmd_vim_deleteOperation d
+binding cmd_vim_lineCutEnd D
+binding cmd_vim_findNext n
+binding cmd_vim_findPrevious N
+binding cmd_vim_enterSearchForward /
+binding cmd_vim_enterSearchBackward ?
+binding cmd_vim_findCharInLine f
+binding cmd_vim_findPreviousCharInLine F
+binding cmd_vim_findCharInLinePosBefore t
+binding cmd_vim_findPreviousCharInLinePosAfter T
+binding cmd_vim_repeatLastFindCharInLineReversed ,
+binding cmd_vim_findWordUnderCursor *
+binding cmd_vim_findWordUnderCursorBack #
+binding cmd_vim_toggleVisualMode v
+binding cmd_vim_toggleVisualLineMode V
+binding cmd_vim_toggleVisualBlockMode Ctrl+V
+binding cmd_foldExpand z o
+binding cmd_foldExpandAll z R
+binding cmd_foldCollapse z c
+binding cmd_foldCollapseAll z M
+binding cmd_foldToggle z a
+binding cmd_vim_cancel Ctrl+[
+binding cmd_vim_undo u
+binding cmd_vim_redo Ctrl+R
+binding cmd_vim_join J
+binding cmd_vim_swapCase ~
+binding cmd_vim_jumpToMatchingBrace %
+binding cmd_vim_enterCommandMode ;
+binding cmd_vim_enterCommandMode :
+binding cmd_vim_repeatLastCommand .
+binding cmd_vim_dedentOperation <
+binding cmd_vim_indentOperation >
+binding cmd_vim_saveAndClose Z Z
+binding cmd_vim_closeNoSave Z Q
+binding cmd_vim_setRegister "
