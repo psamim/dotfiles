@@ -1,0 +1,14 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "qa", 
+  "language": "JavaScript", 
+  "trigger_enabled": false, 
+  "value": [
+    "ko.main.quitApplication();"
+  ], 
+  "version": "1.0.12", 
+  "rank": 100, 
+  "async": false, 
+  "type": "macro", 
+  "trigger": "trigger_postopen"
+}
