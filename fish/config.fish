@@ -24,6 +24,8 @@ alias swapon='sudo swapon'
 # python
 alias p2='python2'
 alias p3='python3'
+# vim
+alias vi='vim'
 # wget
 alias wget='wget -c'
 # }}}
