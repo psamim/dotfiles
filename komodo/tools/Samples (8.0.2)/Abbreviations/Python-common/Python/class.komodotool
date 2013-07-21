@@ -1,0 +1,18 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "class", 
+  "value": [
+    "class [[%tabstop:name]][[%soft:(]][[%tabstop:object]][[%soft:)]][[%soft::]]", 
+    "    def __init__(self[[%tabstop:, arg]]):", 
+    "        [[%tabstop:pass]]", 
+    "    def __del__(self):", 
+    "        pass", 
+    "!@#_currentPos!@#_anchor"
+  ], 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "true"
+}

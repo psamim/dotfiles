@@ -1,0 +1,13 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "<h2> Header 2", 
+  "value": [
+    "<h2>[[%(w:else:)]]!@#_currentPos!@#_anchor</h2>"
+  ], 
+  "set_selection": "true", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "false"
+}

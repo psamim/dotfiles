@@ -1,0 +1,20 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "module", 
+  "value": [
+    "<% if (ko.snippets.rightOfFirstKeyword()) {%>", 
+    "module [[%tabstop:name]]", 
+    "\t[[%tabstop: ]]", 
+    "end", 
+    "<% } else {", 
+    "  throw new ko.snippets.RejectedSnippet(\"not at start of line\");", 
+    "   } %>", 
+    "!@#_currentPos!@#_anchor"
+  ], 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "true"
+}

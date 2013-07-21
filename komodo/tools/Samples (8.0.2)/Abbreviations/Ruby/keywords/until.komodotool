@@ -1,0 +1,19 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "until", 
+  "value": [
+    "<% if (ko.snippets.rightOfFirstKeyword()) {%>", 
+    "until [[%tabstop:test]]", 
+    "\t[[%tabstop:#code]]", 
+    "end", 
+    "<% } else {", 
+    "  throw new ko.snippets.RejectedSnippet(\"not at start of line\");", 
+    "   } %>!@#_currentPos!@#_anchor"
+  ], 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "true"
+}
