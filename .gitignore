@@ -2,8 +2,19 @@
 # fish
 /fish/fish_history
 /fish/fishd.localhost.localdomain
+/fish/fishd.localhost
 # vim
 /vim/.netrwhist
 /vim/bundle/
 !/vim/bundle/vundle
-/fish/fishd.localhost
+# komodo
+/komodo/autosave/
+/komodo/codeintel/
+/komodo/XRE/
+/komodo/*.log
+/komodo/*.bak
+/komodo/*.lock
+/komodo/*.xmlc
+/komodo/*.sqlite
+/komodo/*.tmp
+/komodo/prefs.xml
