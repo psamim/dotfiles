@@ -1,0 +1,18 @@
+{
+  "insertOutput": 0, 
+  "keyboard_shortcut": "", 
+  "name": "git push", 
+  "parseRegex": "", 
+  "operateOnSelection": 0, 
+  "value": [
+    "git push"
+  ], 
+  "cwd": "%p", 
+  "version": "1.0.12", 
+  "env": "", 
+  "doNotOpenOutputWindow": 0, 
+  "showParsedOutputList": 0, 
+  "type": "command", 
+  "parseOutput": 0, 
+  "runIn": "command-output-window"
+}
