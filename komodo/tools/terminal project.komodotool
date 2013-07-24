@@ -1,0 +1,18 @@
+{
+  "insertOutput": 0, 
+  "parseRegex": "", 
+  "doNotOpenOutputWindow": 1, 
+  "keyboard_shortcut": "", 
+  "name": "terminal project", 
+  "operateOnSelection": 0, 
+  "value": [
+    "gnome-terminal --working-directory=%p"
+  ], 
+  "cwd": "", 
+  "version": "1.0.12", 
+  "env": "", 
+  "showParsedOutputList": 0, 
+  "type": "command", 
+  "parseOutput": 0, 
+  "runIn": "no-console"
+}
