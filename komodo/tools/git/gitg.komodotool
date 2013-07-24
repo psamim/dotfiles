@@ -14,5 +14,5 @@
   "showParsedOutputList": 0, 
   "type": "command", 
   "parseOutput": 0, 
-  "runIn": "command-output-window"
+  "runIn": "no-console"
 }
