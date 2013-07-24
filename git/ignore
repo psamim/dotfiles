@@ -6,6 +6,7 @@
 
 # komodo
 *.komodoproject
+.komodotools
 
 # python
 *.pyc

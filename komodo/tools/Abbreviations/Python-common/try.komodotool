@@ -3,8 +3,8 @@
   "name": "try", 
   "value": [
     "try:", 
-    "\t[[%tabstop:your code here]]", 
-    "except [[%tabstop:exceptions]][[%tabstop:, [[%tabstop:name]]]]:", 
+    "\t[[%tabstop:#code]]", 
+    "except [[%tabstop:Exception]]:", 
     "\t[[%tabstop:pass]]!@#_currentPos!@#_anchor"
   ], 
   "set_selection": "true", 
@@ -12,5 +12,5 @@
   "treat_as_ejs": "false", 
   "type": "snippet", 
   "indent_relative": "true", 
-  "auto_abbreviation": "false"
+  "auto_abbreviation": "true"
 }

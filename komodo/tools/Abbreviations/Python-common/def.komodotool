@@ -2,7 +2,7 @@
   "keyboard_shortcut": "", 
   "name": "def", 
   "value": [
-    "def [[%tabstop:name]][[%soft:(]]<%= ko.snippets.inPythonClass() ? \"self, \" : \"\" %>[[%soft:)]][[%soft::]]", 
+    "def [[%tabstop:name]][[%soft:(]]<%= ko.snippets.inPythonClass() ? \"self\" : \"\" %>[[%soft:)]][[%soft::]]", 
     "\t[[%tabstop:pass]]", 
     "!@#_currentPos!@#_anchor"
   ], 
