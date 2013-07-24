@@ -1,14 +1,13 @@
 {
   "keyboard_shortcut": "", 
-  "name": "class", 
+  "name": "djmodel", 
   "value": [
-    "class [[%tabstop:name]][[%soft::]]", 
-    "\t[[%tabstop:#code]]", 
+    "class [[%tabstop:ModelName]][[%soft:(models.Model):]]", 
+    "    [[%tabstop:pass]]", 
     "!@#_currentPos!@#_anchor"
   ], 
   "set_selection": "false", 
   "version": "1.0.12", 
-  "treat_as_ejs": "false", 
   "type": "snippet", 
   "indent_relative": "true", 
   "auto_abbreviation": "true"
