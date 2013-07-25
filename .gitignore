@@ -1,8 +1,7 @@
 /bin/local
 # fish
 /fish/fish_history
-/fish/fishd.localhost.localdomain
-/fish/fishd.localhost
+/fish/fishd.*
 # vim
 /vim/.netrwhist
 /vim/bundle/
