@@ -163,13 +163,13 @@ binding cmd_vim_wordRightEnd e
 binding cmd_vim_homeAbsolute 0
 binding cmd_vim_homeAbsolute |
 binding cmd_vim_home ^
+binding cmd_vim_home H
 binding cmd_vim_end $
+binding cmd_vim_end L
 binding cmd_vim_wordRightPastPunctuation W
 binding cmd_vim_wordLeftPastPunctuation B
 binding cmd_vim_wordRightEndPastPunctuation E
-binding cmd_vim_moveToScreenTop H
 binding cmd_vim_moveToScreenCenter M
-binding cmd_vim_moveToScreenBottom L
 binding cmd_vim_moveSentenceBegin (
 binding cmd_vim_moveSentenceEnd )
 binding cmd_vim_moveParagraphBegin {
@@ -240,3 +240,5 @@ binding cmd_vim_saveAndClose Z Z
 binding cmd_vim_closeNoSave Z Q
 binding cmd_vim_setRegister "
 binding cmd_showHideMinimap Ctrl+:
+binding cmd_projectOpenRemoteProject Ctrl+K Ctrl+P Ctrl+O
+binding cmd_open_remote Ctrl+K Ctrl+O
