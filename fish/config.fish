@@ -17,6 +17,7 @@ set -x HOME_BIN_PATH ~/bin
 # sudo
 alias s='sudo'
 alias yum='sudo yum'
+alias apt-get='sudo apt-get'
 alias service='sudo service'
 alias systemctl='sudo systemctl'
 alias swapoff='sudo swapoff'
