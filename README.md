@@ -1,11 +1,10 @@
 Overview
 ====================
 This is most **dotfiles** that i use on my home's PC, my laptop and my PC at work!
-:Authors:
-    Bersam Karbasion,
-    Ali Vakilzadeh
+>   Bersam Karbasion,
+>   Ali Vakilzadeh
 
-:Version: 2013/07/28
+
 aria2/
 ---------------------
 > ln -s /home/$USER/dotfiles/aria2 /home/$USER/.aria2

@@ -2,8 +2,8 @@
 set -x FISH ~/.config/fish
 # }}}
 # binary files are here {{{
-set -x PATH ~/Workspace/dotfiles/bin
-set -x PATH $PATH ~/Workspace/dotfiles/bin/local
+set -x PATH ~/dotfiles/bin
+set -x PATH $PATH ~/dotfiles/bin/local
 set -x PATH $PATH /usr/local/bin
 set -x PATH $PATH /usr/bin
 set -x PATH $PATH /bin
