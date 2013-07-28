@@ -1,0 +1,16 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "fore", 
+  "value": [
+    "foreach my $[[%tabstop:var]] ([[%tabstop:EXPR]]) {", 
+    "\t[[%tabstop]]", 
+    "}[[%tabstop:]]!@#_currentPos!@#_anchor"
+  ], 
+  "auto_snippet": "true", 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "true"
+}

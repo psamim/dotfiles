@@ -1,0 +1,13 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "emf", 
+  "value": [
+    "error_messages_for [[%tabstop:object]]!@#_currentPos!@#_anchor"
+  ], 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "false"
+}

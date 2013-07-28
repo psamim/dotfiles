@@ -1,0 +1,13 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "reca", 
+  "value": [
+    "redirect_to :controller => [[%tabstop:items]], :action => \"[[%tabstop:action]]\"!@#_currentPos!@#_anchor"
+  ], 
+  "set_selection": "false", 
+  "version": "1.0.12", 
+  "treat_as_ejs": "false", 
+  "type": "snippet", 
+  "indent_relative": "true", 
+  "auto_abbreviation": "false"
+}
