@@ -1,9 +1,9 @@
 # vim:ft=gitconfig:
 [user]
-    name = aliva
-    email = ali.vakilzade@gmail.com
+    name = bersam
+    email = bersam.k@gmail.com
 [core]
-    editor = gvim --nofork
+    editor = vim
 [alias]
     st = status
 [push]
