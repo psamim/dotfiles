@@ -1,6 +1,6 @@
 # vim:ft=gitconfig:
 [user]
-    name = bersam
+    name = Bersam Karbasion
     email = bersam.k@gmail.com
 [core]
     editor = vim
