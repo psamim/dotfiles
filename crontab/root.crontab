@@ -1,2 +1,3 @@
 # vim:set ft=crontab:
-#55 6 * * * /sbin/halt -p
+0 6 * * * shutdown now
+1 6 * * * poweroff
