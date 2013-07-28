@@ -4,4 +4,4 @@ then
     . /etc/bashrc
 fi
 
-export EDITOR='gvim --nofork'
+export EDITOR='vim'
