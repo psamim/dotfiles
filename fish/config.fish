@@ -10,6 +10,9 @@ set -x PATH $PATH /bin
 set -x PATH $PATH /usr/sbin
 set -x PATH $PATH /sbin
 # }}}
+# ENV variables{{{
+set -U EDITOR vim
+# }}}
 # bin path in home {{{
 set -x HOME_BIN_PATH ~/bin
 # }}}
