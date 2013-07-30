@@ -19,7 +19,7 @@ bin/
 
 crontab/
 ---------------------
-Use crontab -e`
+> Use crontab -e`
 
 fish/
 ---------------------
@@ -36,6 +36,12 @@ hg/
 komodo/
 ---------------------
 > ln -s /home/$USER/dotfiles/komodo /home/$USER/.komodoedit/8.0
+
+tmux/
+---------------------
+> ln -s /home/$USER/dotfiles/tmux/tmux.conf /home/$USER/.tmux/.tmux.conf
+> Or
+> ln -s /home/$USER/dotfiles/tmux/tmux.conf /home/$USER/.byobu/.tmux.conf
 
 vim/
 ---------------------
