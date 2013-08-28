@@ -32,9 +32,10 @@ source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
 source ~/.vim/startup/autocmd.vim
 source ~/.vim/startup/bundle.vim
+source ~/.vim/startup/auto.vim
 " }}}
 
 
 " colorscheme {{{
-colorscheme koehler
+colorscheme elflord
 " }}}
