@@ -33,5 +33,7 @@ ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.tmux.conf"
 ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.byobu/.tmux.conf"
 
 # vim/
+rm -rf "/home/$USER/.vim"
 ln -sf "$PWD/vim" "/home/$USER/.vim"
+rm -f "/home/$USER/.vimrc"
 ln -sf "$PWD/vim/vimrc" "/home/$USER/.vimrc"
