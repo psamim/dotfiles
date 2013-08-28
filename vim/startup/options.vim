@@ -29,6 +29,7 @@ set copyindent " use same indents for next line
 set expandtab
 set smartindent
 set smartcase
+set backspace=indent,eol,start
 " }}}
 
 " Other options {{{
