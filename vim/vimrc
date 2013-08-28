@@ -2,33 +2,39 @@
 syntax on
 let g:vim_data_path = expand("$HOME") . "/.vim/data/"
 " }}}
-" fish {{{
-if $SHELL =~ 'bin/fish'
-    set shell=/bin/sh
-endif
+
+
+" shell {{{
+set shell=/bin/bash
 " }}}
+
+
 " leader {{{
-let mapleader = ","
-let maplocalleader = "\\"
+" let mapleader = ","
+" let maplocalleader = "\\"
 " }}}
+
+
 " startup {{{
 " vundle
-filetype off
-set runtimepath+=~/.vim/bundle/vundle/
+set nocompatible  " be iMproved
+filetype off      " required!
+
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-source ~/.vim/startup/bundle.vim
-filetype plugin indent on
+
+filetype plugin indent on     " required!
+
+
 " other scripts
 source ~/.vim/startup/options.vim
 source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
 source ~/.vim/startup/autocmd.vim
+source ~/.vim/startup/bundle.vim
 " }}}
+
+
 " colorscheme {{{
 colorscheme koehler
-" }}}
-" if cwd is ~ change it to ~/Workspace {{{
-if getcwd() == expand('$HOME')
-    cd ~/Workspace
-endif
 " }}}

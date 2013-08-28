@@ -1,7 +1,7 @@
 # vim:ft=gitconfig:
 [user]
-    name = Bersam Karbasion
-    email = bersam.k@gmail.com
+	name = Samim Pezeshki
+	email = p.samim@gmail.com
 [core]
     editor = vim
 	excludesfile = ~/.gitignore
@@ -9,3 +9,5 @@
     st = status
 [push]
     #default = simple
+[push]
+	default = simple
