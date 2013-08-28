@@ -14,7 +14,6 @@ ln -sf "$PWD/bash/bashrc" "/home/$USER/.bashrc"
 ln -sf "$PWD/bin" "/home/$USER/.local/bin"
 
 # fish/
-mkdir -p "/home/$USER/.config/"
 ln -sf "$PWD/fish" "/home/$USER/.config/fish"
 
 # git/
