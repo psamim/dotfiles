@@ -1,10 +1,12 @@
 " ; => : {{{
-" nmap ; :
+nmap ; :
 " }}}
+
 " quick change filetype {{{
 " map <leader>ft  :set filetype=
 " map <leader>ffp :set filetype=python<CR>
 " }}}
+
 " fold/unfold {{{
 " nmap <space> za
 " vmap <space> za
@@ -33,7 +35,7 @@ nnoremap tj  :tabnext<CR>
 nnoremap tk  :tabprev<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
+nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 " }}}
