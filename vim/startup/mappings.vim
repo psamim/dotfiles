@@ -39,3 +39,6 @@ nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 " }}}
+
+" Other {{{
+nnoremap <Leader>t :NERDTreeToggle<CR>

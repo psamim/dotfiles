@@ -28,15 +28,28 @@ set autoindent " auto indent/auto removes indent if noting entered
 set copyindent " use same indents for next line
 set expandtab
 set smartindent
+set incsearch
+set hlsearch
+set ignorecase
 set smartcase
 set backspace=indent,eol,start
+:nmap \h :nohlsearch<CR>
 " }}}
 
 " Other options {{{
 set mouse=a
+set laststatus=2
+let g:airline_theme="bubblegum"
+set t_Co=256
+"let g:airline_powerline_fonts = 1
 " }}}
 
 " 16 folding {{{
 " set foldcolumn=2 " columns on right side reserved for showing fold levels
 " set foldmethod=marker " use { { { } } } to fold
+" }}}
+
+" CtrlP {{{
+":let g:ctrlp_match_window_bottom = 0
+:let g:ctrlp_match_window_reversed = 0
 " }}}
