@@ -42,6 +42,8 @@ nnoremap td  :tabclose<CR>
 
 " Other {{{
 nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>i gg=G<c-o><c-o>
+map <Esc><Esc> :update<CR>
 " }}}
 
 " Quick marking navigation {{{
