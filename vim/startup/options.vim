@@ -53,3 +53,20 @@ set t_Co=256
 ":let g:ctrlp_match_window_bottom = 0
 :let g:ctrlp_match_window_reversed = 0
 " }}}
+
+" Startify {{{
+let g:startify_change_to_dir = 1
+let g:startify_custom_header = [
+                \ '   __      ___            ______ ____   ',
+                \ '   \ \    / (_)           |____  |___ \ ',
+                \ '    \ \  / / _ _ __ ___       / /  __) |',
+                \ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
+                \ '      \  /  | | | | | | |   / /   ___) |',
+                \ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
+                \ '',
+                \ '',
+                \ ]
+
+
+" }}}
+

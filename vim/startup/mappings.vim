@@ -24,7 +24,7 @@ cmap W!! w !sudo tee % >/dev/null
 " }}}
 
 " CtrlP {{{
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<C-@>'
 let g:ctrlp_cmd = 'CtrlP'
 " }}}
 
