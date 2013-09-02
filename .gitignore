@@ -6,6 +6,7 @@
 /vim/.netrwhist
 /vim/bundle/
 !/vim/bundle/vundle
+/vim/session
 # komodo
 /komodo/autosave/
 /komodo/codeintel/
