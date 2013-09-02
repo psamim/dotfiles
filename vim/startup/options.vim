@@ -40,6 +40,8 @@ set backspace=indent,eol,start
 set mouse=a
 set laststatus=2
 let g:airline_theme="bubblegum"
+let g:airline_left_sep='›❱'
+let g:airline_right_sep='❰‹'
 set t_Co=256
 "let g:airline_powerline_fonts = 1
 " }}}
@@ -70,3 +72,7 @@ let g:startify_custom_header = [
 
 " }}}
 
+" Autoformat {{{
+"let g:formatprg_php = "php-cs-fixer.phar"
+"let g:formatprg_args_expr_php = '"fix --level=all ".expand("%")'
+" }}}

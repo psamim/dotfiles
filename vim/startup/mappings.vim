@@ -42,7 +42,7 @@ nnoremap td  :tabclose<CR>
 
 " Other {{{
 nnoremap <Leader>t :NERDTreeToggle<CR>
-nnoremap <Leader>i gg=G<c-o><c-o>
+nnoremap <Leader>i :Autoformat<CR>
 map <Esc><Esc> :update<CR>
 " }}}
 
