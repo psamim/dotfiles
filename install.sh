@@ -31,7 +31,7 @@ ln -sf "$PWD/komodo" "/home/$USER/.komodoedit/8.0"
 # tmux/
 ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.tmux.conf"
 ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.byobu/.tmux.conf"
-
+ln -sf "$PWD/tmux" "/home/$USER/.tmux"
 # vim/
 rm -rf "/home/$USER/.vim"
 ln -sf "$PWD/vim" "/home/$USER/.vim"
