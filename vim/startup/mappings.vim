@@ -44,6 +44,7 @@ nnoremap td  :tabclose<CR>
 nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>i :Autoformat<CR>
 map <Esc><Esc> :update<CR>
+inoremap ii <Esc>
 " }}}
 
 " Quick marking navigation {{{
@@ -55,3 +56,10 @@ nnoremap <leader>[ [`
 nnoremap j gj
 nnoremap k gk
 " }}}
+
+" Yankstack {{{
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" }}}
+
