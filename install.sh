@@ -1,4 +1,4 @@
-samim is #!/bin/bash
+#!/bin/bash
 # This scripts installs all conf files
 # by creating appropriate symbolic links
 # cron jobs are not included.
@@ -30,9 +30,9 @@ ln -sf "$PWD/komodo" "/home/$USER/.komodoedit/8.0"
 
 # tmux/
 ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.tmux.conf"
-A
 ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.byobu/.tmux.conf"
 ln -sf "$PWD/tmux" "/home/$USER/.tmux"
+
 # vim/
 rm -rf "/home/$USER/.vim"
 ln -sf "$PWD/vim" "/home/$USER/.vim"
