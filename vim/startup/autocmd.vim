@@ -1,5 +1,5 @@
 " try auto save on focus lost {{{
-au FocusLost * try | :wa | catch | endtry
+"au FocusLost * try | :wa | catch | endtry
 " }}}
 
 
@@ -26,7 +26,9 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
+" Set Line numbers relative or absolute {{{
 au FocusLost * set number
 au FocusGained * set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+" }}}
