@@ -20,13 +20,12 @@ endif
 set tabstop=4
 set shiftwidth=4
 set smarttab
-set softtabstop=4
+set preserveindent
+set softtabstop=0
 set shiftround
-set expandtab " not tabs
+set noexpandtab " not tabs
 set autoindent " auto indent/auto removes indent if noting entered
-" set nosmartindent " it removes indent from python comments
 set copyindent " use same indents for next line
-set expandtab
 set smartindent
 set incsearch
 set hlsearch
