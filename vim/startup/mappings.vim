@@ -30,10 +30,10 @@ let g:ctrlp_cmd = 'CtrlP'
 
 
 " Tabs {{{
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
+"nnoremap th  :tabfirst<CR>
+nnoremap tl  :tabnext<CR>
+nnoremap th  :tabprev<CR>
+"nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
