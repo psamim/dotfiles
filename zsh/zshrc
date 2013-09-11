@@ -26,3 +26,6 @@ antigen theme robbyrussell
 
 # Tell antigen that you're done.
 antigen apply
+
+# My Sources
+source ~/.zsh/alias.zsh
