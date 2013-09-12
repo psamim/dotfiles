@@ -22,3 +22,6 @@ Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'mileszs/ack.vim'
 Bundle 'ConradIrwin/vim-bracketed-paste'
 Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'rhysd/clever-f.vim'
+"Bundle 'mhinz/vim-signify'
+"Bundle airblade/vim-gitgutter

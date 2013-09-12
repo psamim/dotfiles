@@ -1,4 +1,4 @@
-" 04 displaying text {{{
+" displaying text {{{
 if has('gui_running')
     " start gvim maximized
     set columns=999
@@ -6,7 +6,7 @@ if has('gui_running')
 endif
 " }}}
 
-"  07 multiple tab pages {{{
+" multiple tab pages {{{
 set showtabline=2 " always show tabbar
 " }}}
 
@@ -16,7 +16,7 @@ if has('gui_running')
 endif
 " }}}
 
-" 15 tabs and indenting {{{
+"tabs and indenting {{{
 set tabstop=4
 set shiftwidth=4
 set smarttab
@@ -37,15 +37,12 @@ set backspace=indent,eol,start
 
 " Other options {{{
 set mouse=a
-set laststatus=2
-let g:airline_theme="bubblegum"
-let g:airline_left_sep='›❱'
-let g:airline_right_sep='❰‹'
-set t_Co=256
-"let g:airline_powerline_fonts = 1
+" Autocompletion for vim commands
+set wildmenu
+set wildmode=full
 " }}}
 
-" 16 folding {{{
+" folding {{{
 " set foldcolumn=2 " columns on right side reserved for showing fold levels
 " set foldmethod=marker " use { { { } } } to fold
 " }}}
@@ -74,4 +71,13 @@ let g:startify_custom_header = [
 " Autoformat {{{
 "let g:formatprg_php = "php-cs-fixer.phar"
 "let g:formatprg_args_expr_php = '"fix --level=all ".expand("%")'
+" }}}
+
+" Airline {{{
+set laststatus=2
+let g:airline_theme="bubblegum"
+let g:airline_left_sep='›❱'
+let g:airline_right_sep='❰‹'
+set t_Co=256
+"let g:airline_powerline_fonts = 1
 " }}}
