@@ -1,3 +1,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule "zsh/prezto"]
+	path = zsh/prezto
+	url = git@github.com:sorin-ionescu/prezto.git

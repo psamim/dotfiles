@@ -1,31 +1,5 @@
-source ~/.zsh/antigen/antigen.zsh
-
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-antigen bundles <<EOBUNDLES
-command-not-found
-autojump
-git
-svn
-extract
-git-extras
-npm
-tmux
-#vi-mode
-vundle
-web-search
-zsh-users/zsh-syntax-highlighting
-#history-substring-search
-safe-paste
-battery
-EOBUNDLES
-
-# Load the theme.
-antigen theme robbyrussell
-
-# Tell antigen that you're done.
-antigen apply
-
-# My Sources
-source ~/.zsh/alias.zsh
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zsh/zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+#source ~/.zsh/alias.zsh
