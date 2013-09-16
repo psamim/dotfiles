@@ -4,3 +4,6 @@
 [submodule "zsh/prezto"]
 	path = zsh/prezto
 	url = git@github.com:psamim/prezto.git
+[submodule "zsh/zaw"]
+	path = zsh/zaw
+	url = git://github.com/zsh-users/zaw.git
