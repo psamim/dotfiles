@@ -81,3 +81,7 @@ let g:airline_right_sep='❰‹'
 set t_Co=256
 "let g:airline_powerline_fonts = 1
 " }}}
+
+" Snippets {{
+let g:neosnippet#snippets_directory='~/.vim/snippets'
+" }}}
