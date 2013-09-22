@@ -17,7 +17,7 @@ ln -sf "$PWD/bin" "/home/$USER/.local/bin"
 ln -sf "$PWD/fish" "/home/$USER/.config/fish"
 
 # git/
-ln -sf "$PWD/git/confiiig" "/home/$USER/.gitconfig"
+ln -sf "$PWD/git/config" "/home/$USER/.gitconfig"
 ln -sf "$PWD/git/ignore" "/home/$USER/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
 
