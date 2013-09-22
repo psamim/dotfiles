@@ -25,3 +25,5 @@ Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'rhysd/clever-f.vim'
 "Bundle 'mhinz/vim-signify'
 "Bundle airblade/vim-gitgutter
+Bundle 'majutsushi/tagbar'
+Bundle 'flazz/vim-colorschemes'
