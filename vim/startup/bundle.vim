@@ -26,6 +26,7 @@ Bundle 'rhysd/clever-f.vim'
 "Bundle 'mhinz/vim-signify'
 "Bundle airblade/vim-gitgutter
 Bundle 'majutsushi/tagbar'
-"Bundle 'flazz/vim-colorschemes'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'techlivezheng/vim-plugin-tagbar-phpctags'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
+Bundle 'vim-scripts/netrw.vim'
