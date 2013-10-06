@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset name="Datis Standards">
+<description>Datis Coding Standards</description>
+<!--<rule ref="PEAR">
+	<exclude name=""/>
+</rule>
+
+<rule ref="PEAR.WhiteSpace.ScopeIndent">
+  <properties>
+   <property name="indent" value="2"/>
+  </properties>
+ </rule>
+-->
+<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+
+<rule ref="Generic.WhiteSpace.ScopeIndent"/>
+<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+<rule ref="Generic.Files.LineLength">
+  <properties>
+   <property name="lineLimit" value="90"/>
+   <property name="absoluteLineLimit" value="100"/>
+  </properties>
+ </rule>
+
+</ruleset>
