@@ -31,5 +31,5 @@ Bundle 'techlivezheng/vim-plugin-tagbar-phpctags'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'vim-scripts/netrw.vim'
 Bundle 'sjl/gundo.vim'
-Bundle 'joonty/vim-phpqa.git'
+"Bundle 'joonty/vim-phpqa.git'
 

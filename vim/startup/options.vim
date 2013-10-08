@@ -87,12 +87,14 @@ let g:neosnippet#snippets_directory='~/.vim/snippets'
 " }}}
 
 " Set the codesniffer args
-let g:phpqa_codesniffer_args = "--config-set tab_width 4 --standard=PSR2"
+let g:syntastic_php_phpcs_args = ' --standard="/home/$USER/.vim/standards/datis.xml" --report=csv'
+"let g:phpqa_codesniffer_args = '--standard="/home/$USER/.vim/standards/datis.xml"'
+"let g:phpqa_open_loc = 0
 " Don't run messdetector on save (default = 1)
-let g:phpqa_messdetector_autorun = 0
+" let g:phpqa_messdetector_autorun = 0
 
 " Don't run codesniffer on save (default = 1)
-let g:phpqa_codesniffer_autorun = 0
+" let g:phpqa_codesniffer_autorun = 0
 
 " Show code coverage on load (default = 0)
-let g:phpqa_codecoverage_autorun = 0
+"let g:phpqa_codecoverage_autorun = 0

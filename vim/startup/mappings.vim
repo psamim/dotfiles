@@ -2,6 +2,14 @@
 nmap ; :
 " }}}
 
+" Paste from clipboard {{{
+nnoremap <C-S-p> "+p
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+" }}}
+
 " quick change filetype {{{
 " map <leader>ft  :set filetype=
 " map <leader>ffp :set filetype=python<CR>
@@ -17,10 +25,14 @@ cmap W!! w !sudo tee % >/dev/null
 " }}}
 
 " toggle line number {{{
-" nmap <silent>   <F1>      :set number!<CR>
-" nmap <silent> <C-F1>      :set relativenumber!<CR>
-" imap <silent>   <F1> <ESC>:set number!<CR>a
-" imap <silent> <C-F1> <ESC>:set relativenumber!<CR>a
+nmap <silent>   <Leader>ln      :set number!<CR>
+nmap <silent> <Leader>rln      :set relativenumber!<CR>
+"imap <silent>   <F1> <ESC>:set number!<CR>a
+"imap <silent> <C-F1> <ESC>:set relativenumber!<CR>a
+" }}}
+
+" toggle Syntastic {{{
+nnoremap <Leader>sy :SyntasticToggleMode<CR>
 " }}}
 
 " CtrlP {{{
@@ -29,6 +41,10 @@ let g:ctrlp_cmd = 'CtrlP'
 nnoremap <C-t> :CtrlPBufTag<CR>
 " }}}
 
+" Visual Mode, Find the selected {{{
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+" }}}
 
 " Tabs {{{
 "nnoremap th  :tabfirst<CR>
@@ -46,6 +62,8 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>i :Autoformat<CR>
 map <Esc><Esc> :update<CR>
 inoremap ii <Esc>
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " }}}
 
 " Quick marking navigation {{{

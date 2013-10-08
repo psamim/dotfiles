@@ -3,24 +3,35 @@
 <description>Datis Coding Standards</description>
 
  <!-- Include some sniffs from all around the place -->
+
+<!--Spaces After Brace in Function-->
  <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+
+ <!--Function Brace on the next line-->
  <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
- <rule ref="Generic.PHP.DisallowShortOpenTag"/>
- <!--<rule ref="Generic.WhiteSpace.DisallowTabIndent"/>-->
+
+ <!--<rule ref="Generic.PHP.DisallowShortOpenTag"/>-->
+
+ <!--Is good, but too ideal-->
+ <!--<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>-->
+
  <rule ref="PEAR.Classes.ClassDeclaration"/>
- <rule ref="PEAR.ControlStructures.ControlSignature"/>
- <rule ref="PEAR.Functions.FunctionCallSignature"/>
+
+ <!--If statements-->
+ <!--<rule ref="PEAR.ControlStructures.ControlSignature"/>-->
+
+ <!--<rule ref="PEAR.Functions.FunctionCallSignature"/>-->
  <rule ref="PEAR.Functions.ValidDefaultValue"/>
- <rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>
+ <!--<rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>-->
  <rule ref="Squiz.Functions.GlobalFunction"/>
 
  <!-- Lines can be 80 chars long, show errors at 120 chars -->
- <rule ref="Generic.Files.LineLength">
-  <properties>
-   <property name="lineLimit" value="80"/>
-   <property name="absoluteLineLimit" value="120"/>
-  </properties>
- </rule>
+ <!--<rule ref="Generic.Files.LineLength">-->
+  <!--<properties>-->
+   <!--<property name="lineLimit" value="80"/>-->
+   <!--<property name="absoluteLineLimit" value="200"/>-->
+  <!--</properties>-->
+ <!--</rule>-->
 
  <!-- Use Unix newlines -->
  <rule ref="Generic.Files.LineEndings">
@@ -29,23 +40,14 @@
   </properties>
  </rule>
 
-<!--<rule ref="PEAR.WhiteSpace.ScopeIndent">
+<rule ref="PEAR.WhiteSpace.ScopeIndent">
   <properties>
-   <property name="indent" value="2"/>
+   <property name="indent" value="4"/>
   </properties>
- </rule>-->
+ </rule>
 
 <!--<rule ref="Generic.ControlStructures.InlineControlStructure"/>-->
-<!--<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>-->
-
 <!--<rule ref="Generic.WhiteSpace.ScopeIndent"/>-->
 <!--<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>-->
-
-<!--<rule ref="Generic.Files.LineLength">-->
-  <!--<properties>-->
-   <!--<property name="lineLimit" value="90"/>-->
-   <!--<property name="absoluteLineLimit" value="100"/>-->
-  <!--</properties>-->
- <!--</rule>-->
 
 </ruleset>
