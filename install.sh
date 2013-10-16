@@ -4,31 +4,30 @@
 # cron jobs are not included.
 
 # aria2/
+rm -rf "$HOME/.aria2"
 mkdir -p "$HOME/.aria2/"
-ln -sf "$PWD/aria2/aria2.conf" "$HOME/.aria2/.aria2.conf"
+ln -sf "$PWD/aria2/aria2.conf" "$HOME/.aria2/aria2.conf"
 
-# bashthisia iakskasj a/
+# bash/
 ln -sf "$PWD/bash/bashrc" "$HOME/.bashrc"
 
 # bin/
 ln -sf "$PWD/bin" "$HOME/.local/bin"
 
-# fish/
-ln -sf "$PWD/fish" "$HOME/.config/fish"
-
 # git/
+rm -rf "$HOME/.gitconfig"
+rm -rf "$HOME/.gitignore"
 ln -sf "$PWD/git/config" "$HOME/.gitconfig"
 ln -sf "$PWD/git/ignore" "$HOME/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
 
 # hg/
+rm -rf "$HOME/.hg"
 ln -sf "$PWD/hg/hgrc" "$HOME/.hg"
 
-# komodo/
-mkdir -p "$HOME/.komodoedit/8.0"
-ln -sf "$PWD/komodo" "$HOME/.komodoedit/8.0"
-
 # tmux/
+rm -rf "$HOME/.tmux"
+rm -rf "$HOME/.tmux.conf"
 ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$PWD/tmux/tmux.conf" "$HOME/.byobu/.tmux.conf"
 ln -sf "$PWD/tmux" "$HOME/.tmux"
