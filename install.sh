@@ -41,6 +41,7 @@ ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 # Zsh/
 rm -rf "$HOME/.zsh"
 ln -sf "$PWD/zsh" "$HOME/.zsh"
+rm -rf "$HOME/.zprezto"
 ln -sf "$PWD/zsh/prezto" "$HOME/.zprezto"
 rm -f "$HOME/.zshrc"
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
