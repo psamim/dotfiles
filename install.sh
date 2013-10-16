@@ -4,50 +4,50 @@
 # cron jobs are not included.
 
 # aria2/
-mkdir -p "/home/$USER/.aria2/"
-ln -sf "$PWD/aria2/aria2.conf" "/home/$USER/.aria2/.aria2.conf"
+mkdir -p "$HOME/.aria2/"
+ln -sf "$PWD/aria2/aria2.conf" "$HOME/.aria2/.aria2.conf"
 
 # bashthisia iakskasj a/
-ln -sf "$PWD/bash/bashrc" "/home/$USER/.bashrc"
+ln -sf "$PWD/bash/bashrc" "$HOME/.bashrc"
 
 # bin/
-ln -sf "$PWD/bin" "/home/$USER/.local/bin"
+ln -sf "$PWD/bin" "$HOME/.local/bin"
 
 # fish/
-ln -sf "$PWD/fish" "/home/$USER/.config/fish"
+ln -sf "$PWD/fish" "$HOME/.config/fish"
 
 # git/
-ln -sf "$PWD/git/config" "/home/$USER/.gitconfig"
-ln -sf "$PWD/git/ignore" "/home/$USER/.gitignore"
+ln -sf "$PWD/git/config" "$HOME/.gitconfig"
+ln -sf "$PWD/git/ignore" "$HOME/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
 
 # hg/
-ln -sf "$PWD/hg/hgrc" "/home/$USER/.hg"
+ln -sf "$PWD/hg/hgrc" "$HOME/.hg"
 
 # komodo/
-mkdir -p "/home/$USER/.komodoedit/8.0"
-ln -sf "$PWD/komodo" "/home/$USER/.komodoedit/8.0"
+mkdir -p "$HOME/.komodoedit/8.0"
+ln -sf "$PWD/komodo" "$HOME/.komodoedit/8.0"
 
 # tmux/
-ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.tmux.conf"
-ln -sf "$PWD/tmux/tmux.conf" "/home/$USER/.byobu/.tmux.conf"
-ln -sf "$PWD/tmux" "/home/$USER/.tmux"
+ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
+ln -sf "$PWD/tmux/tmux.conf" "$HOME/.byobu/.tmux.conf"
+ln -sf "$PWD/tmux" "$HOME/.tmux"
 
 # vim/
-rm -rf "/home/$USER/.vim"
-ln -sf "$PWD/vim" "/home/$USER/.vim"
-rm -f "/home/$USER/.vimrc"
-ln -sf "$PWD/vim/vimrc" "/home/$USER/.vimrc"
+rm -rf "$HOME/.vim"
+ln -sf "$PWD/vim" "$HOME/.vim"
+rm -f "$HOME/.vimrc"
+ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
 # Zsh/
-rm -rf "/home/$USER/.zsh"
-ln -sf "$PWD/zsh" "/home/$USER/.zsh"
-ln -sf "$PWD/zsh/prezto" "/home/$USER/.zprezto"
-rm -f "/home/$USER/.zshrc"
-ln -sf "$PWD/zsh/zshrc" "/home/$USER/.zshrc"
-ln -sf "$PWD/zsh/prezto/runcoms/zlogin" "/home/$USER/.zlogin"
-ln -sf "$PWD/zsh/prezto/runcoms/zlogout" "/home/$USER/.zlogout"
-ln -sf "$PWD/zsh/prezto/runcoms/zpreztorc" "/home/$USER/.zpreztorc"
-ln -sf "$PWD/zsh/prezto/runcoms/zprofile" "/home/$USER/.zprofile"
-ln -sf "$PWD/zsh/prezto/runcoms/zshenv" "/home/$USER/.zshenv"
-ln -sf "$PWD/zsh/prezto/runcoms/zshrc" "/home/$USER/.zshrc"
+rm -rf "$HOME/.zsh"
+ln -sf "$PWD/zsh" "$HOME/.zsh"
+ln -sf "$PWD/zsh/prezto" "$HOME/.zprezto"
+rm -f "$HOME/.zshrc"
+ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
+ln -sf "$PWD/zsh/prezto/runcoms/zlogin" "$HOME/.zlogin"
+ln -sf "$PWD/zsh/prezto/runcoms/zlogout" "$HOME/.zlogout"
+ln -sf "$PWD/zsh/prezto/runcoms/zpreztorc" "$HOME/.zpreztorc"
+ln -sf "$PWD/zsh/prezto/runcoms/zprofile" "$HOME/.zprofile"
+ln -sf "$PWD/zsh/prezto/runcoms/zshenv" "$HOME/.zshenv"
+ln -sf "$PWD/zsh/prezto/runcoms/zshrc" "$HOME/.zshrc"
