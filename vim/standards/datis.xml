@@ -18,11 +18,11 @@
  <rule ref="PEAR.Classes.ClassDeclaration"/>
 
  <!--If statements-->
- <!--<rule ref="PEAR.ControlStructures.ControlSignature"/>-->
+ <rule ref="PEAR.ControlStructures.ControlSignature"/>
 
- <!--<rule ref="PEAR.Functions.FunctionCallSignature"/>-->
+ <rule ref="PEAR.Functions.FunctionCallSignature"/>
  <rule ref="PEAR.Functions.ValidDefaultValue"/>
- <!--<rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>-->
+ <rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>
  <rule ref="Squiz.Functions.GlobalFunction"/>
 
  <!-- Lines can be 80 chars long, show errors at 120 chars -->

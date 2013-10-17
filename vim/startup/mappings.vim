@@ -64,6 +64,7 @@ map <Esc><Esc> :update<CR>
 inoremap ii <Esc>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+nnoremap <Leader>c :set cursorline!<CR>
 " }}}
 
 " Quick marking navigation {{{
