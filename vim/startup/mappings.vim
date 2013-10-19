@@ -1,5 +1,5 @@
 " ; => : {{{
-nmap ; :
+nmap ;; :
 " }}}
 
 " Paste from clipboard {{{
@@ -39,6 +39,10 @@ nnoremap <Leader>sy :SyntasticToggleMode<CR>
 let g:ctrlp_map = '<C-@>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap <C-t> :CtrlPBufTag<CR>
+let g:ctrlp_prompt_mappings = {
+    		\ 'AcceptSelection("e")': ['<C-t>', '<2-LeftMouse>'],
+    		\ 'AcceptSelection("t")': ['<CR>'],
+    		\ }
 " }}}
 
 " Visual Mode, Find the selected {{{
