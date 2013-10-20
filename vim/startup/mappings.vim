@@ -1,5 +1,5 @@
 " ; => : {{{
-nmap ; :
+nmap ;; :
 " }}}
 
 " Paste from clipboard {{{
@@ -39,6 +39,10 @@ nnoremap <Leader>sy :SyntasticToggleMode<CR>
 let g:ctrlp_map = '<C-@>'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap <C-t> :CtrlPBufTag<CR>
+let g:ctrlp_prompt_mappings = {
+    		\ 'AcceptSelection("e")': ['<C-t>', '<2-LeftMouse>'],
+    		\ 'AcceptSelection("t")': ['<CR>'],
+    		\ }
 " }}}
 
 " Visual Mode, Find the selected {{{
@@ -86,4 +90,4 @@ let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }}}
-
+let g:seek_subst_disable = 1
