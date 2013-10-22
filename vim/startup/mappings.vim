@@ -64,7 +64,7 @@ nnoremap td  :tabclose<CR>
 " Other {{{
 nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>i :Autoformat<CR>
-map <Esc><Esc> :update<CR>
+map <Esc><Esc> :w<CR>
 inoremap ii <Esc>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
