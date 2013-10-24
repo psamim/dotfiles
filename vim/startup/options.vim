@@ -32,7 +32,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
-:nmap \h :nohlsearch<CR>
+nmap \h :nohlsearch<CR>
 " }}}
 
 " Other options {{{
@@ -81,6 +81,7 @@ let g:airline_right_sep='❰‹'
 set t_Co=256
 "let g:airline_powerline_fonts = 1
 " }}}
+
 
 " Snippets {{
 let g:neosnippet#snippets_directory='~/.vim/snippets'
