@@ -71,6 +71,7 @@ inoremap kj <Esc>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <Leader>c :set cursorline!<CR>
 inoremap jj <ESC>A;<Esc>
+nnoremap <Leader>sp :setlocal spell! spelllang=en_us<CR>
 " }}}
 
 " Quick marking navigation {{{
