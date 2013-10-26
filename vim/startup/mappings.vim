@@ -65,10 +65,13 @@ nnoremap td  :tabclose<CR>
 nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>i :Autoformat<CR>
 map <Esc><Esc> :w<CR>
-inoremap ii <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <Leader>c :set cursorline!<CR>
+inoremap jj <ESC>A;<Esc>
+nnoremap <Leader>sp :setlocal spell! spelllang=en_us<CR>
 " }}}
 
 " Quick marking navigation {{{

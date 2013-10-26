@@ -40,4 +40,7 @@ source ~/.vim/startup/auto.vim
 colorscheme Monokai
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
+hi TabLineFill ctermfg=8 ctermbg=7
+hi TabLine ctermfg=8  ctermbg=7
+hi TabLineSel ctermfg=15 ctermbg=0
 " }}}

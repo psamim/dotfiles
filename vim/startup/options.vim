@@ -32,11 +32,12 @@ set hlsearch
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
-:nmap \h :nohlsearch<CR>
+nmap \h :nohlsearch<CR>
 " }}}
 
 " Other options {{{
 set mouse=a
+set linebreak
 " Autocompletion for vim commands
 set wildmenu
 set wildmode=full
@@ -55,15 +56,15 @@ set wildmode=full
 " Startify {{{
 let g:startify_change_to_dir = 1
 let g:startify_custom_header = [
-                \ '   __      ___            ______ ____   ',
-                \ '   \ \    / (_)           |____  |___ \ ',
-                \ '    \ \  / / _ _ __ ___       / /  __) |',
-                \ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
-                \ '      \  /  | | | | | | |   / /   ___) |',
-                \ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
-                \ '',
-                \ '',
-                \ ]
+     		\ '   __      ___            ______ ____   ',
+     		\ '   \ \    / (_)           |____  |___ \ ',
+     		\ '    \ \  / / _ _ __ ___       / /  __) |',
+     		\ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
+     		\ '      \  /  | | | | | | |   / /   ___) |',
+     		\ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
+     		\ '',
+     		\ '',
+     		\ ]
 
 
 " }}}
@@ -82,6 +83,7 @@ set t_Co=256
 "let g:airline_powerline_fonts = 1
 " }}}
 
+
 " Snippets {{
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 " }}}
@@ -98,3 +100,17 @@ let g:syntastic_php_phpcs_args = ' --standard="/home/$USER/.vim/standards/datis.
 
 " Show code coverage on load (default = 0)
 "let g:phpqa_codecoverage_autorun = 0
+"
+function! DistractionFreeWriting()
+    set lines=40 columns=160           " size of the editable area
+    set laststatus=0                   " don't show status line
+    set noruler                        " don't show ruler
+    set linebreak                      " break the lines on words
+	set foldcolumn=12
+	set showtabline=0
+	hi FoldColumn ctermbg=none
+	hi LineNr ctermfg=0 ctermbg=none
+    hi NonText ctermfg=0
+	GitGutterDisable
+endfunction
+map <Leader>df :call DistractionFreeWriting()<CR>
