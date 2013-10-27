@@ -1,4 +1,5 @@
 " displaying text {{{
+"
 if has('gui_running')
     " start gvim maximized
     set columns=999
@@ -50,23 +51,20 @@ set wildmode=full
 
 " CtrlP {{{
 ":let g:ctrlp_match_window_bottom = 0
-:let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_match_window_reversed = 0
 " }}}
 
 " Startify {{{
 let g:startify_change_to_dir = 1
 let g:startify_custom_header = [
-     		\ '   __      ___            ______ ____   ',
-     		\ '   \ \    / (_)           |____  |___ \ ',
-     		\ '    \ \  / / _ _ __ ___       / /  __) |',
-     		\ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
-     		\ '      \  /  | | | | | | |   / /   ___) |',
-     		\ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
-     		\ '',
-     		\ '',
-     		\ ]
-
-
+			\ '=======================================',
+			\ ' \ \    / (_)           |____  | || |  ',
+			\ '  \ \  / / _ _ __ ___       / /| || |_ ',
+			\ '   \ \/ / | | "_ ` _ \     / / |__   _|',
+			\ '    \  /  | | | | | | |   / /     | |  ',
+			\ '     \/   |_|_| |_| |_|  /_(_)    |_|  ',
+			\ '=======================================',
+    		\ ]
 " }}}
 
 " Autoformat {{{
