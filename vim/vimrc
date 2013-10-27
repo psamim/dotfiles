@@ -43,4 +43,10 @@ hi NonText ctermbg=NONE
 hi TabLineFill ctermfg=8 ctermbg=7
 hi TabLine ctermfg=8  ctermbg=7
 hi TabLineSel ctermfg=15 ctermbg=0
+hi SignColumn ctermbg=NONE
+set foldcolumn=1
+hi foldcolumn ctermbg=NONE
+" Match arbitrary highlighted colors
+hi currawong ctermbg=12
+match currawong /.*\*\*$/
 " }}}

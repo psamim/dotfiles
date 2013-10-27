@@ -38,6 +38,7 @@ nmap \h :nohlsearch<CR>
 
 " Other options {{{
 set mouse=a
+set tw=120
 set linebreak
 " Autocompletion for vim commands
 set wildmenu
