@@ -39,13 +39,18 @@ nmap \h :nohlsearch<CR>
 set mouse=a
 set tw=120
 set linebreak
+" Remember more commands and search history (default: 20)
+set history=100
+" Expand %% to current directory
+" http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Autocompletion for vim commands
 set wildmenu
 set wildmode=full
 " }}}
 
 " folding {{{
-" set foldcolumn=2 " columns on right side reserved for showing fold levels
+set foldcolumn=1 " columns on right side reserved for showing fold levels
 " set foldmethod=marker " use { { { } } } to fold
 " }}}
 
@@ -90,18 +95,9 @@ let g:neosnippet#snippets_directory='~/.vim/snippets'
 " }}}
 
 " Set the codesniffer args
-let g:syntastic_php_phpcs_args = ' --standard="/home/$USER/.vim/standards/datis.xml" --report=csv'
-"let g:phpqa_codesniffer_args = '--standard="/home/$USER/.vim/standards/datis.xml"'
-"let g:phpqa_open_loc = 0
-" Don't run messdetector on save (default = 1)
-" let g:phpqa_messdetector_autorun = 0
+let g:syntastic_php_phpcs_args = ' --standard="/home/$USER/.vim/standards/datis.xml" --report=csv --tab-width=4'
 
-" Don't run codesniffer on save (default = 1)
-" let g:phpqa_codesniffer_autorun = 0
-
-" Show code coverage on load (default = 0)
-"let g:phpqa_codecoverage_autorun = 0
-"
+" Distraction free writing
 function! DistractionFreeWriting()
     set lines=40 columns=160           " size of the editable area
     set laststatus=0                   " don't show status line
