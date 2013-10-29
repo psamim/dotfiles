@@ -38,6 +38,10 @@ ln -sf "$PWD/vim" "$HOME/.vim"
 rm -f "$HOME/.vimrc"
 ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
+# vrapperrc
+rm -rf "$HOME/.vrapperrc"
+ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
+
 # Zsh/
 rm -rf "$HOME/.zsh"
 ln -sf "$PWD/zsh" "$HOME/.zsh"
