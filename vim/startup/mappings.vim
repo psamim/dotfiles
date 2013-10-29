@@ -27,8 +27,6 @@ cmap W!! w !sudo tee % >/dev/null
 " toggle line number {{{
 nmap <silent>   <Leader>ln      :set number!<CR>
 nmap <silent> <Leader>rln      :set relativenumber!<CR>
-"imap <silent>   <F1> <ESC>:set number!<CR>a
-"imap <silent> <C-F1> <ESC>:set relativenumber!<CR>a
 " }}}
 
 " toggle Syntastic {{{
@@ -63,7 +61,7 @@ nnoremap td  :tabclose<CR>
 
 " Other {{{
 nnoremap <Leader>t :NERDTreeToggle<CR>
-nnoremap <Leader>i :Autoformat<CR>
+"nnoremap <Leader>i :Autoformat<CR>
 map <Esc><Esc> :w<CR>
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -73,6 +71,9 @@ nnoremap <Leader>c :set cursorline!<CR>
 inoremap jj <ESC>A;<Esc>
 nnoremap <Leader>sp :setlocal spell! spelllang=en_us<CR>
 nnoremap n nzz
+nmap \h :nohlsearch<CR>
+nmap ]q :cnext<CR>
+nmap [q :cprevious<CR>
 " }}}
 
 " Quick marking navigation {{{
@@ -94,4 +95,3 @@ let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }}}
-let g:seek_subst_disable = 1

@@ -1,20 +1,14 @@
-" displaying text {{{
-"
+" GUI {{{
 if has('gui_running')
     " start gvim maximized
     set columns=999
     set lines=999
+    set guioptions-=T " no toolbar
 endif
 " }}}
 
 " multiple tab pages {{{
 set showtabline=2 " always show tabbar
-" }}}
-
-" 10 GUI {{{
-if has('gui_running')
-    set guioptions-=T " no toolbar
-endif
 " }}}
 
 "tabs and indenting {{{
@@ -33,7 +27,6 @@ set hlsearch
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
-nmap \h :nohlsearch<CR>
 " }}}
 
 " Other options {{{
@@ -84,6 +77,8 @@ let g:airline_theme="bubblegum"
 let g:airline_left_sep='›❱'
 let g:airline_right_sep='❰‹'
 set t_Co=256
+set noshowmode " Hide the default mode text
+let g:Powerline_symbols = 'fancy'
 "let g:airline_powerline_fonts = 1
 " }}}
 
@@ -103,6 +98,7 @@ function! DistractionFreeWriting()
     set linebreak                      " break the lines on words
 	set foldcolumn=12
 	set showtabline=0
+	set noshowcmd
 	hi FoldColumn ctermbg=none
 	hi LineNr ctermfg=0 ctermbg=none
     hi NonText ctermfg=0
