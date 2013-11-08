@@ -26,6 +26,12 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
+autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
+"autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
+"autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
+"autocmd BufReadPre *.js let b:javascript_lib_use_prelude = 0
+"autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 0
+
 " Set Line numbers relative or absolute {{{
 "au FocusLost * set number
 "au FocusGained * set relativenumber
