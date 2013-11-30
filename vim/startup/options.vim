@@ -105,3 +105,20 @@ function! DistractionFreeWriting()
 	GitGutterDisable
 endfunction
 map <Leader>df :call DistractionFreeWriting()<CR>
+
+
+function! PresentationMode()
+	:colorscheme basic
+	nnoremap ]] :next<CR>
+	nnoremap [[ :previous<CR>
+    set laststatus=0                   " don't show status line
+    set noruler                        " don't show ruler
+    set linebreak                      " break the lines on words
+	hi FoldColumn ctermbg=none
+	set foldcolumn=2
+	set showtabline=0
+	set noshowcmd
+	hi LineNr ctermfg=15 ctermbg=none
+    hi NonText ctermfg=15
+	GitGutterDisable
+endfunction
