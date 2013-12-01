@@ -121,4 +121,8 @@ function! PresentationMode()
 	hi LineNr ctermfg=15 ctermbg=none
     hi NonText ctermfg=15
 	GitGutterDisable
+	hi important ctermbg=none ctermfg=4
+	match important /.*\*\*$/
+	hi bangbang ctermbg=none ctermfg=9
+	:2match bangbang /.*!!$/
 endfunction
