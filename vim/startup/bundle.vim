@@ -42,3 +42,11 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 "Bundle 'mikewest/vimroom'
 "Bundle 'psamim/vimroom'
 Bundle 'SQLComplete.vim'
+
+" Org-mode
+Bundle 'vim-orgmode'
+Bundle 'utl.vim'
+Bundle 'calendar.vim'
+Bundle 'speeddating.vim'
+Bundle 'repeat.vim'
+"Bundle 'hsitz/VimOrganizer'

@@ -8,13 +8,6 @@ let g:vim_data_path = expand("$HOME") . "/.vim/data/"
 set shell=/bin/bash
 " }}}
 
-
-" leader {{{
-" let mapleader = ","
-" let maplocalleader = "\\"
-" }}}
-
-
 " startup {{{
 " vundle
 set nocompatible  " be iMproved

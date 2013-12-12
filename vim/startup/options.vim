@@ -66,6 +66,9 @@ let g:startify_custom_header = [
     		\ ]
 " }}}
 
+" Org-mode
+let g:org_agenda_files = ['~/Note/orgs/samim.org']
+
 " Autoformat {{{
 "let g:formatprg_php = "php-cs-fixer.phar"
 "let g:formatprg_args_expr_php = '"fix --level=all ".expand("%")'

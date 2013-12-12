@@ -27,6 +27,11 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
+
+" let g:org_capture_file = '~/org_files/mycaptures.org'
+command! OrgCapture :call org#CaptureBuffer()
+command! OrgCaptureFile :call org#OpenCaptureFile()
+
 "autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
 "autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
 "autocmd BufReadPre *.js let b:javascript_lib_use_prelude = 0

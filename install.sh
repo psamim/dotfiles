@@ -38,6 +38,10 @@ ln -sf "$PWD/vim" "$HOME/.vim"
 rm -f "$HOME/.vimrc"
 ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
+# emacs
+rm -rf "$HOME/.emacs.d"
+ln -sf "$PWD/emacs" "$HOME/.emacs.d"
+
 # vrapperrc
 rm -rf "$HOME/.vrapperrc"
 ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
