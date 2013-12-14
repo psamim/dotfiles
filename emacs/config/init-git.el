@@ -1,5 +1,5 @@
 (require-package 'magit)
-(require-package 'gist)
+;(require-package 'gist)
 
 (setq magit-diff-options '("--histogram"))
 

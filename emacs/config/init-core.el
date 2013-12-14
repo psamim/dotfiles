@@ -30,6 +30,11 @@
 (recentf-mode +1)
 
 
+;; Multi-term
+(require-package 'multi-term)
+(require 'multi-term)
+(setq multi-term-program "/bin/zsh")
+
 ;; eshell
 (setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
