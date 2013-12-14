@@ -35,8 +35,8 @@
 (set-face-attribute 'default nil :font
 "DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
 
-(require-package 'monokai-theme)
-(load-theme 'monokai)
+(require-package 'color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-night)
 
 (require-package 'writeroom-mode)
 
