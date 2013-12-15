@@ -3,6 +3,10 @@
 ;(setq sml/theme 'dark)
 ;(sml/setup)
 
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(setq-default mode-line-format nil)
 
 ;(require-package 'pretty-mode)
 ;(setq pretty-default-groups '(:function))
