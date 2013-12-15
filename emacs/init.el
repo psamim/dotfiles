@@ -26,7 +26,7 @@
 (require 'init-helm)
 (require 'init-ido)
 
-;(require 'init-git)
+(require 'init-git)
 (require 'init-flycheck)
 
 (require 'init-vim)

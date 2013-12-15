@@ -1,14 +1,13 @@
-(require-package 'smart-mode-line)
-(require 'smart-mode-line)
-(setq sml/theme 'dark)
-(sml/setup)
+;(require-package 'smart-mode-line)
+;(require 'smart-mode-line)
+;(setq sml/theme 'dark)
+;(sml/setup)
 
 
-(require-package 'pretty-mode)
-(setq pretty-default-groups '(:function))
-(require 'pretty-mode)
-(global-pretty-mode)
-
+;(require-package 'pretty-mode)
+;(setq pretty-default-groups '(:function))
+;(require 'pretty-mode)
+;(global-pretty-mode)
 
 (require-package 'diminish)
 (after 'diminish-autoloads
@@ -39,5 +38,8 @@
 (load-theme 'sanityinc-tomorrow-night)
 
 (require-package 'writeroom-mode)
+
+(require-package 'powerline)
+(require 'powerline)
 
 (provide 'init-eyecandy)
