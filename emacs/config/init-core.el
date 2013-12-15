@@ -2,6 +2,8 @@
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 
+; Enable clipboard integration
+(setq x-select-enable-clipboard t)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
