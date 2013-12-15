@@ -33,8 +33,11 @@
 (set-face-attribute 'default nil :font
 "DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
 
-(require-package 'color-theme-sanityinc-tomorrow)
-(load-theme 'sanityinc-tomorrow-night)
+(require-package 'solarized-theme)
+;(require-package 'color-theme-sanityinc-tomorrow)
+(load-theme 'solarized-dark)
+;(load-theme 'sanityinc-tomorrow-night)
+
 
 (require-package 'writeroom-mode)
 
@@ -46,5 +49,8 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 (setq-default mode-line-format nil)
+
+
+(setq org-startup-indented t)
 
 (provide 'init-eyecandy)
