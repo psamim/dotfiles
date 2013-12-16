@@ -5,6 +5,8 @@
 ; Enable clipboard integration
 (setq x-select-enable-clipboard t)
 
+(require 'sudo-ext)
+
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))

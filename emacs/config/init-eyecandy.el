@@ -43,12 +43,13 @@
 
 (require-package 'powerline)
 (require 'powerline)
-(powerline-center-evil-theme)
+;(powerline-center-evil-theme)
+(powerline-vim-theme)
 
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(setq-default mode-line-format nil)
+;(setq-default mode-line-format nil)
 
 
 (setq org-startup-indented t)

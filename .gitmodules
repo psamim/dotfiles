@@ -7,3 +7,6 @@
 [submodule "zsh/zaw"]
 	path = zsh/zaw
 	url = git://github.com/zsh-users/zaw.git
+[submodule "emacs/orgs"]
+	path = emacs/orgs
+	url = git@bitbucket.org:psamim/orgs.git
