@@ -5,3 +5,5 @@ eshell
 el-get
 custom.el
 tramp
+url
+session*
