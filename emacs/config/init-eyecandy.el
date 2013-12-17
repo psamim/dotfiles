@@ -1,4 +1,4 @@
-;(require-package 'smart-mode-line)
+;(require-package 'smartmode-line)
 ;(require 'smart-mode-line)
 ;(setq sml/theme 'dark)
 ;(sml/setup)
