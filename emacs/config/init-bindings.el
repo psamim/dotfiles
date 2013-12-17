@@ -43,6 +43,7 @@
            (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
            (eshell my-eshell-buffer-count))
       "C" 'customize-group
+      "h l" 'evil-ex-nohighlight
       "b d" 'kill-this-buffer
       "v" (kbd "C-w v C-w l")
       "s" (kbd "C-w s C-w j")
