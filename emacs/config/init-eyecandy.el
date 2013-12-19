@@ -41,10 +41,10 @@
 
 (require-package 'writeroom-mode)
 
-(require-package 'powerline)
-(require 'powerline)
+;(require-package 'powerline)
+;(require 'powerline)
 ;(powerline-center-evil-theme)
-(powerline-vim-theme)
+;(powerline-vim-theme)
 
 (menu-bar-mode -1)
 ;(toggle-scroll-bar -1)
