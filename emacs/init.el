@@ -12,7 +12,7 @@
 (require 'init-util)
 (require 'init-core)
 (require 'init-org)
-(require 'init-eyecandy
+(require 'init-eyecandy)
 
 (require 'init-editor)
 ;; (require 'init-smartparens)
