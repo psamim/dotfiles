@@ -26,8 +26,9 @@
 
 ; Latex Configs
 (defun my-ac-tex-setup()
-  (setq ac-sources (append '(ac-source-auctex-bibs) ac-sources)))
-(add-hook 'TeX-mode-hook 'my-ac-tex-setup)
+  (setq ac-sources (append '(
+                             ) ac-sources)))
+;(add-hook 'LaTeX-mode-hook 'my-ac-tex-setup)
 
 (after 'linum
   (ac-linum-workaround))

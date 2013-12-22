@@ -94,10 +94,6 @@
       (message "%s" file)
       (delete-file file))))
 
-(require-package 'multi-term)
-(require 'multi-term)
-(setq multi-term-program "/bin/zsh")
-
 ;; better scrolling
 (setq scroll-conservatively 9999
       scroll-preserve-screen-position t)
