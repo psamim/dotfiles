@@ -239,6 +239,7 @@
 (global-set-key (kbd "C-x g") 'my-google)
 (global-set-key (kbd "C-c e") 'my-eval-and-replace)
 
+(global-set-key [f11] 'switch-full-screen)
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))

@@ -92,4 +92,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (exec-path-from-shell-initialize))
 
 
+(defun switch-full-screen ()
+ (interactive)
+ (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
+
 (provide 'init-util)
