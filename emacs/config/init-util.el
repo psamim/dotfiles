@@ -42,6 +42,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                            (buffer-substring (region-beginning) (region-end))
                          (read-string "Search Google: "))))))
 
+(defun my-ddg ()
+  "DuckDuckGo the selected region if any, display a query prompt otherwise."
+  (interactive)
+  (browse-url
+   (concat
+    "https://duckduckgo.com/?q="
+    (url-hexify-string (if mark-active
+                           (buffer-substring (region-beginning) (region-end))
+                         (read-string "Search DDG: "))))))
 
 (defun my-eval-and-replace ()
   "Replace the preceding sexp with its value."
