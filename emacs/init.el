@@ -18,9 +18,9 @@
 ;; (require 'init-smartparens)
 (require 'init-autopair)
 
-(require 'init-yasnippet)
+;(require 'init-yasnippet)
 (require 'init-auto-complete)
-;; (require 'init-company)
+;(require 'init-company)
 
 (require 'init-projectile)
 (require 'init-helm)
