@@ -10,6 +10,7 @@
 
 (require-package 'elscreen)
 (require 'elscreen)
+(elscreen-start)
 (elscreen-toggle-display-tab)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
