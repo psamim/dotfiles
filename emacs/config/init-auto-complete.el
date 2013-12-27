@@ -2,6 +2,8 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 
+;(global-auto-complete-mode t)
+
 ; This adds the dabbrev to ac, for autocompleting strings, but did not work as intended for me
 ;(require-package 'ac-dabbrev)
 ;(require 'ac-dabbrev)
@@ -26,6 +28,7 @@
         ac-source-dictionary
         ;ac-source-dabbrev
         ac-source-words-in-buffer
+        ac-source-words-in-all-buffer
         ;ac-source-yasnippet
         ac-source-words-in-same-mode-buffers))
 
