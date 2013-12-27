@@ -48,16 +48,26 @@
   ;(my-stylus-compile (point-min) (point-max)))
 
 
-(require-package 'skewer-mode)
-(skewer-setup)
+;(require-package 'skewer-mode)
+;(skewer-setup)
 
 (require-package 'php-mode)
 (require 'php-mode)
 
 (require-package 'rainbow-mode)
 (require 'rainbow-mode)
-(add-hook 'stylus-mode-hook (lambda () (rainbow-turn-on)))
+(dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook web-mode-hook))
+    (add-hook hook 'rainbow-mode))
 
+;;; Auto-complete CSS keywords
+  (dolist (hook '(css-mode-hook sass-mode-hook scss-mode-hook))
+    (add-hook hook 'ac-css-mode-setup))
+
+
+;;; Use eldoc for syntax hints
+(require-package 'css-eldoc)
+(autoload 'turn-on-css-eldoc "css-eldoc")
+(add-hook 'css-mode-hook 'turn-on-css-eldoc)
 
 ;(require-package 'emmet-mode)
 ;(add-hook 'css-mode-hook 'emmet-mode)
