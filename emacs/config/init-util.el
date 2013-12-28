@@ -5,6 +5,13 @@
      '(progn ,@body)))
 
 
+(defun my-add-semicolon-at-the-end-of-line ()
+  "Add a semicolon to the end of line and go to next"
+  (interactive) ; Do the following interactively
+  (end-of-line) ; Move to the end of line
+  (insert ";") ; Add the semicolon
+  (evil-normal-state))
+
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."
   (interactive)

@@ -27,6 +27,7 @@
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "jj" 'my-add-semicolon-at-the-end-of-line)
 
   ; ace-jump key bindings,
   (after 'ace-jump-mode
