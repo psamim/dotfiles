@@ -12,7 +12,6 @@
 
 (defun my-latex-mode-hook-funcs ()
   (flyspell-mode 1)
-  (ac-flyspell-workaround)
   (turn-on-reftex)
   (setq TeX-command-default "XeTex"
         TeX-auto-save t

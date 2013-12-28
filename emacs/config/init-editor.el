@@ -14,6 +14,9 @@
 
 (set-fill-column 110)
 
+; Make flyspell compatible with ac
+(ac-flyspell-workaround)
+
 ;; Add spell-checking in comments for all programming language modes
 (if (fboundp 'prog-mode)
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)

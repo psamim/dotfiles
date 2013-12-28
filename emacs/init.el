@@ -14,12 +14,13 @@
 (require 'init-org)
 (require 'init-eyecandy)
 
+(require 'init-auto-complete)
 (require 'init-editor)
 ;; (require 'init-smartparens)
 (require 'init-autopair)
 
 ;(require 'init-yasnippet)
-(require 'init-auto-complete)
+;(require 'init-auto-complete)
 ;(require 'init-company)
 
 (require 'init-projectile)
