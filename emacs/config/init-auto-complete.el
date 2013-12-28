@@ -1,4 +1,5 @@
 (require-package 'auto-complete)
+(require-package 'ac-etags)
 (require 'auto-complete)
 (require 'auto-complete-config)
 
@@ -20,10 +21,15 @@
                 html-mode stylus-mode))
   (add-to-list 'ac-modes mode))
 
+(eval-after-load "etags"
+  '(progn
+      (ac-etags-setup)))
+
 (ac-config-default)
 (setq-default ac-sources
           '(
         ac-source-filename
+        ac-etags
         ;ac-source-abbrev
         ac-source-dictionary
         ;ac-source-dabbrev

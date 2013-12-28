@@ -12,6 +12,13 @@
   (insert ";") ; Add the semicolon
   (evil-normal-state))
 
+(setq path-to-ctags "TAGS")
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+   (format "ctags --exclude=.git -f %s -e -R %s" path-to-ctags (directory-file-name dir-name))))
+
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."
   (interactive)
