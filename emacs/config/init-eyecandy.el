@@ -30,8 +30,15 @@
                             ;(hl-line-mode)
                             ;(linum-mode)))
 
-(set-face-attribute 'default nil :font
-"DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+;(set-face-attribute 'default nil :font
+;"DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+
+(set-default-font "Inconsolata-14")
+
+(set-fontset-font
+   "fontset-default"
+   (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
+   "Dejavu Sans Mono-13")
 
 (require-package 'solarized-theme)
 ;(require-package 'color-theme-sanityinc-tomorrow)
@@ -46,7 +53,7 @@
 ;(powerline-center-evil-theme)
 ;(powerline-vim-theme)
 
-(menu-bar-mode -1)
+;(menu-bar-mode -1)
 ;(toggle-scroll-bar -1)
 (tool-bar-mode -1)
 ;(setq-default mode-line-format nil)
