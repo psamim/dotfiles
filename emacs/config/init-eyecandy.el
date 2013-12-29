@@ -8,6 +8,9 @@
 ;(require 'pretty-mode)
 ;(global-pretty-mode)
 
+; Window Title
+(setq frame-title-format '("%b - %F"))
+
 (require-package 'diminish)
 (after 'diminish-autoloads
   (diminish 'visual-line-mode)

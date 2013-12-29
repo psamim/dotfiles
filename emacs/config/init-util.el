@@ -17,7 +17,7 @@
   "Create tags file."
   (interactive "DDirectory: ")
   (shell-command
-   (format "ctags --exclude=.git -f %s -e -R %s" path-to-ctags (directory-file-name dir-name))))
+   (format "ctags-exuberant --exclude=.git -f %s -e -R %s" path-to-ctags (directory-file-name dir-name))))
 
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."

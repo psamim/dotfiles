@@ -29,7 +29,7 @@
 (setq-default ac-sources
           '(
         ac-source-filename
-        ac-etags
+        ;ac-etags
         ;ac-source-abbrev
         ac-source-dictionary
         ;ac-source-dabbrev
