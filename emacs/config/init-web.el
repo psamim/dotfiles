@@ -6,6 +6,7 @@
 (require-package 'ac-js2)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 
+
 (after 'js2-mode-autoloads
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 

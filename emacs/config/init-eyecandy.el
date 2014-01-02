@@ -61,6 +61,10 @@
 (tool-bar-mode -1)
 ;(setq-default mode-line-format nil)
 
+; Mouse moves only one line
+(setq mouse-wheel-follow-mouse 't)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 
 (setq org-startup-indented t)
 
