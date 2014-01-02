@@ -2,8 +2,7 @@
 (setq org-default-notes-file "~/.orgs/notes.org"
       org-log-done t)
 
-(setq org-agenda-files (list "~/.orgs/my.org.gpg"))
-;(setq org-agenda-files (quote ("~/.orgs/")))
+;(setq org-agenda-files (list "~/.orgs/my.org.gpg"))
 
 (require 'epa-file)
 (epa-file-enable)
@@ -55,4 +54,5 @@
         )))
 
 
+(setq org-agenda-files (quote ("~/.orgs/my.org.gpg")))
 (provide 'init-org)
