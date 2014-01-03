@@ -35,22 +35,37 @@
 ;(setq org-plantuml-jar-path (expand-file-name "~/plantuml.jar"))
 
 
-; Custom agendas
+; Custom agendas and trees
 (setq org-agenda-custom-commands
-      (quote
-       (("w" "At Work"
+      (quote (
+        ("u" "@uni NEXT" tags-tree "@uni+TODO=\"NEXT\"")
+        ("1" "@uni TODO" tags-tree "@uni+TODO=\"TODO\"")
+        ("w" "@work NEXT" tags-tree "@work+TODO=\"NEXT\"")
+        ("2" "@work TODO" tags-tree "@work+TODO=\"TODO\"")
+        ("m" "@me NEXT" tags-tree "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
+        ("3" "@me TODO" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
+
+       ("z" "Work Agenda"
          (
           (tags-todo "@work+TODO=\"NEXT\"")
           (tags-todo "@work+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
 
-        ("u" "At Uni"
+        ("x" "Uni Agenda"
          (
           (tags-todo "@uni+TODO=\"NEXT\"")
           (tags-todo "@uni+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
+
+        ("c" "Me Agenda"
+         (
+          (tags-todo "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
+          (tags-todo "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
+          )
+         ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
+
         )))
 
 
