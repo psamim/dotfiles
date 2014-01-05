@@ -38,28 +38,28 @@
 ; Custom agendas and trees
 (setq org-agenda-custom-commands
       (quote (
-        ("u" "@uni NEXT" tags-tree "@uni+TODO=\"NEXT\"")
-        ("1" "@uni TODO" tags-tree "@uni+TODO=\"TODO\"")
-        ("w" "@work NEXT" tags-tree "@work+TODO=\"NEXT\"")
-        ("2" "@work TODO" tags-tree "@work+TODO=\"TODO\"")
-        ("m" "@me NEXT" tags-tree "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
-        ("3" "@me TODO" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
+        ("un" "@uni NEXT" tags-tree "@uni+TODO=\"NEXT\"")
+        ("ut" "@uni TODO" tags-tree "@uni+TODO=\"TODO\"")
+        ("wn" "@work NEXT" tags-tree "@work+TODO=\"NEXT\"")
+        ("wt" "@work TODO" tags-tree "@work+TODO=\"TODO\"")
+        ("mn" "@me NEXT" tags-tree "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
+        ("mt" "@me TODO" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
 
-       ("z" "Work Agenda"
+       ("wa" "Work Agenda"
          (
           (tags-todo "@work+TODO=\"NEXT\"")
           (tags-todo "@work+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
 
-        ("x" "Uni Agenda"
+        ("ua" "Uni Agenda"
          (
           (tags-todo "@uni+TODO=\"NEXT\"")
           (tags-todo "@uni+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
 
-        ("c" "Me Agenda"
+        ("ma" "Me Agenda"
          (
           (tags-todo "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
           (tags-todo "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
