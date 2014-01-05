@@ -5,6 +5,11 @@
       `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 (global-undo-tree-mode)
 
+;(require-package 'smart-tabs-mode)
+;(setq-default indent-tabs-mode nil)
+;(smart-tabs-insinuate 'c 'javascript 'python 'cperl 'php)
+;(setq-default tab-width 4)
+
 
 (require-package 'multiple-cursors)
 (require 'multiple-cursors)
