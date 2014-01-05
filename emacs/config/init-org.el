@@ -40,26 +40,29 @@
       (quote (
         ("un" "@uni NEXT" tags-tree "@uni+TODO=\"NEXT\"")
         ("ut" "@uni TODO" tags-tree "@uni+TODO=\"TODO\"")
+        ("ua" "@uni ALL" tags-tree "@uni+TODO=\"NEXT\"|@uni+TODO=\"TODO\"")
         ("wn" "@work NEXT" tags-tree "@work+TODO=\"NEXT\"")
-        ("wt" "@work TODO" tags-tree "@work+TODO=\"TODO\"")
+        ("wt" "@work TODO" tags-tree "@work+TODO=\"NEXT\"")
+        ("wa" "@work ALL" tags-tree "@work+TODO=\"NEXT\"|@work+TODO=\"TODO\"")
         ("mn" "@me NEXT" tags-tree "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
         ("mt" "@me TODO" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
+        ("ma" "@me ALL" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"|@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
 
-       ("wa" "Work Agenda"
+       ("wg" "Work Agenda"
          (
           (tags-todo "@work+TODO=\"NEXT\"")
           (tags-todo "@work+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
 
-        ("ua" "Uni Agenda"
+        ("ug" "Uni Agenda"
          (
           (tags-todo "@uni+TODO=\"NEXT\"")
           (tags-todo "@uni+TODO=\"TODO\"")
           )
          ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
 
-        ("ma" "Me Agenda"
+        ("mg" "Me Agenda"
          (
           (tags-todo "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
           (tags-todo "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
