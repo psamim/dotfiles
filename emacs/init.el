@@ -38,3 +38,4 @@
 (require 'init-evil)
 (require 'init-misc)
 (require 'init-bindings)
+(require 'init-gnus)
