@@ -33,7 +33,7 @@
                   yaml-mode
                   python-mode-hook
                   shell-mode-hook
-                  php-mode-hook
+                  ; php-mode-hook
                   css-mode-hook
                   haskell-mode-hook
                   caml-mode-hook

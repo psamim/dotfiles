@@ -59,7 +59,6 @@
 
 (require-package 'php-eldoc)
 (add-hook 'php-mode-hook 'php-eldoc-enable)
-(add-hook 'php-mode-hook 'flycheck-mode nil)
 
 (defun my-php-mode-hook ()
   (setq indent-tabs-mode t)

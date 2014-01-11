@@ -5,6 +5,6 @@
   (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
   (setq flycheck-checkers (delq 'html-tidy flycheck-checkers)))
 
-(global-flycheck-mode t)
+;(global-flycheck-mode t)
 
 (provide 'init-flycheck)
