@@ -37,7 +37,7 @@
     )
 
   (after 'evil-leader
-    (evil-leader/set-leader ",")
+    (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       "w" 'save-buffer
       "e" (kbd "C-x C-e")
