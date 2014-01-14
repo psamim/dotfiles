@@ -44,4 +44,7 @@
                   javascript-mode-hook))
     (add-hook hook 'flyspell-prog-mode)))
 
+(require-package 'edit-server)
+(edit-server-start)
+
 (provide 'init-editor)
