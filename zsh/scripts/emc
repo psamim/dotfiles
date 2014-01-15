@@ -2,7 +2,7 @@
 ps aux|grep 'emacs *--daemon' || DISPLAY='' emacs --daemon -nw --no-splash
 
 if [ "x$1" = "x-nw" ]; then
-  exec emacsclient "$@"
+  exec emacsclient -a "" "$@"
 else
-  exec emacsclient -nc "$@"
+  exec emacsclient -a "" -nc "$@"
 fi

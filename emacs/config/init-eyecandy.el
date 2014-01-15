@@ -36,12 +36,18 @@
 ;(set-face-attribute 'default nil :font
 ;"DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
 
-(set-default-font "Inconsolata-14")
 
 (set-fontset-font
    "fontset-default"
    (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
    "Dejavu Sans Mono-13")
+
+(add-hook 'before-make-frame-hook
+          #'(lambda ()
+              (menu-bar-mode t)
+              (font . "Inconsolata-14")
+              ))
+
 
 (require-package 'solarized-theme)
 ;(require-package 'color-theme-sanityinc-tomorrow)
