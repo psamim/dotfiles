@@ -33,8 +33,8 @@
                             ;(hl-line-mode)
                             ;(linum-mode)))
 
-;(set-face-attribute 'default nil :font
-;"DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+(set-face-attribute 'default nil :font
+"DejaVu Sans Mono:pixelsize=15:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
 
 
 (set-fontset-font
