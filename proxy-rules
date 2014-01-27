@@ -1,0 +1,15 @@
+; Summary: Example Rule List
+; Author: Mhd Hejazi (my@email)
+; Date: 2010-01-20
+; URL: http://samabox.com/projects/chrome/switchy/switchyrules.txt
+
+#BEGIN
+
+[Wildcard]
+*facebook.com/*
+
+
+[RegExp]
+
+
+#END
