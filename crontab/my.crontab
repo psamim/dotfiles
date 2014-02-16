@@ -1,0 +1,5 @@
+# vim:set ft=crontab:
+# m h  dom mon dow   command
+2 1 * * * /bin/bash /home/samim/.zsh/scripts/download.sh
+2 2 * * * /usr/bin/youtube-dl -a /home/samim/Downloads/nightly/yt --proxy http://localhost:8118 --no-check-certificate
+1 8 * * * /usr/bin/systemctl suspend

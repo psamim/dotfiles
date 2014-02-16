@@ -40,6 +40,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       "w" 'save-buffer
+      "ص" 'save-buffer
       "e" (kbd "C-x C-e")
       "E" (kbd "C-M-x")
       "t" (bind
@@ -108,7 +109,13 @@
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "ت" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+  (define-key evil-motion-state-map "ن" 'evil-previous-visual-line)
+  (define-key evil-motion-state-map "ؤ" 'evil-end-of-line)
+  (define-key evil-motion-state-map "ا" 'evil-forward-char)
+  (define-key evil-motion-state-map "م" 'evil-backward-char)
+  (define-key evil-motion-state-map "ه" 'evil-insert)
 
   (define-key evil-normal-state-map (kbd "Q") 'my-window-killer)
   (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))

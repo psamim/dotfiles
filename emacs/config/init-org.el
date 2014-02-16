@@ -2,13 +2,14 @@
 (setq org-default-notes-file "~/.orgs/notes.org"
       org-log-done t)
 
-;(setq org-agenda-files (list "~/.orgs/my.org.gpg"))
-
 (require 'epa-file)
 (epa-file-enable)
 (setq epa-file-select-keys nil)
 
-(setq org-M-RET-may-split-line nil)
+(defun my-org-mode-hook()
+  (setq bidi-paragraph-direction nil))
+
+(add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-todo-keywords '("TODO" "NEXT" "WAITING" "DONE"))
 
@@ -72,5 +73,9 @@
         )))
 
 
-(setq org-agenda-files (quote ("~/.orgs/my.org.gpg")))
+(setq org-agenda-files (quote ("~/.orgs/my.org")))
+(setq org-mobile-directory "~/Owncloud/orgs")
+;; (setq org-mobile-directory "~/.orgs/mob")
+(setq org-directory "~/.orgs")
+(setq org-mobile-inbox-for-pull "~/.orgs/mob.org")
 (provide 'init-org)
