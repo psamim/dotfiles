@@ -28,12 +28,12 @@
                               (goto-char
                                (cdr ash-org-current-task-loc)))))
 
-;(require 'ob)
-;(org-babel-do-load-languages
-; 'org-babel-load-languages
-; '((plantuml . t)))
-;
-;(setq org-plantuml-jar-path (expand-file-name "~/plantuml.jar"))
+(require 'ob)
+(org-babel-do-load-languages
+'org-babel-load-languages
+'((plantuml . t)))
+
+(setq org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar"))
 
 
 ; Custom agendas and trees
@@ -78,4 +78,11 @@
 ;; (setq org-mobile-directory "~/.orgs/mob")
 (setq org-directory "~/.orgs")
 (setq org-mobile-inbox-for-pull "~/.orgs/mob.org")
+
+;; Syntax Highlighting
+;; http://praveen.kumar.in/2012/03/10/org-mode-latex-and-minted-syntax-highlighting/
+(require 'org-latex)
+(setq org-export-latex-listings 'minted)
+(add-to-list 'org-export-latex-packages-alist '("" "minted"))
+
 (provide 'init-org)
