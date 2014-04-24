@@ -43,7 +43,7 @@
         ("ut" "@uni TODO" tags-tree "@uni+TODO=\"TODO\"")
         ("ua" "@uni ALL" tags-tree "@uni+TODO=\"NEXT\"|@uni+TODO=\"TODO\"")
         ("wn" "@work NEXT" tags-tree "@work+TODO=\"NEXT\"")
-        ("wt" "@work TODO" tags-tree "@work+TODO=\"NEXT\"")
+        ("wt" "@work TODO" tags-tree "@work+TODO=\"TODO\"")
         ("wa" "@work ALL" tags-tree "@work+TODO=\"NEXT\"|@work+TODO=\"TODO\"")
         ("mn" "@me NEXT" tags-tree "@me+TODO=\"NEXT\"|@tasks+TODO=\"NEXT\"")
         ("mt" "@me TODO" tags-tree "@me+TODO=\"TODO\"|@tasks+TODO=\"TODO\"")
