@@ -8,7 +8,8 @@
 
 (defun my-org-mode-hook()
   (setq bidi-paragraph-direction nil)
-  (auto-complete-mode t))
+  (auto-complete-mode t)
+  (flyspell-mode t))
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
