@@ -119,4 +119,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  (interactive)
  (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
 
+(defun my-insert-today-date ()
+  (interactive)
+   (insert
+          (format-time-string "%Y-%m-%d")))
+
 (provide 'init-util)
