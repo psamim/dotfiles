@@ -1,5 +1,5 @@
 (require 'org)
-(setq org-default-notes-file "~/.orgs/notes.org"
+(setq org-default-notes-file "~/Note/notes.org"
       org-log-done t)
 
 (require 'epa-file)
@@ -75,11 +75,11 @@
         )))
 
 
-(setq org-agenda-files (quote ("~/.orgs/my.org")))
+(setq org-agenda-files (quote ("~/Note/todo.org")))
 (setq org-mobile-directory "~/Owncloud/orgs")
 ;; (setq org-mobile-directory "~/.orgs/mob")
-(setq org-directory "~/.orgs")
-(setq org-mobile-inbox-for-pull "~/.orgs/mob.org")
+(setq org-directory "~/Note")
+(setq org-mobile-inbox-for-pull "~/Note/mob.org")
 
 ;; Syntax Highlighting
 ;; http://praveen.kumar.in/2012/03/10/org-mode-latex-and-minted-syntax-highlighting/
