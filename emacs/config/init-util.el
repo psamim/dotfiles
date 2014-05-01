@@ -124,4 +124,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
    (insert
           (format-time-string "%Y-%m-%d")))
 
+(defun my-new-daily-journal ()
+  (interactive)
+  (setq my-file-name (concat "~/Note/daily/" (concat (format-time-string "%Y-%m-%d") ".org")))
+  (if (file-exists-p my-file-name)
+      ()
+    (copy-file "~/Note/template.org" my-file-name))
+  (find-file my-file-name)
+  (split-window-right)
+  (find-file "~/Note/todo.org"))
+
+
 (provide 'init-util)
