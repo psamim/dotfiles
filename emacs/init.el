@@ -19,7 +19,7 @@
 (require 'init-smartparens)
 ;(require 'init-autopair)
 
-;(require 'init-yasnippet)
+(require 'init-yasnippet)
 ;(require 'init-company)
 
 (require 'init-projectile)

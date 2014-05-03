@@ -50,7 +50,7 @@
       ; "C" 'customize-group
       "h l" 'evil-ex-nohighlight
       "c" 'evilnc-comment-or-uncomment-lines
-      "b d" 'kill-this-buffer
+      ;; "b d" 'kill-this-buffer
       "v" (kbd "C-w v C-w l")
       "s" (kbd "C-w s C-w j")
       "g s" 'magit-status
