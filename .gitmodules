@@ -10,3 +10,6 @@
 [submodule "emacs/orgs"]
 	path = emacs/orgs
 	url = git@bitbucket.org:psamim/orgs.git
+[submodule "emacs.d"]
+	path = emacs.d
+	url = git@github.com:psamim/emacs.d.git
