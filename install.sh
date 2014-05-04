@@ -62,3 +62,9 @@ ln -sf "$PWD/zsh/prezto/runcoms/zpreztorc" "$HOME/.zpreztorc"
 ln -sf "$PWD/zsh/prezto/runcoms/zprofile" "$HOME/.zprofile"
 ln -sf "$PWD/zsh/prezto/runcoms/zshenv" "$HOME/.zshenv"
 ln -sf "$PWD/zsh/prezto/runcoms/zshrc" "$HOME/.zshrc"
+
+# Vimperator
+rm -rf "$HOME/.vimperator"
+ln -sf "$PWD/vimperator" "$HOME/.vimperator"
+rm -rf "$HOME/.vimperatorrc"
+ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
