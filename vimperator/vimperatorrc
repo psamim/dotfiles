@@ -16,6 +16,6 @@ nmap <A-n> :tabopen<CR>
 " command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args>
 fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
 fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l
-fmaps -u='facebookc\.com' j k l c
+fmaps -u='facebook\.com' j k l c
 
 set hintchars=asdfghjkl;
