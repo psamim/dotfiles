@@ -1,12 +1,18 @@
 "3.8.2 (created: 2014/02/13 23:52:43)
 
 source! /home/samim/.vimperatorrc.local
+" vim: set ft=vimrc:
 
-" vim: set ft=vimperator:
+set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 
 nmap <A-l> :tabnext<CR>
 nmap <A-h> :tabprevious<CR>
+nmap <A-j> :tabnext<CR>
+nmap <A-k> :tabprevious<CR>
 nmap <A-n> :tabopen<CR>
+
+nmap <PageDown> :tabnext<CR>
+nmap <PageUp> :tabprevious<CR>
 
 " set passkeys+=mail.google.com:!#*+-./<C-Down><C-s><Enter>?INU[]jkacefpqrsuvxyz,*a,*n,*r,*s,*t,*u,ga,gc,gd,gi,gl,gs,gt,yo
 " set passkeys+=tweetdeck.twitter.com:jkfrlhxspnt,rt
@@ -15,7 +21,7 @@ nmap <A-n> :tabopen<CR>
 
 " command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args>
 fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
-fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l
+fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
 fmaps -u='facebook\.com' j k l c
 
-set hintchars=asdfghjkl;
+set hintchars=jk
