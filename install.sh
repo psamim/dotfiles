@@ -68,3 +68,9 @@ rm -rf "$HOME/.vimperator"
 ln -sf "$PWD/vimperator" "$HOME/.vimperator"
 rm -rf "$HOME/.vimperatorrc"
 ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
+
+# i3
+rm -rf "$HOME/.i3"
+ln -sf "$PWD/i3" "$HOME/.i3"
+rm -rf "$HOME/.i3status.conf"
+ln -sf "$PWD/i3/i3status.conf" "$HOME/.i3status.conf"
