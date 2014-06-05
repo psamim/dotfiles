@@ -5,8 +5,8 @@ source! /home/samim/.vimperatorrc.local
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 
-nmap <A-l> :tabnext<CR>
-nmap <A-h> :tabprevious<CR>
+nmap <A-l> :forward<CR>
+nmap <A-h> :back<CR>
 nmap <A-j> :tabnext<CR>
 nmap <A-k> :tabprevious<CR>
 nmap <A-n> :tabopen<CR>
@@ -24,4 +24,4 @@ fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd 
 fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
 fmaps -u='facebook\.com' j k l c
 
-set hintchars=jk
+set hintchars=jkl
