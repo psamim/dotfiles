@@ -78,3 +78,7 @@ ln -sf "$PWD/i3/i3status.conf" "$HOME/.i3status.conf"
 # compton
 rm -rf "$HOME/.compton"
 ln -sf "$PWD/compton/compton.conf" "$HOME/.compton"
+
+# X
+rm -rf "$HOME/.Xresources"
+ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
