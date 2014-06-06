@@ -74,3 +74,7 @@ rm -rf "$HOME/.i3"
 ln -sf "$PWD/i3" "$HOME/.i3"
 rm -rf "$HOME/.i3status.conf"
 ln -sf "$PWD/i3/i3status.conf" "$HOME/.i3status.conf"
+
+# compton
+rm -rf "$HOME/.compton"
+ln -sf "$PWD/compton/compton.conf" "$HOME/.compton"
