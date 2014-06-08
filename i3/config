@@ -11,7 +11,7 @@ exec "setxkbmap -layout us,ir"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
 # Hide curser when incactive
 exec unclutter &
-exec "/usr/bin/xcompmgr -n &"
+exec "/usr/bin/compton -b --config ~/.compton &"
 exec "/usr/bin/emacs --daemon &"
 
 set $mod Mod4
@@ -26,7 +26,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec gnome-terminal
+# bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -34,16 +34,16 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec "j4-dmenu-desktop"
 # bindsym $mod+d exec --no-startup-id "launchy"
-bindsym $mod+d exec "dmenu_run"
-
+bindsym $mod+d exec "dmenu_run -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus right
+bindsym $mod+k focus left
+bindsym $mod+j focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
+bindsym $mod+i focus up
 bindsym $mod+Right focus right
 
 # move focused window
@@ -81,8 +81,8 @@ bindsym $mod+3 workspace 
 bindsym F3 workspace 
 bindsym $mod+4 workspace 
 bindsym F4 workspace 
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
+bindsym $mod+5 workspace 
+bindsym $mod+6 workspace 
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -96,8 +96,8 @@ bindsym Shift+F3 move container to workspace 
 bindsym $mod+Shift+3 move container to workspace 
 bindsym Shift+F4 move container to workspace 
 bindsym $mod+Shift+4 move container to workspace 
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+5 move container to workspace 
+bindsym $mod+Shift+6 move container to workspace 
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -107,9 +107,12 @@ bindsym $mod+Shift+0 move container to workspace 10
 assign [class="Vlc"] → 
 assign [class="Spotify"] → 
 assign [class="OSD Lyrics"] → 
-assign [class="Firefox"] → 
+assign [class="Firefox"] → 
 assign [class="Emacs"] → 
+assign [class="Pidgin"] → 
+assign [class="Thunderbird"] → 
 for_window [class="Osdlyrics"] floating enable
+for_window [class="Thunar"] floating enable
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -151,8 +154,12 @@ bindsym F12 scratchpad show
 bindsym $mod+z exec python ~/src/i3-wm-scripts/nextfind.py
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 # bindsym $mod+w exec quickswitch.py -w
-bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu | ~/src/i3_benkaiser_script/go_to_workspace.py"
-bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu | ~/src/i3_benkaiser_script/move_to_workspace.py"
+bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
+bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
+bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} xdg-open '{}'"
+
+
+
 bindsym $mod+shift+o move workspace to output right
 bindsym $mod+b bar mode toggle
 # starting a specially named term automatically
@@ -174,9 +181,8 @@ new_float pixel 2
 workspace_layout tabbed
 focus_follows_mouse no
 force_focus_wrapping yes
+workspace_auto_back_and_forth yes
 
-# switch to last workspace
-# bindsym $mod+a  workspace back_and_forth
 
 bar {
         mode hide
@@ -184,3 +190,21 @@ bar {
         position bottom
         hidden_state hide
 }
+
+
+# I want my Pidgin in the right half, and chat windows in the left half, stacked
+# I go to my pidgin mode, fire Pidgin, and type p i d
+mode "pidgin" {
+    bindsym p exec i3-sensible-terminal --title "pidgin-terminal"
+    bindsym i layout stacking
+    bindsym d [class="Pidgin"] focus, move right, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym    Tab mode "default"
+}
+
+assign [title="pidgin-terminal"] 
+assign [class="Pidgin"] 
+for_window [instance="Pidgin"] move left, move left
+for_window [title="pidgin-terminal"] move left
+bindsym $mod+p mode "pidgin"
