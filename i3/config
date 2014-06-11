@@ -3,16 +3,12 @@
 # Set background
 exec_always --no-startup-id "sh ~/.fehbg &"
 
-# Keyboard layouts
-exec "setxkbmap -layout us,ir"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
-
 # Hide curser when incactive
 exec unclutter &
 
 # Compton window compositor
 exec "/usr/bin/compton -b --config ~/.compton &"
-
+exec --no-startup-id nm-applet
 exec "/usr/bin/emacs --daemon &"
 
 set $mod Mod4
@@ -76,36 +72,36 @@ bindsym $mod+1 workspace 1: 
 bindsym F1 workspace 1: 
 bindsym $mod+2 workspace 2: 
 bindsym F2 workspace 2: 
-bindsym $mod+6 workspace 6: 
-bindsym F6 workspace 6: 
-bindsym $mod+4 workspace 4: 
-bindsym F4 workspace 4: 
-bindsym $mod+5 workspace 5: 
-bindsym F5 workspace 5: 
 bindsym $mod+3 workspace 3: 
 bindsym F3 workspace 3: 
+bindsym $mod+4 workspace 4: 
+bindsym F4 workspace 4: 
+bindsym $mod+5 workspace 5: 
+bindsym F5 workspace 5: 
+bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1: 
 bindsym $mod+Shift+2 move container to workspace 2: 
-bindsym $mod+Shift+6 move container to workspace 6: 
-bindsym $mod+Shift+4 move container to workspace 4: 
-bindsym $mod+Shift+5 move container to workspace 5: 
 bindsym $mod+Shift+3 move container to workspace 3: 
+bindsym $mod+Shift+4 move container to workspace 4: 
+bindsym $mod+Shift+5 move container to workspace 5: 
+bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Assignments
-assign [class="Vlc"] → 6: 
-assign [class="Spotify"] → 6: 
-assign [class="OSD Lyrics"] → 6: 
+assign [class="Vlc"] → 4: 
+assign [class="Spotify"] → 4: 
+assign [class="OSD Lyrics"] → 4: 
 assign [class="Firefox"] → 2: 
-assign [class="Emacs"] → 4: 
+# assign [class="Emacs"] → 4: 
 assign [class="Pidgin"] → 5: 
 assign [class="Thunderbird"] → 3: 
 for_window [class="Osdlyrics"] floating enable
