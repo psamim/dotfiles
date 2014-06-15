@@ -1,2 +1,2 @@
 #!/bin/bash
-nautilus --no-desktop &
+nautilus --no-desktop "$1"

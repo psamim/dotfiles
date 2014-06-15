@@ -1,2 +1,8 @@
 #!/bin/sh
-emacsclient -c --socket-name="/tmp/samim/emacs1000/server"
+if [[ -n "$1" ]]
+then
+	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" "$1"
+else
+	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server"
+fi
+
