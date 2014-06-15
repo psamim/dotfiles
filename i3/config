@@ -10,6 +10,15 @@ exec unclutter &
 exec "/usr/bin/compton -b --config ~/.compton &"
 exec --no-startup-id nm-applet
 exec "/usr/bin/emacs --daemon &"
+exec "redshift-gtk &"
+# start clipboardmanager
+exec parcellite
+#enable dunst for notify-send
+exec dunst
+
+
+
+
 
 set $mod Mod4
 
@@ -145,6 +154,7 @@ bindsym $mod+Return [urgent=latest] focus
 bindsym $mod+m move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
+bindsym $mod+Tab workspace back_and_forth
 
 # Search between windows
 bindsym $mod+z exec python ~/src/i3-wm-scripts/nextfind.py
@@ -156,6 +166,8 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 # bindsym $mod+w exec quickswitch.py -w
 bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
 bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
+#invert the screen
+bindsym $mod+e exec --no-startup-id xcalib -i -a
 
 # Search in home
 bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
