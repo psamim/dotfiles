@@ -158,7 +158,7 @@ bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu 
 bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
 
 # Search in home
-bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} xdg-open '{}'"
+bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
 
 # Send workspace to othe monitor
 bindsym $mod+shift+o move workspace to output right
@@ -166,7 +166,7 @@ bindsym $mod+shift+o move workspace to output right
 # Toggle bar visibility
 bindsym $mod+b bar mode toggle
 # starting a specially named term automatically
-exec --no-startup-id urxvt -name scratchpad -e '/usr/bin/tmux -f /home/samim/.tmux.conf'
+exec --no-startup-id urxvt -name scratchpad -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
 # move this to scratchpad, if active
 for_window [class="URxvt" instance="scratchpad"] move scratchpad
 bindsym mod4+c [class="URxvt"] scratchpad show
