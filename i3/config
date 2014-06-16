@@ -16,10 +16,6 @@ exec parcellite
 #enable dunst for notify-send
 exec dunst
 
-
-
-
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -217,7 +213,6 @@ mode "pidgin" {
     bindsym Escape mode "default"
     bindsym    Tab mode "default"
 }
-for_window [instance="Pidgin"] move left, move left
-for_window [title="pidgin-terminal"] move left
+for_window [class="Pidgin" window_role="conversation"] focus, move left, move left
 
-bindsym $mod+p mode "pidgin"
+# bindsym $mod+p mode "pidgin"
