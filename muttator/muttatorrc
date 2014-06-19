@@ -1,0 +1,3 @@
+nmap <A-j> :tabnext<return>
+nmap <A-k> :tabprevious<return>
+nmap a :moveto p.samim@gmail.com: All Mail<return>
