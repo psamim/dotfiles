@@ -1,20 +1,10 @@
 # i3 config file (v4)
 
-# Set background
-exec_always --no-startup-id "sh ~/.fehbg &"
-
-# Hide curser when incactive
-exec unclutter &
-
-# Compton window compositor
-exec "/usr/bin/compton -b --config ~/.compton &"
-exec --no-startup-id nm-applet
-exec "/usr/bin/emacs --daemon &"
+exec --no-startup-id nm-applet &
 exec "redshift-gtk &"
+exec workrave &
 # start clipboardmanager
-exec parcellite
-#enable dunst for notify-send
-exec dunst
+exec parcellite &
 
 set $mod Mod4
 
@@ -33,7 +23,7 @@ bindsym $mod+q kill
 # bindsym $mod+d exec "j4-dmenu-desktop"
 # bindsym $mod+d exec --no-startup-id "launchy"
 # It's dmenu2
-bindsym $mod+d exec "dmenu_run -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
+bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
 
 # change focus
 bindsym $mod+k focus left
@@ -77,12 +67,12 @@ bindsym $mod+1 workspace 1: 
 bindsym F1 workspace 1: 
 bindsym $mod+2 workspace 2: 
 bindsym F2 workspace 2: 
-bindsym $mod+3 workspace 3: 
-bindsym F3 workspace 3: 
-bindsym $mod+4 workspace 4: 
-bindsym F4 workspace 4: 
-bindsym $mod+5 workspace 5: 
-bindsym F5 workspace 5: 
+bindsym $mod+3 workspace 3: 
+bindsym F3 workspace 3: 
+bindsym $mod+4 workspace 4: 
+bindsym F4 workspace 4: 
+bindsym $mod+5 workspace 5: 
+bindsym F5 workspace 5: 
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -92,9 +82,9 @@ bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1: 
 bindsym $mod+Shift+2 move container to workspace 2: 
-bindsym $mod+Shift+3 move container to workspace 3: 
-bindsym $mod+Shift+4 move container to workspace 4: 
-bindsym $mod+Shift+5 move container to workspace 5: 
+bindsym $mod+Shift+3 move container to workspace 3: 
+bindsym $mod+Shift+4 move container to workspace 4: 
+bindsym $mod+Shift+5 move container to workspace 5: 
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -102,13 +92,13 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Assignments
-assign [class="Vlc"] → 4: 
-assign [class="Spotify"] → 4: 
-assign [class="OSD Lyrics"] → 4: 
+assign [class="Vlc"] → 5: 
+assign [class="Spotify"] → 5: 
+assign [class="OSD Lyrics"] → 5: 
 assign [class="Firefox"] → 2: 
 # assign [class="Emacs"] → 4: 
-assign [class="Pidgin"] → 5: 
-assign [class="Thunderbird"] → 3: 
+assign [class="Pidgin"] → 3: 
+assign [class="Thunderbird"] → 4: 
 for_window [class="Osdlyrics"] floating enable
 for_window [class="Thunar"] floating enable
 
@@ -160,13 +150,13 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # Search in workspaces
 # bindsym $mod+w exec quickswitch.py -w
-bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
-bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
-#invert the screen
+bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
+bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -p '>'  -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
+# invert the screen
 bindsym $mod+e exec --no-startup-id xcalib -i -a
 
 # Search in home
-bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
+bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 1| dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
 
 # Send workspace to othe monitor
 bindsym $mod+shift+o move workspace to output right
@@ -181,9 +171,13 @@ bindsym mod4+c [class="URxvt"] scratchpad show
 bindsym mod4+x [class="Emacs"] scratchpad show
 
 # Multimedia keys
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+'"
-bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & killall -USR1 i3blocks"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-' & killall -USR1 i3blocks"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle & killall -USR1 i3blocks"
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioStop exec "playerctl stop"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
 
 # Some Options
 hide_edge_borders both
@@ -196,23 +190,10 @@ workspace_auto_back_and_forth yes
 
 
 bar {
-        mode hide
-        status_command i3status
+        status_command i3blocks
         position bottom
-        hidden_state hide
 }
 
 
-# I want my Pidgin in the right half, and chat windows in the left half, stacked
-# I go to my pidgin mode, fire Pidgin, and type p i d
-mode "pidgin" {
-    # bindsym p exec i3-sensible-terminal --title "pidgin-terminal"
-    bindsym i layout stacking
-    bindsym d [class="Pidgin"] focus, move right, mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym    Tab mode "default"
-}
 for_window [class="Pidgin" window_role="conversation"] focus, move left, move left
-
-# bindsym $mod+p mode "pidgin"
+for_window [urgent=latest] focus
