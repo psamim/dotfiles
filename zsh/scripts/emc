@@ -1,8 +1,8 @@
 #!/bin/sh
 if [[ -n "$1" ]]
 then
-	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" "$1"
+	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" -e '(psamim-set-window-fonts)' "$1"
 else
-	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server"
+	emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" -e '(psamim-set-window-fonts)'
 fi
 
