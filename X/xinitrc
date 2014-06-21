@@ -20,7 +20,7 @@ setxkbmap -option 'grp:alt_shift_toggle'
 setxkbmap -option caps:escape
 
 # Run Emacs if not already running
-if ps aux | grep "emacs" > /dev/null
+if pidof emacs
 then
     echo "Emacs Running"
 else
@@ -36,8 +36,15 @@ unclutter &
 #enable dunst for notify-send
 dunst &
 
+# Capture data about programs I use
+/home/samim/.cabal/bin/arbtt-capture &
+
 # Compton window compositor
 /usr/bin/compton -b --config ~/.compton &
+
+# screen powersave
+xset +dpms
+xset dpms 0 0 300
 
 xrdb -merge ~/.Xresources
 exec i3
