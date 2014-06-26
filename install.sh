@@ -69,11 +69,19 @@ ln -sf "$PWD/vimperator" "$HOME/.vimperator"
 rm -rf "$HOME/.vimperatorrc"
 ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
 
+# Muttator
+rm -rf "$HOME/.muttator"
+ln -sf "$PWD/muttator" "$HOME/.muttator"
+rm -rf "$HOME/.muttatorrc"
+ln -sf "$PWD/muttator/muttatorrc" "$HOME/.muttatorrc"
+
 # i3
 rm -rf "$HOME/.i3"
 ln -sf "$PWD/i3" "$HOME/.i3"
 rm -rf "$HOME/.i3status.conf"
 ln -sf "$PWD/i3/i3status.conf" "$HOME/.i3status.conf"
+rm -rf "$HOME/.i3blocks.conf"
+ln -sf "$PWD/i3/i3blocks.conf" "$HOME/.i3blocks.conf"
 
 # compton
 rm -rf "$HOME/.compton"
@@ -82,3 +90,9 @@ ln -sf "$PWD/compton/compton.conf" "$HOME/.compton"
 # X
 rm -rf "$HOME/.Xresources"
 ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
+rm -rf "$HOME/.xinitrc"
+ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
+
+# Binaries
+rm -rf "$HOME/.bin"
+ln -sf "$PWD/zsh/scripts" "$HOME/.bin"

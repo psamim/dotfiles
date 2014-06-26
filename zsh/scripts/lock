@@ -1,0 +1,4 @@
+physlock -ds -u samim;
+#i3lock-wrapper;
+#systemctl suspend;
+pm-suspend;
