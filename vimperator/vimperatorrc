@@ -10,6 +10,8 @@ nmap <A-h> :back<CR>
 nmap <A-j> :tabnext<CR>
 nmap <A-k> :tabprevious<CR>
 nmap <A-n> :tabopen<CR>
+noremap j 4j
+noremap k 4k
 
 nmap <PageDown> :tabnext<CR>
 nmap <PageUp> :tabprevious<CR>
@@ -25,3 +27,4 @@ fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
 fmaps -u='facebook\.com' j k l c
 
 set hintchars=jkl
+set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
