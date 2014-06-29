@@ -49,9 +49,6 @@ ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
 # Zsh/
 rm -rf "$HOME/.zsh"
 ln -sf "$PWD/zsh" "$HOME/.zsh"
-rm -rf "$HOME/.myscripts"
-ln -sf "$PWD/zsh/scripts" "$HOME/.myscripts"
-sudo ln -sf "$PWD/zsh/scripts/emc" "/usr/bin/emc"
 rm -rf "$HOME/.zprezto"
 ln -sf "$PWD/zsh/prezto" "$HOME/.zprezto"
 rm -f "$HOME/.zshrc"
@@ -95,4 +92,4 @@ ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
 
 # Binaries
 rm -rf "$HOME/.bin"
-ln -sf "$PWD/zsh/scripts" "$HOME/.bin"
+ln -sf "$PWD/bin" "$HOME/.bin"
