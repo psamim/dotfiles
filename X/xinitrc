@@ -48,7 +48,12 @@ dunst &
 # screen powersave
 xset +dpms
 xset dpms 0 0 300
-xss-lock lock &
+if pidof xss-lock
+then
+    echo "xss-lock Running"
+else
+    xss-lock lock &
+fi
 
 xrdb -merge ~/.Xresources
 exec i3
