@@ -1,8 +1,0 @@
-# Source global definitions
-if [ -f /etc/bashrc ]
-then
-    . /etc/bashrc
-fi
-
-export EDITOR='vim'
-PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"

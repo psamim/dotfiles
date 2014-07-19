@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Komodo Project File - DO NOT EDIT -->
-<project id="e6577ca4-3483-11db-bfd4-000d935d3368" name="Sample Custom Template.kpf" kpf_version="3">
-<snippet keyboard_shortcut="" name="ReadMe" set_selection="false" idref="e6577ca4-3483-11db-bfd4-000d935d3368" id="f6b2361a-3483-11db-bfd4-000d935d3368" indent_relative="false">
-This is a sample custom template for Komodo. The actual template file is:\n    /home/ali/.komodoedit/8.0/project-templates/My Templates/Sample Custom Template.xml\n\nYou can create your own templates with any content you wish.\nSee "Custom Templates" in Komodo's on-line help for more details.\n!@#_currentPos!@#_anchor</snippet>
-<preference-set idref="e6577ca4-3483-11db-bfd4-000d935d3368">
-  <boolean id="import_live">1</boolean>
-</preference-set>
-</project>

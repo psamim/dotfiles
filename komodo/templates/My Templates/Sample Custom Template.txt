@@ -1,6 +1,0 @@
-
-        This is a sample custom template for Komodo. The actual template file is:
-    /home/ali/.komodoedit/8.0/templates/My Templates/Sample Custom Template.txt
-
-You can create your own templates with any content you wish.
-See "Custom Templates" in Komodo's on-line help for more details.

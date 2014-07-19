@@ -1,1 +1,0 @@
-emacs --daemon --eval " (setq default-frame-alist (set-fontset-font \"fontset-default\" (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) \"B Traffic-15\") (set-transparency 0.9))"

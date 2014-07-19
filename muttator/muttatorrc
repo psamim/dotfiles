@@ -1,3 +1,4 @@
 nmap <A-j> :tabnext<return>
 nmap <A-k> :tabprevious<return>
 nmap a :moveto p.samim@gmail.com: All Mail<return>
+set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
