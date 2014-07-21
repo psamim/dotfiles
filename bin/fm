@@ -1,2 +1,3 @@
 #!/bin/bash
-nautilus --no-desktop "$1"
+#nautilus --no-desktop "$1"
+urxvt -name ranger -e bash -c "ranger '$@'"
