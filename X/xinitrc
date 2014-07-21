@@ -55,5 +55,8 @@ else
     xss-lock lock &
 fi
 
+# Automount disks
+udiskie --tray &
+
 xrdb -merge ~/.Xresources
 exec i3
