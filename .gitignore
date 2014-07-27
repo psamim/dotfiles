@@ -7,14 +7,7 @@
 /vim/bundle/
 !/vim/bundle/vundle
 /vim/session
-# komodo
-/komodo/autosave/
-/komodo/codeintel/
-/komodo/XRE/
-/komodo/*.log
-/komodo/*.bak
-/komodo/*.lock
-/komodo/*.xmlc
-/komodo/*.sqlite
-/komodo/*.tmp
-/komodo/prefs.xml
+# muttator
+/muttator/info
+# vimperator
+/vimperator/info
