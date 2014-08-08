@@ -13,3 +13,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = git@github.com:psamim/emacs.d.git
+[submodule "tmux/tmux-yank"]
+	path = tmux/tmux-yank
+	url = git@github.com:tmux-plugins/tmux-yank.git
