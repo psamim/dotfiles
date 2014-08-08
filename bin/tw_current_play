@@ -1,2 +1,2 @@
 #!/bin/sh
-torify t update "Listening to `mpc current` $@"
+torify t update "Listening to `mpc current||spotify-current` $@"
