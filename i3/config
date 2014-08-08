@@ -11,7 +11,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Inconsolata, fontawesome 13px
+font pango:source code pro, fontawesome 11px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -23,7 +23,8 @@ bindsym $mod+q kill
 # bindsym $mod+d exec "j4-dmenu-desktop"
 # bindsym $mod+d exec --no-startup-id "launchy"
 # It's dmenu2
-bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
+#bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
+bindsym $mod+d exec "yeganesh -x -p path -- -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal' | /bin/sh"
 
 # change focus
 bindsym $mod+k focus left
@@ -62,11 +63,11 @@ bindsym $mod+space focus mode_toggle
 #          
 # http://fortawesome.github.io/Font-Awesome/cheatsheet/
 
-set $w1 1: 
-set $w2 2: 
-set $w3 3: 
-set $w4 4: 
-set $w5 5: 
+set $w1 
+set $w2 
+set $w3 
+set $w4 
+set $w5 
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -106,6 +107,7 @@ assign [class="Firefox"] → $w2
 assign [class="Pidgin"] → $w3
 assign [class="Thunderbird"] → $w4
 for_window [class="Osdlyrics"] floating enable
+for_window [instance="music"] floating enable
 for_window [class="Thunar"] floating enable
 
 # reload the configuration file
@@ -143,7 +145,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Return [urgent=latest] focus
-bindsym $mod+m move scratchpad
+bindsym $mod+s move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
 bindsym $mod+Tab workspace back_and_forth
@@ -162,7 +164,7 @@ bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | 
 bindsym $mod+e exec --no-startup-id invert
 
 # Search in home
-bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
+bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| yeganesh -p directories --  -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
 
 # Send workspace to othe monitor
 bindsym $mod+shift+o move workspace to output right
@@ -173,22 +175,23 @@ bindsym $mod+b bar mode toggle
 exec --no-startup-id urxvt -name urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
 # move this to scratchpad, if active
 # for_window [class="URxvt" instance="scratchpad"] move scratchpad
-bindsym mod4+c [class="URxvt"] scratchpad show
+bindsym mod4+c [instance="urxvt"] scratchpad show
+bindsym mod4+m [instance="music"] scratchpad show
 bindsym mod4+x [class="Emacs"] scratchpad show
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & killall -USR1 i3blocks"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-' & killall -USR1 i3blocks"
 bindsym XF86AudioMute exec "amixer -D pulse set Master toggle & killall -USR1 i3blocks"
-bindsym XF86AudioPlay exec "playerctl play-pause"
-bindsym XF86AudioStop exec "playerctl stop"
-bindsym XF86AudioNext exec "playerctl next"
-bindsym XF86AudioPrev exec "playerctl previous"
+bindsym XF86AudioPlay exec "playerctl play-pause||mpc toggle"
+bindsym XF86AudioStop exec "playerctl stop||mpc stop"
+bindsym XF86AudioNext exec "playerctl next||mpc next"
+bindsym XF86AudioPrev exec "playerctl previous||mpc previous"
 
 # Some Options
 hide_edge_borders both
 new_window pixel 0
-new_float pixel 2
+new_float pixel 0
 workspace_layout tabbed
 focus_follows_mouse no
 force_focus_wrapping yes
@@ -198,8 +201,22 @@ workspace_auto_back_and_forth yes
 bar {
         status_command i3blocks
         position bottom
+ colors {
+      background #101010
+      statusline #605c5a
+      focused_workspace #101010 #101010 #b72f62
+      active_workspace #101010 #202020 #eeeeee
+      inactive_workspace #101010 #202020 #5f5f5f
+      urgent_workspace #2e3436 #9a878f
+	}
 }
 
 
 for_window [class="Pidgin" window_role="conversation"] focus, move left, move left
 for_window [urgent=latest] focus
+
+client.focused          #C9B5BD #C9B5BD #825969
+client.focused_inactive #191919 #191919 #999999
+client.unfocused        #191919 #191919 #999999
+client.urgent           #cd989a #cd989a #2e3436
+client.background       #121212
