@@ -23,12 +23,7 @@ setxkbmap -option caps:escape
 syndaemon -t -k -i 1 &
 
 # Run Emacs if not already running
-if pidof emacs
-then
-    echo "Emacs Running"
-else
-    emacs --daemon
-fi
+# [[ -z $(pidof emacs) ]] && emacs --daemon
 
 # Set background
 [ -e ~/.fehbg ] && source ~/.fehbg
@@ -48,12 +43,9 @@ dunst &
 # screen powersave
 xset +dpms
 xset dpms 0 0 300
-if pidof xss-lock
-then
-    echo "xss-lock Running"
-else
-    xss-lock lock &
-fi
+
+# xss-lock, if not runnig
+[[ -z $(pidof xss-lock) ]] && xss-lock lock &
 
 # Automount disks
 udiskie --tray &
