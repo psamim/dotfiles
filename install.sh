@@ -93,3 +93,7 @@ ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
 # Binaries
 rm -rf "$HOME/.bin"
 ln -sf "$PWD/bin" "$HOME/.bin"
+
+# dunst
+rm -rf "$HOME/.config/dunst"
+ln -sf "$PWD/dunst" "$HOME/.config/dunst"
