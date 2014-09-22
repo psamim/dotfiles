@@ -8,8 +8,9 @@ URxvt*.scrollBar: false
 URxvt*.font: xft:source code pro:size=13
 URxvt*.letterSpace: -2
 
-URxvt*.background: [95]#002b36
+URxvt*.background: [80]#002b36
 URxvt*.foreground: #657b83
+
 !!*fading: 40
 URxvt*.fadeColor: #002b36
 URxvt*.cursorColor: #93a1a1
