@@ -4,7 +4,7 @@ exec --no-startup-id nm-applet &
 exec "redshift-gtk &"
 # exec workrave &
 # start clipboardmanager
-exec parcellite &
+exec clipit &
 
 set $mod Mod4
 
