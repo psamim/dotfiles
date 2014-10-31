@@ -1,0 +1,3 @@
+#!/bin/sh
+[[ -z $(pidof emacs) ]] && emacs --daemon
+emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" --eval '(mu4e)'

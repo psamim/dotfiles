@@ -1,0 +1,3 @@
+#!/bin/sh
+[[ -z $(pidof emacs) ]] && emacs --daemon
+emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" --eval "(progn (psamim-set-window-fonts) (find-file \"~/Note/todo.org\"))"
