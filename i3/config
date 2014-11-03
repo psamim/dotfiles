@@ -171,10 +171,10 @@ bindsym $mod+shift+o move workspace to output right
 # Toggle bar visibility
 bindsym $mod+b bar mode toggle
 # starting a specially named term automatically
-exec --no-startup-id urxvt -name urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
+# exec --no-startup-id urxvt -name urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
 # move this to scratchpad, if active
 # for_window [class="URxvt" instance="scratchpad"] move scratchpad
-bindsym mod4+c [instance="urxvt"] scratchpad show
+bindsym mod4+c [class="Gnome-terminal"] scratchpad show
 bindsym mod4+m [instance="music"] scratchpad show
 bindsym mod4+x [class="Emacs"] scratchpad show
 

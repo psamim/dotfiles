@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# put the path to your Inbox folder here
+CHECKDIR="/home/$LOGNAME/email/gmail/INBOX"
+
+#
+# -mmin -5: consider only messages that were created / changed in the
+# the last 3 minutes
+#
+for f in `find $CHECKDIR -mmin -3 -a -type f -not -path '*/\.*'`; do
+        subject=`mu view $f | grep '^Subject:' | sed 's/^Subject://'`
+        from=`mu view $f | grep '^From:' | sed 's/^From://'`
+        notify-send -a mu4e -h 'string:bgcolor:#ff9393' -h 'string:fgcolor:#1F1F1F' "$subject\nFrom $from"
+done
