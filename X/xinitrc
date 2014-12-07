@@ -45,10 +45,13 @@ xset +dpms
 xset dpms 0 0 300
 
 # xss-lock, if not runnig
-[[ -z $(pidof xss-lock) ]] && xss-lock lock &
+# [[ -z $(pidof xss-lock) ]] && xss-lock lock &
 
 # Automount disks
 udiskie --tray &
+
+# gpg-agent
+eval $(gpg-agent --daemon)
 
 xrdb -merge ~/.Xresources
 exec i3
