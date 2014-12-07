@@ -1,9 +1,9 @@
 # i3 config file (v4)
 
+# Startup
 exec --no-startup-id nm-applet &
 exec "redshift-gtk &"
 # exec workrave &
-# start clipboardmanager
 exec clipit &
 
 set $mod Mod4
@@ -19,18 +19,19 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+q kill
 
-# start dmenu (a program launcher)
+# Start dmenu (a program launcher)
 # bindsym $mod+d exec "j4-dmenu-desktop"
 # bindsym $mod+d exec --no-startup-id "launchy"
 # It's dmenu2
 #bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
+# http://dmwit.com/yeganesh/
 bindsym $mod+d exec "yeganesh -x -p path -- -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal' | /bin/sh"
 
-# change focus
+# Change focus
 bindsym $mod+k focus left
 bindsym $mod+j focus right
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -58,7 +59,6 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
 
 #          
 # http://fortawesome.github.io/Font-Awesome/cheatsheet/
@@ -107,46 +107,54 @@ assign [class="Pidgin"] → $w3
 assign [class="Thunderbird"] → $w4
 # for_window [class="Osdlyrics"] floating enable
 for_window [instance="music"] floating enable
-for_window [class="Thunar"] floating enable
+# for_window [class="Thunar"] floating enable
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+h workspace prev
 bindsym $mod+l workspace next
-
-bindsym $mod+shift+h move container to prev
-bindsym $mod+shift+l move container to next
+bindsym $mod+shift+h move container to workspace next
+bindsym $mod+shift+l move container to workspace prev
 
 # resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  # These bindings trigger as soon as you enter the resize mode
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# Go to the urgent window
 bindsym $mod+Return [urgent=latest] focus
+
+# Scrathcpad
 bindsym $mod+s move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
+bindsym mod4+m [instance="music"] scratchpad show
+bindsym mod4+x [class="Emacs"] scratchpad show
+
+# Something like ALT-TAB
 bindsym $mod+Tab workspace back_and_forth
 
 # Search between windows
@@ -157,26 +165,27 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # Search in workspaces
 # bindsym $mod+w exec quickswitch.py -w
-bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
+# bindsym $mod+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/go_to_workspace.py"
 bindsym $mod+Shift+w exec "~/src/i3_benkaiser_script/get_workspace_options.py | dmenu -p '>'  -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| ~/src/i3_benkaiser_script/move_to_workspace.py"
-# invert the screen
+
+# Invert the screen colors
+# https://github.com/psamim/dotfiles/blob/master/bin/invert
 bindsym $mod+e exec --no-startup-id invert
 
-# Search in home
-bindsym $mod+a exec "find . ./BIHE/Pre-Master/2 \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| yeganesh -p directories --  -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
+# Search in home using dmenu
+bindsym $mod+a exec "find . ./BIHE \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| yeganesh -p directories --  -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
 
-# Send workspace to othe monitor
+# Send workspace to other monitor
 bindsym $mod+shift+o move workspace to output right
 
 # Toggle bar visibility
 bindsym $mod+b bar mode toggle
-# starting a specially named term automatically
+
+# My terminal
 # exec --no-startup-id urxvt -name urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
 # move this to scratchpad, if active
 # for_window [class="URxvt" instance="scratchpad"] move scratchpad
 bindsym mod4+c [class="Gnome-terminal"] scratchpad show
-bindsym mod4+m [instance="music"] scratchpad show
-bindsym mod4+x [class="Emacs"] scratchpad show
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & killall -USR1 i3blocks"
@@ -197,25 +206,25 @@ workspace_layout tabbed
 focus_follows_mouse no
 force_focus_wrapping yes
 workspace_auto_back_and_forth yes
-
+for_window [class="Pidgin" window_role="conversation"] focus, move left
 
 bar {
-        status_command i3blocks
-        position bottom
- colors {
-      background #101010
-      statusline #605c5a
-      focused_workspace #101010 #101010 #b72f62
-      active_workspace #101010 #202020 #eeeeee
-      inactive_workspace #101010 #202020 #5f5f5f
-      urgent_workspace #2e3436 #9a878f
-	}
+  status_command i3blocks
+  position bottom
+  colors {
+    background #101010
+    statusline #605c5a
+    focused_workspace #101010 #101010 #b72f62
+    active_workspace #101010 #202020 #eeeeee
+    inactive_workspace #101010 #202020 #5f5f5f
+    urgent_workspace #2e3436 #9a878f
+  }
 }
 
-
-for_window [class="Pidgin" window_role="conversation"] focus, move left, move left
+# Go to urgent automatically
 for_window [urgent=latest] focus
 
+# Colors
 client.focused          #C9B5BD #C9B5BD #825969
 client.focused_inactive #191919 #191919 #999999
 client.unfocused        #191919 #191919 #999999
