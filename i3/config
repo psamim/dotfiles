@@ -144,6 +144,37 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
+# Mark windows
+# http://www.slackword.net/?p=657
+mode "mark" {
+   # hardcoded focus keybindings
+   bindsym z [class="(?i)zathura"] focus, mode "default"
+
+   # keybindings for marking and jumping to clients
+   bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
+   bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+   # Assign marks to keys 1-5
+   bindsym Shift+1 mark mark1, mode "default"
+   bindsym Shift+2 mark mark2, mode "default"
+   bindsym Shift+3 mark mark3, mode "default"
+   bindsym Shift+4 mark mark4, mode "default"
+   bindsym Shift+5 mark mark5, mode "default"
+
+   # Jump to clients marked 1-5
+   bindsym 1 [con_mark="mark1"] focus, mode "default"
+   bindsym 2 [con_mark="mark2"] focus, mode "default"
+   bindsym 3 [con_mark="mark3"] focus, mode "default"
+   bindsym 4 [con_mark="mark4"] focus, mode "default"
+   bindsym 5 [con_mark="mark5"] focus, mode "default"
+
+   # Exit to the default mode
+   bindsym Return mode "default"
+   bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "mark"
+
 # Go to the urgent window
 bindsym $mod+Return [urgent=latest] focus
 
@@ -151,8 +182,8 @@ bindsym $mod+Return [urgent=latest] focus
 bindsym $mod+s move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
-bindsym mod4+m [instance="music"] scratchpad show
-bindsym mod4+x [class="Emacs"] scratchpad show
+# bindsym $mod+m [instance="music"] scratchpad show
+bindsym $mod+x [class="Emacs"] scratchpad show
 
 # Something like ALT-TAB
 bindsym $mod+Tab workspace back_and_forth
