@@ -219,15 +219,18 @@ bindsym $mod+b bar mode toggle
 bindsym mod4+c [class="Gnome-terminal"] scratchpad show
 
 # Multimedia keys
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & killall -USR1 i3blocks"
-bindsym mod4+equal exec "amixer -D pulse sset Master '3%+' & killall -USR1 i3blocks"
-bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-' & killall -USR1 i3blocks"
-bindsym mod4+minus exec "amixer -D pulse sset Master '5%-' & killall -USR1 i3blocks"
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle & killall -USR1 i3blocks"
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & pkill -RTMIN+10 i3blocks"
+bindsym mod4+equal exec "amixer -D pulse sset Master '3%+' & pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-' & pkill -RTMIN+10 i3blocks"
+bindsym mod4+minus exec "amixer -D pulse sset Master '5%-' & pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle & pkill -RTMIN+10 i3blocks"
 bindsym XF86AudioPlay exec "playerctl play-pause||mpc toggle"
 bindsym XF86AudioStop exec "playerctl stop||mpc stop"
 bindsym XF86AudioNext exec "playerctl next||mpc next"
 bindsym XF86AudioPrev exec "playerctl previous||mpc previous"
+
+# Keyboard Layouts
+bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
 
 # Some Options
 hide_edge_borders both
