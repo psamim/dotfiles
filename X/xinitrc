@@ -18,6 +18,7 @@ fi
 setxkbmap -layout us,ir
 setxkbmap -option 'grp:alt_shift_toggle'
 setxkbmap -option caps:escape
+perWindowLayoutD
 
 # Disable touchpad taps while typing
 syndaemon -t -k -i 1 &
