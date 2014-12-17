@@ -1,9 +1,18 @@
-"3.8.2 (created: 2014/02/13 23:52:43)
-
+" -*- mode: vimrc -*-
 source! /home/samim/.vimperatorrc.local
-" vim: set ft=vimrc:
 
-set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
+" set gui=noaddons,nobookmarks,nomenu,navigation,tabs
+set gui=none,tabs
+set hintchars=jkl
+set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
+set wildmode animations
+set complete=lS
+set focuscontent
+set hlsearch
+set ignorecase
+set incsearch
+set titlestring=Firefox
+set smartcase
 
 nmap <A-l> :forward<CR>
 nmap <A-h> :back<CR>
@@ -13,18 +22,52 @@ nmap <A-n> :tabopen<CR>
 noremap j 4j
 noremap k 4k
 
-nmap <PageDown> :tabnext<CR>
-nmap <PageUp> :tabprevious<CR>
-
+" Only works in Pentadactyl
 " set passkeys+=mail.google.com:!#*+-./<C-Down><C-s><Enter>?INU[]jkacefpqrsuvxyz,*a,*n,*r,*s,*t,*u,ga,gc,gd,gi,gl,gs,gt,yo
 " set passkeys+=tweetdeck.twitter.com:jkfrlhxspnt,rt
 " set passkeys+=facebook.com:jkfrlhlc
 " set passkeys+=bitly.com:a
 
+" Only works with feedsomekeys plugin
 " command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args>
-fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
-fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
-fmaps -u='facebook\.com' j k l c
+" fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
+" fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
+" fmaps -u='facebook\.com' j k l c
 
-set hintchars=jkl
-set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d mail.google.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d facebook.com$
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d tweetdeck.twitter.com
+
+" Authohide the status bar
+" https://github.com/vimperator/vimperator-labs/issues/26
+noremap <silent> <F8> :js toggle_bottombar()<CR>
+noremap : :js toggle_bottombar('on')<CR>:
+noremap o :js toggle_bottombar('on')<CR>o
+noremap O :js toggle_bottombar('on')<CR>O
+noremap t :js toggle_bottombar('on')<CR>t
+noremap T :js toggle_bottombar('on')<CR>t
+noremap / :js toggle_bottombar('on')<CR>/
+cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
+cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
+
+:js << EOF
+function toggle_bottombar(p) {
+    var bb = document.getElementById('liberator-bottombar');
+    if (!bb)
+        return;
+    if (p == 'on'){
+        bb.style.height = '';
+        bb.style.overflow = '';
+        return;
+    }
+    if (p == 'off'){
+        bb.style.height = '0px';
+        bb.style.overflow = 'hidden';
+        return;
+    }
+    bb.style.height = (bb.style.height == '') ? '0px' : '';
+    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+}
+toggle_bottombar();
+EOF
+
