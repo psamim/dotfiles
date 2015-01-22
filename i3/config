@@ -231,7 +231,7 @@ bindsym XF86AudioNext exec "playerctl next||mpc next"
 bindsym XF86AudioPrev exec "playerctl previous||mpc previous"
 
 # Keyboard Layouts
-bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
+# bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
 
 # Some Options
 hide_edge_borders both
