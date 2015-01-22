@@ -66,8 +66,8 @@ bindsym $mod+space focus mode_toggle
 set $w1 
 set $w2 
 set $w3 
-set $w4 
-set $w5 
+set $w4 
+set $w5 
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -98,15 +98,16 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Assignments
-# assign [class="Vlc"] → $w5
-assign [class="Spotify"] → $w5
+assign [class="Vlc"] → $w4
+assign [class="Spotify"] → $w4
+assign [class="MPlayer"] → $w4
 # assign [class="OSD Lyrics"] → $w5
 assign [class="Firefox"] → $w2
 # assign [class="Emacs"] → $w4
 assign [class="Pidgin"] → $w3
-assign [class="Thunderbird"] → $w4
+# assign [class="Thunderbird"] → $w4
 # for_window [class="Osdlyrics"] floating enable
-for_window [instance="music"] floating enable
+# for_window [instance="music"] floating enable
 # for_window [class="Thunar"] floating enable
 
 # reload the configuration file
