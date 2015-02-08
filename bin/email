@@ -1,3 +1,4 @@
 #!/bin/sh
+email=`mu cfind --format=mutt-alias | sed -e 's/^alias \w*\ *//' | yeganesh -p mu4e -- -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'`
 [[ -z $(pidof emacs) ]] && emacs --daemon
-emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" --eval '(mu4e)'
+emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" --eval "(mu4e~compose-mail \"${email}\")"
