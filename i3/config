@@ -98,13 +98,16 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Assignments
+assign [class="Firefox"] → $w2
+assign [class="Pidgin"] → $w3
+assign [class="Skype"] → $w3
+assign [class="ViberPC"] → $w3
+assign [class="Telegram"] → $w3
 assign [class="Vlc"] → $w4
 assign [class="Spotify"] → $w4
 assign [class="MPlayer"] → $w4
-# assign [class="OSD Lyrics"] → $w5
-assign [class="Firefox"] → $w2
-# assign [class="Emacs"] → $w4
-assign [class="Pidgin"] → $w3
+assign [class="Rhythmbox"] → $w4
+
 # assign [class="Thunderbird"] → $w4
 # for_window [class="Osdlyrics"] floating enable
 # for_window [instance="music"] floating enable
