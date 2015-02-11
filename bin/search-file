@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DMENU='dmenu -i -o 0.9 -dim 0.15 -l 3 -fn 10:normal'
+
+input="$(clipit -c | $DMENU)"
+if [ "$input" != '' ]
+then
+    result="$(echo "$input" | locate -ie -r "$input" | $DMENU -p "search result:" )"
+    xdg-open "$result"
+fi
