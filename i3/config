@@ -17,7 +17,7 @@ font pango:source code pro, fontawesome 11px
 floating_modifier $mod
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+shift+q kill
 
 # Start dmenu (a program launcher)
 # bindsym $mod+d exec "j4-dmenu-desktop"
