@@ -153,6 +153,7 @@ mode "resize" {
 mode "mark" {
    # hardcoded focus keybindings
    bindsym z [class="(?i)zathura"] focus, mode "default"
+   bindsym t [class="Telegram"] focus, mode "default"
 
    # keybindings for marking and jumping to clients
    bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
