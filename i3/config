@@ -107,6 +107,7 @@ assign [class="Vlc"] → $w4
 assign [class="Spotify"] → $w4
 assign [class="MPlayer"] → $w4
 assign [class="Rhythmbox"] → $w4
+assign [class="mpv"] → $w4
 
 # assign [class="Thunderbird"] → $w4
 # for_window [class="Osdlyrics"] floating enable
