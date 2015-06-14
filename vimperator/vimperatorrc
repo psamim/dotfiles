@@ -35,6 +35,7 @@ noremap k 4k
 " fmaps -u='facebook\.com' j k l c
 
 ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i> mail.google.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i> inbox.google.com
 ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d facebook.com$
 ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d tweetdeck.twitter.com
 
