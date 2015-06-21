@@ -25,7 +25,8 @@ bindsym $mod+shift+q kill
 # It's dmenu2
 #bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
 # http://dmwit.com/yeganesh/
-bindsym $mod+d exec "yeganesh -x -p path -- -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal' | /bin/sh"
+bindsym $mod+d exec "yeganesh -x -p path -- -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' | /bin/sh"
+# bindsym $mod+d exec dmenu_extended_run
 
 # Change focus
 bindsym $mod+k focus left
@@ -195,7 +196,7 @@ bindsym $mod+x [class="Emacs"] scratchpad show
 bindsym $mod+Tab workspace back_and_forth
 
 # Search between windows
-bindsym $mod+z exec  quickswitch.py -d "dmenu -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
+bindsym $mod+z exec  quickswitch.py -d "dmenu -p '>' -dim 0.15 -x 183 -y 150 -w 1000 -h 30 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 4 -fn 'Source Code Pro-12:normal'"
 
 # Rename a workspace
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -208,7 +209,7 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 bindsym $mod+e exec --no-startup-id invert
 
 # Search in home using dmenu
-bindsym $mod+a exec "find . ./BIHE \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| yeganesh -p directories --  -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
+# bindsym $mod+a exec "find . ./BIHE \( ! -regex '.*/\..*' \) -maxdepth 2 -type d| yeganesh -p directories --  -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'| xargs -I{} fm '{}'"
 
 # Send workspace to other monitor
 bindsym $mod+shift+o move workspace to output right
