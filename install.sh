@@ -99,3 +99,8 @@ ln -sf "$PWD/bin" "$HOME/.bin"
 # dunst
 rm -rf "$HOME/.config/dunst"
 ln -sf "$PWD/dunst" "$HOME/.config/dunst"
+
+# phpcs
+rm -rf "$HOME/.phpcs"
+ln -sf "$PWD/phpcs" "$HOME/.phpcs"
+~/.phpcs/commands.sh
