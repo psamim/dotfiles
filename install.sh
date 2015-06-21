@@ -59,6 +59,8 @@ ln -sf "$PWD/zsh/prezto/runcoms/zpreztorc" "$HOME/.zpreztorc"
 ln -sf "$PWD/zsh/prezto/runcoms/zprofile" "$HOME/.zprofile"
 ln -sf "$PWD/zsh/prezto/runcoms/zshenv" "$HOME/.zshenv"
 ln -sf "$PWD/zsh/prezto/runcoms/zshrc" "$HOME/.zshrc"
+ln -s "$PWD/zsh/pure/pure.zsh" "$HOME/.zsh/functions/prompt_pure_setup"
+ln -s "$PWD/zsh/pure/async.zsh" "$HOME/.zsh/functions/async"
 
 # Vimperator
 rm -rf "$HOME/.vimperator"
