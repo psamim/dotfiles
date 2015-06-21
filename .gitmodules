@@ -16,6 +16,3 @@
 [submodule "tmux/tmux-yank"]
 	path = tmux/tmux-yank
 	url = git@github.com:tmux-plugins/tmux-yank.git
-[submodule "zsh/pure"]
-	path = zsh/pure
-	url = git@github.com:sindresorhus/pure.git
