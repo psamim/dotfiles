@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 #nautilus --no-desktop "$1"
 export EDITOR="emc"
-urxvt -name ranger -title ranger -e zsh -c "ranger '$@'"
+# urxvt -name ranger -title ranger -e zsh -c "ranger '$@'"
+exec nautilus --no-desktop
