@@ -33,10 +33,10 @@ ln -sf "$PWD/tmux/tmux.conf" "$HOME/.byobu/.tmux.conf"
 ln -sf "$PWD/tmux" "$HOME/.tmux"
 
 # vim/
-rm -rf "$HOME/.vim"
-ln -sf "$PWD/vim" "$HOME/.vim"
-rm -f "$HOME/.vimrc"
-ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
+# rm -rf "$HOME/.vim"
+# ln -sf "$PWD/vim" "$HOME/.vim"
+# rm -f "$HOME/.vimrc"
+# ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
 # emacs
 rm -rf "$HOME/.emacs.d"
