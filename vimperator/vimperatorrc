@@ -2,7 +2,7 @@
 source! /home/samim/.vimperatorrc.local
 
 " set gui=noaddons,nobookmarks,nomenu,navigation,tabs
-set gui=none,tabs
+set gui=none,tabs,navigation
 set hintchars=jkl
 set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
 set wildmode animations
