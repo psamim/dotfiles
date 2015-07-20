@@ -16,3 +16,6 @@
 [submodule "tmux/tmux-yank"]
 	path = tmux/tmux-yank
 	url = git@github.com:tmux-plugins/tmux-yank.git
+[submodule "password-store"]
+	path = password-store
+	url = git@bitbucket.org:psamim/password-store.git

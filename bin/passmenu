@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
+
+typeit=0
+if [[ $1 == "--type" ]]; then
+	typeit=1
+	shift
+fi
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+# dmenu2
+password=$(printf '%s\n' "${password_files[@]}" | dmenu -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal')
+
+[[ -n $password ]] || exit
+
+if [[ $typeit -eq 0 ]]; then
+	pass show -c "$password" 2>/dev/null
+else
+	xdotool - <<<"type --clearmodifiers -- $(pass show "$password" | head -n 1)"
+fi

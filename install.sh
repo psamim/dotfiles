@@ -102,3 +102,7 @@ ln -sf "$PWD/dunst" "$HOME/.config/dunst"
 rm -rf "$HOME/.phpcs"
 ln -sf "$PWD/phpcs" "$HOME/.phpcs"
 ~/.phpcs/commands.sh
+
+# password-store
+rm -rf "$HOME/.password-store"
+ln -sf "$PWD/password-store" "$HOME/.password-store"
