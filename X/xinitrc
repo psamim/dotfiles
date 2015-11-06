@@ -49,7 +49,7 @@ xset dpms 0 0 300
 # [[ -z $(pidof xss-lock) ]] && xss-lock lock &
 
 # Automount disks
-udiskie --tray &
+udiskie --no-tray &
 
 # gpg-agent
 eval $(gpg-agent --daemon)

@@ -10,8 +10,8 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:source code pro, fontawesome 11px
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango: Source Code Pro Semibold, FontAwesome Regular 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -20,13 +20,10 @@ floating_modifier $mod
 bindsym $mod+shift+q kill
 
 # Start dmenu (a program launcher)
-# bindsym $mod+d exec "j4-dmenu-desktop"
-# bindsym $mod+d exec --no-startup-id "launchy"
 # It's dmenu2
 #bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
 # http://dmwit.com/yeganesh/
 bindsym $mod+d exec "yeganesh -x -p path -- -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' | /bin/sh"
-# bindsym $mod+d exec dmenu_extended_run
 
 # Change focus
 bindsym $mod+k focus left
@@ -48,6 +45,9 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# Fullscreen vids to small sticky in corner aka picture in picture mode 
+bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518 
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -98,7 +98,13 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# Assignments
+# Move between workspaces
+bindsym $mod+h workspace prev
+bindsym $mod+l workspace next
+bindsym $mod+shift+h move container to workspace next
+bindsym $mod+shift+l move container to workspace prev
+
+# Assign workspaces
 assign [class="Firefox"] → $w2
 assign [class="Pidgin"] → $w3
 assign [class="Skype"] → $w3
@@ -109,11 +115,15 @@ assign [class="Spotify"] → $w4
 assign [class="MPlayer"] → $w4
 assign [class="Rhythmbox"] → $w4
 assign [class="mpv"] → $w4
-
 # assign [class="Thunderbird"] → $w4
+
+# Assing floating modes
 # for_window [class="Osdlyrics"] floating enable
 # for_window [instance="music"] floating enable
 # for_window [class="Thunar"] floating enable
+for_window [window_role="task_dialog|bubble|pop-up|page-info|Preferences"] floating enable
+for_window [window_type="dialog|menu"] floating enable
+for_window [class="Pidgin" window_role="conversation"] focus, move left
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -124,15 +134,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+h workspace prev
-bindsym $mod+l workspace next
-bindsym $mod+shift+h move container to workspace next
-bindsym $mod+shift+l move container to workspace prev
-
 # resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-
-mode "resize" {
+bindsym $mod+r mode "  "
+mode "  " {
   # These bindings trigger as soon as you enter the resize mode
   bindsym h resize shrink width 10 px or 10 ppt
   bindsym j resize grow height 10 px or 10 ppt
@@ -152,7 +156,9 @@ mode "resize" {
 
 # Mark windows
 # http://www.slackword.net/?p=657
-mode "mark" {
+bindsym $mod+m mode "  "
+
+mode "  " {
    # hardcoded focus keybindings
    bindsym z [class="(?i)zathura"] focus, mode "default"
    bindsym t [class="Telegram"] focus, mode "default"
@@ -180,17 +186,22 @@ mode "mark" {
    bindsym Escape mode "default"
 }
 
-bindsym $mod+m mode "mark"
-
 # Go to the urgent window
 bindsym $mod+Return [urgent=latest] focus
+
+# focus windows
+no_focus [window_role="pop-up"]
+focus_on_window_activation focus
+for_window [class="(?i)"] focus
 
 # Scrathcpad
 bindsym $mod+s move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
-# bindsym $mod+m [instance="music"] scratchpad show
 bindsym $mod+x [class="Emacs"] scratchpad show
+
+# Shortcuts
+bindsym $mod+slash exec chromium --show-app-list
 
 # Something like ALT-TAB
 bindsym $mod+Tab workspace back_and_forth
@@ -234,38 +245,59 @@ bindsym XF86AudioStop exec "playerctl stop||mpc stop"
 bindsym XF86AudioNext exec "playerctl next||mpc next"
 bindsym XF86AudioPrev exec "playerctl previous||mpc previous"
 
+# brightness control
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+
+# Suspend
+bindsym $mod+XF86PowerOff exec systemctl suspend
+
 # Keyboard Layouts
 # bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
 
+# windows borders
+new_window pixel 3
+new_float pixel 3
+
 # Some Options
 hide_edge_borders both
-new_window pixel 0
-new_float pixel 0
 workspace_layout tabbed
 focus_follows_mouse no
 force_focus_wrapping yes
 workspace_auto_back_and_forth yes
-for_window [class="Pidgin" window_role="conversation"] focus, move left
-
-bar {
-  status_command i3blocks
-  position bottom
-  colors {
-    background #101010
-    statusline #605c5a
-    focused_workspace #101010 #101010 #b72f62
-    active_workspace #101010 #202020 #eeeeee
-    inactive_workspace #101010 #202020 #5f5f5f
-    urgent_workspace #2e3436 #9a878f
-  }
-}
+focus_follows_mouse no
+popup_during_fullscreen smart
+force_display_urgency_hint 500 ms
 
 # Go to urgent automatically
 for_window [urgent=latest] focus
 
+# window title format mess around with pango
+for_window [class="(?i)"] title_format "<span  font='10.5' weight='light' foreground='#C7C7C7'> </span> %title "
+
+bar {
+  status_command i3blocks
+  position bottom
+  bindsym button5 nop
+  bindsym button4 nop
+  tray_padding 3 
+  separator_symbol "〉"
+  workspace_buttons yes
+  strip_workspace_numbers yes
+  # tray_output none|primary|<output>
+  colors {
+     separator #586e75 
+     background #2d2d2d
+     statusline #c7c7c7
+     focused_workspace  #586e75 #586e75 #ffffff
+     active_workspace #2d2d2d #2d2d2d #ffffff
+     inactive_workspace #455057 #455057 #c7c7c7
+     urgent_workspace #ae4544 #ae4544 #ffffff
+  }
+}
+
 # Colors
-client.focused          #C9B5BD #C9B5BD #825969
-client.focused_inactive #191919 #191919 #999999
-client.unfocused        #191919 #191919 #999999
-client.urgent           #cd989a #cd989a #2e3436
-client.background       #121212
+client.focused #586e75 #586e75 #f9f9f9 #268bd2
+client.focused_inactive #455057 #455057 #c7c7c7 #002b36
+client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
+client.urgent #dc322f #dc322f #f9f9f9 #dc322f
