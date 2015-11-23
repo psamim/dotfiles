@@ -1,2 +1,5 @@
 map <M-j> gt
 map <M-k> gT
+map d <M-d>
+map <M-h> H
+map <M-l> L
