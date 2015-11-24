@@ -39,6 +39,8 @@ ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i> inbox.google.com
 ignorekeys add -except=<A-j>,<A-k>,<C-i> docs.google.com
 ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d facebook.com$
 ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d tweetdeck.twitter.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d web.whatsapp.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d web.telegram.org
 
 " Authohide the status bar
 " https://github.com/vimperator/vimperator-labs/issues/26
