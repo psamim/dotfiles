@@ -6,4 +6,4 @@ map <M-l> L
 
 set disable_autofocus
 set editor=emc
-set disablesites=mail.google.com, inbox.google.com
+set disablesites=tweetdeck.twitter.com, web.telegram.org, web.whatsapp.com
