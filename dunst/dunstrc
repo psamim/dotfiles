@@ -18,12 +18,12 @@
     separator_color = frame
     startup_notification = true
     dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
-    browser = /home/knopwob/bin/url_dispatcher
-
+    browser = /usr/bin/firefox -new-tab
+    transparency = 20
 
 [frame]
-    width = 3
-    color = "#000000"
+    width = 1
+    color = "#212121"
 
 [shortcuts]
     close = ctrl+space
@@ -37,8 +37,8 @@
     timeout = 30
 
 [urgency_normal]
-    background = "#94DBFF"
-    foreground = "#000000"
+    background = "#727272"
+    foreground = "#F5F5F5"
     timeout = 45
 
 [urgency_critical]
