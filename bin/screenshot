@@ -1,0 +1,20 @@
+#!/bin/bash
+IMG_PATH=/home/samim/Pictures/
+FILE=$(date +%F-%T).png
+
+prog="fullscreen
+section
+"
+
+cmd=$(dmenu -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' <<< "$prog")
+cd $IMG_PATH
+
+case ${cmd%% *} in
+    fullscreen)
+        maim -d 4 "$FILE"  && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
+        ;;
+    section)
+        maim --select --color 1,0,0,0.6 "$FILE" && notify-send -u low 'Screenshot' 'Section Screenshot saved'
+        ;;
+esac
+xdg-open "$FILE"
