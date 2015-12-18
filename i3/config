@@ -2,9 +2,9 @@
 
 # Startup
 exec --no-startup-id nm-applet &
-exec "redshift-gtk &"
-# exec workrave &
+exec redshift-gtk &
 exec clipit &
+exec xautolock -time 5 -locker ~/.bin/lock &
 
 set $mod Mod4
 
@@ -68,41 +68,32 @@ set $w1 
 set $w2 
 set $w3 
 set $w4 
-set $w5 
 
 # switch to workspace
-bindsym $mod+1 workspace $w1
 bindsym F1 workspace $w1
-bindsym $mod+2 workspace $w2
 bindsym F2 workspace $w2
-bindsym $mod+3 workspace $w3
 bindsym F3 workspace $w3
-bindsym $mod+4 workspace $w4
 bindsym F4 workspace $w4
-bindsym $mod+5 workspace $w5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+5 workspace 5
+
+# Jump to clients marked 1-5
+bindsym $mod+1 [con_mark="mark1"] focus
+bindsym $mod+2 [con_mark="mark2"] focus
+bindsym $mod+3 [con_mark="mark3"] focus
+bindsym $mod+4 [con_mark="mark4"] focus
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
 bindsym $mod+Shift+2 move container to workspace $w2
 bindsym $mod+Shift+3 move container to workspace $w3
 bindsym $mod+Shift+4 move container to workspace $w4
-bindsym $mod+Shift+5 move container to workspace $w5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+5 move container to workspace 5
 
 # Move between workspaces
 bindsym $mod+h workspace prev
 bindsym $mod+l workspace next
-bindsym $mod+shift+h move container to workspace next
-bindsym $mod+shift+l move container to workspace prev
+bindsym $mod+shift+l move container to workspace next
+bindsym $mod+shift+h move container to workspace prev
 
 # Assign workspaces
 assign [class="Firefox"] → $w2
@@ -115,13 +106,17 @@ assign [class="Spotify"] → $w4
 assign [class="MPlayer"] → $w4
 assign [class="Rhythmbox"] → $w4
 assign [class="mpv"] → $w4
-# assign [class="Thunderbird"] → $w4
+# TweetDeck
+assign [instance="crx_hbdpomandigafcibbmofojjchbcdagbl"] → $w3
+# WhatsApp
+assign [instance="crx_bgkodfmeijboinjdegggmkbkjfiagaan"] → $w3
+# Telegram
+assign [instance="crx_clhhggbfdinjmjhajaheehoeibfljjno"] → $w3
 
 # Assing floating modes
 # for_window [class="Osdlyrics"] floating enable
 # for_window [instance="music"] floating enable
-# for_window [class="Thunar"] floating enable
-for_window [window_role="task_dialog|bubble|pop-up|page-info|Preferences"] floating enable
+for_window [window_role="task_dialog|bubble|page-info|Preferences"] floating enable
 for_window [window_type="dialog|menu"] floating enable
 for_window [class="Pidgin" window_role="conversation"] focus, move left
 
@@ -229,10 +224,11 @@ bindsym $mod+shift+o move workspace to output right
 bindsym $mod+b bar mode toggle
 
 # My terminal
-# exec --no-startup-id urxvt -name urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
+# exec --no-startup-id termite -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
+exec --no-startup-id termite -e 'tmux -2 attach'
 # move this to scratchpad, if active
-# for_window [class="URxvt" instance="scratchpad"] move scratchpad
-bindsym mod4+c [class="Gnome-terminal"] scratchpad show
+for_window [class="Termite"] move scratchpad
+bindsym mod4+c [class="Termite"] scratchpad show
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & pkill -RTMIN+10 i3blocks"
@@ -256,8 +252,9 @@ bindsym $mod+XF86PowerOff exec systemctl suspend
 # bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
 
 # windows borders
-new_window pixel 3
-new_float pixel 3
+# new_window pixel 0
+new_float none
+new_window none
 
 # Some Options
 hide_edge_borders both
@@ -285,6 +282,8 @@ bar {
   workspace_buttons yes
   strip_workspace_numbers yes
   # tray_output none|primary|<output>
+  height 20
+
   colors {
      separator #586e75 
      background #2d2d2d
@@ -301,3 +300,6 @@ client.focused #586e75 #586e75 #f9f9f9 #268bd2
 client.focused_inactive #455057 #455057 #c7c7c7 #002b36
 client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
 client.urgent #dc322f #dc322f #f9f9f9 #dc322f
+
+gaps inner 4
+# smart_gaps on
