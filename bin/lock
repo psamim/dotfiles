@@ -1,4 +1,6 @@
-physlock -ds -u samim;
+#!/usr/bin/env bash
+# physlock -ds -u samim;
 # i3lock-wrapper;
 # pm-suspend;
-systemctl suspend;
+pixelate_lock
+systemctl suspend
