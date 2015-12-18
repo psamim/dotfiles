@@ -22,8 +22,8 @@ ln -sf "$PWD/git/ignore" "$HOME/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
 
 # hg/
-rm -rf "$HOME/.hg"
-ln -sf "$PWD/hg/hgrc" "$HOME/.hg"
+# rm -rf "$HOME/.hg"
+# ln -sf "$PWD/hg/hgrc" "$HOME/.hg"
 
 # tmux/
 rm -rf "$HOME/.tmux"
@@ -106,3 +106,11 @@ ln -sf "$PWD/phpcs" "$HOME/.phpcs"
 # password-store
 rm -rf "$HOME/.password-store"
 ln -sf "$PWD/password-store" "$HOME/.password-store"
+
+# termite
+rm -rf "$HOME/.config/termite"
+ln -sf "$PWD/termite" "$HOME/.config/termite"
+
+# gtk-3.0
+rm -rf "$HOME/.config/gtk-3.0"
+ln -sf "$PWD/termite" "$HOME/.config/gtk-3.0"

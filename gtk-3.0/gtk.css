@@ -1,0 +1,10 @@
+/* There is bug for gtk apps */
+.window-frame {
+    box-shadow: none;
+    margin: 1;
+}
+
+/* Padding for terminal (termite) */
+VteTerminal {
+    padding: 5px;
+}
