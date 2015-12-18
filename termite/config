@@ -1,6 +1,7 @@
 [options]
 font = Source Code Pro 10
 clickable_url = true
+browser = firefox
 
 # Solarized dark color scheme
 
