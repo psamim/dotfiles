@@ -2,5 +2,6 @@
 # physlock -ds -u samim;
 # i3lock-wrapper;
 # pm-suspend;
+xkb-switch -s us
 pixelate_lock
 systemctl suspend
