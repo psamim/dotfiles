@@ -4,7 +4,6 @@
 exec --no-startup-id nm-applet &
 exec redshift-gtk &
 exec clipit &
-exec xautolock -time 5 -locker ~/.bin/lock &
 
 set $mod Mod4
 
@@ -97,6 +96,7 @@ bindsym $mod+shift+h move container to workspace prev
 
 # Assign workspaces
 assign [class="Firefox"] → $w2
+assign [class="jetbrains-studio"] → $w1
 assign [class="Pidgin"] → $w3
 assign [class="Skype"] → $w3
 assign [class="ViberPC"] → $w3
@@ -251,7 +251,9 @@ bindsym $mod+XF86PowerOff exec systemctl suspend
 # Keyboard Layouts
 # bindsym Mod1+Tab exec --no-startup-id keyboard.sh us ir && pkill -RTMIN+1 i3blocks
 
-# windows borders
+# Next wallpaper
+bindsym $mod+w exec systemctl --user start feh-wallpaper.service
+
 # new_window pixel 0
 new_float none
 new_window none
