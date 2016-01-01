@@ -36,7 +36,7 @@ unclutter &
 dunst &
 
 # Capture data about programs I use
-/home/samim/.cabal/bin/arbtt-capture &
+# /home/samim/.cabal/bin/arbtt-capture &
 
 # Compton window compositor
 /usr/bin/compton -b --config ~/.compton &
@@ -50,6 +50,9 @@ xset dpms 0 0 300
 
 # Automount disks
 udiskie --no-tray &
+
+# Screen lock
+xautolock -time 5 -locker ~/.bin/lock &
 
 # gpg-agent
 eval $(gpg-agent --daemon)
