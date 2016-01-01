@@ -1,38 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This scripts installs all conf files
 # by creating appropriate symbolic links
-# cron jobs are not included.
 
-# aria2/
+# aria2
 rm -rf "$HOME/.aria2"
-mkdir -p "$HOME/.aria2/"
-ln -sf "$PWD/aria2/aria2.conf" "$HOME/.aria2/aria2.conf"
+ln -sf "$PWD/aria2" "$HOME/.aria2"
 
-# bash/
-ln -sf "$PWD/bash/bashrc" "$HOME/.bashrc"
+# bin
+rm -rf "$HOME/.bin"
+ln -sf "$PWD/bin" "$HOME/.bin"
 
-# bin/
-ln -sf "$PWD/bin" "$HOME/.local/bin"
-
-# git/
+# git
 rm -rf "$HOME/.gitconfig"
 rm -rf "$HOME/.gitignore"
 ln -sf "$PWD/git/config" "$HOME/.gitconfig"
 ln -sf "$PWD/git/ignore" "$HOME/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
 
-# hg/
-# rm -rf "$HOME/.hg"
-# ln -sf "$PWD/hg/hgrc" "$HOME/.hg"
-
-# tmux/
+# tmux
 rm -rf "$HOME/.tmux"
 rm -rf "$HOME/.tmux.conf"
 ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
-ln -sf "$PWD/tmux/tmux.conf" "$HOME/.byobu/.tmux.conf"
 ln -sf "$PWD/tmux" "$HOME/.tmux"
 
-# vim/
+# vim
 # rm -rf "$HOME/.vim"
 # ln -sf "$PWD/vim" "$HOME/.vim"
 # rm -f "$HOME/.vimrc"
@@ -46,7 +37,7 @@ ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
 rm -rf "$HOME/.vrapperrc"
 ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
 
-# Zsh/
+# zsh
 rm -rf "$HOME/.zsh"
 ln -sf "$PWD/zsh" "$HOME/.zsh"
 rm -rf "$HOME/.zprezto"
@@ -90,18 +81,14 @@ ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
 rm -rf "$HOME/.xinitrc"
 ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
 
-# Binaries
-rm -rf "$HOME/.bin"
-ln -sf "$PWD/bin" "$HOME/.bin"
-
 # dunst
 rm -rf "$HOME/.config/dunst"
 ln -sf "$PWD/dunst" "$HOME/.config/dunst"
 
 # phpcs
-rm -rf "$HOME/.phpcs"
-ln -sf "$PWD/phpcs" "$HOME/.phpcs"
-~/.phpcs/commands.sh
+# rm -rf "$HOME/.phpcs"
+# ln -sf "$PWD/phpcs" "$HOME/.phpcs"
+# ~/.phpcs/commands.sh
 
 # password-store
 rm -rf "$HOME/.password-store"
@@ -114,3 +101,7 @@ ln -sf "$PWD/termite" "$HOME/.config/termite"
 # gtk-3.0
 rm -rf "$HOME/.config/gtk-3.0"
 ln -sf "$PWD/termite" "$HOME/.config/gtk-3.0"
+
+# systemd
+mkdir -p "$HOME/.config/systemd/user/"
+ln -sf $PWD/systemd/* $HOME/.config/systemd/user/

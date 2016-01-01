@@ -1,0 +1,10 @@
+[Unit]
+Description=Random wallpaper with feh
+
+[Service]
+Type=oneshot
+Environment=WALLPATH=~/Pictures/wallpaper
+ExecStart=/bin/bash -c '/usr/bin/feh --bg-scale "$(find ${WALLPATH}|shuf|head -n 1)"'
+
+[Install]
+WantedBy=default.target
