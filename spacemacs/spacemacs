@@ -30,7 +30,6 @@ values."
      javascript
      haskell
      python
-     django
      lua
      c-c++
      html
@@ -58,7 +57,7 @@ values."
      semicolon
      org-latex-classes
      org-psamim
-     psamim-keybindings
+     keybindings-psamim
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
