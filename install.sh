@@ -30,8 +30,10 @@ ln -sf "$PWD/tmux" "$HOME/.tmux"
 # ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 
 # emacs
-rm -rf "$HOME/.emacs.d"
-ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
+rm -rf "$HOME/.spacemacs"
+ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
+rm -rf "$HOME/.emacs.d/private"
+ln -sf "$PWD/spacemacs/private" "$HOME/.emacs.d/private"
 
 # vrapperrc
 rm -rf "$HOME/.vrapperrc"
