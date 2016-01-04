@@ -27,14 +27,10 @@ values."
      better-defaults
 
      emacs-lisp
-     clojure
      javascript
-     scheme
-     racket
      haskell
      python
      django
-     common-lisp
      lua
      c-c++
      html
@@ -62,6 +58,7 @@ values."
      semicolon
      org-latex-classes
      org-psamim
+     psamim-keybindings
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these

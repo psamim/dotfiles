@@ -1,0 +1,16 @@
+#+TITLE: org-latex-classes layer
+
+* Table of Contents                                      :TOC_4_org:noexport:
+ - [[Description][Description]]
+ - [[Install][Install]]
+
+* Description
+This layer consists of my personal latex classes, [[https://github.com/gpoore/minted][minted]] preferences and latex export configurations.
+I use these classes for English or Persian assignments and articles.
+
+* Install
+To use this contribution add it to your =~/.spacemacs=
+
+#+begin_src emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(org-latex-classes))
+#+end_src

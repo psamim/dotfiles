@@ -11,5 +11,5 @@
   (add-hook 'prog-mode-hook
             (lambda ()
               (key-chord-mode 1)
-              (key-chord-define evil-insert-state-map "kk"
+              (key-chord-define evil-insert-state-map "jj"
                                 'add-semicolon-at-end-of-line))))
