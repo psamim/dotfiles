@@ -3,6 +3,7 @@
         ;; org is installed by `org-plus-contrib'
         (org :location built-in)
         (ox-latex :location local)
+
         (ox-beamer :location local)
         ))
 
@@ -65,6 +66,8 @@
       [PACKAGES]
       [EXTRA]
 \\linespread{1.1}
+\\BeforeBeginEnvironment{minted}{\\vspace{3mm}}
+\\AfterEndEnvironment{minted}{\\vspace{3mm}}
 \\hypersetup{pdfborder=0 0 0}"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -99,6 +102,8 @@
       [PACKAGES]
       [EXTRA]
 \\usepackage{xepersian}
+\\BeforeBeginEnvironment{minted}{\\vspace{3mm}}
+\\AfterEndEnvironment{minted}{\\vspace{3mm}}
 \\linespread{1.4}
 \\hypersetup{pdfborder=0 0 0}
 \\settextfont{XB Yas}"
@@ -135,6 +140,8 @@
       [PACKAGES]
       [EXTRA]
 \\linespread{1.1}
+\\BeforeBeginEnvironment{minted}{\\vspace{3mm}}
+\\AfterEndEnvironment{minted}{\\vspace{3mm}}
 \\hypersetup{pdfborder=0 0 0}"
                    ("\\section*{%s}" . "\\section{%s}")
                    ("\\subsection*{%s}" . "\\subsection{%s}")
