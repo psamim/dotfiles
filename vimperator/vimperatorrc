@@ -53,6 +53,7 @@ noremap T :js toggle_bottombar('on')<CR>t
 noremap / :js toggle_bottombar('on')<CR>/
 cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
 cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
+inoremap <C-a> <C-Home><C-S-End>
 
 :js << EOF
 function toggle_bottombar(p) {
