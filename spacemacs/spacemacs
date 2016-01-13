@@ -28,6 +28,7 @@ values."
 
      emacs-lisp
      javascript
+     clojure
      haskell
      python
      lua
@@ -36,6 +37,8 @@ values."
      shell-scripts
      ess
      sql
+     go
+     scala
 
      git
      markdown
@@ -63,7 +66,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(vimrc-mode
+     groovy-mode
+     systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -114,7 +120,7 @@ values."
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
                                :size 13
-                               :weight normal
+                               :weight regular
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
@@ -230,7 +236,17 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(paradox-github-token t))
+ '(custom-safe-themes
+   (quote
+    ("3b24f986084001ae46aa29ca791d2bc7f005c5c939646d2b800143526ab4d323" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "6ecd762f08fd5c3aab65585d5aa04f6ae8b44d969df4be669259975dac849687" default)))
+ '(org-agenda-files (quote ("~/Dropbox/notes/todo.org")))
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "zathura %s"))))
+ '(paradox-github-token t t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
