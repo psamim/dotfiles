@@ -9,7 +9,7 @@
 
 (defun org-latex-classes/init-ox-latex ()
   (use-package ox-latex
-    :init
+    :config
     (progn
       ;; Tell the latex export to use the minted package for source
       ;; code coloration.

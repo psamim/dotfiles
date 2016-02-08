@@ -3,6 +3,8 @@
 * Table of Contents                                        :TOC_4_org:noexport:
  - [[Description][Description]]
  - [[Install][Install]]
+ - [[Key Bindings][Key Bindings]]
+   - [[RefTeX][RefTeX]]
 
 * Description
 My personal configs for org-mode.
@@ -13,3 +15,23 @@ To use this contribution add it to your =~/.spacemacs=
 #+begin_src emacs-lisp
   (setq-default dotspacemacs-configuration-layers '(org-psamim))
 #+end_src
+
+* Key Bindings
+** RefTeX
+
+| Key Binding   | Description                           |
+|---------------+---------------------------------------|
+| ~SPC m r c~   | reftex-citation                       |
+| ~SPC m r g~   | reftex-grep-document                  |
+| ~SPC m r i~   | reftex-index-selection-or-word        |
+| ~SPC m r I~   | reftex-display-index                  |
+| ~SPC m r TAB~ | reftex-index                          |
+| ~SPC m r l~   | reftex-label                          |
+| ~SPC m r p~   | reftex-index-phrase-selection-or-word |
+| ~SPC m r P~   | reftex-index-visit-phrases-buffer     |
+| ~SPC m r r~   | reftex-reference                      |
+| ~SPC m r s~   | reftex-search-document                |
+| ~SPC m r t~   | reftex-toc                            |
+| ~SPC m r T~   | reftex-toc-recenter                   |
+| ~SPC m r v~   | reftex-view-crossref                  |
+|               |                                       |
