@@ -14,7 +14,7 @@ SSID=$(iwgetid $INTERFACE -r)
 
 echo $SSID
 echo $SSID
-echo "#8ABEB7"
+echo "#000000"
 
 case $1 in
   -4)

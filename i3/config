@@ -46,7 +46,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Fullscreen vids to small sticky in corner aka picture in picture mode 
-bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518 
+bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 500
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -193,7 +193,8 @@ for_window [class="(?i)"] focus
 bindsym $mod+s move scratchpad
 bindsym $mod+o scratchpad show
 bindsym F12 scratchpad show
-bindsym $mod+x [class="Emacs"] scratchpad show
+bindsym $mod+x [instance="TODOs"] scratchpad show
+for_window [instance="TODOs"] move scratchpad
 
 # Shortcuts
 bindsym $mod+slash exec chromium --show-app-list
@@ -287,12 +288,12 @@ bar {
   height 20
 
   colors {
-     separator #586e75 
-     background #2d2d2d
-     statusline #c7c7c7
+     separator #000000
+     background  #A9a9a9 
+     statusline #000000 
      focused_workspace  #586e75 #586e75 #ffffff
      active_workspace #2d2d2d #2d2d2d #ffffff
-     inactive_workspace #455057 #455057 #c7c7c7
+     inactive_workspace #1F1F1F #1F1F1F #c7c7c7
      urgent_workspace #ae4544 #ae4544 #ffffff
   }
 }
@@ -303,5 +304,5 @@ client.focused_inactive #455057 #455057 #c7c7c7 #002b36
 client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
 client.urgent #dc322f #dc322f #f9f9f9 #dc322f
 
-gaps inner 4
+gaps inner 8
 # smart_gaps on
