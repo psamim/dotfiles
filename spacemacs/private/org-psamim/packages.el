@@ -1,6 +1,5 @@
 (setq org-psamim-packages
     '(
-      ;; package names go here
       (org :location built-in)
       (reftex :location built-in)
       (org-babel :location local)
@@ -17,8 +16,9 @@
           org-agenda-files (quote ("~/Dropbox/notes/todo.org"))
           org-directory "~/Dropbox/notes"
           org-archive-location "~/Dropbox/notes/archive/todo.org::"
-          bidi-paragraph-direction 'nil
     )
+
+    (add-hook 'org-mode-hook (lambda () (setq bidi-paragraph-direction 'nil)))
 
     (custom-set-variables
      ;; Open PDFs after Export with Zathura
