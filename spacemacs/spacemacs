@@ -39,11 +39,16 @@ values."
      sql
      go
      scala
-
+     java
+     react
      git
      markdown
      org
      restclient
+     selectric
+     erc
+     dockerfile
+     latex
 
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-commentary
@@ -69,6 +74,7 @@ values."
    dotspacemacs-additional-packages
    '(vimrc-mode
      groovy-mode
+     yaml-mode
      systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -227,6 +233,8 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (setq eclim-eclipse-dirs "/usr/lib/eclipse"
+        eclim-executable "/usr/lib/eclipse/eclim")
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
