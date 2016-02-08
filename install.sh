@@ -31,7 +31,7 @@ ln -sf "$PWD/tmux" "$HOME/.tmux"
 
 # emacs
 rm -rf "$HOME/.emacs.d/"
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
 rm -rf "$HOME/.spacemacs"
 ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
 rm -rf "$HOME/.emacs.d/private"
