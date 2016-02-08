@@ -1,0 +1,2 @@
+#!/bin/sh
+emacsclient -c --frame-parameters="((font . \"Ubuntu-16\")(internal-border-width . 15) (width . 48) (height . 20) (name . \"TODOs\") (top . 180) (left . 440) (left-fringe . 0) (right-fringe . 0) (auto-raise t) (alpha . 0.8))" --eval "(progn (find-file \"~/Notes/todo.org\") (setq mode-line-format nil))" 

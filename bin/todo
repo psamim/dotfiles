@@ -1,3 +1,0 @@
-#!/bin/sh
-[[ -z $(pidof emacs) ]] && emacs --daemon
-emacsclient -c --socket-name="/tmp/samim/emacs1000/server/server" --eval "(progn (psamim-set-window-fonts) (psamim-open-todo))" --frame-parameters="((width . 48) (height . 20) (title . \"TODOs\") (top . 180) (left . 440) (left-fringe 0)(auto-raise t))"
