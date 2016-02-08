@@ -1,0 +1,56 @@
+# load zgen
+source "${HOME}/.dotfiles/zgen/zgen.zsh"
+
+# check if there's no init script
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    zgen oh-my-zsh
+
+    # plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/git-extras
+    zgen oh-my-zsh plugins/pass
+    zgen oh-my-zsh plugins/archlinux
+    zgen oh-my-zsh plugins/vi-mode
+    zgen oh-my-zsh plugins/extract
+    zgen oh-my-zsh plugins/golang
+    zgen oh-my-zsh plugins/gradle
+    zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/command-not-found
+    zgen oh-my-zsh plugins/history-substring-search
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zaw
+    zgen load zsh-users/zsh-completions src
+
+    # theme
+    zgen oh-my-zsh themes/agnoster
+
+    # save all to init script
+    zgen save
+fi
+
+# Zaw
+zstyle ':filter-select' max-lines 4 # use $LINES - 4 for filter-select
+zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
+bindkey '^R' zaw-history
+bindkey -M filterselect '^R' down-line-or-history
+bindkey -M filterselect '^S' up-line-or-history
+bindkey -M filterselect '^E' accept-search
+bindkey '^P' zaw-process
+bindkey '^F' zaw-open-file
+
+alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
+alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
+alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
+alias fly='~/src/sshuttle/sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0 --exclude-from ~/src/sshuttle/excludes'
+
+export DEFAULT_USER="samim"
+export GOPATH="$HOME/.go"
+export ANDROID_HOME="/opt/android-sdk/"
+export PATH="$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/home/samim/.pyenv/bin:$PATH"

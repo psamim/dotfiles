@@ -43,18 +43,8 @@ rm -rf "$HOME/.vrapperrc"
 ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
 
 # zsh
-rm -rf "$HOME/.zsh"
-ln -sf "$PWD/zsh" "$HOME/.zsh"
-rm -rf "$HOME/.zprezto"
-ln -sf "$PWD/zsh/prezto" "$HOME/.zprezto"
 rm -f "$HOME/.zshrc"
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
-ln -sf "$PWD/zsh/prezto/runcoms/zlogin" "$HOME/.zlogin"
-ln -sf "$PWD/zsh/prezto/runcoms/zlogout" "$HOME/.zlogout"
-ln -sf "$PWD/zsh/prezto/runcoms/zpreztorc" "$HOME/.zpreztorc"
-ln -sf "$PWD/zsh/prezto/runcoms/zprofile" "$HOME/.zprofile"
-ln -sf "$PWD/zsh/prezto/runcoms/zshenv" "$HOME/.zshenv"
-ln -sf "$PWD/zsh/prezto/runcoms/zshrc" "$HOME/.zshrc"
 
 # Vimperator
 rm -rf "$HOME/.vimperator"

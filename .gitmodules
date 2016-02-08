@@ -1,21 +1,12 @@
-[submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
-[submodule "zsh/prezto"]
-	path = zsh/prezto
-	url = git@github.com:psamim/prezto.git
-[submodule "zsh/zaw"]
-	path = zsh/zaw
-	url = git://github.com/zsh-users/zaw.git
 [submodule "emacs/orgs"]
 	path = emacs/orgs
 	url = git@bitbucket.org:psamim/orgs.git
-[submodule "tmux/tmux-yank"]
-	path = tmux/tmux-yank
-	url = git@github.com:tmux-plugins/tmux-yank.git
 [submodule "password-store"]
 	path = password-store
 	url = git@bitbucket.org:psamim/password-store.git
 [submodule "emacs.d"]
 	path = emacs.d
 	url = https://github.com/syl20bnr/spacemacs.git
+[submodule "zgen"]
+	path = zgen
+	url = https://github.com/tarjoilija/zgen.git
