@@ -1,6 +1,3 @@
-[submodule "emacs/orgs"]
-	path = emacs/orgs
-	url = git@bitbucket.org:psamim/orgs.git
 [submodule "password-store"]
 	path = password-store
 	url = git@bitbucket.org:psamim/password-store.git
