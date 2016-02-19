@@ -50,7 +50,7 @@ values."
      dockerfile
      latex
 
-     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+     ;; (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-commentary
 
      ;; (shell :variables
