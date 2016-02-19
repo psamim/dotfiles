@@ -4,7 +4,7 @@ source! /home/samim/.vimperatorrc.local
 " set gui=noaddons,nobookmarks,nomenu,navigation,tabs
 set gui=none,tabs,navigation
 set hintchars=jkl
-set editor="emacsclient -c --socket-name='/tmp/samim/emacs1000/server/server'"
+set editor="emc"
 set wildmode animations
 set complete=lS
 set focuscontent
@@ -21,6 +21,8 @@ nmap <A-k> :tabprevious<CR>
 nmap <A-n> :tabopen<CR>
 noremap j 4j
 noremap k 4k
+" Switch between alternate tabs
+nmap <A-Tab> <C-6>
 
 " Only works in Pentadactyl
 " set passkeys+=mail.google.com:!#*+-./<C-Down><C-s><Enter>?INU[]jkacefpqrsuvxyz,*a,*n,*r,*s,*t,*u,ga,gc,gd,gi,gl,gs,gt,yo
