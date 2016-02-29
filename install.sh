@@ -95,7 +95,7 @@ ln -sf "$PWD/termite" "$HOME/.config/termite"
 
 # gtk-3.0
 rm -rf "$HOME/.config/gtk-3.0"
-ln -sf "$PWD/termite" "$HOME/.config/gtk-3.0"
+ln -sf "$PWD/gtk-3.0" "$HOME/.config/gtk-3.0"
 
 # systemd
 mkdir -p "$HOME/.config/systemd/user/"
