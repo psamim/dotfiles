@@ -1,9 +1,20 @@
 #!/bin/sh
 
+elisp=$(cat <<'END_HEREDOC'
+(concat
+ (if (org-clock-is-active) (org-clock-get-clock-string) "")
+ " "
+ (when (org-pomodoro-active-p)
+  (format
+   (propertize org-pomodoro-format 'face 'org-pomodoro-mode-line)
+   (org-pomodoro-format-seconds))))
+END_HEREDOC
+)
+
 if [[ -z $(pidof emacs) ]]
 then
     echo ""
 else
-    emacsclient --eval '(if (org-clock-is-active) (org-clock-get-clock-string) "")' \
+    emacsclient --eval "$elisp" \
         | grep -s -o "\".*\"" | sed 's/\"//g' | sed 's/^ //g' | sed 's/ $//g'  | sed 's/\[//g' | sed 's/\]//g'
 fi
