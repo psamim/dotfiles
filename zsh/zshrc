@@ -45,6 +45,7 @@ alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
 alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
 alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --conf-path=${HOME}/.aria2/down.conf"
 alias fly='~/src/sshuttle/sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0 --exclude-from ~/src/sshuttle/excludes'
+alias o='xdg-open'
 
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
@@ -55,3 +56,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="/home/samim/.pyenv/bin:$PATH"
+export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
+export GEM_PATH=$GEM_HOME
+export PATH=$PATH:$GEM_HOME/bin
+export EDITOR=emct
+alias e=$EDITOR
