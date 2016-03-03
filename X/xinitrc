@@ -36,7 +36,7 @@ unclutter &
 dunst &
 
 # Capture data about programs I use
-# /home/samim/.cabal/bin/arbtt-capture &
+/home/samim/.cabal/bin/arbtt-capture &
 
 # Compton window compositor
 /usr/bin/compton -b --config ~/.compton &

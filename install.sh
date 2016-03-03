@@ -100,3 +100,8 @@ ln -sf "$PWD/gtk-3.0" "$HOME/.config/gtk-3.0"
 # systemd
 mkdir -p "$HOME/.config/systemd/user/"
 ln -sf $PWD/systemd/* $HOME/.config/systemd/user/
+
+# arbtt
+mkdir -p "$HOME/.arbtt/"
+ln -sf "$PWD/arbtt/categorize.cfg" "$HOME/.arbtt/categorize.cfg"
+
