@@ -105,3 +105,7 @@ ln -sf $PWD/systemd/* $HOME/.config/systemd/user/
 mkdir -p "$HOME/.arbtt/"
 ln -sf "$PWD/arbtt/categorize.cfg" "$HOME/.arbtt/categorize.cfg"
 
+# vlc
+mkdir -p "$HOME/.config/vlc/"
+ln -sf $PWD/vlc/* $HOME/.config/vlc/
+
