@@ -23,6 +23,10 @@ noremap j 4j
 noremap k 4k
 " Switch between alternate tabs
 nmap <A-Tab> <C-6>
+" Stop
+map <Esc> :st<CR>
+" Reload vimperator
+map R :source ~/.vimperatorrc<CR>
 
 " Only works in Pentadactyl
 " set passkeys+=mail.google.com:!#*+-./<C-Down><C-s><Enter>?INU[]jkacefpqrsuvxyz,*a,*n,*r,*s,*t,*u,ga,gc,gd,gi,gl,gs,gt,yo
