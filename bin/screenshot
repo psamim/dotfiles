@@ -14,10 +14,14 @@ cd $IMG_PATH
 
 case ${cmd%% *} in
     fullscreen)
+        pkill compton
         maim -d 4 "$FILE"  && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
+        compton --config ~/.compton &
         ;;
     section)
+        pkill compton
         maim --select --color 1,0,0,0.6 "$FILE" && notify-send -u low 'Screenshot' 'Section Screenshot saved'
+        compton --config ~/.compton &
         ;;
 esac
 xdg-open "$FILE"
