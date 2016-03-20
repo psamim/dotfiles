@@ -7,3 +7,5 @@
 	excludesfile = ~/.gitignore
 [alias]
   st = status
+[push]
+	default = simple
