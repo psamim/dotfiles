@@ -3,13 +3,7 @@
 	name = Samim Pezeshki
 	email = p.samim@gmail.com
 [core]
-    editor = vim
+  editor = emc
 	excludesfile = ~/.gitignore
 [alias]
-    st = status
-[push]
-    #default = simple
-[push]
-#	default = simple
-[push]
-	default = matching
+  st = status
