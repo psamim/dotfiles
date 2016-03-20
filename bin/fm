@@ -1,2 +1,2 @@
 #!/bin/bash
-exec nautilus --no-desktop
+exec nemo
