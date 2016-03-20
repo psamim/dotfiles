@@ -37,16 +37,14 @@ map R :source ~/.vimperatorrc<CR>
 " Only works with feedsomekeys plugin
 " command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args>
 " fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
-" fmaps -u='tweetdeck\.twitter\.com' j k f r t p h l n ^[
-" fmaps -u='facebook\.com' j k l c
 
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i> mail.google.com
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i> inbox.google.com
-ignorekeys add -except=<A-j>,<A-k>,<C-i> docs.google.com
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d facebook.com$
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d tweetdeck.twitter.com
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d web.whatsapp.com
-ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d web.telegram.org
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i>,<A-Tab> mail.google.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<C-i>,<A-Tab> inbox.google.com
+ignorekeys add -except=<A-j>,<A-k>,<C-i>,<A-Tab> docs.google.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<A-Tab> facebook.com$
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<A-Tab> tweetdeck.twitter.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<A-Tab> web.whatsapp.com
+ignorekeys add -except=t,o,O,:,/,<A-j>,<A-k>,d,<A-Tab> web.telegram.org
 
 " Authohide the status bar
 " https://github.com/vimperator/vimperator-labs/issues/26
