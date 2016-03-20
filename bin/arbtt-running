@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Toggle arbtt-capture if block is clicked
+if [ -n "$BLOCK_BUTTON" ]; then
+    if pgrep "arbtt-capture" > /dev/null; then
+        pkill arbtt-capture
+    else
+        nohup arbtt-capture &> /dev/null &
+    fi
+fi
+
+# Current status of arbtt
+if pgrep "arbtt-capture" > /dev/null; then
+    today=$(arbtt-stats -o today --filter='$date>='$(date +"%Y-%m-%d") --output-format=csv|grep today|cut -d, -f2|head -c -4)
+    echo $today
+    exit 0
+else
+    echo " OFF "
+    echo
+    echo \#D32F2F
+    exit 33
+fi
+
