@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Use pass in dmenu
+
 shopt -s nullglob globstar
 
 typeit=0

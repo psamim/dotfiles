@@ -1,2 +1,5 @@
 #!/bin/bash
+
+# Script to run my preferred file manager
+
 exec nemo

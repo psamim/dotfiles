@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-# physlock -ds -u samim;
-# i3lock-wrapper;
-# pm-suspend;
+
+# My screen locker
+
+# Switch to us layout to prevent problems in unlocking
 xkb-switch -s us
+
+# Locker
 pixelate_lock
+# physlock -ds -u samim
+# i3lock-wrapper
+
+# Suspend
 systemctl suspend
+# pm-suspend

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Displays the overall time spent today
+# If arbtt-capture is not running displays a red alert showing OFF
+# Toggles arbtt-capture on or off on click
+
 # Toggle arbtt-capture if block is clicked
 if [ -n "$BLOCK_BUTTON" ]; then
     if pgrep "arbtt-capture" > /dev/null; then

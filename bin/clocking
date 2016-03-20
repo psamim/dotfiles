@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Displays the title  of current active (clocked) task in org-mode
+# along with its pomodoro counter and overall spent time.
+
 elisp=$(cat <<'END_HEREDOC'
 (concat
  (if (org-clock-is-active) (org-clock-get-clock-string) "")

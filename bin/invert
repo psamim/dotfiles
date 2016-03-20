@@ -1,4 +1,8 @@
 #! /bin/bash
+
+# This script inverts colors of the currently active window using compton
+# and toggles it.
+
 if [[ -e ~/.inverted ]]
 then
 	echo "Already inverted"

@@ -1,8 +1,0 @@
-!#/bin/sh
-if
-    yad --class timeup --width 200 --title Warning --image=/home/faruk/.config/timer/timesup.png --button='gtk-close:1' & > /dev/null
-    mpv /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga & > /dev/null
-    exit 0
-  then
-    exit 0
-fi

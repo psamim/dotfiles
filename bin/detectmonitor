@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# detects connected display
+
 IN="LVDS1"
 EXT="VGA1"
 # EXT="HDMI1"

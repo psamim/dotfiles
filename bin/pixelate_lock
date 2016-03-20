@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Pixelate screen and lock
+
 set -e
 
 scrot /tmp/screen.png

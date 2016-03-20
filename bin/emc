@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Script to run emacsclient in window mode
+
 if [[ -z $(pidof emacs) ]]
 then
     emacs "$@"

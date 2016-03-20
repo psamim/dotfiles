@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Take a screenshot using dmenu and maim
+
 IMG_PATH=/home/samim/Pictures/
 FILE=$(date +%F-%T).png
 

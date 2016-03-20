@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Open ranger file manager in emacs
+
+emacsclient -c --frame-parameters="((width . 48) (height . 20) (name . \"Ranger\") (top . 180) (left . 440) (left-fringe . 0) (right-fringe . 0) (auto-raise t) (alpha . 0.8))" --eval "(progn (deer))" 

@@ -1,7 +1,0 @@
-#!/bin/bash
-if [[ -z $(pidof mpd) ]];
-then
-	mpd
-fi
-
-urxvt  -geometry 30x20 -name music -title music -e bash -c "ncmpcpp"
