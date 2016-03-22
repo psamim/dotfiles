@@ -1,0 +1,9 @@
+[Unit]
+Description=arbtt service
+
+[Service]
+Type=simple
+ExecStart=/home/samim/.cabal/bin/arbtt-capture
+
+[Install]
+WantedBy=default.target

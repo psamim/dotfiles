@@ -4,17 +4,21 @@
 # If arbtt-capture is not running displays a red alert showing OFF
 # Toggles arbtt-capture on or off on click
 
-# Toggle arbtt-capture if block is clicked
+SERVICE='arbtt.service'
+
+STATUS=`systemctl --user is-active $SERVICE`
+# Toggle process if block is clicked
 if [ -n "$BLOCK_BUTTON" ]; then
-    if pgrep "arbtt-capture" > /dev/null; then
-        pkill arbtt-capture
+    if [[ $STATUS == "active" ]]; then
+        systemctl --user stop $SERVICE
     else
-        nohup arbtt-capture &> /dev/null &
+        systemctl --user start $SERVICE
     fi
 fi
 
+STATUS=`systemctl --user is-active $SERVICE`
 # Current status of arbtt
-if pgrep "arbtt-capture" > /dev/null; then
+if [[ $STATUS == "active" ]]; then
     today=$(arbtt-stats -o today --filter='$date>='$(date +"%Y-%m-%d") --output-format=csv|grep today|cut -d, -f2|head -c -4)
     echo $today
     exit 0
@@ -24,4 +28,3 @@ else
     echo \#D32F2F
     exit 33
 fi
-
