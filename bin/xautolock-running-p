@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Toggles xautolock on or off on click
+
+SERVICE='xautolock.service'
+
+STATUS=`systemctl --user is-active $SERVICE`
+# Toggle process if block is clicked
+if [ -n "$BLOCK_BUTTON" ]; then
+    if [[ $STATUS == "active" ]]; then
+        systemctl --user stop $SERVICE
+    else
+        systemctl --user start $SERVICE
+    fi
+fi
+
+
+STATUS=`systemctl --user is-active $SERVICE`
+# Current status of arbtt
+if [[ $STATUS == "active" ]]; then
+    echo 
+    exit 0
+else
+    echo "  "
+    echo
+    echo \#D32F2F
+    exit 33
+fi
+

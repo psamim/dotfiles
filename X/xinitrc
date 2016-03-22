@@ -42,14 +42,8 @@ dunst &
 xset +dpms
 xset dpms 0 0 300
 
-# xss-lock, if not runnig
-# [[ -z $(pidof xss-lock) ]] && xss-lock lock &
-
 # Automount disks
 udiskie --no-tray &
-
-# Screen lock
-xautolock -time 5 -locker ~/.bin/lock &
 
 # gpg-agent
 eval $(gpg-agent --daemon)
