@@ -294,7 +294,7 @@ bar {
   separator_symbol "〉"
   workspace_buttons yes
   strip_workspace_numbers yes
-  # tray_output none|primary|<output>
+  tray_output primary
   height 20
 
   colors {
