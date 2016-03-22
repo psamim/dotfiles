@@ -9,7 +9,8 @@ prog="fullscreen
 section
 "
 
-cmd=$(dmenu -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' <<< "$prog")
+# cmd=$(dmenu -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' <<< "$prog")
+cmd=$(rofi -dmenu <<< "$prog")
 cd $IMG_PATH
 
 case ${cmd%% *} in
