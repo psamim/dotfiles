@@ -3,7 +3,7 @@ Description=xautolock service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/xautolock -time 5 -locker /home/samim/.bin/lock
+ExecStart=/usr/bin/xautolock -time 5 -locker /home/samim/.bin/lock -detectsleep -secure
 
 [Install]
 WantedBy=default.target
