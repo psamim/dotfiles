@@ -36,7 +36,7 @@
 
 (defun org-psamim/init-org-babel ()
   (use-package org-babel
-    :config
+    :init
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((R . t)
@@ -47,6 +47,7 @@
        (latex . t)
        (gnuplot . t)
        (sql . t)
+       (sh . t)
        ))
     ))
 
