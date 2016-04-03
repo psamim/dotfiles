@@ -18,7 +18,7 @@ fi
 STATUS=`systemctl --user is-active $SERVICE`
 # Current status of arbtt
 if [[ $STATUS == "active" ]]; then
-    echo 
+    echo " "
     exit 0
 else
     echo "  "
