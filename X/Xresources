@@ -59,7 +59,7 @@ rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
 rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
 rofi.fullscreen:        true
 rofi.padding:           100
-rofi.opacity: 80
+rofi.opacity: 60
 rofi.modi: run
 rofi.fixed-num-lines: 15 
 rofi.lines: 15
