@@ -210,7 +210,8 @@ bindsym $mod+slash exec chromium --show-app-list
 bindsym $mod+Tab workspace back_and_forth
 
 # Search between windows
-bindsym $mod+z exec  quickswitch.py -d "dmenu -p '>' -dim 0.15 -x 183 -y 150 -w 1000 -h 30 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 4 -fn 'Source Code Pro-12:normal'"
+# bindsym $mod+z exec  quickswitch.py -d "dmenu -p '>' -dim 0.15 -x 183 -y 150 -w 1000 -h 30 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 4 -fn 'Source Code Pro-12:normal'"
+bindsym $mod+z exec "rofi -modi window,run -show window"
 
 # Rename a workspace
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
