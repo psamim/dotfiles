@@ -6,8 +6,7 @@ IMG_PATH=/home/samim/Pictures/
 FILE=$(date +%F-%T).png
 
 prog="fullscreen
-section
-"
+section"
 
 # cmd=$(dmenu -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' <<< "$prog")
 cmd=$(rofi -dmenu <<< "$prog")
@@ -15,14 +14,16 @@ cd $IMG_PATH
 
 case ${cmd%% *} in
     fullscreen)
-        pkill compton
-        maim -d 4 "$FILE"  && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
-        compton --config ~/.compton &
+        # pkill compton
+        # maim -d 4 "$FILE"  && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
+        scrot -d 4 "$FILE" && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
+        # compton --config ~/.compton &
         ;;
     section)
-        pkill compton
-        maim --select --color 1,0,0,0.6 "$FILE" && notify-send -u low 'Screenshot' 'Section Screenshot saved'
-        compton --config ~/.compton &
+        # pkill compton
+        # maim --select --color 1,0,0,0.6 "$FILE" && notify-send -u low 'Screenshot' 'Section Screenshot saved'
+        scrot -s "$FILE" && notify-send -u low 'Screenshot' 'Fullscreen taken and saved'
+        # compton --config ~/.compton &
         ;;
 esac
 xdg-open "$FILE"
