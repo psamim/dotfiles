@@ -92,8 +92,9 @@ rm -rf "$HOME/.config/gtk-3.0"
 ln -sf "$PWD/gtk-3.0" "$HOME/.config/gtk-3.0"
 
 # systemd
-mkdir -p "$HOME/.config/systemd/user/"
-ln -sf $PWD/systemd/* $HOME/.config/systemd/user/
+rm -rf "$HOME/.config/systemd"
+mkdir -p "$HOME/.config/systemd/"
+ln -sf "$PWD/systemd" "$HOME/.config/systemd/user"
 
 # arbtt
 mkdir -p "$HOME/.arbtt/"

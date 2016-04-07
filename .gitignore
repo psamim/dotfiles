@@ -12,3 +12,4 @@
 # vimperator
 /vimperator/info
 /tmux/plugins/
+/systemd/default.target.wants/
