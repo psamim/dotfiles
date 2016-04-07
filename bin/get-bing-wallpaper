@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# The market, can be "en-US" "zh-CN" "ja-JP" "en-AU" "en-UK" "de-DE" "en-NZ" "en-CA"
+mkt="en-US"
+
+bing="www.bing.com"
+
+# The idx parameter determines where to start from. 0 is the current day,
+# 1 the previous day, etc.
+idx="0"
+
+# $xmlURL is needed to get the xml data
+xmlURL="http://www.bing.com/HPImageArchive.aspx?format=xml&idx=$idx&n=1&mkt=$mkt"
+
+# $saveDir is used to set the location where Bing pics of the day are stored.
+saveDir=$HOME'/Pictures/Bing/'
+
+# Create saveDir if it does not already exist
+mkdir -p $saveDir
+
+# Extract the relative URL of the Bing pic of the day
+xml=$(curl "$bing/HPImageArchive.aspx?format=rss&idx=$idx&n=1&mkt=$mkt")
+
+picUrl=$bing$( \
+    echo $xml\
+        | xmllint --xpath "/rss/channel/item/link/text()" - \
+        | sed 's/1366x768/1920x1080/g' \
+      )
+
+# Get title, remove copyright notice and html entities
+picTitle=$( \
+    echo $xml\
+        | xmllint --xpath "/rss/channel/item/title/text()" - \
+        | sed s/'([^)]*)'/''/g \
+        | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'\
+      )
+
+picName="${picUrl##*/}"
+
+# Download the Bing pic of the day
+cd $saveDir && curl -O $picUrl
+
+# Test if download was successful.
+downloadResult=$?
+if [[ $downloadResult -ge 1 ]]; then
+    rm -rf $saveDir$picName
+    echo "Couldn't download any picture."
+    exit 1;
+fi
+
+# Test if it's a pic
+file --mime-type -b $saveDir$picName | grep "^image/" > /dev/null
+downloadResult=$?
+if [[ $downloadResult -ge 1 ]]; then
+    rm -rf $saveDir$picName
+    echo "Downloaded file is not an image."
+    exit 1;
+fi
+
+# Add title to image
+width=$(identify -format %w $saveDir$picName)
+height=$(identify -format %h $saveDir$picName)
+convert -background '#0008' -fill white -gravity center -size $(($width/4))x$(($height/6))\
+        caption:"$picTitle" \
+        $saveDir$picName +swap -gravity east -composite $saveDir$picName

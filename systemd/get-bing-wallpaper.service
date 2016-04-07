@@ -1,0 +1,9 @@
+[Unit]
+Description=Get Bing wallpaper
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/home/samim/.bin/get-bing-wallpaper'
+
+[Install]
+WantedBy=default.target

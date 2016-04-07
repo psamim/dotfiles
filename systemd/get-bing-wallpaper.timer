@@ -1,0 +1,10 @@
+[Unit]
+Description=Get bing wallpaper once a day
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1d
+Unit=get-bing-wallpaper.service
+
+[Install]
+WantedBy=default.target
