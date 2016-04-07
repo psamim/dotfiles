@@ -1,0 +1,11 @@
+#!/bin/bash
+
+prefix=${SCREEN_LAYOUT_DIR-~/.screenlayout}
+layout_files=( "$prefix"/* )
+layout_files=( "${layout_files[@]#"$prefix"/}" )
+
+layout=$(printf '%s\n' "${layout_files[@]}" | rofi -dmenu -p select:)
+
+[[ -n $layout ]] || exit
+
+exec $prefix/$layout
