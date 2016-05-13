@@ -20,10 +20,10 @@ STATUS=`systemctl --user is-active $SERVICE`
 # Current status of arbtt
 if [[ $STATUS == "active" ]]; then
     today=$(arbtt-stats -o today --filter='$date>='$(date +"%Y-%m-%d") --output-format=csv|grep today|cut -d, -f2|head -c -4)
-    echo $today
+    echo " $today "
     exit 0
 else
-    echo " OFF "
+    echo " "
     echo
     echo \#D32F2F
     exit 33
