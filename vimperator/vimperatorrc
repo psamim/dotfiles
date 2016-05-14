@@ -58,6 +58,7 @@ noremap / :js toggle_bottombar('on')<CR>/
 cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
 cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
 inoremap <C-a> <C-Home><C-S-End>
+highlight ContentSeparator border-top: 0px dotted gray; display: -moz-box;
 
 :js << EOF
 function toggle_bottombar(p) {
