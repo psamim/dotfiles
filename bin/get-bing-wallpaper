@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export {http,https,ftp}_proxy=http://127.0.0.1:7777
+
 # The market, can be "en-US" "zh-CN" "ja-JP" "en-AU" "en-UK" "de-DE" "en-NZ" "en-CA"
 mkt="en-US"
 
