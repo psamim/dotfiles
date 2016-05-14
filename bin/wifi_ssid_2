@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#------------------------------------------------------------------------
+
+INTERFACE="${BLOCK_INSTANCE:-wlp3s0}"
+
+#------------------------------------------------------------------------
+
+# if the machine has no battery or wireless connection, the corresponding block should not be displayed.
+[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] ||
+    [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && exit
+
+SSID=$(iwgetid $INTERFACE -r)
+
+echo " $SSID "
