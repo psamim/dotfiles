@@ -1,0 +1,32 @@
+#+TITLE: psamim-org-zotero layer
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
+
+#+CAPTION: logo
+
+# The maximum height of the logo should be 200 pixels.
+[[img/psamim-org-zotero.png]]
+
+* Table of Contents                                        :TOC_4_org:noexport:
+ - [[Description][Description]]
+ - [[Install][Install]]
+ - [[Key bindings][Key bindings]]
+
+* Description
+This layer integrates [[https://github.com/egh/zotxt-emacs][zotxt]] and [[https://github.com/vspinu/zotelo][zotelo]] into org-mode and Spacemacs.
+
+* Install
+To use this contribution add it to your =~/.spacemacs=
+
+#+begin_src emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(psamim-org-zotero))
+#+end_src
+
+* Key bindings
+
+| Key Binding | Description                     |
+|-------------+---------------------------------|
+| ~SPC m z i~ | org-zotxt-insert-reference-link |
+| ~SPC m i z~ | org-zotxt-insert-reference-link |
+| ~SPC m z o~ | org-zotxt-open-attachment       |
+| ~SPC m z u~ | zotelo-update-database          |
+| ~SPC m z s~ | zotelo-set-collection           |
