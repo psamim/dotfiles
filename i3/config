@@ -1,16 +1,22 @@
 # i3 config file (v4)
 
 # Startup
+# exec tint2 &
+exec xfce4-panel --disable-wm-check &
+exec tilda &
 exec --no-startup-id nm-applet &
 exec redshift-gtk &
-exec clipit &
+# exec clipit &
+exec volumeicon &
+exec cbatticon &
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango: Source Code Pro Semibold, FontAwesome Regular 8
+# font pango: Source Code Pro Semibold, FontAwesome Regular 8
+font pango:DejaVu Sans Mono 0
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -67,7 +73,7 @@ bindsym $mod+space focus mode_toggle
 set $w1 
 set $w2 
 set $w3 
-set $w4 
+set $w4 ♬
 
 # switch to workspace
 bindsym F1 workspace $w1
@@ -101,7 +107,7 @@ assign [class="jetbrains-studio"] → $w1
 assign [class="Pidgin"] → $w3
 assign [class="Skype"] → $w3
 assign [class="ViberPC"] → $w3
-assign [class="Telegram"] → $w3
+assign [class="telegram-desktop"] → $w3
 assign [class="Vlc"] → $w4
 assign [class="Spotify"] → $w4
 assign [class="MPlayer"] → $w4
@@ -120,6 +126,7 @@ assign [instance="crx_clhhggbfdinjmjhajaheehoeibfljjno"] → $w3
 for_window [window_role="task_dialog|bubble|page-info|Preferences"] floating enable
 for_window [window_type="dialog|menu"] floating enable
 for_window [class="Pidgin" window_role="conversation"] focus, move left
+for_window [class="Tilda"] floating enable
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -163,7 +170,7 @@ bindsym $mod+m mode "  "
 mode "  " {
    # hardcoded focus keybindings
    bindsym z [class="(?i)zathura"] focus, mode "default"
-   bindsym t [class="Telegram"] focus, mode "default"
+   bindsym t [class="telegram-desktop"] focus, mode "default"
 
    # keybindings for marking and jumping to clients
    bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
@@ -234,10 +241,10 @@ bindsym $mod+b bar mode toggle
 
 # My terminal
 # exec --no-startup-id termite -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
-exec --no-startup-id termite -e 'tmux -2 attach'
+# exec --no-startup-id termite -e 'tmux -2 attach'
 # move this to scratchpad, if active
-for_window [class="Termite"] move scratchpad
-bindsym mod4+c [class="Termite"] scratchpad show
+# for_window [class="Termite"] move scratchpad
+# bindsym mod4+c [class="Termite"] scratchpad show
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+' & pkill -RTMIN+10 i3blocks"
@@ -284,36 +291,36 @@ force_display_urgency_hint 500 ms
 for_window [urgent=latest] focus
 
 # window title format mess around with pango
-for_window [class="(?i)"] title_format "<span  font='10.5' weight='light' foreground='#C7C7C7'> </span> %title "
+# for_window [class="(?i)"] title_format "<span  font='10.5' weight='light' foreground='#C7C7C7'> </span> %title "
+for_window [class="(?i)"] title_format "%title"
 
-bar {
-  status_command i3blocks
-  position bottom
-  bindsym button5 nop
-  bindsym button4 nop
-  tray_padding 3 
-  separator_symbol "〉"
-  workspace_buttons yes
-  strip_workspace_numbers yes
-  tray_output primary
-  height 20
+# bar {
+#   status_command i3blocks
+#   position bottom
+#   bindsym button5 nop
+#   bindsym button4 nop
+#   tray_padding 3 
+#   separator_symbol "〉"
+#   workspace_buttons yes
+#   strip_workspace_numbers yes
+#   tray_output primary
+#   height 20
 
-  colors {
-     separator #000000
-     background  #A9a9a9 
-     statusline #000000 
-     focused_workspace  #586e75 #586e75 #ffffff
-     active_workspace #2d2d2d #2d2d2d #ffffff
-     inactive_workspace #1F1F1F #1F1F1F #c7c7c7
-     urgent_workspace #ae4544 #ae4544 #ffffff
-  }
-}
+#   colors {
+#      separator #000000
+#      background  #A9a9a9 
+#      statusline #000000 
+#      focused_workspace  #586e75 #586e75 #ffffff
+#      active_workspace #2d2d2d #2d2d2d #ffffff
+#      inactive_workspace #1F1F1F #1F1F1F #c7c7c7
+#      urgent_workspace #ae4544 #ae4544 #ffffff
+#   }
+# }
 
 # Colors
 client.focused #586e75 #586e75 #f9f9f9 #268bd2
 client.focused_inactive #455057 #455057 #c7c7c7 #002b36
 client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
 client.urgent #dc322f #dc322f #f9f9f9 #dc322f
-
 gaps inner 8
-# smart_gaps on
+smart_gaps on
