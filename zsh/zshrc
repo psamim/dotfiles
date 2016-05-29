@@ -17,7 +17,9 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/golang
     zgen oh-my-zsh plugins/gradle
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/command-not-found
+    zgen oh-my-zsh plugins/gpg-agent
+    zgen oh-my-zsh plugins/tmux
+    zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/history-substring-search
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
@@ -47,6 +49,8 @@ alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --
 alias fly='~/src/sshuttle/sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0 --exclude-from ~/src/sshuttle/excludes'
 alias o='xdg-open'
 
+export JAVA_HOME=/usr/lib/jvm/default/jre/
+export PATH=$PATH:$JAVA_HOME/bin
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
 export ANDROID_HOME="/opt/android-sdk/"
@@ -56,8 +60,11 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="/home/samim/.pyenv/bin:$PATH"
-export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
-export GEM_PATH=$GEM_HOME
+# export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
+# export GEM_PATH=$GEM_HOME
 export PATH=$PATH:$GEM_HOME/bin
 export EDITOR=emct
 alias e=$EDITOR
+
+
+. /home/samim/torch/install/bin/torch-activate
