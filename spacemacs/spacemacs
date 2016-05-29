@@ -28,7 +28,7 @@ values."
 
      emacs-lisp
      javascript
-     clojure
+     ;; clojure
      haskell
      python
      lua
@@ -38,7 +38,7 @@ values."
      ess
      sql
      go
-     scala
+     ;; scala
      java
      react
      git
@@ -64,8 +64,10 @@ values."
      ;; Private:
      semicolon
      org-latex-classes
-     org-psamim
      psamim-defaults
+     psamim-org
+     psamim-org-zotero
+     psamim-org-reftex
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
