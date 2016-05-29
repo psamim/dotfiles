@@ -1,11 +1,9 @@
-(setq org-psamim-packages
+(setq psamim-org-packages
     '(
       (org :location built-in)
-      (reftex :location built-in)
-      (org-babel :location local)
-      ))
+      (org-babel :location local)))
 
-(defun org-psamim/post-init-org ()
+(defun psamim-org/post-init-org ()
   (progn
     (setq org-default-notes-file "~/Notes/notes.org"
           org-log-done t
@@ -18,11 +16,18 @@
           org-archive-location "~/Notes/archive/todo.org::"
     )
 
-    (add-hook 'org-mode-hook (lambda () (setq bidi-paragraph-direction 'nil)))
+    (add-hook 'org-mode-hook (lambda ()
+                               (visual-line-mode)
+                               (spacemacs|diminish visual-line-mode nil nil)
+                               (setq bidi-paragraph-direction 'nil)))
 
     (custom-set-variables
      ;; Open PDFs after Export with Zathura
-     '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . "zathura %s"))))
+     '(org-file-apps (quote ((auto-mode . emacs)
+                             ("\\.mm\\'" . default)
+                             ("\\.x?html?\\'" . "firefox %s")
+                             ("\\.pdf\\'" . "evince %s"))))
+
      '(org-agenda-files (quote ("~/Notes/todo.org")))
      ;; '(org-agenda-ndays 7)
      ;; '(org-deadline-warning-days 14)
@@ -31,10 +36,9 @@
      ;; '(org-agenda-skip-scheduled-if-done t)
      ;; '(org-agenda-start-on-weekday nil)
      ;; '(org-reverse-note-order t)
-     )
-    ))
+     )))
 
-(defun org-psamim/init-org-babel ()
+(defun psamim-org/init-org-babel ()
   (use-package org-babel
     :init
     (org-babel-do-load-languages
@@ -47,24 +51,4 @@
        (latex . t)
        (gnuplot . t)
        (sql . t)
-       (sh . t)
-       ))
-    ))
-
-(defun org-psamim/init-reftex ()
-  (add-hook 'org-mode-hook 'turn-on-reftex)
-  (spacemacs/declare-prefix-for-mode 'org-mode "mr"  "reftex")
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "rc"    'reftex-citation
-    "rg"    'reftex-grep-document
-    "ri"    'reftex-index-selection-or-word
-    "rI"    'reftex-display-index
-    "r TAB" 'reftex-index
-    "rl"    'reftex-label
-    "rp"    'reftex-index-phrase-selection-or-word
-    "rP"    'reftex-index-visit-phrases-buffer
-    "rr"    'reftex-reference
-    "rs"    'reftex-search-document
-    "rt"    'reftex-toc
-    "rT"    'reftex-toc-recenter
-    "rv"    'reftex-view-crossref))
+       (sh . t)))))
