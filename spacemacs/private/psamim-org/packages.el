@@ -13,13 +13,17 @@
           org-confirm-babel-evaluate nil
           org-agenda-files (quote ("~/Notes/todo.org"))
           org-directory "~/Notes"
-          org-archive-location "~/Notes/archive/todo.org::"
-    )
+          org-archive-location "~/Notes/archive/todo.org::")
 
-    (add-hook 'org-mode-hook (lambda ()
-                               (visual-line-mode)
-                               (spacemacs|diminish visual-line-mode nil nil)
-                               (setq bidi-paragraph-direction 'nil)))
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (setq buffer-face-mode-face '(:family "DejaVu Sans" :height 120))
+                (buffer-face-mode)
+                (spacemacs|diminish buffer-face-mode nil nil)
+                (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+                (visual-line-mode)
+                (spacemacs|diminish visual-line-mode nil nil)
+                (setq bidi-paragraph-direction 'nil)))
 
     (custom-set-variables
      ;; Open PDFs after Export with Zathura
@@ -40,7 +44,7 @@
 
 (defun psamim-org/init-org-babel ()
   (use-package org-babel
-    :init
+    :config
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((R . t)
