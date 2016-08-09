@@ -19,6 +19,7 @@ nmap <A-h> :back<CR>
 nmap <A-j> :tabnext<CR>
 nmap <A-k> :tabprevious<CR>
 nmap <A-n> :tabopen<CR>
+nmap m :bmarks!
 noremap j 4j
 noremap k 4k
 " Switch between alternate tabs
