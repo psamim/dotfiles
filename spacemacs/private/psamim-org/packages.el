@@ -17,10 +17,11 @@
 
     (add-hook 'org-mode-hook
               (lambda ()
-                (setq buffer-face-mode-face '(:family "DejaVu Sans" :height 120))
-                (buffer-face-mode)
-                (spacemacs|diminish buffer-face-mode nil nil)
-                (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+                ;; (setq buffer-face-mode-face '(:family "DejaVu Sans" :height 120))
+                ;; (buffer-face-mode)
+                ;; (spacemacs|diminish buffer-face-mode nil nil)
+                (linum-relative-mode -1)
+                ;; (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
                 (visual-line-mode)
                 (spacemacs|diminish visual-line-mode nil nil)
                 (setq bidi-paragraph-direction 'nil)))
