@@ -29,9 +29,6 @@ syndaemon -t -k -i 1 &
 # Hide mouse when not used
 unclutter &
 
-#enable dunst for notify-send
-dunst &
-
 # Compton window compositor
 /usr/bin/compton -b --config ~/.compton &
 

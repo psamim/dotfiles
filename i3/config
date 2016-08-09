@@ -2,8 +2,10 @@
 
 # Startup
 # exec tint2 &
-exec xfce4-panel --disable-wm-check &
+exec lxqt-notificationd &
 exec tilda &
+exec xfce4-panel --disable-wm-check &
+exec blueman-applet &
 exec --no-startup-id nm-applet &
 exec redshift-gtk &
 # exec clipit &
@@ -74,13 +76,14 @@ set $w1 
 set $w2 
 set $w3 
 set $w4 ♬
+set $w5 
 
 # switch to workspace
 bindsym F1 workspace $w1
 bindsym F2 workspace $w2
 bindsym F3 workspace $w3
 bindsym F4 workspace $w4
-bindsym $mod+5 workspace 5
+bindsym $mod+5 workspace $w5
 
 # Jump to clients marked 1-5
 bindsym $mod+1 [con_mark="mark1"] focus
@@ -93,7 +96,7 @@ bindsym $mod+Shift+1 move container to workspace $w1
 bindsym $mod+Shift+2 move container to workspace $w2
 bindsym $mod+Shift+3 move container to workspace $w3
 bindsym $mod+Shift+4 move container to workspace $w4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+5 move container to workspace $w5
 
 # Move between workspaces
 bindsym $mod+h workspace prev
