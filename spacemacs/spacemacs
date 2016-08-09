@@ -27,7 +27,6 @@ values."
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t)
-     better-defaults
      emacs-lisp
      javascript
      ;; clojure
@@ -51,10 +50,12 @@ values."
      dockerfile
      latex
      evil-commentary
+     evil-snipe
      spell-checking
      syntax-checking
      version-control
      ranger
+     emoji
 
      ;; Private:
      semicolon
@@ -98,7 +99,7 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -131,18 +132,13 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         monokai
-                         zenburn)
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -201,7 +197,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-micro-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -241,7 +237,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -251,7 +247,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -284,7 +280,49 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (spaceline-toggle-minor-modes-off)
+
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js2-highlight-external-variables t)
+ '(js2-mode-show-parse-errors nil)
+ '(js2-strict-trailing-comma-warning nil)
+ '(org-agenda-files (quote ("~/Notes/todo.org")))
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . "firefox %s")
+     ("\\.pdf\\'" . "evince %s"))))
+ '(safe-local-variable-values
+   (quote
+    ((zotelo-auto-update)
+     (zotelo-default-translator . Better\ BibLaTeX)
+     (reftex-default-bibliography "./refs.bib")
+     (zotero-collection .
+                        #("10" 0 2
+                          (name "redhat")))
+     (eval org-babel-execute-buffer)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

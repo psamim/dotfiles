@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: promise
+# key: npr
+# --
+return new Promise((resolve, reject) => {
+$0
+});
