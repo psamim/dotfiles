@@ -66,4 +66,10 @@ export PATH=$PATH:$GEM_HOME/bin
 export EDITOR=emct
 alias e=$EDITOR
 eval "$(direnv hook zsh)"
+# Set GPG TTY
+export GPG_TTY=$(tty)
+
+# Refresh gpg-agent tty in case user switches into an X session
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
 # source /usr/share/nvm/init-nvm.sh

@@ -39,8 +39,5 @@ xset dpms 0 0 300
 # Automount disks
 udiskie --no-tray &
 
-# gpg-agent
-eval $(gpg-agent --daemon)
-
 xrdb -merge ~/.Xresources
 exec i3

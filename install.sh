@@ -98,3 +98,8 @@ ln -sf $PWD/tint2/tint2rc $HOME/.config/tint2/tint2rc
 echo "vimfx: Remember to change config_file_directory prop in Firefox"
 rm -rf "$HOME/.config/vimfx"
 ln -sf "$PWD/vimfx" "$HOME/.config/vimfx"
+
+# gpg
+ln -sf $PWD/pam_environment $HOME/.pam_environment
+ln -sf $PWD/gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+
