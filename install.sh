@@ -94,3 +94,7 @@ ln -sf $PWD/vlc/* $HOME/.config/vlc/
 mkdir -p "$HOME/.config/tint2/"
 ln -sf $PWD/tint2/tint2rc $HOME/.config/tint2/tint2rc
 
+# vimfx
+echo "vimfx: Remember to change config_file_directory prop in Firefox"
+rm -rf "$HOME/.config/vimfx"
+ln -sf "$PWD/vimfx" "$HOME/.config/vimfx"
