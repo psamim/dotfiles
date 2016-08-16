@@ -103,3 +103,5 @@ ln -sf "$PWD/vimfx" "$HOME/.config/vimfx"
 ln -sf $PWD/pam_environment $HOME/.pam_environment
 ln -sf $PWD/gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
+# eslint
+ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js
