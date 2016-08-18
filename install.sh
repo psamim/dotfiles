@@ -105,3 +105,13 @@ ln -sf $PWD/gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 
 # eslint
 ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js
+
+# pacman
+rm -rf $HOME/.config/pacman
+ln -sf $PWD/pacman $HOME/.config/pacman
+
+# yaourt
+rm -rf $HOME/.config/yaourt
+ln -sf $PWD/yaourt $HOME/.config/yaourt
+
+
