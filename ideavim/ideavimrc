@@ -1,0 +1,1 @@
+inoremap jk <Esc> :action EditorCompleteStatement<CR>

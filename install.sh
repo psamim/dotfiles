@@ -114,4 +114,7 @@ ln -sf $PWD/pacman $HOME/.config/pacman
 rm -rf $HOME/.config/yaourt
 ln -sf $PWD/yaourt $HOME/.config/yaourt
 
+# ideavim
+ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
+
 
