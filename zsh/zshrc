@@ -60,6 +60,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="/home/samim/.pyenv/bin:$PATH"
+export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 # export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
 # export GEM_PATH=$GEM_HOME
 export PATH=$PATH:$GEM_HOME/bin
