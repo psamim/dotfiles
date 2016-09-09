@@ -1,0 +1,22 @@
+#+TITLE: psamim-diary layer
+
+* Table of Contents                                        :TOC_4_org:noexport:
+ - [[Description][Description]]
+ - [[Install][Install]]
+ - [[Key bindings][Key bindings]]
+
+* Description
+Provide diary micro-state to move between days easily.
+
+* Install
+To use this contribution add it to your =~/.spacemacs=
+
+#+begin_src emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(psamim-diary))
+#+end_src
+
+* Key bindings
+
+| Key Binding | Description       |
+|-------------+-------------------|
+| ~<SPC> a a~ | diary micro-state |
