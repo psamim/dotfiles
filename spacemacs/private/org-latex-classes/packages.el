@@ -58,7 +58,7 @@
 \\usepackage{amssymb}
 \\usepackage{hyperref}
 \\usepackage{mathpazo}
-\\usepackage{color}
+\\usepackage{xcolor}
 \\usepackage{enumerate}
 \\definecolor{bg}{rgb}{0.95,0.95,0.95}
 \\tolerance=1000
@@ -93,7 +93,7 @@
 \\usepackage{amssymb}
 \\usepackage{hyperref}
 \\usepackage{enumerate}
-\\usepackage{color}
+\\usepackage{xcolor}
 \\definecolor{bg}{rgb}{0.95,0.95,0.95}
 \\geometry{a4paper, textwidth=6.5in, textheight=10in,
             marginparsep=7pt, marginparwidth=.6in}
@@ -132,7 +132,7 @@
 \\usepackage{amssymb}
 \\usepackage{hyperref}
 \\usepackage{mathpazo}
-\\usepackage{color}
+\\usepackage{xcolor}
 \\usepackage{enumerate}
 \\definecolor{bg}{rgb}{0.95,0.95,0.95}
 \\tolerance=1000
