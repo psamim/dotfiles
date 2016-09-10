@@ -142,9 +142,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Mode to disable all other i3 key bindings, passthrough mode
 mode "" {
-    bindsym Mod4+Escape mode "default"
+    bindsym $mod+Escape mode "default"
 }
-bindsym Mod4+Escape mode ""
+bindsym $mod+Escape mode ""
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "  "
