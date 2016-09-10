@@ -1,9 +1,38 @@
 (require 'parse-time)
 
-(setq psamim-diary-diary-directory "/home/samim/Notes/daily/")
+(setq
+ psamim-diary-diary-directory "/home/samim/Notes/daily/"
+ psamim-diary-diary-template "/home/samim/Notes/archive/template.org"
+ psamim-diary-diary-template-in-a-while "/home/samim/Notes/archive/template-in-a-while.org"
+ psamim-diary-in-a-while "5" ;; Fridays
+ psamim-diary-date-format "%Y-%m-%d")
+
+(defun psamim-diary-open-today ()
+  (interactive)
+  (let
+      ((file-name (concat
+                   psamim-diary-diary-directory
+                   (format-time-string psamim-diary-date-format)
+                   ".org"))
+       (template (if (string= (format-time-string "%w") psamim-diary-in-a-while)
+                     psamim-diary-diary-template-in-a-while
+                   psamim-diary-diary-template)))
+
+    (if (file-exists-p file-name)
+        (find-file file-name)
+      (progn
+        (copy-file template file-name)
+        (find-file file-name)
+        (beginning-of-buffer)
+        (insert (concat
+                 (format-time-string "%A") "\n"
+                 (format-time-string "%B %e, %Y") "\n"
+                 (calendar-persian-date-string) "\n"
+                 (calendar-bahai-date-string) "\n\n"))))
+    (end-of-buffer)))
 
 (defun psamim-diary-next-day-string (current-day diff)
-  (format-time-string "%Y-%m-%d"
+  (format-time-string psamim-diary-date-format
      (time-add
       (apply (function encode-time)
              `(0 0 0
@@ -52,4 +81,5 @@
   :bindings
   ("n" psamim-diary-show-next)
   ("p" psamim-diary-show-prev)
+  ("N" psamim-diary-show-prev)
   ("q" nil :exit t))
