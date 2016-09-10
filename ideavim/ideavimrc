@@ -1,1 +1,4 @@
 inoremap jk <Esc> :action EditorCompleteStatement<CR>
+map ,i :action Generate<CR>
+map ,r :action ReformatCode<CR>
+map <Space><Space> :action Generate<CR>
