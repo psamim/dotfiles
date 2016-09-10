@@ -1,0 +1,9 @@
+#!/bin/bash
+
+t=~/Notes/daily/`date +"%Y-%m-%d"`.org
+
+if [ ! -f "$t" ]; then
+    cp ~/Notes/archive/template.org $t
+fi
+
+emc $t
