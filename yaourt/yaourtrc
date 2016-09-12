@@ -7,7 +7,7 @@
 # General
 #AUTOSAVEBACKUPFILE=0
 #DEVEL=0
-#DEVELSRCDIR=""
+DEVELSRCDIR="/var/abs/local/devel/"
 #FORCE=0
 #NO_TESTDB=0
 
