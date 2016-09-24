@@ -78,6 +78,8 @@ values."
     yaml-mode
     ob-restclient
     ob-php
+    pkgbuild-mode
+    editorconfig
     systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
