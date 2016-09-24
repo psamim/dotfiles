@@ -27,6 +27,7 @@ values."
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t)
+     (colors :variables colors-enable-nyan-cat-progress-bar t)
      emacs-lisp
      javascript
      ;; clojure
