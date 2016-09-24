@@ -13,8 +13,8 @@
           org-confirm-babel-evaluate nil
           org-agenda-files (quote ("~/Notes/todo.org"))
           org-directory "~/Notes"
+          org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
           org-archive-location "~/Notes/archive/todo.org::")
-
     (add-hook 'org-mode-hook
               (lambda ()
                 ;; (setq buffer-face-mode-face '(:family "DejaVu Sans" :height 120))
