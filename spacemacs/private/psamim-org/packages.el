@@ -30,8 +30,8 @@
      ;; Open PDFs after Export with Zathura
      '(org-file-apps (quote ((auto-mode . emacs)
                              ("\\.mm\\'" . default)
-                             ("\\.x?html?\\'" . "firefox %s")
-                             ("\\.pdf\\'" . "evince %s"))))
+                             ("\\.x?html?\\'" . "xdg-open %s")
+                             ("\\.pdf\\'" . "xdg-open %s"))))
 
      '(org-agenda-files (quote ("~/Notes/todo.org")))
      ;; '(org-agenda-ndays 7)
