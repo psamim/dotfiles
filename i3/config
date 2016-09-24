@@ -8,7 +8,7 @@ exec xfce4-panel --disable-wm-check &
 exec blueman-applet &
 exec --no-startup-id nm-applet &
 exec redshift-gtk &
-# exec clipit &
+exec clipit &
 exec volumeicon &
 exec cbatticon &
 
