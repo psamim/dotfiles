@@ -48,6 +48,7 @@ alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2
 alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --conf-path=${HOME}/.aria2/down.conf"
 alias fly='sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0'
 alias o='xdg-open'
+alias xclip='xclip -selection clipboard'
 
 export JAVA_HOME=/usr/lib/jvm/default
 export PATH=$PATH:$JAVA_HOME/bin
