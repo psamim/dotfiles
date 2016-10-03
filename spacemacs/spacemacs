@@ -312,6 +312,7 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(edebug-on-error t)
+ '(js-indent-level 2)
  '(js2-highlight-external-variables t)
  '(js2-mode-show-parse-errors nil)
  '(js2-strict-trailing-comma-warning nil)
