@@ -117,4 +117,7 @@ ln -sf $PWD/yaourt $HOME/.config/yaourt
 # ideavim
 ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
 
-
+# desktop entries
+for f in $PWD/desktop-files/*.desktop; do
+    ln -sf $f $HOME/.local/share/applications/
+done
