@@ -74,12 +74,16 @@
       (setq next-file (psamim-diary-next-file (buffer-file-name) count)))
     (psamim-diary-open next-file)))
 
-(spacemacs|define-micro-state psamim-diary
-  :doc "[p] [N] previous [n] next [q] quit"
-  :evil-leader "aa"
-  :persistent t
+(spacemacs|define-transient-state psamim-diary
+  :title "Diary Transient State"
+  :doc "
+[_p_] [_N_] previous [_n_] next [_q_] quit"
   :bindings
   ("n" psamim-diary-show-next)
   ("p" psamim-diary-show-prev)
   ("N" psamim-diary-show-prev)
   ("q" nil :exit t))
+
+(spacemacs/set-leader-keys
+  "aa" 'spacemacs/psamim-diary-transient-state/body)
+
