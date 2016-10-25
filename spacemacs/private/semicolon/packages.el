@@ -1,6 +1,5 @@
 (setq semicolon-packages
       '(
-        evil
         key-chord
         ))
 
