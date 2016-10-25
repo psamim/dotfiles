@@ -7,7 +7,7 @@
   (progn
     (setq org-default-notes-file "~/Notes/notes.org"
           org-log-done t
-          org-image-actual-width '(300)
+          org-image-actual-width '(700)
           org-clock-into-drawer t
           org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
           org-export-babel-evaluate nil
