@@ -2,15 +2,17 @@
 
 # Startup
 # exec tint2 &
-exec lxqt-notificationd &
-exec tilda &
+exec xfce4-power-manager &
+exec --no-startup-id xfsettingsd --sm-client-disable &
 exec xfce4-panel --disable-wm-check &
+# Exec lxqt-notificationd &
+exec tilda &
 exec blueman-applet &
 exec --no-startup-id nm-applet &
 exec redshift-gtk &
 exec clipit &
 exec volumeicon &
-exec cbatticon &
+# exec cbatticon &
 
 set $mod Mod4
 
@@ -31,7 +33,7 @@ bindsym $mod+shift+q kill
 #bindsym $mod+d exec "dmenu_run -p '>' -i -o 0.9 -dim 0.15 -l 10 -fn 'Source Code Pro-10:normal'"
 # http://dmwit.com/yeganesh/
 # bindsym $mod+d exec "yeganesh -x -p path -- -dim 0.15 -x 183 -y 150 -w 1000 -h 70 -i -nf '#c5c8c6' -nb '#1d1f21' -sf '#1d1f21' -sb '#b4b7b4' -l 0 -fn 'Fantasque Sans Mono-16:normal' | /bin/sh"
-bindsym $mod+d exec "rofi -modi run,window -show run"
+bindsym $mod+d exec "/home/samim/.bin/rofi-background"
 
 # Change focus
 bindsym $mod+k focus left
@@ -106,13 +108,14 @@ bindsym $mod+shift+h move container to workspace prev
 
 # Assign workspaces
 assign [class="Firefox"] → $w2
+assign [class="chromium"] → $w2
 assign [class="jetbrains-studio"] → $w1
 assign [class="Pidgin"] → $w3
 assign [class="Skype"] → $w3
 assign [class="ViberPC"] → $w3
 assign [class="telegram-desktop"] → $w3
 assign [class="Vlc"] → $w4
-assign [class="Spotify"] → $w4
+assign [class="spotify"] → $w4
 assign [class="MPlayer"] → $w4
 assign [class="Rhythmbox"] → $w4
 assign [class="mpv"] → $w4
@@ -325,5 +328,7 @@ client.focused #586e75 #586e75 #f9f9f9 #268bd2
 client.focused_inactive #455057 #455057 #c7c7c7 #002b36
 client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
 client.urgent #dc322f #dc322f #f9f9f9 #dc322f
-gaps inner 8
-smart_gaps on
+gaps inner 0
+workspace $w3 gaps inner 30
+workspace $w3 gaps outer 30
+# smart_gaps on
