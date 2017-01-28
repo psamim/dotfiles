@@ -1,0 +1,8 @@
+[Desktop Entry]
+GenericName=Pass
+Terminal=false
+Name=Pass
+Exec=rofi-pass
+Type=Application
+Comment=Pass
+Categories=Accessories

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Lock
+Exec=/home/samim/.bin/lock
+Type=Application
+Icon=xfsm-hibernate
