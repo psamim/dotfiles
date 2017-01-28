@@ -3,8 +3,6 @@ KINDLE='/run/media/samim/Kindle/system/vocabulary/vocab.db'
 COLLECTION=~/Documents/Anki/User\ 1/collection.anki2
 DECK='kindle'
 
-cd /home/samim/src/anki-kindle/
-source .direnv/python-3.5.2/bin/activate
-./kindle2anki.py --kindle "$KINDLE" --collection "$COLLECTION" --deck "$DECK" --verbose
+kindle2anki --kindle "$KINDLE" --collection "$COLLECTION" --deck "$DECK" --verbose
 
 
