@@ -15,17 +15,15 @@
           org-agenda-files (quote ("~/Notes/todo.org"))
           org-directory "~/Notes"
           org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
-          org-archive-location "~/Notes/archive/todo.org::")
+          org-archive-location "~/Notes/archive/todo.org::"
+          bidi-paragraph-direction t)
+
     (add-hook 'org-mode-hook
               (lambda ()
-                ;; (setq buffer-face-mode-face '(:family "DejaVu Sans" :height 120))
-                ;; (buffer-face-mode)
-                ;; (spacemacs|diminish buffer-face-mode nil nil)
-                (linum-relative-mode -1)
-                ;; (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
                 (visual-line-mode)
-                (spacemacs|diminish visual-line-mode nil nil)
-                (setq bidi-paragraph-direction 'nil)))
+                (spacemacs/toggle-vi-tilde-fringe-off)
+                (spacemacs/toggle-line-numbers-off)
+                (setq bidi-paragraph-direction t)))
 
     (custom-set-variables
      ;; Open PDFs after Export with Zathura
