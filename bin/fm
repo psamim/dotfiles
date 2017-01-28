@@ -2,4 +2,4 @@
 
 # Script to run my preferred file manager
 
-exec thunar "$@"
+exec dolphin "$@" &
