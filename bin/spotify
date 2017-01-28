@@ -1,3 +1,5 @@
 #!/bin/sh
 /usr/bin/blockify &
-LD_PRELOAD=libcurl.so.3 /usr/share/spotify/spotify --force-device-scale-factor=1.0000001 "$@"
+# LD_PRELOAD=libcurl.so.3 /usr/share/spotify/spotify --force-device-scale-factor=1.0000001 "$@"
+/usr/bin/spotify "$@"
+
