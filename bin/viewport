@@ -1,0 +1,14 @@
+#!/bin/python
+
+from subprocess import check_output
+
+command = "xprop -root _NET_DESKTOP_VIEWPORT | grep -oh '[0-9]\{4\}'"
+
+try:
+    output = check_output(command, shell=True)
+except Exception:
+    output = 0
+
+viewport = int(int(output) / 1920)
+name = ['', '', '', '♬', '']
+print(" " + name[viewport] + " ")
