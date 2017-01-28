@@ -35,4 +35,3 @@ map('<a-k>', 'tab_select_previous');
 map('<a-tab>', 'tab_select_most_recent');
 map('<a-h>', 'history_back');
 map('<a-l>', 'history_forward');
-map('d', 'tab_close');
