@@ -1,0 +1,6 @@
+(defun psamim-write-room ()
+  (interactive)
+  (writeroom-mode)
+  (visual-line-mode)
+  (spacemacs/toggle-vi-tilde-fringe-off)
+  (spacemacs/toggle-line-numbers-off))
