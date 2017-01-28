@@ -69,14 +69,6 @@ ln -sf "$PWD/dunst" "$HOME/.config/dunst"
 rm -rf "$HOME/.password-store"
 ln -sf "$PWD/password-store" "$HOME/.password-store"
 
-# termite
-# rm -rf "$HOME/.config/termite"
-# ln -sf "$PWD/termite" "$HOME/.config/termite"
-
-# gtk-3.0
-mkdir -p "$HOME/.config/gtk-3.0"
-ln -sf $PWD/gtk-3.0/* $HOME/.config/gtk-3.0/
-
 # systemd
 rm -rf "$HOME/.config/systemd"
 mkdir -p "$HOME/.config/systemd/"
@@ -85,10 +77,6 @@ ln -sf "$PWD/systemd" "$HOME/.config/systemd/user"
 # arbtt
 mkdir -p "$HOME/.arbtt/"
 ln -sf "$PWD/arbtt/categorize.cfg" "$HOME/.arbtt/categorize.cfg"
-
-# vlc
-mkdir -p "$HOME/.config/vlc/"
-ln -sf $PWD/vlc/* $HOME/.config/vlc/
 
 # tint2
 mkdir -p "$HOME/.config/tint2/"
