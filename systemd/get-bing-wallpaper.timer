@@ -2,7 +2,8 @@
 Description=Get bing wallpaper once a day
 
 [Timer]
-OnCalendar=daily
+OnBootSec=15min
+OnUnitActiveSec=1d
 Persistent=true  
 Unit=get-bing-wallpaper.service
 
