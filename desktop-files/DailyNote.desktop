@@ -1,8 +1,14 @@
-#!/usr/bin/env xdg-open
 [Desktop Entry]
-Comment=
-Terminal=false
-Name=Daily Note
-Exec=/home/samim/.bin/daily-note
-Type=Application
 Categories=Accessories
+Comment=
+Exec=/home/samim/.bin/daily-note
+Icon=knotes
+Name=Daily Note
+NoDisplay=false
+Path[$e]=
+StartupNotify=true
+Terminal=0
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

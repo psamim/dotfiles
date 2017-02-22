@@ -1,8 +1,15 @@
 [Desktop Entry]
-GenericName=Pass
-Terminal=false
-Name=Pass
-Exec=rofi-pass
-Type=Application
-Comment=Pass
 Categories=Accessories
+Comment=Pass
+Exec=rofi-pass
+GenericName=Pass
+Icon=keepass
+Name=Pass
+NoDisplay=false
+Path[$e]=
+StartupNotify=true
+Terminal=0
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
