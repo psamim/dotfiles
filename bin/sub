@@ -1,0 +1,6 @@
+#!/bin/zsh
+# -*- mode: sh; -*-
+
+CURRENT_DIR=`pwd`
+cd ~/src/subliminal/
+./.direnv/python-3.6.0/bin/subliminal download -l en --directory "$CURRENT_DIR" "$@"
