@@ -1,4 +1,2 @@
-SSH_AGENT_PID	DEFAULT=
-SSH_AUTH_SOCK	DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 PATH DEFAULT=${PATH}:${HOME}/.bin
 SSH_ASKPASS=/usr/bin/ksshaskpass
