@@ -1,0 +1,7 @@
+#!/bin/bash
+# -*- mode: sh; -*-
+
+telegram-cli --json -P 9009 &
+PID=$!
+~/src/telegram-history-dump/telegram-history-dump.rb -c ~/Backup/tg/config.yaml
+kill -KILL $PID
