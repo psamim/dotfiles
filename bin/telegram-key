@@ -1,22 +1,18 @@
 #!/bin/bash
 
+# Usage: bind alt+j to "telegram-key alt+j"
+
 CURRENT_WINDOW_ID=$(xdotool getwindowfocus)
 TELEGRAM_WINDOW_ID=$(xdotool search --class telegramdesktop | tail -n 1)
 
 if [ $TELEGRAM_WINDOW_ID -eq $CURRENT_WINDOW_ID ]; then
-    if [ $1 == "alt-j" ]; then
+    if [ $1 == "alt+j" ]; then
         xdotool windowactivate $TELEGRAM_WINDOW_ID key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Tab &> ~/ERROR
     fi
 
-    if [ $1 == "alt-k" ]; then
+    if [ $1 == "alt+k" ]; then
         xdotool windowactivate $TELEGRAM_WINDOW_ID key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Shift+Tab &> ~/ERROR
     fi
 else
-    if [ $1 == "alt-j" ]; then
-        xdotool key --clearmodifiers --window $CURRENT_WINDOW_ID Alt+j &> ~/ERROR
-    fi
-
-    if [ $1 == "alt-k" ]; then
-        xdotool key --clearmodifiers --window $CURRENT_WINDOW_ID Alt+k &> ~/ERROR
-    fi
+        xdotool key --clearmodifiers --window $CURRENT_WINDOW_ID $1 &> ~/ERROR
 fi
