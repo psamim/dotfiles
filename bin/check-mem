@@ -1,0 +1,19 @@
+#!/bin/bash
+
+total_mem=$(free -m |awk '/^Mem:/{print $3}')
+threshold=6000
+
+while :
+do
+    echo $total_mem
+
+    if [ $total_mem -gt $threshold ]
+        then
+        notify-send "Low memory!!"
+    fi
+
+    sleep 5
+
+done
+
+exit
