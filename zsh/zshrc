@@ -25,6 +25,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
     zgen load zsh-users/zsh-completions src
+    zgen load zsh-users/zsh-autosuggestions
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -36,13 +37,24 @@ fi
 # Zaw
 zstyle ':filter-select' max-lines 4 # use $LINES - 4 for filter-select
 zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
+
 bindkey '^R' zaw-history
 bindkey -M filterselect '^R' down-line-or-history
 bindkey -M filterselect '^S' up-line-or-history
 bindkey -M filterselect '^E' accept-search
 bindkey '^P' zaw-process
 bindkey '^F' zaw-open-file
+bindkey '^[^M' autosuggest-execute
 
+export JAVA_HOME=/usr/lib/jvm/default
+export DEFAULT_USER="samim"
+export GOPATH="$HOME/.go"
+export ANDROID_HOME="/opt/android-sdk"
+export EDITOR=emct
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+
+alias e=$EDITOR
 alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
 alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
 alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
@@ -51,23 +63,12 @@ alias fly='sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.co
 alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
 
-export JAVA_HOME=/usr/lib/jvm/default
+export PATH=$PATH:$HOME/.cabal/bin
+export PATH=$HOME/.bin:$PATH
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export PATH=$PATH:$JAVA_HOME/bin
-export DEFAULT_USER="samim"
-export GOPATH="$HOME/.go"
-export ANDROID_HOME="/opt/android-sdk/"
-export EDITOR=emct
-export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-alias e=$EDITOR
-
-# PATH
-export PATH="$HOME/.cabal/bin:$PATH"
-export PATH="$HOME/.bin:$PATH"
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # export PATH="/home/samim/.pyenv/bin:$PATH"
-export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 
 eval "$(direnv hook zsh)"
 eval $(keychain --eval --quiet)
