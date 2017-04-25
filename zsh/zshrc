@@ -18,14 +18,21 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/gradle
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/docker
+    zgen oh-my-zsh plugins/fasd
+    zgen oh-my-zsh plugins/nmap
+    zgen oh-my-zsh plugins/last-working-dir
+    zgen oh-my-zsh plugins/themes
+    zgen oh-my-zsh plugins/mosh
+    zgen oh-my-zsh plugins/cp
     # zgen oh-my-zsh plugins/gpg-agent
-    zgen oh-my-zsh plugins/tmux
+    # zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/history-substring-search
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
     zgen load zsh-users/zsh-completions src
     zgen load zsh-users/zsh-autosuggestions
+    zgen load changyuheng/zsh-interactive-cd
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -53,6 +60,7 @@ export ANDROID_HOME="/opt/android-sdk"
 export EDITOR=emct
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+export PYENV_ROOT="$HOME/.pyenv"
 
 alias e=$EDITOR
 alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
@@ -62,13 +70,16 @@ alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --
 alias fly='sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0'
 alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
+alias j='fasd_cd -d'
+alias jj='fasd_cd -d -i'
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export PATH=$PATH:$JAVA_HOME/bin
-# export PATH="/home/samim/.pyenv/bin:$PATH"
 
 eval "$(direnv hook zsh)"
 eval $(keychain --eval --quiet)
+
+

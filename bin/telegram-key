@@ -7,12 +7,12 @@ TELEGRAM_WINDOW_ID=$(xdotool search --class telegramdesktop | tail -n 1)
 
 if [ $TELEGRAM_WINDOW_ID -eq $CURRENT_WINDOW_ID ]; then
     if [ $1 == "alt+j" ]; then
-        xdotool key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Tab &> ~/ERROR
+        xdotool key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Tab
     fi
 
     if [ $1 == "alt+k" ]; then
-        xdotool key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Shift+Tab &> ~/ERROR
+        xdotool key --clearmodifiers --window $TELEGRAM_WINDOW_ID Ctrl+Shift+Tab
     fi
 else
-        xdotool key --clearmodifiers --window $CURRENT_WINDOW_ID $1 &> ~/ERROR
+        xdotool key --clearmodifiers --window $CURRENT_WINDOW_ID $1
 fi

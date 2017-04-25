@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Decrypt
+# gpg -d ~/Downloads/notes-backup-09-19-2016-10-51-55.tar.gz.gpg  | tar xz
+
+function send_to_drive() {
+    # rclone --stats=10s -v delete backup:backup
+    rclone copy --stats=10s -v --no-update-modtime --checksum $1 backup:
+}
+
+function send_to_server() {
+    rsync -rvz --progress  $1 cyber6:~
+}
+
+function make_tar() {
+    prev_dir=$PWD
+    cd $1
+    tar czf - . | gpg -e -r psamim@gmail.com > $2
+    cd $prev_dir
+}
+
+function backup() {
+    BACKUP_PLACE=$1
+    BACKUP_FILE=${2:-/tmp/backup}
+    make_tar $BACKUP_PLACE $BACKUP_FILE
+    send_to_drive $BACKUP_FILE
+    send_to_server $BACKUP_FILE
+    rm -f $BACKUP_FILE
+}
+
+/home/samim/.bin/backup-telegram
+backup /home/samim/Backup

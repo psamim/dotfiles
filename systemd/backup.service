@@ -1,0 +1,6 @@
+[Unit]
+Description=Backup
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/home/samim/.bin/backup-and-upload'

@@ -1,0 +1,7 @@
+#!/bin/bash
+# -*- mode: sh; -*-
+
+BASEDIR="/home/samim/Backup/tg-auth"
+rm -rf ~/.telegram-cli
+ln -sf "${BASEDIR}/${1}" ~/.telegram-cli
+ls -alh ~/.telegram-cli

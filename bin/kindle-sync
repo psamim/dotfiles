@@ -1,8 +1,11 @@
 #!/bin/bash
-KINDLE='/run/media/samim/Kindle/system/vocabulary/vocab.db'
+# KINDLE='~/Backup/vocab.db'
+# scp root@192.168.1.3:/mnt/us/system/vocabulary/vocab.db ./Backup
+KINDLE='/home/samim/Documents/vocab.db'
 COLLECTION=~/Documents/Anki/User\ 1/collection.anki2
-DECK='kindle'
+DECK='Words'
 
-kindle2anki --kindle "$KINDLE" --collection "$COLLECTION" --deck "$DECK" --verbose
+cd ~/workspace/kindle2anki/
+./kindle2anki.py --kindle "$KINDLE" --collection "$COLLECTION" --deck "$DECK" --clipboard
 
 

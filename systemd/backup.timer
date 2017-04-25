@@ -1,0 +1,10 @@
+[Unit]
+Description=Backup
+
+[Timer]
+Persistent=true  
+OnBootSec=15min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=default.target
