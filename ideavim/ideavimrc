@@ -1,4 +1,24 @@
+" https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+nnoremap <Space>d :action CloseContent<CR>
+nnoremap <Space>j :action RecentFiles<CR>
+nnoremap <Space>k :action FileStructurePopup<CR>
 inoremap jj <Esc> :action EditorCompleteStatement<CR>
-map ,i :action Generate<CR>
-map ,r :action ReformatCode<CR>
-map <Space><Space> :action Generate<CR>
+map ,f :action ReformatCode<CR>
+map ,r :action Refactorings.QuickListPopupAction<CR>
+map ,g :action Generate<CR>
+nnoremap <Space><Space> :action SearchEverywhere<CR>
+
+" Find
+" nnoremap / :action Find<CR>
+" nnoremap n :action FindNext<CR>
+" nnoremap N :action FindPrevious<CR>
+:set ignorecase smartcase
+
+" Reload .ideavimrc
+nnoremap <Space>rr :source ~/.ideavimrc<CR>
+
+" nnoremap U :action $Redo<CR>
+" nnoremap ; :action AceJumpAction<CR>
+" nnoremap <Space>o :action GotoClass<CR>
+" nnoremap <Space>O :action GotoFile<CR>
+" nnoremap <Space>h :action QuickJavaDoc<CR>
