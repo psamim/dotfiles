@@ -1,5 +1,4 @@
 #!/bin/sh
 /usr/bin/blockify &
-# LD_PRELOAD=libcurl.so.3 /usr/share/spotify/spotify --force-device-scale-factor=1.0000001 "$@"
-/usr/bin/spotify "$@"
-
+export LD_PRELOAD="libcrypto-compat.so.1.0.0 libssl-compat.so.1.0.0 libcurl-openssl-1.0.so"
+/usr/share/spotify/spotify "$@"

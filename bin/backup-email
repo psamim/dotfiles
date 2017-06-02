@@ -1,0 +1,5 @@
+source gmvalut/gmvault-1.7-beta/bin/activate
+gmvault sync p.samim@gmail.com --resume
+tar cfvj ~/email.tar.bz ~/gmvault-db/
+gpg -o ~/email.tar.bz.gpg --symmetric ~/email.tar.bz
+rclone copy --stats=10s -v ~/email.tar.bz.gpg psamim:

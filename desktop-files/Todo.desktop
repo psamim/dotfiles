@@ -1,8 +1,9 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 GenericName=Todo
 Terminal=false
 Name=Todo
-Exec=/home/samim/.bin/todo
+Exec=/home/samim/.bin/todo-org
 Type=Application
 Icon=emblem-ubuntuone-synchronized
 Comment=Todo
