@@ -72,6 +72,7 @@ alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
 alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
+alias tmux='direnv exec / tmux'
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH
