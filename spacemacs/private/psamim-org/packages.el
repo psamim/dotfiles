@@ -31,10 +31,14 @@
                              ("\\.mm\\'" . default)
                              ("\\.x?html?\\'" . "xdg-open %s")
                              ("\\.pdf\\'" . "xdg-open %s"))))
-
+     '(org-refile-targets '((org-agenda-files :maxlevel . 1)))
+     '(org-outline-path-complete-in-steps nil)         ; Refile in a single go
+     '(org-refile-use-outline-path t)                  ; Show full paths for refiling
      '(org-agenda-files (quote ("~/Notes/todo.org")))
-     ;; '(org-agenda-ndays 7)
-     ;; '(org-deadline-warning-days 14)
+     '(org-agenda-custom-commands
+       (quote (("u" alltodo "" ((org-agenda-overriding-header "Next Actions"))))))
+     '(org-agenda-ndays 7)
+     '(org-deadline-warning-days 5)
      ;; '(org-agenda-show-all-dates t)
      ;; '(org-agenda-skip-deadline-if-done t)
      ;; '(org-agenda-skip-scheduled-if-done t)
