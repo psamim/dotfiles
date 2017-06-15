@@ -16,6 +16,7 @@
           org-directory "~/Notes"
           org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
           org-archive-location "~/Notes/archive/todo.org::"
+          org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
           bidi-paragraph-direction t)
 
     (add-hook 'org-mode-hook
