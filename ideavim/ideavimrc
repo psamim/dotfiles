@@ -1,21 +1,42 @@
 " https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
-nnoremap <Space>d :action CloseContent<CR>
-nnoremap <Space>j :action RecentFiles<CR>
-nnoremap <Space>k :action FileStructurePopup<CR>
+
 inoremap jj <Esc> :action EditorCompleteStatement<CR>
-map ,f :action ReformatCode<CR>
-map ,r :action Refactorings.QuickListPopupAction<CR>
-map ,g :action Generate<CR>
+
+nnoremap <Space>j :action Switcher<CR>
+nnoremap <Space>k :action FileStructurePopup<CR>
 nnoremap <Space><Space> :action SearchEverywhere<CR>
+
+nnoremap <Space>pp :action ManageRecentProjects<CR>
+nnoremap <Space>pr :action Run<cr>
+nnoremap <Space>pd :action Debug<cr>
+nnoremap <Space>pn :action WelcomeScreen.OpenProject<CR>
+
+" nnoremap <Space>gs :action ChangesView.Commit<CR>
+nnoremap <Space>gs :action Vcs.QuickListPopupAction<CR>
+
+nnoremap <Space>en :action GotoNextError<CR>
+nnoremap <Space>ep :action GotoPreviousError<CR>
+
+nnoremap <Space>wh :action HideAllWindows<CR>
+
+nnoremap ,f :action ReformatCode<CR>
+nnoremap ,r :action Refactorings.QuickListPopupAction<CR>
+nnoremap ,g :action Generate<CR>
 
 " Find
 " nnoremap / :action Find<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
-:set ignorecase smartcase
+set ignorecase smartcase
+set hlsearch
 
 " Reload .ideavimrc
 nnoremap <Space>rr :source ~/.ideavimrc<CR>
+
+" built-in navigation to navigated items works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+" JumpToLastChange JumpToNextChange
 
 " nnoremap U :action $Redo<CR>
 " nnoremap ; :action AceJumpAction<CR>
