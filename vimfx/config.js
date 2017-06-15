@@ -1,6 +1,7 @@
 /* global vimfx */
 
 vimfx.set('hint_chars', 'asdfjkl');
+vimfx.set('ignore_keyboard_layout', true);
 
 vimfx.addKeyOverrides(
   [ (location) => location.host === 'www.facebook.com',
@@ -30,8 +31,12 @@ function disable_cmd ( cmd )	{
   'reload_all',
 ].map(disable_cmd);
 
-map('<a-j>', 'tab_select_next');
-map('<a-k>', 'tab_select_previous');
+map('<a-l>', 'tab_select_next');
+map('<a-h>', 'tab_select_previous');
 map('<a-tab>', 'tab_select_most_recent');
-map('<a-h>', 'history_back');
-map('<a-l>', 'history_forward');
+map('<c-i>', 'history_back');
+map('<c-o>', 'history_forward');
+map('d', 'tab_close');
+map('u', 'tab_restore');
+map('<c-d>','scroll_half_page_down');
+map('<c-u>','scroll_half_page_up');
