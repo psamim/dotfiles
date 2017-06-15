@@ -5,6 +5,7 @@
 [core]
   editor = emct
 	excludesfile = ~/.gitignore
+	autocrlf = input
 [alias]
   st = status
 [push]
