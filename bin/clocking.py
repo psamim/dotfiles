@@ -7,6 +7,7 @@ import os
 tomato = 'https://emojipedia-us.s3.amazonaws.com/cache/bc/62/bc6271e8d5db5a36ff98d95b390a50b2.png'
 clock_off = 'https://emojipedia-us.s3.amazonaws.com/cache/de/50/de50e49fa32a5ddd0f1e104f8311a1d7.png'
 clock_on = 'https://emojipedia-us.s3.amazonaws.com/cache/67/59/6759cc24da158731982ec16fc0790885.png'
+stopwatch = 'https://emojipedia-us.s3.amazonaws.com/cache/50/5f/505f468020b1b24068617dba4d2cb267.png'
 
 
 def run_elisp(elisp):
@@ -30,6 +31,8 @@ def effort():
     """)
     if s is not '':
         return '/' + s
+
+    return ''
 
 
 def clock_time():
@@ -76,13 +79,13 @@ def current_pomodoro():
     (if (org-pomodoro-active-p) (org-pomodoro-format-seconds))
     """)
     if s is not '':
-        return "(<img src='{}' width='16' height='16'/> {})".format(tomato, s)
+        return "(<img src='{}' width='18' height='18'/> {})".format(tomato, s)
 
     return ''
 
 
 def icon(color):
-    icon = "<font color='{}' face='FontAwesome'></font>".format(color)
+    icon = "<img height='18'  width='18' src='{}' />".format(stopwatch)
     return icon
 
 

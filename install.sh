@@ -72,7 +72,7 @@ ln -sf "$PWD/password-store" "$HOME/.password-store"
 # systemd
 rm -rf "$HOME/.config/systemd"
 mkdir -p "$HOME/.config/systemd/"
-ln -sf "$PWD/systemd" "$HOME/.config/systemd/user"
+cp -r "$PWD/systemd" "$HOME/.config/systemd/user"
 
 # arbtt
 mkdir -p "$HOME/.arbtt/"
