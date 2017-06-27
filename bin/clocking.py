@@ -113,5 +113,5 @@ if __name__ == '__main__':
             print("---")
             print("  Clock out | bash='{} cancel' onclick=bash".format(this_file))
         else:
-            print("{}| bash='{} goto' onclick=bash"
-                  .format(icon('#f3f3f3'), this_file))
+            # print("{}| bash='{} goto' onclick=bash".format(icon('#f3f3f3'), this_file))
+            print("‌")

@@ -17,6 +17,7 @@ def run(command):
 
 run("wget -qO {} http://p.hiweb.ir --save-cookies={} --keep-session-cookies".format(TMP_FILE, COOKIE_FILE))
 remain = run("cat {} | grep -Poh '<tr.*?</tr>' | grep  'مگابایت' | grep -o '[0-9]*'".format(TMP_FILE))
+remain = round(float(remain) / 1000, 2)
 service_days = run("cat {} | grep -Poh '<tr.*?</tr>' | grep 'روزهای باقیمانده'| grep -o '[0-9]*'".format(TMP_FILE))
 service_days = int(service_days)
 run("wget -qO {} http://panel.hiweb.ir/xhr/usl.php\?user\=551402\&action\=load_usl --load-cookies={}".format(TMP_FILE, COOKIE_FILE))
@@ -28,9 +29,9 @@ credit_days = delta.days
 days = min(credit_days, service_days)
 
 if days >= 0 and days < 3:
-    print("HiWeb: {} GB <font color='red'>in {} days</font>".format(float(remain) / 1000, days))
+    print("🌐 {} GB <font color='red'>in {} days</font>".format(remain, days))
 else:
-    print("HiWeb: {} GB".format(float(remain) / 1000))
+    print("🌐 {} GB".format(remain))
 
 print("---")
 print("In {} days (service)".format(service_days))
