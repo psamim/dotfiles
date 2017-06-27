@@ -16,7 +16,7 @@ nnoremap <Space>gs :action Vcs.QuickListPopupAction<CR>
 
 nnoremap <Space>en :action GotoNextError<CR>
 nnoremap <Space>ep :action GotoPreviousError<CR>
-
+nnoremap <Space>d :action SelectInProjectView<CR>
 nnoremap <Space>wh :action HideAllWindows<CR>
 
 nnoremap ,f :action ReformatCode<CR>
