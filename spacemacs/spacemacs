@@ -42,7 +42,11 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      ;; markdown
-     org
+     (org :variables
+          org-want-todo-bindings t
+          org-enable-org-journal-support t
+          org-journal-dir "~/Notes/journal/"
+          org-enable-reveal-js-support t)
      python
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -55,6 +59,10 @@ This function should only modify configuration layer settings."
      javascript
      ;; private
      psamim-defaults
+     ;; psamim-diary
+     psamim-org
+     org-latex-classes
+     semicolon
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -63,6 +71,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(vimrc-mode
      writeroom-mode
+     centered-window-mode
      groovy-mode
      oauth2
      super-save
@@ -367,9 +376,36 @@ before packages are loaded."
 
   (spacemacs|diminish super-save-mode nil)
   ;; (keychain-refresh-environment)
-  ;; (setq deft-directory "~/Notes")
-  ;; (setq deft-recursive t)
   (super-save-mode +1)
+
+  (defun get-string-from-file (filePath)
+    "Return filePath's file content."
+    (with-temp-buffer
+      (insert-file-contents filePath)
+      (buffer-string)))
+
+  (setq
+   psamim-diary-in-a-while "5" ;; Fridays
+   psamim-diary-diary-template "/home/samim/Notes/archive/template.org"
+   psamim-diary-diary-template-in-a-while "/home/samim/Notes/archive/template-in-a-while.org")
+
+  (defun psamim-journal-prefix()
+    (let
+        ((template
+          (if (string= (format-time-string "%w") psamim-diary-in-a-while)
+              psamim-diary-diary-template-in-a-while
+            psamim-diary-diary-template)))
+      (concat
+       "* "
+       (format-time-string "%B %e, %Y") "\n"
+       (format-time-string "%A") "\n"
+       (calendar-persian-date-string) "\n"
+       (calendar-bahai-date-string) "\n\n"
+       (get-string-from-file template))))
+
+  (custom-set-variables
+   '(org-journal-prefix-function 'psamim-journal-prefix))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -384,9 +420,25 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-custom-commands
+   (quote
+    (("u" alltodo ""
+      ((org-agenda-overriding-header "Next Actions"))))))
+ '(org-agenda-files (quote ("~/Notes/todo.org")))
+ '(org-agenda-ndays 7)
+ '(org-deadline-warning-days 5)
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . "xdg-open %s")
+     ("\\.pdf\\'" . "xdg-open %s"))))
+ '(org-outline-path-complete-in-steps nil)
+ '(org-refile-targets (quote ((org-agenda-files :maxlevel . 1))))
+ '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (yapfify yaml-mode writeroom-mode visual-fill-column web-mode web-beautify vimrc-mode tagedit super-save smeargle slim-mode scss-mode sass-mode ranger pyvenv pytest pyenv-mode py-isort pug-mode pkgbuild-mode pip-requirements orgit org-projectile org-present org-pomodoro alert log4e gntp org-download org-brain ob-restclient restclient ob-php oauth2 magit-gitflow livid-mode skewer-mode live-py-mode less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc impatient-mode simple-httpd hy-mode htmlize helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode groovy-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-org evil-magit magit magit-popup git-commit with-editor emmet-mode diff-hl cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda company coffee-mode browse-at-remote auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav editorconfig dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async org-plus-contrib evil-unimpaired f s dash))))
+    (ox-reveal org-journal key-chord company-flow centered-window-mode yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit symon super-save string-inflection spaceline smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pip-requirements persp-mode pcre2el password-generator paradox orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word cython-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
