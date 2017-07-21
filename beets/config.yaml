@@ -1,0 +1,5 @@
+directory: /media/hdd/Music/library
+library: ~/.config/beets/library.blb
+import:
+    move: yes
+plugins: scrub play fetchart lastgenre thumbnails

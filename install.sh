@@ -74,6 +74,9 @@ rm -rf "$HOME/.config/systemd"
 mkdir -p "$HOME/.config/systemd/"
 cp -r "$PWD/systemd" "$HOME/.config/systemd/user"
 
+# beets
+cp -r "$PWD/beets/config.yaml" "$HOME/.config/beets/config.yaml"
+
 # arbtt
 mkdir -p "$HOME/.arbtt/"
 ln -sf "$PWD/arbtt/categorize.cfg" "$HOME/.arbtt/categorize.cfg"
