@@ -68,7 +68,13 @@
 \\linespread{1.1}
 \\BeforeBeginEnvironment{minted}{\\vspace{3mm}}
 \\AfterEndEnvironment{minted}{\\vspace{3mm}}
-\\hypersetup{pdfborder=0 0 0}"
+\\hypersetup{pdfborder=0 0 0}
+\\usepackage{xepersian}
+\\settextfont{XB Yas}
+\\setmainfont[Script=Arabic,Numbers=Lining]{XB Yas}
+\\usepackage{eukdate}
+\\renewcommand{\\mkbibbrackets}[1]{]#1[}
+\\setLTR"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -83,7 +89,7 @@
 \\usepackage{graphicx}
 \\usepackage{geometry}
 \\usepackage{float}
-\\usepackage{wrapfig}
+
 \\usepackage{rotating}
 \\usepackage[normalem]{ulem}
 \\usepackage{amsmath}
