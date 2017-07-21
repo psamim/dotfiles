@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+#name : arr
+#key : arr
+# --
+$1 = ($2) => {
+   $0
+};
