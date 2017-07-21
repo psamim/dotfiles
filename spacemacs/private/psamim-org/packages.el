@@ -9,6 +9,10 @@
           org-log-done t
           org-image-actual-width '(700)
           org-clock-into-drawer t
+          org-clock-persist t
+          org-columns-default-format "%60ITEM(Task) %20TODO %10Effort(Effort){:} %10CLOCKSUM"
+          org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+                                        ("STYLE_ALL" . "habit")))
           org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
           org-export-babel-evaluate nil
           org-confirm-babel-evaluate nil
@@ -18,6 +22,12 @@
           org-archive-location "~/Notes/archive/todo.org::"
           org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
           bidi-paragraph-direction t)
+
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "v" 'org-columns)
+
+    ;; http://kitchingroup.cheme.cmu.edu/blog/2015/03/12/Making-org-mode-Python-sessions-look-better/
+    ;; (add-hook 'org-babel-after-execute-hook 'org-babel-python-strip-session-chars)
 
     (add-hook 'org-mode-hook
               (lambda ()

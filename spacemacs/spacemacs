@@ -29,7 +29,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -37,9 +37,16 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      helm
      (auto-completion :variables
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence "jk"
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-return-key-behavior 'complete
                       auto-completion-enable-sort-by-usage t)
      ;; better-defaults
      emacs-lisp
+     typescript
+     systemd
      git
      ;; markdown
      (org :variables
@@ -55,9 +62,11 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      ranger
-     react
+     ;; react
      javascript
+
      ;; private
+     aj-javascript
      psamim-defaults
      ;; psamim-diary
      psamim-org
@@ -72,6 +81,10 @@ This function should only modify configuration layer settings."
    '(vimrc-mode
      writeroom-mode
      centered-window-mode
+     all-the-icons
+     all-the-icons-dired
+     spaceline-all-the-icons
+     qml-mode
      groovy-mode
      oauth2
      super-save
@@ -160,7 +173,7 @@ It should only modify the values of Spacemacs settings."
                                :size 15
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands `M-x' (after pressing on the leader key).
@@ -185,7 +198,7 @@ It should only modify the values of Spacemacs settings."
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
    ;; If non-nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ nil
+   dotspacemacs-remap-Y-to-y$ t
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
    ;; there. (default t)
    dotspacemacs-retain-visual-state-on-shift t
@@ -359,6 +372,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -367,45 +381,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (visual-line-mode)
-  ;;             (spacemacs/toggle-vi-tilde-fringe-off)
-  ;;             (spacemacs/toggle-line-numbers-off)
-  ;;             (setq bidi-paragraph-direction t)))
-
-  (spacemacs|diminish super-save-mode nil)
-  ;; (keychain-refresh-environment)
-  (super-save-mode +1)
-
-  (defun get-string-from-file (filePath)
-    "Return filePath's file content."
-    (with-temp-buffer
-      (insert-file-contents filePath)
-      (buffer-string)))
-
-  (setq
-   psamim-diary-in-a-while "5" ;; Fridays
-   psamim-diary-diary-template "/home/samim/Notes/archive/template.org"
-   psamim-diary-diary-template-in-a-while "/home/samim/Notes/archive/template-in-a-while.org")
-
-  (defun psamim-journal-prefix()
-    (let
-        ((template
-          (if (string= (format-time-string "%w") psamim-diary-in-a-while)
-              psamim-diary-diary-template-in-a-while
-            psamim-diary-diary-template)))
-      (concat
-       "* "
-       (format-time-string "%B %e, %Y") "\n"
-       (format-time-string "%A") "\n"
-       (calendar-persian-date-string) "\n"
-       (calendar-bahai-date-string) "\n\n"
-       (get-string-from-file template))))
-
-  (custom-set-variables
-   '(org-journal-prefix-function 'psamim-journal-prefix))
-
+  (setq spaceline-responsive nil)
+  (use-package spaceline-all-the-icons 
+    :after spaceline
+    :config (spaceline-all-the-icons-theme))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -420,6 +399,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(dired-listing-switches "-alh")
  '(org-agenda-custom-commands
    (quote
     (("u" alltodo ""
@@ -433,12 +413,23 @@ This function is called at the very end of Spacemacs initialization."
      ("\\.mm\\'" . default)
      ("\\.x?html?\\'" . "xdg-open %s")
      ("\\.pdf\\'" . "xdg-open %s"))))
+ '(org-journal-date-format (quote psamim-journal-prefix))
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 1))))
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (ox-reveal org-journal key-chord company-flow centered-window-mode yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit symon super-save string-inflection spaceline smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pip-requirements persp-mode pcre2el password-generator paradox orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word cython-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (rainbow-mode rainbow-identifiers color-identifiers-mode company-quickhelp spaceline-all-the-icons all-the-icons-dired all-the-icons qml-mode haml-mode web-completion-data prettier-js eslintd-fix rjsx-mode add-node-modules-path tide typescript-mode ox-reveal org-journal key-chord company-flow centered-window-mode yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit symon super-save string-inflection spaceline smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pip-requirements persp-mode pcre2el password-generator paradox orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word cython-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-github-token t)
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "node_modules/.bin/")))
+     (eval pyenv-workon "dss")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
