@@ -1,4 +1,4 @@
 #!/bin/sh
 /usr/bin/blockify &
-export LD_PRELOAD="libcrypto-compat.so.1.0.0 libssl-compat.so.1.0.0 libcurl-openssl-1.0.so"
-/usr/share/spotify/spotify "$@"
+/usr/bin/spotify "$@"
+

@@ -1,0 +1,8 @@
+[Unit]
+Description=xcape
+
+[Service]
+ExecStart=/usr/bin/xcape -t 200 -e "Caps_Lock=Escape" -d
+
+[Install]
+WantedBy=default.target
