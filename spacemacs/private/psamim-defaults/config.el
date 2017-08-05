@@ -17,7 +17,8 @@
 (set-fontset-font
  "fontset-default"
  (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
- "Vazir Code-13")
+ ;; "Vazir Code-13")
+ "Shabnam-12")
 ;; "DejaVu Sans-12")
 
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
@@ -31,6 +32,7 @@
 (spacemacs|diminish prettier-js-mode  nil)
 (spacemacs|diminish eslintd-fix-mode  nil)
 (spacemacs|diminish centered-window-mode  nil)
+(spacemacs|diminish all-the-icons-dired-mode  nil)
 
 ;; Configure org-journal
 (custom-set-variables

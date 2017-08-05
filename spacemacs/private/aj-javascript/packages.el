@@ -60,6 +60,7 @@
     :defer t
     :init
     (progn
+      (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "p" 'prettier-js)
       ;; (add-hook 'rjsx-mode-hook 'prettier-js-mode)
       (setq prettier-js-args '(
                                "--trailing-comma" "es5"

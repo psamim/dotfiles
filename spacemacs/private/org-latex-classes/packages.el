@@ -3,8 +3,6 @@
         ;; org is installed by `org-plus-contrib'
         (org :location built-in)
         (ox-latex :location local)
-
-        (ox-beamer :location local)
         ))
 
 (defun org-latex-classes/init-ox-latex ()

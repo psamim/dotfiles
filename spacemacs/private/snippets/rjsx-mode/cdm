@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : cdm
+#key : cdm
+#contributor : 
+# --
+componentDidMount() {
+  $0
+}
