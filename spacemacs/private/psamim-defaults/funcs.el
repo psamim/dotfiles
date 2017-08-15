@@ -3,7 +3,8 @@
   (writeroom-mode)
   (visual-line-mode)
   (spacemacs/toggle-vi-tilde-fringe-off)
-  (spacemacs/toggle-line-numbers-off))
+  (spacemacs/toggle-line-numbers-off)
+  (writeroom-adjust-width))
 
 (defun get-string-from-file (filePath)
   "Return filePath's file content."
