@@ -24,8 +24,6 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/themes
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/cp
-    # zgen oh-my-zsh plugins/gpg-agent
-    # zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/history-substring-search
     zgen load zsh-users/zsh-syntax-highlighting
@@ -33,6 +31,11 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-completions src
     zgen load zsh-users/zsh-autosuggestions
     zgen load changyuheng/zsh-interactive-cd
+    zgen load marzocchi/zsh-notify
+    zgen load joel-porquet/zsh-dircolors-solarized
+    zgen load djui/alias-tips
+    zgen load Tarrasch/zsh-bd
+    zgen load larkery/zsh-histdb
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -40,6 +43,18 @@ if ! zgen saved; then
     # save all to init script
     zgen save
 fi
+
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
 # Zaw
 zstyle ':filter-select' max-lines 4 # use $LINES - 4 for filter-select
@@ -79,8 +94,10 @@ export PATH=$HOME/.bin:$PATH
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PYENV_ROOT/bin:$PATH
 
 eval "$(direnv hook zsh)"
 eval $(keychain --eval --quiet)
+eval "$(pyenv init -)"
 
 
