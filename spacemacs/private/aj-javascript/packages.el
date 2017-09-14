@@ -22,6 +22,8 @@
     :init
     (progn
       (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+      (evil-define-key 'normal rjsx-mode-map
+        (kbd "x") 'rjsx-delete-creates-full-tag)
 
       (setq
        js2-mode-show-strict-warnings nil
@@ -60,8 +62,12 @@
     :defer t
     :init
     (progn
-      (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "p" 'prettier-js)
-      ;; (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-      (setq prettier-js-args '(
+      (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "p" 'prettier-js-mode)
+      (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "e" 'eslintd-fix-mode)
+      (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "r" 'rjsx-rename-tag-at-point)
+      (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+      (setq
+       prettier-js-command "prettier_d"
+       prettier-js-args '(
                                "--trailing-comma" "es5"
                                "--single-quote")))))
