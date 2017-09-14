@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : componentWillMount
+#key : cwm
+#contributor : 
+# --
+componentWillMount() {
+  $0
+}
