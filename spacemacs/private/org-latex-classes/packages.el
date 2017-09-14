@@ -67,6 +67,7 @@
 \\BeforeBeginEnvironment{minted}{\\vspace{3mm}}
 \\AfterEndEnvironment{minted}{\\vspace{3mm}}
 \\hypersetup{pdfborder=0 0 0}
+\\usepackage[labelsep=quad,labelformat=simple]{caption}
 \\usepackage{xepersian}
 \\settextfont{XB Yas}
 \\setmainfont[Script=Arabic,Numbers=Lining]{XB Yas}
