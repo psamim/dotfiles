@@ -65,7 +65,7 @@
       (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "p" 'prettier-js-mode)
       (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "e" 'eslintd-fix-mode)
       (spacemacs/set-leader-keys-for-major-mode 'rjsx-mode "r" 'rjsx-rename-tag-at-point)
-      (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+      ;; (add-hook 'rjsx-mode-hook 'prettier-js-mode)
       (setq
        prettier-js-command "prettier_d"
        prettier-js-args '(

@@ -1,7 +1,3 @@
-(setq frame-title-format
-      '("emacs%@" (:eval (system-name)) ": " (:eval (if (buffer-file-name)
-                                                        (abbreviate-file-name (buffer-file-name))
-                                                      "%b")) " [%*]"))
 (setq-default
  ;; js2-mode
  js2-basic-offset 2

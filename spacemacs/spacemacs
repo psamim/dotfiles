@@ -29,7 +29,10 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(markdown
+     php
+     yaml
+     html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -68,10 +71,12 @@ This function should only modify configuration layer settings."
      ;; private
      aj-javascript
      psamim-defaults
+     ;; psamim-react
      ;; psamim-diary
      psamim-org
      org-latex-classes
      semicolon
+     display
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -80,10 +85,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(vimrc-mode
      writeroom-mode
+     arduino-mode
      graphql-mode
-     all-the-icons
-     all-the-icons-dired
-     spaceline-all-the-icons
      qml-mode
      groovy-mode
      oauth2
@@ -169,7 +172,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Iosevka"
                                :size 15
                                :weight normal
                                :width normal
@@ -308,7 +311,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -347,7 +350,7 @@ It should only modify the values of Spacemacs settings."
    ;; %n - Narrow if appropriate
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
-   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-frame-title-format "%t - %a"
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
@@ -381,12 +384,18 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; (setq spaceline-responsive nil)
-  ;; (use-package spaceline-all-the-icons 
-  ;;   :after spaceline
-  ;;   :config (spaceline-all-the-icons-theme))
-  (global-vi-tilde-fringe-mode -1)
-  )
+  (global-prettify-symbols-mode 1)
+
+  (add-hook
+   'rjsx-mode-hook
+   (lambda ()
+     (mapc (lambda (pair) (push pair prettify-symbols-alist))
+           '(;; Syntax
+             ("return" .   #x27fc)
+             ("true" .     #x1d54b)
+             ("false" .    #x1d53d)
+             ))))
+  (global-vi-tilde-fringe-mode -1))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -420,11 +429,39 @@ This function is called at the very end of Spacemacs initialization."
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (visual-fill-column systemd powerline spinner org-category-capture alert log4e gntp restclient skewer-mode json-snatcher json-reformat multiple-cursors js2-mode simple-httpd hydra htmlize parent-mode window-purpose imenu-list projectile request gitignore-mode fringe-helper git-gutter+ git-gutter flyspell-correct flycheck pkg-info epl flx org-plus-contrib graphql-mode all-the-icons-ivy ivy rainbow-mode rainbow-identifiers color-identifiers-mode company-quickhelp spaceline-all-the-icons all-the-icons-dired all-the-icons qml-mode haml-mode web-completion-data prettier-js eslintd-fix rjsx-mode add-node-modules-path tide typescript-mode ox-reveal org-journal key-chord company-flow centered-window-mode yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit symon super-save string-inflection spaceline smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pip-requirements persp-mode pcre2el password-generator paradox orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word cython-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (origami wgrep smex ivy-purpose ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper prettify-utils markdown-toc mmm-mode markdown-mode gh-md phpunit phpcbf php-extras php-auto-yasnippets drupal-mode company-php ac-php-core xcscope php-mode magit magit-popup git-commit with-editor smartparens iedit anzu evil goto-chg undo-tree highlight diminish dash-functional tern pos-tip company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s memoize font-lock+ helm avy helm-core async auto-complete popup arduino-mode visual-fill-column systemd powerline spinner org-category-capture alert log4e gntp restclient skewer-mode json-snatcher json-reformat multiple-cursors js2-mode simple-httpd hydra htmlize parent-mode window-purpose imenu-list projectile request gitignore-mode fringe-helper git-gutter+ git-gutter flyspell-correct flycheck pkg-info epl flx org-plus-contrib graphql-mode all-the-icons-ivy ivy rainbow-mode rainbow-identifiers color-identifiers-mode company-quickhelp spaceline-all-the-icons all-the-icons-dired all-the-icons qml-mode haml-mode web-completion-data prettier-js eslintd-fix rjsx-mode add-node-modules-path tide typescript-mode ox-reveal org-journal key-chord company-flow centered-window-mode yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit symon super-save string-inflection spaceline smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pip-requirements persp-mode pcre2el password-generator paradox orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree move-text magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word cython-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
     ((eval progn
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "node_modules/.bin/"))
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "../.node_modules/bin/")))
+     (eval progn
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             ".node_modules/bin/")))
+     (eval progn
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "node_modules/.bin/"))
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             ".node_modules/bin/")))
+     (eval progn
            (add-to-list
             (quote exec-path)
             (concat
