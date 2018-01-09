@@ -1,0 +1,14 @@
+source=$1
+IP=192.168.1.7:8123
+entities=('media_player.snapcast_group_ba5b10e48aaffd72f94f5f2f4f5304c7'
+          'media_player.snapcast_group_14acc4f321241f0d0eb3255beae1124e')
+
+
+for entity in "${entities[@]}"
+do
+    curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
+         -H "Content-Type: application/json" \
+         -d '{"entity_id": "'$entity'", "source": "'$source'"}' \
+         http://$IP/api/services/media_player/select_source
+done
+

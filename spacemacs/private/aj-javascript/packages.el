@@ -2,7 +2,7 @@
   '(
     add-node-modules-path
     company-flow
-    eslintd-fix
+    (eslintd-fix :location (recipe :fetcher github :repo "aaronjensen/eslintd-fix" :branch "improve-verification-and-startup"))
     flycheck
     prettier-js
     rjsx-mode))
@@ -15,6 +15,11 @@
     :init
     (progn
       (add-hook 'rjsx-mode-hook #'eslintd-fix-mode t))))
+
+(defun aj-javascript/post-init-company()
+  (spacemacs|add-company-hook rjsx-mode)
+  (when (configuration-layer/layer-usedp 'aj-javascript)
+    (spacemacs|add-company-hook rjsx-mode)))
 
 (defun aj-javascript/init-rjsx-mode ()
   (use-package rjsx-mode
@@ -44,17 +49,26 @@
   (with-eval-after-load 'rjsx-mode
     (add-hook 'rjsx-mode-hook #'add-node-modules-path)))
 
-(defun aj-javascript/post-init-company-flow ()
-  (spacemacs|add-company-backends
-    :backends
-    '((company-flow :with company-dabbrev-code)
-      company-files)))
+
+(defun aj-javascript/init-company-flow ()
+  (use-package company-flow
+    :defer t
+    :init
+    (progn
+      (push 'company-flow company-backends-js2-mode)
+      (push 'company-flow company-backends-rjsx-mode)
+      (when (configuration-layer/package-usedp 'web-mode)
+        (push 'company-flow company-backends-react-mode))
+      )
+    :config
+    (when (configuration-layer/package-usedp 'web-mode)
+      (push 'react-mode company-flow-modes)))
+  )
 
 (defun aj-javascript/post-init-flycheck ()
   (with-eval-after-load 'flycheck
     (push 'javascript-jshint flycheck-disabled-checkers)
     (push 'json-jsonlint flycheck-disabled-checkers))
-
   (spacemacs/enable-flycheck 'rjsx-mode))
 
 (defun aj-javascript/init-prettier-js ()

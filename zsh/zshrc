@@ -36,6 +36,7 @@ if ! zgen saved; then
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
+    # zgen load lukechilds/zsh-nvm
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -95,9 +96,12 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PYENV_ROOT/bin:$PATH
+export PATH=$HOME/.yarn/bin:$PATH
 
 eval "$(direnv hook zsh)"
 eval $(keychain --eval --quiet)
 eval "$(pyenv init -)"
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

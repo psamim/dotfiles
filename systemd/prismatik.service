@@ -1,0 +1,8 @@
+[Unit]
+Description=Prismatik
+
+[Service]
+ExecStart=/usr/bin/prismatik --nogui
+
+[Install]
+WantedBy=default.target

@@ -24,9 +24,10 @@ function backup() {
     BACKUP_FILE=${2:-/tmp/backup}
     make_tar $BACKUP_PLACE $BACKUP_FILE
     send_to_drive $BACKUP_FILE
-    send_to_server $BACKUP_FILE
+    # send_to_server $BACKUP_FILE
     rm -f $BACKUP_FILE
 }
 
 /home/samim/.bin/backup-telegram
 backup /home/samim/Backup
+backup /home/samim/fidibo /tmp/books

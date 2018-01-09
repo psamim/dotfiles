@@ -16,7 +16,7 @@ def run(command):
 
 
 run("wget -qO {} http://p.hiweb.ir --save-cookies={} --keep-session-cookies".format(TMP_FILE, COOKIE_FILE))
-remain = run("cat {} | grep -Poh '<tr.*?</tr>' | grep  'مگابایت' | grep -o '[0-9]*'".format(TMP_FILE))
+remain = run("cat {} | grep -Poh '<tr.*?</tr>' | grep  'مگابایت' | grep -o '[0-9]*\.[0-9]*' | head -n1".format(TMP_FILE))
 remain = round(float(remain) / 1000, 2)
 service_days = run("cat {} | grep -Poh '<tr.*?</tr>' | grep 'روزهای باقیمانده'| grep -o '[0-9]*'".format(TMP_FILE))
 service_days = int(service_days)

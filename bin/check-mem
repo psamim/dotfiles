@@ -1,6 +1,6 @@
 #!/bin/bash
 
-threshold=6000
+threshold=6200
 
 while :
 do
@@ -10,6 +10,9 @@ do
     if [ $total_mem -gt $threshold ]
         then
         notify-send "Low memory!!"
+        curl http://192.168.1.234/hex=FF0000
+    else
+        curl http://192.168.1.234/stop
     fi
 
     sleep 5

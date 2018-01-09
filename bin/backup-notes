@@ -1,7 +1,0 @@
-#!/bin/sh
-# Using https://github.com/odeke-em/drive
-cd /home/samim/Notes
-tar czf - . | gpg -e -r psamim@gmail.com | drive push -force -piped notes-backup.tar.gz.gpg
-
-# Decrypt
-# gpg -d ~/Downloads/notes-backup-09-19-2016-10-51-55.tar.gz.gpg  | tar xz
