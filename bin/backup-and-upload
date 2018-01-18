@@ -9,7 +9,7 @@ function send_to_drive() {
 }
 
 function send_to_server() {
-    rsync -rvz --progress  $1 cyber6:~
+    rsync -rvz --progress  $1 psamim:~
 }
 
 function make_tar() {
@@ -24,7 +24,7 @@ function backup() {
     BACKUP_FILE=${2:-/tmp/backup}
     make_tar $BACKUP_PLACE $BACKUP_FILE
     send_to_drive $BACKUP_FILE
-    # send_to_server $BACKUP_FILE
+    send_to_server $BACKUP_FILE
     rm -f $BACKUP_FILE
 }
 

@@ -1,0 +1,15 @@
+[Unit]
+Description=PalseAudio configuration for snapserver
+After=sound.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/pacmd load-module module-pipe-sink file=/tmp/snapfifopulse sink_name=Snapcast
+ExecStart=/usr/bin/pacmd load-module module-pipe-sink file=/tmp/snapfifopulse sink_name=Snapcast
+ExecStartPost=/usr/bin/pacmd update-sink-proplist Snapcast device.description=Snapcast
+
+[Install]
+WantedBy=multi-user.target
+
+
