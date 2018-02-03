@@ -65,13 +65,13 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      ranger
-     ;; react
+     react
      ;; flow-type
      javascript
      docker
 
      ;; private
-     aj-javascript
+     ;; aj-javascript
      psamim-defaults
      ;; psamim-react
      ;; psamim-diary
@@ -79,6 +79,7 @@ This function should only modify configuration layer settings."
      org-latex-classes
      semicolon
      display
+     psamim-js
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -389,7 +390,7 @@ before packages are loaded."
   (global-prettify-symbols-mode 1)
 
   (add-hook
-   'rjsx-mode-hook
+   'react-mode-hook
    (lambda ()
      (mapc (lambda (pair) (push pair prettify-symbols-alist))
            '(;; Syntax
@@ -397,7 +398,8 @@ before packages are loaded."
              ("true" .     #x1d54b)
              ("false" .    #x1d53d)
              ))))
-  (global-vi-tilde-fringe-mode -1))
+  (global-vi-tilde-fringe-mode -1)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -430,7 +432,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (pippel importmagic epc ctable concurrent deferred evil-cleverparens paredit yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tide tagedit systemd symon super-save string-inflection spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode rjsx-mode restart-emacs ranger rainbow-delimiters qml-mode pyvenv pytest pyenv-mode py-isort pug-mode prettify-utils prettier-js popwin pkgbuild-mode pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el password-generator paradox ox-reveal overseer origami orgit org-projectile org-present org-pomodoro org-journal org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree nameless move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode key-chord js2-refactor js-doc info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode graphql-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eslintd-fix emmet-mode elisp-slime-nav editorconfig dumb-jump drupal-mode dockerfile-mode docker diff-hl define-word cython-mode company-web company-tern company-statistics company-quickhelp company-php company-flow company-anaconda column-enforce-mode coffee-mode clean-aindent-mode centered-window-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile arduino-mode all-the-icons-ivy all-the-icons-dired aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (prettier-js eslintd-fix yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tide tagedit systemd symon super-save string-inflection spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode restart-emacs ranger rainbow-delimiters qml-mode pyvenv pytest pyenv-mode py-isort pug-mode prettify-utils popwin pkgbuild-mode pippel pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el password-generator paradox ox-reveal overseer origami orgit org-projectile org-present org-pomodoro org-mime org-journal org-download org-bullets org-brain open-junk-file ob-restclient ob-php oauth2 neotree nameless move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode key-chord js2-refactor js-doc info+ indent-guide importmagic impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode graphql-mode google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump drupal-mode dockerfile-mode docker diff-hl define-word cython-mode counsel-projectile company-web company-tern company-statistics company-quickhelp company-php company-flow company-anaconda column-enforce-mode coffee-mode clean-aindent-mode centered-window-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile arduino-mode all-the-icons-ivy all-the-icons-dired aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(safe-local-variable-values
    (quote
     ((eval progn
