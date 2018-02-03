@@ -5,7 +5,7 @@ from datetime import datetime
 # Config:
 source = "IFN"
 destination = "AWZ"
-start_str = "2018/02/07"
+start_str = "2018/01/24"
 end_str = "2018/02/12"
 sthreshold = 140  # hezar toman, color (soft) threshold
 hthreshold = 180  # toggle (hard) threshold

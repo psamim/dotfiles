@@ -78,7 +78,7 @@ This function should only modify configuration layer settings."
      psamim-org
      org-latex-classes
      semicolon
-     display
+     ;; display
      psamim-js
      )
    ;; List of additional packages that will be installed without being

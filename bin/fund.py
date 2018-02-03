@@ -22,25 +22,37 @@ def scrape(regno, name):
         run("cat {} | grep -n '<table' |  gawk '{{print $1}}' FS=\":\" | tail -n 1".
             format(TMP_FILE)))
 
-    day1 = float(
-        run("tail -n+61 /tmp/fund | grep td | sed -n -e 4p | grep -oh '[0-9]*\.*[0-9]*'"
-            ))
-    day1 = round(day1 * 365, 2)
+    try:
+        day1 = float(
+            run("tail -n+61 /tmp/fund | grep td | sed -n -e 4p | grep -oh '[0-9]*\.*[0-9]*'"
+                ))
+        day1 = round(day1 * 365, 2)
+    except ValueError:
+        day1 = ''
 
-    day7 = float(
-        run("tail -n+61 /tmp/fund | grep td | sed -n -e 5p | grep -oh '[0-9]*\.*[0-9]*'"
-            ))
-    day7 = round(day7 * 365 / 7, 2)
+    try:
+        day7 = float(
+            run("tail -n+61 /tmp/fund | grep td | sed -n -e 5p | grep -oh '[0-9]*\.*[0-9]*'"
+                ))
+        day7 = round(day7 * 365 / 7, 2)
+    except ValueError:
+        day7 = ''
 
-    day30 = float(
-        run("tail -n+{} /tmp/fund | grep td | sed -n -e 6p | grep -oh '[0-9]*\.*[0-9]*'".
-            format(table_line_no)))
-    day30 = round(day30 * 365 / 30, 2)
+    try:
+        day30 = float(
+            run("tail -n+{} /tmp/fund | grep td | sed -n -e 6p | grep -oh '[0-9]*\.*[0-9]*'".
+                format(table_line_no)))
+        day30 = round(day30 * 365 / 30, 2)
+    except ValueError:
+        day30 = ''
 
-    day90 = float(
-        run("tail -n+{} /tmp/fund | grep td | sed -n -e 7p | grep -oh '[0-9]*\.*[0-9]*'".
-            format(table_line_no)))
-    day90 = round(day90 * 365 / 90, 2)
+    try:
+        day90 = float(
+            run("tail -n+{} /tmp/fund | grep td | sed -n -e 7p | grep -oh '[0-9]*\.*[0-9]*'".
+                format(table_line_no)))
+        day90 = round(day90 * 365 / 90, 2)
+    except ValueError:
+        day90 = ''
 
     print(
         "{:<25}, {:<7}, {:<5}, {:<5}, {:<5}, http://www.fipiran.com/FundDetails?regno={}".
@@ -66,8 +78,8 @@ def BTC():
         "BTC", btcDay, btcWeek, btcMonth, btc90, currentPrice))
 
 
-print("{:<25}, {:<7}, {:<5}, {:<5}, {:<5}".format("Name", "1D", "1W",
-                                                  "1M", "3M"))
+print("{:<25}, {:<7}, {:<5}, {:<5}, {:<5}".format("Name", "1D", "1W", "1M",
+                                                  "3M"))
 scrape(10911, "ArzeshAfarinan (Dey)")
 scrape(10639, "Yekom (EghtesadNovin)")
 scrape(11405, "Andokhteh (ToseeSaderat)")
@@ -91,14 +103,20 @@ print("------")
 # scrape(10581, "Karafarin (No More)")
 # scrape(10845, "AK (Karafarin) (No More)")
 print("------")
+scrape(11215, "Atlas")
+scrape(11518, "Firuza")
+scrape(11459, "Kian")
+scrape(11315, "Etemad")
 scrape(11308, "Firouzeh")
 scrape(11341, "Agas")
 scrape(11183, "Karis")
 scrape(11195, "Asas")
-scrape(11315, "Etemad")
 scrape(11460, "AminYekom")
-scrape(11459, "Kian")
+scrape(11416, "Paarand")
+scrape(11327, "Servatam")
+scrape(11509, "Tala")
 scrape(11409, "Akord")
 scrape(11513, "Kamand")
-scrape(11416, "Parand")
-scrape(11215, "Atlas")
+scrape(11172, "Asam")
+scrape(11260, "Almas")
+print("Sanvin")

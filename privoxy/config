@@ -1268,7 +1268,11 @@ forward code.google.com localhost:7777
 forward drive.google.com localhost:7777
 forward accounts.google.com localhost:7777
 forward meet.google.com localhost:7777
+forward developers.google.com localhost:7777
 forward .ggpht.com localhost:7777
+forward storage.googleapis.com localhost:7777
+forward dl.google.com localhost:7777
+forward feedproxy.google.com localhost:7777
 # forward hangouts.google.com localhost:7777
 
 # Youtube
@@ -1299,6 +1303,7 @@ forward .t.co localhost:7777
 
 # Wordpress
 forward .wp.com localhost:7777
+forward .wp.me localhost:7777
 forward .netdna-ssl.com localhost:7777
 forward .wordpress.com localhost:7777
 forward .wpengine.com localhost:7777
@@ -1329,6 +1334,8 @@ forward .mixcloud.com localhost:7777
 forward .tunein.com localhost:7777
 forward .sndcdn.com localhost:7777
 forward .spotify.com localhost:7777
+forward .jango.com localhost:7777
+forward .lyricsmode.com localhost:7777
 
 # Religion
 forward .aeenebahai.org localhost:777
@@ -1363,6 +1370,12 @@ forward .blockdozer.com localhost:7777
 forward .coinmarketcap.com localhost:7777
 forward .binance.com localhost:7777
 forward .mixpanel.com localhost:7777
+forward .now.sh localhost:7777
+forward .thepiratebay.org localhost:7777
+forward .paypal.com localhost:7777
+forward .paypal.me localhost:7777
+forward .alicdn.com localhost:7777
+
 
 # Kodi
 forward .themoviedb.org localhost:7777
