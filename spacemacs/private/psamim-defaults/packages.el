@@ -1,8 +1,8 @@
 (setq psamim-defaults-packages
       '(ranger
-        centered-window-mode))
+        sublimity))
 
-(defun psamim-defaults/init-ranger ()
+(defun psamim-defaults/post-init-ranger ()
   (use-package ranger
     :config (progn
               (ranger-override-dired-mode t)
@@ -11,6 +11,12 @@
               (define-key ranger-mode-map (kbd "M-l") 'ranger-next-tab)
               (define-key ranger-mode-map (kbd "M-h") 'ranger-prev-tab))))
 
-(defun psamim-defaults/init-centered-window-mode ()
-  (use-package centered-window-mode
-    :config (progn (centered-window-mode t))))
+(defun psamim-defaults/init-sublimity ()
+  (use-package sublimity
+    :config (progn
+              (require 'sublimity)
+              (require 'sublimity-scroll)
+              (setq sublimity-attractive-centering-width 110)
+              (require 'sublimity-attractive)
+              (sublimity-mode 1)
+              )))

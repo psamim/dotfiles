@@ -20,8 +20,8 @@
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;; Add icons
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; Hide mode names
 (spacemacs|diminish super-save-mode  nil)

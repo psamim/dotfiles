@@ -1,7 +1,7 @@
 (setq psamim-org-packages
     '(
       (org :location built-in)
-      (org-babel :location local)))
+      (ob :location built-in)))
 
 (defun psamim-org/post-init-org ()
   (progn
@@ -16,13 +16,20 @@
           org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
           org-export-babel-evaluate nil
           org-confirm-babel-evaluate nil
-          org-agenda-files (quote ("~/Notes/todo.org"))
+          org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/appointments.org"))
           org-directory "~/Notes"
           org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
           org-archive-location "~/Notes/archive/todo.org::"
           org-duration-format 'h:mm
           org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
-          bidi-paragraph-direction t)
+          bidi-paragraph-direction t
+          org-caldav-url 'google
+          org-caldav-calendar-id "ovuticv96133cisuc0pm8f7d6g@group.calendar.google.com"
+          org-caldav-files '("~/Notes/appointments.org")
+          org-icalendar-timezone "Asia/Tehran"
+          org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
+          org-caldav-oauth2-client-secret "tGlcde8zVpUiXFPuLOMb-DCB"
+          org-caldav-inbox "~/Notes/calendar-inbox.org")
 
     (spacemacs/set-leader-keys-for-major-mode 'org-mode
       "v" 'org-columns)
@@ -46,7 +53,6 @@
      '(org-refile-targets '((org-agenda-files :maxlevel . 1)))
      '(org-outline-path-complete-in-steps nil)         ; Refile in a single go
      '(org-refile-use-outline-path t)                  ; Show full paths for refiling
-     '(org-agenda-files (quote ("~/Notes/todo.org")))
      '(org-agenda-custom-commands
        (quote (("u" alltodo "" ((org-agenda-overriding-header "Next Actions"))))))
      '(org-agenda-ndays 7)
@@ -58,17 +64,12 @@
      ;; '(org-reverse-note-order t)
      )))
 
-(defun psamim-org/init-org-babel ()
-  (use-package org-babel
+(defun psamim-org/post-init-ob ()
+  (use-package ob
     :config
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((R . t)
        (emacs-lisp . t)
        (python . t)
-       (sh . t)
-       (js . t)
-       (latex . t)
-       (gnuplot . t)
-       (sql . t)
-       (sh . t)))))
+       (shell . t)))))
