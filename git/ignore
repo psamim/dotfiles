@@ -17,3 +17,5 @@ __pycache__
 
 # gedit
 *~
+.dir-locals.el
+.tern-port
