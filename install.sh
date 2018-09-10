@@ -79,6 +79,7 @@ mkdir -p "$HOME/.config/systemd/"
 cp -r "$PWD/systemd" "$HOME/.config/systemd/user"
 
 # beets
+mkdir -p "$HOME/.config/beets"
 cp -r "$PWD/beets/config.yaml" "$HOME/.config/beets/config.yaml"
 
 # arbtt
@@ -112,7 +113,8 @@ ln -sf $PWD/yaourt $HOME/.config/yaourt
 # ideavim
 ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
 
-# desktop entries
+# desktop
+mkdir -p  $HOME/.local/share/applications/
 for f in $PWD/desktop-files/*.desktop; do
     ln -sf $f $HOME/.local/share/applications/
 done
