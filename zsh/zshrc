@@ -35,7 +35,7 @@ if ! zgen saved; then
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
-    zgen load larkery/zsh-histdb
+    # zgen load larkery/zsh-histdb
     # zgen load lukechilds/zsh-nvm
 
     # theme
@@ -55,7 +55,7 @@ group by commands.argv order by count(*) desc limit 1"
     suggestion=$(_histdb_query "$query")
 }
 
-ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
+# ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
 # Zaw
 zstyle ':filter-select' max-lines 4 # use $LINES - 4 for filter-select
@@ -100,8 +100,8 @@ export PATH=$PYENV_ROOT/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
 
 eval "$(direnv hook zsh)"
-eval $(keychain --eval --quiet)
-eval "$(pyenv init -)"
+# eval $(keychain --eval --quiet)
+# eval "$(pyenv init -)"
 
 
 
