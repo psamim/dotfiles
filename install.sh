@@ -23,6 +23,8 @@ git config --global core.excludesfile '~/.gitignore'
 ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
 rm -rf "$HOME/.tmux"
 ln -sf "$PWD/tmux" "$HOME/.tmux"
+mkdir -p $HOME/.tmux/plugins
+ln -sf $PWD/tpm $HOME/.tmux/plugins/tpm
 
 # emacs
 rm -rf "$HOME/.emacs.d"

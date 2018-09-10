@@ -1,9 +1,12 @@
 [submodule "password-store"]
 	path = password-store
-	url = git@bitbucket.org:psamim/password-store.git
+	url = git@gitlab.org:psamim/password-store.git
 [submodule "emacs.d"]
 	path = emacs.d
 	url = https://github.com/syl20bnr/spacemacs.git
 [submodule "zgen"]
 	path = zgen
 	url = https://github.com/tarjoilija/zgen.git
+[submodule "tpm"]
+	path = tpm
+	url = https://github.com/tmux-plugins/tpm
