@@ -58,16 +58,20 @@ group by commands.argv order by count(*) desc limit 1"
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
 # Zaw
-zstyle ':filter-select' max-lines 4 # use $LINES - 4 for filter-select
+zstyle ':filter-select' max-lines 6 # use $LINES - 4 for filter-select
 zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
 
 bindkey '^R' zaw-history
-bindkey -M filterselect '^R' down-line-or-history
-bindkey -M filterselect '^S' up-line-or-history
+bindkey -M filterselect '^[j' down-line-or-history
+bindkey -M filterselect '^[k' up-line-or-history
 bindkey -M filterselect '^E' accept-search
 bindkey '^P' zaw-process
 bindkey '^F' zaw-open-file
 bindkey '^[^M' autosuggest-execute
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 export JAVA_HOME=/usr/lib/jvm/default
 export DEFAULT_USER="samim"
