@@ -1,0 +1,64 @@
+# permanently set alternative root dir
+# root=/path/to/root
+
+# rofi command. Make sure to have "$@" as last argument
+_rofi () {
+    rofi -i -no-auto-select -kb-mode-previous "" -kb-mode-next "" -width 700 -no-levenshtein-sort "$@"      
+}
+
+# keyboard layout (set this to your actual layout. E.g. keyboard="de us"
+#keyboard=us
+
+# fields to be used
+URL_field='url'
+USERNAME_field='user'
+AUTOTYPE_field='autotype'
+
+# delay to be used for :delay keyword
+delay=2
+
+## Programs to be used
+# Editor
+EDITOR='/home/samim/.bin/emc'
+
+# Browser
+BROWSER='firefox-developer-edition'
+
+## Misc settings
+
+default_do='menu' # menu, autotype, copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
+auto_enter='false'
+notify='false'
+
+# color of the help messages
+# leave empty for autodetection
+help_color=""
+
+# Clipboard settings
+# Possible options: primary, clipboard, both
+clip=primary
+
+# Options for generating new password entries
+default_user=psamim
+default_user2=samim.pezeshki
+password_length=12
+
+# Custom Keybindings
+# autotype="Alt+1"
+# type_user="Alt+2"
+# type_pass="Alt+3"
+# open_url="Alt+4"
+# copy_name="Alt+u"
+# copy_url="Alt+l"
+# copy_pass="Alt+p"
+show="Alt+s"
+# copy_entry="Alt+c"
+# type_entry="Alt+1"
+copy_menu="Alt+c"
+action_menu="Alt+a"
+# type_menu="Alt+t"
+help="Alt+h"
+# switch="Alt+x"
+# insert_pass="Alt+i"
+
+

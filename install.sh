@@ -6,6 +6,10 @@
 mkdir -p "$HOME/.aria2"
 ln -sf $PWD/aria2/* $HOME/.aria2/
 
+# roffi pass
+mkdir -p "$HOME/.config/rofi-pass"
+ln -sf $PWD/rofi-pass/config $HOME/.config/rofi-pass/config
+
 # bin
 rm -rf "$HOME/.bin"
 ln -sf "$PWD/bin" "$HOME/.bin"
