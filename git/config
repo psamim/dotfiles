@@ -1,7 +1,7 @@
 # vim:ft=gitconfig:
 [user]
 	name = Samim Pezeshki
-	email = p.samim@gmail.com
+	email = psamim@gmail.com
 [core]
   editor = emct
 	excludesfile = ~/.gitignore

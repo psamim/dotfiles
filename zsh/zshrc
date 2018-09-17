@@ -77,7 +77,8 @@ export JAVA_HOME=/usr/lib/jvm/default
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
 export ANDROID_HOME="/media/hdd/android-sdk/"
-export EDITOR=emct
+export EDITOR=vim
+export GIT_EDITOR=vim
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"

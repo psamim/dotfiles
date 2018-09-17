@@ -104,6 +104,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(arduino-mode
      graphql-mode
+     vimrc-mode
      org-caldav
      all-the-icons-dired
      groovy-mode

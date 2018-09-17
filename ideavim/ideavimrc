@@ -1,8 +1,9 @@
 " https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+" https://gist.github.com/VoldikSS/da3a3e97ee612b1cd9ab1add6e8e9e77
 
 inoremap jj <Esc> :action EditorCompleteStatement<CR>
 
-nnoremap <Space>j :action Switcher<CR>
+nnoremap q :action ShowErrorDescription <CR>
 nnoremap <Space>k :action FileStructurePopup<CR>
 nnoremap <Space><Space> :action SearchEverywhere<CR>
 
@@ -25,6 +26,7 @@ nnoremap ,g :action Generate<CR>
 
 " Find
 " nnoremap / :action Find<CR>
+nnoremap <SPACE>/ :action FindInPath<CR>
 " nnoremap n :action FindNext<CR>
 " nnoremap N :action FindPrevious<CR>
 set ignorecase smartcase
