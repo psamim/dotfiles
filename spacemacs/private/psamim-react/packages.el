@@ -11,7 +11,6 @@
 
 (setq psamim-react-packages
       '(
-        emmet-mode
         evil-matchit
         flycheck
         js-doc
@@ -19,9 +18,6 @@
         web-beautify
         web-mode
         ))
-
-(defun psamim-react/post-init-emmet-mode ()
-  (add-hook 'react-mode-hook 'emmet-mode))
 
 (defun psamim-react/post-init-evil-matchit ()
   (with-eval-after-load 'evil-matchit

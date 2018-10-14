@@ -95,6 +95,8 @@ alias xclip='xclip -selection clipboard'
 alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
 alias tmux='direnv exec / tmux'
+alias magit='emacsclient -nw -e \(magit-status\)'
+alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH

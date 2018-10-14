@@ -120,3 +120,5 @@ mkdir -p  $HOME/.local/share/applications/
 for f in $PWD/desktop-files/*.desktop; do
     ln -sf $f $HOME/.local/share/applications/
 done
+
+kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true

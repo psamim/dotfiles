@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import subprocess
-from exchanges.coindesk import CoinDesk
+# from exchanges.coindesk import CoinDesk
 from datetime import date, timedelta
 
 TMP_FILE = '/tmp/fund'
@@ -59,23 +59,23 @@ def scrape(regno, name):
         format(name, day1, day7, day30, day90, regno))
 
 
-def BTC():
-    today = date.today()
-    lastMonth = today - timedelta(days=30)
-    lastWeek = today - timedelta(days=7)
-    lastDay = today - timedelta(days=1)
-    last90 = today - timedelta(days=90)
-    currentPrice = CoinDesk().get_current_price()
-    lastMonthPrice = CoinDesk.get_past_price(lastMonth.strftime('%Y-%m-%d'))
-    lastWeekPrice = CoinDesk.get_past_price(lastWeek.strftime('%Y-%m-%d'))
-    lastDayPrice = CoinDesk.get_past_price(lastDay.strftime('%Y-%m-%d'))
-    last90Price = CoinDesk.get_past_price(last90.strftime('%Y-%m-%d'))
-    btcDay = round((currentPrice - lastDayPrice) * 100 / lastDayPrice, 2)
-    btcWeek = round((currentPrice - lastWeekPrice) * 100 / lastWeekPrice, 2)
-    btcMonth = round((currentPrice - lastMonthPrice) * 100 / lastMonthPrice, 2)
-    btc90 = round((currentPrice - last90Price) * 100 / last90Price, 2)
-    print("{:<25}, {:<7}, {:<5}, {:<5}, {:<5}, Current BTC/USD: {}".format(
-        "BTC", btcDay, btcWeek, btcMonth, btc90, currentPrice))
+# def BTC():
+#     today = date.today()
+#     lastMonth = today - timedelta(days=30)
+#     lastWeek = today - timedelta(days=7)
+#     lastDay = today - timedelta(days=1)
+#     last90 = today - timedelta(days=90)
+#     currentPrice = CoinDesk().get_current_price()
+#     lastMonthPrice = CoinDesk.get_past_price(lastMonth.strftime('%Y-%m-%d'))
+#     lastWeekPrice = CoinDesk.get_past_price(lastWeek.strftime('%Y-%m-%d'))
+#     lastDayPrice = CoinDesk.get_past_price(lastDay.strftime('%Y-%m-%d'))
+#     last90Price = CoinDesk.get_past_price(last90.strftime('%Y-%m-%d'))
+#     btcDay = round((currentPrice - lastDayPrice) * 100 / lastDayPrice, 2)
+#     btcWeek = round((currentPrice - lastWeekPrice) * 100 / lastWeekPrice, 2)
+#     btcMonth = round((currentPrice - lastMonthPrice) * 100 / lastMonthPrice, 2)
+#     btc90 = round((currentPrice - last90Price) * 100 / last90Price, 2)
+#     print("{:<25}, {:<7}, {:<5}, {:<5}, {:<5}, Current BTC/USD: {}".format(
+#         "BTC", btcDay, btcWeek, btcMonth, btc90, currentPrice))
 
 
 print("{:<25}, {:<7}, {:<5}, {:<5}, {:<5}".format("Name", "1D", "1W", "1M",
@@ -85,9 +85,9 @@ scrape(10639, "Yekom (EghtesadNovin)")
 scrape(11405, "Andokhteh (ToseeSaderat)")
 scrape(10919, "Ganjineh (Shahr)")
 scrape(10765, "Atieh (EghtesadNovin)")
-print("------")
-BTC()
-print("------")
+# print("------")
+# BTC()
+# print("------")
 # scrape(10929, "Amin (Saman)")
 # scrape(10883, "Gardeshgari * ")
 # scrape(11500, "Negin (Saman)")
