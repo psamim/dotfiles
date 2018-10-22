@@ -1,30 +1,33 @@
-#!/bin/bash
+#!/bin/zsh
 # -*- mode: sh; -*-
 
-# Helper
-function info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
-trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
+function info() { chalk -t "$(date) - {yellow $* }" }
+function error() { chalk -t "$(date) - {red $* }" }
+trap 'echo; error "Backup interrupted"; exit 2' INT TERM
+
 
 function borg_backup() {
     local SOURCE=$1
     local NAME=$2
+    local OPTIONS=$3
     local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
+    export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 
     if [ ! -d "$SOURCE" ]; then
         # Control will enter here if $DIRECTORY doesn't exist.
-        info "$SOURCE does not exist"
-        exit
+        error "$SOURCE does not exist"
+        exit 1
     fi
 
     if [ ! -d "/home/samim/borg/keys/" ]; then
         # Control will enter here if $DIRECTORY doesn't exist.
-        info "$SOURCE does not exist"
-        exit
+        error "$SOURCE does not exist"
+        exit 1
     fi
 
     if [ -z "$(ls -A $BORG_CONFIG_DIR/keys)" ]; then
-        info "Keys do not exist at $BORG_CONFIG_DIR/keys"
-        exit
+        error "Keys do not exist at $BORG_CONFIG_DIR/keys"
+        exit 1
     fi
 
     if [ ! -d "$BORG_REPO" ]; then
@@ -32,10 +35,9 @@ function borg_backup() {
         borg init -e keyfile "$BORG_REPO"
     fi
 
-    info "Starting backup from $SOURCE"
-
     # Create the backup
-    borg create -C lzma,4 --verbose --stats --list $BORG_REPO::{now} $SOURCE
+    info "Starting backup from '$SOURCE' to repo '$NAME'"
+    eval borg create $OPTIONS -C lzma,4 --stats --list $BORG_REPO::{now} $SOURCE
 
     backup_exit=$?
 
@@ -54,67 +56,132 @@ function borg_backup() {
 
     if [ ${global_exit} -eq 1 ];
     then
-        info "Backup and/or Prune finished with a warning"
+        error "Backup and/or Prune finished with a warning"
     fi
 
     if [ ${global_exit} -gt 1 ];
     then
-        info "Backup and/or Prune finished with an error"
+        error "Backup and/or Prune finished with an error"
     fi
+
+    export BORG_PASSPHRASE=""
+}
+
+function borg_remote_backup() {
+    local REMOTE=$1
+    local PREV=$PWD
+    local SOURCE=/tmp/$RANDOM
+    local NAME=$2
+    local OPTIONS=$@[3,-1]
+    local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
+
+    mkdir $SOURCE
+    sshfs $REMOTE $SOURCE
+    cd $SOURCE
+
+    borg_backup . $NAME $OPTIONS
+    cd
+    sudo umount -f $SOURCE
+    rm -rf $SOURCE
 }
 
 function make_tar_gpg() {
     # Decrypt: 
     # gpg -d your_archive.tgz.gpg | tar xz
-    prev_dir=$PWD
-    cd $1
+    info "Creating tar archive encrypted with gpg key from $1"
+    local SOURCE=$1
+    local PREV_DIR=$PWD
+
+    if [ ! -d "$SOURCE" ]; then
+        error "$SOURCE does not exist"
+        exit 1
+    fi
+
+    if [ ! -d "$SOURCE" ]; then
+        error "$SOURCE does not exist"
+        exit 1
+    fi
+
+    if [ -n "$(find $SOURCE -prune -empty 2>/dev/null)" ]; then
+        error "$SOURCE is empty"
+        exit 1
+    fi
+
+    cd $SOURCE
     tar czf - . | gpg -e -r psamim@gmail.com > $2
-    cd $prev_dir
+    cd $PREV_DIR
 }
 
 function make_tar_gpg_sym() {
     # https://askubuntu.com/questions/95920/encrypt-tar-gz-file-on-create
     # Decrypt: 
     # gpg -d your_archive.tgz.gpg | tar xz
+    info "Creating tar archive symmetrically encrypted from $1"
     prev_dir=$PWD
     cd $1
     tar czf - . | gpg -c --s2k-cipher-algo AES256 --s2k-digest-algo SHA512 --s2k-count 65536 -o $2
+    local exit=$?
     cd $prev_dir
+
+    if [ ${exit} != 0 ];
+    then
+        error "Creating archive finished with errors"
+        exit 1
+    fi
 }
 
-function cloud() {
-    rclone sync -v $1 passport:/mnt/mybook/$2
+function send() {
+    info "Sending '$1' to cloud as name '$2'"
+    info "Sending to passport"
+    rclone sync --progress --quiet $1 passport:/mnt/mybook/$2
+    echo # New Line
     for remote in dropbox drive; do
-        rclone sync -v $1 $remote:$2
+        info "Sending to remote '$remote'"
+        rclone sync --progress --quiet --transfers=1 $1 $remote:$2
+        echo # New Line
     done
 }
 
-function create_private() {
+function create_private_file() {
+    info "Creating private file"
     local TEMP_PRIVATE_DIR=/tmp/$RANDOM
     local PRIVATE_FILE=$1
     mkdir -p $TEMP_PRIVATE_DIR
-    cp -r ~/.gnupg/ $TEMP_PRIVATE_DIR/gnugp
-    cp -r ~/.ssh/ $TEMP_PRIVATE_DIR/ssh
-    rsync -rzvl --progress --exclude "repos" --exclude "cache" ~/borg $TEMP_PRIVATE_DIR
+    rsync -rvzl ~/.gnupg $TEMP_PRIVATE_DIR/gnugp
+    rsync -rvzl ~/.ssh $TEMP_PRIVATE_DIR/ssh
+    rsync -rvzl  --exclude "repos" --exclude "cache" ~/borg $TEMP_PRIVATE_DIR
     make_tar_gpg_sym $TEMP_PRIVATE_DIR $PRIVATE_FILE
     rm -rf $TEMP_PRIVATE_DIR
-    info "File created in $PRIVATE_FILE"
+
+    if [ -e $PRIVATE_FILE ];
+    then
+        info "File created in $PRIVATE_FILE"
+    fi
 }
 
 function main() {
-    # encrypted backup with borg and send to cloud
-    borg_backup /home/samim/tombs/backups/ backups
-    borg_backup /home/samim/Calibre calibre
-    cloud /home/samim/borg/repos borg-repos
+    # Create private file
+    if [ "$1" = "--create-private" ]; then
+        create_private_file "$HOME/Engineering.pdf"
+        exit
+    fi
 
     # gpg encrypted backup of passwords and send to cloud
-    local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
-    make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-    cloud $TEMP_PASS_BACKUP ""
-    rm $TEMP_PASS_BACKUP
 
-    create_private "$HOME/Engineering.pdf"
+    # local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+    # make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+    # send $TEMP_PASS_BACKUP ""
+    # rm $TEMP_PASS_BACKUP
+
+    # encrypted backup with borg and send to cloud
+
+    borg_backup /home/samim/tombs/backups/ backups
+    borg_backup /home/samim/Calibre calibre
+    borg_remote_backup pi@192.168.31.20:/home/homeassistant/.homeassistant hass '-e *home-assistant_v2.db'
+    borg_remote_backup pi@192.168.31.20:/etc hassetc
+    send /home/samim/borg/repos borg-repos
 }
 
-main
+main $@
+info Done
 
