@@ -1,0 +1,120 @@
+#!/bin/bash
+# -*- mode: sh; -*-
+
+# Helper
+function info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
+trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
+
+function borg_backup() {
+    local SOURCE=$1
+    local NAME=$2
+    local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
+
+    if [ ! -d "$SOURCE" ]; then
+        # Control will enter here if $DIRECTORY doesn't exist.
+        info "$SOURCE does not exist"
+        exit
+    fi
+
+    if [ ! -d "/home/samim/borg/keys/" ]; then
+        # Control will enter here if $DIRECTORY doesn't exist.
+        info "$SOURCE does not exist"
+        exit
+    fi
+
+    if [ -z "$(ls -A $BORG_CONFIG_DIR/keys)" ]; then
+        info "Keys do not exist at $BORG_CONFIG_DIR/keys"
+        exit
+    fi
+
+    if [ ! -d "$BORG_REPO" ]; then
+        info "Creating borg repo at $BORG_REPO"
+        borg init -e keyfile "$BORG_REPO"
+    fi
+
+    info "Starting backup from $SOURCE"
+
+    # Create the backup
+    borg create -C lzma,4 --verbose --stats --list $BORG_REPO::{now} $SOURCE
+
+    backup_exit=$?
+
+    borg prune                          \
+         --list                          \
+         --show-rc                       \
+         --keep-daily    1               \
+         --keep-weekly   1               \
+         --keep-monthly  1               \
+         $BORG_REPO
+
+    prune_exit=$?
+
+    # use highest exit code as global exit code
+    global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+
+    if [ ${global_exit} -eq 1 ];
+    then
+        info "Backup and/or Prune finished with a warning"
+    fi
+
+    if [ ${global_exit} -gt 1 ];
+    then
+        info "Backup and/or Prune finished with an error"
+    fi
+}
+
+function make_tar_gpg() {
+    # Decrypt: 
+    # gpg -d your_archive.tgz.gpg | tar xz
+    prev_dir=$PWD
+    cd $1
+    tar czf - . | gpg -e -r psamim@gmail.com > $2
+    cd $prev_dir
+}
+
+function make_tar_gpg_sym() {
+    # https://askubuntu.com/questions/95920/encrypt-tar-gz-file-on-create
+    # Decrypt: 
+    # gpg -d your_archive.tgz.gpg | tar xz
+    prev_dir=$PWD
+    cd $1
+    tar czf - . | gpg -c --s2k-cipher-algo AES256 --s2k-digest-algo SHA512 --s2k-count 65536 -o $2
+    cd $prev_dir
+}
+
+function cloud() {
+    rclone sync -v $1 passport:/mnt/mybook/$2
+    for remote in dropbox drive; do
+        rclone sync -v $1 $remote:$2
+    done
+}
+
+function create_private() {
+    local TEMP_PRIVATE_DIR=/tmp/$RANDOM
+    local PRIVATE_FILE=$1
+    mkdir -p $TEMP_PRIVATE_DIR
+    cp -r ~/.gnupg/ $TEMP_PRIVATE_DIR/gnugp
+    cp -r ~/.ssh/ $TEMP_PRIVATE_DIR/ssh
+    rsync -rzvl --progress --exclude "repos" --exclude "cache" ~/borg $TEMP_PRIVATE_DIR
+    make_tar_gpg_sym $TEMP_PRIVATE_DIR $PRIVATE_FILE
+    rm -rf $TEMP_PRIVATE_DIR
+    info "File created in $PRIVATE_FILE"
+}
+
+function main() {
+    # encrypted backup with borg and send to cloud
+    borg_backup /home/samim/tombs/backups/ backups
+    borg_backup /home/samim/Calibre calibre
+    cloud /home/samim/borg/repos borg-repos
+
+    # gpg encrypted backup of passwords and send to cloud
+    local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+    make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+    cloud $TEMP_PASS_BACKUP ""
+    rm $TEMP_PASS_BACKUP
+
+    create_private "$HOME/Engineering.pdf"
+}
+
+main
+
