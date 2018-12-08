@@ -22,8 +22,10 @@ Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
 Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'ap/vim-buftabline'
 Plug 'bling/vim-bufferline'
+Plug 'lifepillar/vim-solarized8'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'amiorin/ctrlp-z'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'rbgrouleff/bclose.vim'
@@ -35,21 +37,41 @@ else
 endif
 call plug#end()
 
+" CtrlpZ, fasd intergration
+let g:ctrlp_map = ''
+let g:ctrlp_extensions = ['Z']
+
+command! -nargs=* Z :call Z(<f-args>)
+function! Z(...)
+  let cmd = 'fasd -d -e printf'
+  for arg in a:000
+    let cmd = cmd . ' ' . arg
+  endfor
+  let path = system(cmd)
+  if isdirectory(path)
+    echo path
+    exec 'cd' fnameescape(path)
+  endif
+endfunction
+
+
+" Colors
 syntax enable
 set background=dark
-colorscheme solarized
+set termguicolors
+colorscheme solarized8
+if exists('g:GuiLoaded')
+  Guifont! Iosevka:h13
+endif
 
+" Deoplete
 let g:deoplete#enable_at_startup = 1
-
-set mousemodel=popup
 
 " Required:
 filetype plugin indent on
 
-set tabstop=2
-set softtabstop=0
-set shiftwidth=2
-set expandtab
+" Color terminal curser
+" :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
 
 "" Enable hidden buffers
 set hidden
@@ -72,24 +94,28 @@ let g:indentLine_concealcursor = 0
 let g:indentLine_char = '┆'
 let g:indentLine_faster = 1
 
+" Indent
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
+
+" Mouse integration
+set mousemodel=popup
 set mouse=a
 
-let g:javascript_plugin_flow = 1
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:jsx_ext_required = 0
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_fixers = ['eslint']
-let g:ale_fix_on_save = 1 
-let g:ale_completion_enabled = 1
-let b:ale_set_balloons = 1
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" Maps
+let mapleader = " "
+nmap <S-w> :w<CR>
 
-:let mapleader = " "
-
-"" fzf.vim
+" fzf
+cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nmap <leader>o :History<CR>
+nmap <leader>p :GFiles<CR>
+nmap <C-p> :GFiles<CR>
+nmap <leader>/ :Ag<CR>
+nmap <leader><leader> :Commands<CR>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
@@ -107,33 +133,65 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nmap <leader>o :History<CR>
-nmap <leader>p :GFiles<CR>
-nmap <C-p> :GFiles<CR>
-nmap <leader>/ :Ag<CR>
-nmap <leader><leader> :Commands<CR>
-
-nnoremap <leader><tab> :b#<cr>
-nnoremap <C-q> :ALEHover<CR>
-nmap <S-w> :w<CR>
-
+" Ranger
 nnoremap <leader>d :Ranger<CR>
 let g:ranger_replace_netrw = 1
 
 "" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-nnoremap <A-l> <C-W><C-L>
-nnoremap <A-h> <C-W><C-H>
+" nnoremap <A-l> <C-W><C-L>
+" nnoremap <A-h> <C-W><C-H>
 
+" Ale
 nmap <silent> <leader>en :ALENext<cr>
 nmap <silent> <leader>ep :ALEPrevious<cr>
+nnoremap <C-q> :ALEHover<CR>
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_fixers = ['eslint']
+let g:ale_fix_on_save = 1 
+let g:ale_completion_enabled = 1
+let b:ale_set_balloons = 1
 
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+" vim-javascript 
+let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 1
+
+" Navigation
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+inoremap <A-q> <Esc>:bdelete!<CR>
+nnoremap <A-q> <Esc>:bdelete!<CR>
+nnoremap <leader><tab> :b#<cr>
+
+" Tig
 if has('nvim')
   nnoremap <leader>gs :Tig<cr>
+else
+  nmap <leader>gs :!tig status<cr>
+endif
+
+" Nvim specific
+if has('nvim')
   set inccommand=nosplit
+endif
+
+" Teminal mode, make it like tmux
+if has('nvim')
+  nnoremap <A-n> :terminal<CR>i
+  inoremap <A-h> <C-\><C-N><C-w>h
+  inoremap <A-j> <C-\><C-N><C-w>j
+  inoremap <A-k> <C-\><C-N><C-w>k
+  inoremap <A-l> <C-\><C-N><C-w>l
   tnoremap <Esc> <C-\><C-n>
   tnoremap <M-[> <Esc>
   tnoremap <C-v><Esc> <Esc>
@@ -141,28 +199,15 @@ if has('nvim')
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
-  inoremap <A-h> <C-\><C-N><C-w>h
-  inoremap <A-j> <C-\><C-N><C-w>j
-  inoremap <A-k> <C-\><C-N><C-w>k
-  inoremap <A-l> <C-\><C-N><C-w>l
-  nnoremap <A-n> :terminal<CR>i
-  tnoremap <A-n> <C-\><C-n>:terminal<CR>i
-  nnoremap <A-h> <C-w>h
-  nnoremap <A-j> <C-w>j
-  nnoremap <A-k> <C-w>k
-  nnoremap <A-l> <C-w>l
-  inoremap <A-q> <Esc>:bdelete!<CR>
-  tnoremap <A-q> <C-\><C-n>:bdelete!<CR>
-  nnoremap <A-q> <Esc>:bdelete!<CR>
   tnoremap <A-l> <C-\><C-n>:bnext<CR>
   tnoremap <A-h> <C-\><C-n>:bprev<CR>
-else
-  nmap <leader>gs :!tig status<cr>
+  tnoremap <A-q> <C-\><C-n>:bdelete!<CR>
+  tnoremap <A-n> <C-\><C-n>:terminal<CR>i
 endif
 
+" Switch buffers
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprev<CR>
-
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -181,21 +226,22 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-
 " Disable visualbell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
 
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
+" Clipboard
+" noremap YY "+y<CR>
+" noremap <leader>p "+gP<CR>
+" noremap XX "+x<CR>
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
 
+" Airline
 " let g:airline_theme='minimalist'
 let g:airline_section_x=''
 let g:airline_section_y=''
