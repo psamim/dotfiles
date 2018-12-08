@@ -1,0 +1,4 @@
+#! /bin/bash
+source /home/samim/src/ledger-autosync/venv/bin/activate
+export PATH=$PATH:/home/samim/src/ledger-autosync/venv/bin
+ledger-autosync $@
