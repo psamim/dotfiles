@@ -45,6 +45,10 @@ rm -rf "$HOME/.vimperator"
 ln -sf "$PWD/vimperator" "$HOME/.vimperator"
 ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
 
+# Vim
+rm -rf "$HOME/.vimrc"
+ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
+
 # Muttator
 rm -rf "$HOME/.muttator"
 ln -sf "$PWD/muttator" "$HOME/.muttator"

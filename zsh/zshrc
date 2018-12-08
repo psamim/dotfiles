@@ -83,8 +83,8 @@ export JAVA_HOME=/usr/lib/jvm/default
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
 export ANDROID_HOME="/media/hdd/android-sdk/"
-export EDITOR=vim
-export GIT_EDITOR=vim
+export EDITOR=nvim
+export GIT_EDITOR=nvim
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -94,8 +94,10 @@ export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
 export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
 export BORG_CONFIG_DIR="/home/samim/borg"
 export BORG_CACHE_DIR="/home/samim/borg/cache"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 alias e=$EDITOR
+alias vim=nvim
 alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
 alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
 alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"

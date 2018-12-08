@@ -192,9 +192,9 @@ if has('nvim')
   inoremap <A-j> <C-\><C-N><C-w>j
   inoremap <A-k> <C-\><C-N><C-w>k
   inoremap <A-l> <C-\><C-N><C-w>l
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
+  tnoremap <Esc><Esc> <C-\><C-n>
+  " tnoremap <M-[> <Esc>
+  " tnoremap <C-v><Esc> <Esc>
   tnoremap <A-h> <C-\><C-N><C-w>h
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k

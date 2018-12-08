@@ -1,5 +1,6 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 # -*- mode: sh; -*-
+
 
 function info() { chalk -t "$(date) - {yellow $* }" }
 function error() { chalk -t "$(date) - {red $* }" }
@@ -77,7 +78,15 @@ function borg_remote_backup() {
 
     mkdir $SOURCE
     sshfs $REMOTE $SOURCE
+    local SSHFS_EXIT=$?
+
     cd $SOURCE
+
+    if [ ${SSHFS_EXIT} != 0 ];
+    then
+        error "Cannot connect to $REMOTE"
+        return 1;
+    fi
 
     borg_backup . $NAME $OPTIONS
     cd
@@ -168,10 +177,10 @@ function main() {
 
     # gpg encrypted backup of passwords and send to cloud
 
-    # local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
-    # make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-    # send $TEMP_PASS_BACKUP ""
-    # rm $TEMP_PASS_BACKUP
+    local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+    make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+    send $TEMP_PASS_BACKUP ""
+    rm $TEMP_PASS_BACKUP
 
     # encrypted backup with borg and send to cloud
 
