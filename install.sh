@@ -112,6 +112,10 @@ ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js
 rm -rf $HOME/.config/pacman
 ln -sf $PWD/pacman $HOME/.config/pacman
 
+# ledger-autosync
+rm -rf $HOME/.config/ledger-autosync
+ln -sf $PWD/ledger-autosync $HOME/.config/ledger-autosync
+
 # yaourt
 rm -rf $HOME/.config/yaourt
 ln -sf $PWD/yaourt $HOME/.config/yaourt

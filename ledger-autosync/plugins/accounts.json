@@ -1,0 +1,26 @@
+{
+    "44462566": {
+        "account": "Expenses:Groceries",
+        "name": "Super Jolfa"
+    },
+    "2026237": {
+        "account": "Expenses:Furniture:Stationary",
+        "name": "Shahre Ketab Nazar"
+    },
+    "5141205": {
+        "account": "Expenses:Food:Dinner",
+        "name": "Edmond"
+    },
+    "5022291057697045": {
+        "account": "Expenses:Dad",
+        "name": "Mahin Manshadi Card"
+    },
+    "6037691579546540": {
+        "account": "Expenses:Adjustment",
+        "name": "Shahin Manshadi Card"
+    },
+    "2102079": {
+        "account": "Expenses:Food:Lunch",
+        "name": "Agha Joon Kabab Shahin Shahr"
+    }
+}
