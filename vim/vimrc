@@ -59,7 +59,9 @@ endfunction
 syntax enable
 set background=dark
 set termguicolors
+let g:solarized_termtrans=1
 colorscheme solarized8
+set cursorline
 if exists('g:GuiLoaded')
   Guifont! Iosevka:h13
 endif
@@ -67,8 +69,16 @@ endif
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 
-" Required:
+" Other
 filetype plugin indent on
+set autowrite
+
+" Cd to current file directory
+command CDC cd %:p:h 
+
+" vim-bufferline
+ let g:bufferline_echo = 0
+ let g:bufferline_show_bufnr = 0
 
 " Color terminal curser
 " :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
@@ -107,6 +117,8 @@ set mouse=a
 " Maps
 let mapleader = " "
 nmap <S-w> :w<CR>
+nmap <leader>1 :on<CR>
+inoremap jj <Esc>
 
 " fzf
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -155,6 +167,7 @@ let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1 
 let g:ale_completion_enabled = 1
 let b:ale_set_balloons = 1
+let g:ale_open_list = 'on_save'
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -165,19 +178,21 @@ let g:jsx_ext_required = 0
 let g:javascript_plugin_flow = 1
 
 " Navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <A-j> <C-w>h
+nnoremap <A-k> <C-w>l
+" nnoremap <A-j> <C-w>j
+" nnoremap <A-k> <C-w>k
 inoremap <A-q> <Esc>:bdelete!<CR>
 nnoremap <A-q> <Esc>:bdelete!<CR>
 nnoremap <leader><tab> :b#<cr>
+nnoremap <A-l> :bnext<CR>
+nnoremap <A-h> :bprev<CR>
 
 " Tig
 if has('nvim')
-  nnoremap <leader>gs :Tig<cr>
+  nnoremap <leader>g :Tig<cr>
 else
-  nmap <leader>gs :!tig status<cr>
+  nmap <leader>g :!tig status<cr>
 endif
 
 " Nvim specific
@@ -205,10 +220,6 @@ if has('nvim')
   tnoremap <A-n> <C-\><C-n>:terminal<CR>i
 endif
 
-" Switch buffers
-nnoremap <A-l> :bnext<CR>
-nnoremap <A-h> :bprev<CR>
-
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
@@ -224,6 +235,8 @@ cnoreabbrev wQ wq
 cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
+cnoreabbrev z Z
+cnoreabbrev j Z
 cnoreabbrev Qall qall
 
 " Disable visualbell
@@ -233,9 +246,8 @@ if has('autocmd')
 endif
 
 " Clipboard
-" noremap YY "+y<CR>
-" noremap <leader>p "+gP<CR>
-" noremap XX "+x<CR>
+noremap <C-c> "+y<CR>
+inoremap <C-v> <Esc>"+gPa
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
