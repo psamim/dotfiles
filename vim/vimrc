@@ -26,6 +26,10 @@ Plug 'bling/vim-bufferline'
 Plug 'lifepillar/vim-solarized8'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'amiorin/ctrlp-z'
+Plug 'tpope/vim-surround'
+Plug 'thaerkh/vim-workspace'
+Plug 'tpope/vim-repeat'
+Plug 'simnalamburt/vim-mundo'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'rbgrouleff/bclose.vim'
@@ -72,6 +76,11 @@ let g:deoplete#enable_at_startup = 1
 " Other
 filetype plugin indent on
 set autowrite
+setlocal spell spelllang=en_us
+ 
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+endif
 
 " Cd to current file directory
 command CDC cd %:p:h 
@@ -117,6 +126,7 @@ set mouse=a
 " Maps
 let mapleader = " "
 nmap <S-w> :w<CR>
+nmap <S-q> :w<CR>:bd<CR>
 nmap <leader>1 :on<CR>
 inoremap jj <Esc>
 
@@ -182,8 +192,8 @@ nnoremap <A-j> <C-w>h
 nnoremap <A-k> <C-w>l
 " nnoremap <A-j> <C-w>j
 " nnoremap <A-k> <C-w>k
-inoremap <A-q> <Esc>:bdelete!<CR>
-nnoremap <A-q> <Esc>:bdelete!<CR>
+inoremap <A-q> <Esc>:bdelete<CR>
+nnoremap <A-q> <Esc>:bdelete<CR>
 nnoremap <leader><tab> :b#<cr>
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprev<CR>
@@ -219,6 +229,13 @@ if has('nvim')
   tnoremap <A-q> <C-\><C-n>:bdelete!<CR>
   tnoremap <A-n> <C-\><C-n>:terminal<CR>i
 endif
+
+augroup MyTermMappings
+  autocmd!
+  autocmd TermOpen * nnoremap <buffer> <A-q> <Esc>:bdelete!<CR>
+augroup END
+
+autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | silent! normal i | endif
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
