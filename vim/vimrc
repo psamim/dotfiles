@@ -5,7 +5,7 @@ Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
@@ -14,7 +14,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'francoiscabrol/ranger.vim'
-Plug 'haya14busa/vim-keeppad'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'iberianpig/tig-explorer.vim'
@@ -30,6 +29,7 @@ Plug 'tpope/vim-surround'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
+Plug 'haya14busa/vim-keeppad'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'rbgrouleff/bclose.vim'
@@ -44,6 +44,10 @@ call plug#end()
 " CtrlpZ, fasd intergration
 let g:ctrlp_map = ''
 let g:ctrlp_extensions = ['Z']
+
+" vim-workspace
+let g:workspace_session_name = '.session.vim'
+let g:workspace_autosave = 0
 
 command! -nargs=* Z :call Z(<f-args>)
 function! Z(...)
@@ -177,11 +181,11 @@ let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1 
 let g:ale_completion_enabled = 1
 let b:ale_set_balloons = 1
-let g:ale_open_list = 'on_save'
+" let g:ale_open_list = 'on_save'
 
 " supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " vim-javascript 
 let g:jsx_ext_required = 0
