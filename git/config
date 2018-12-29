@@ -3,7 +3,7 @@
 	name = Samim Pezeshki
 	email = psamim@gmail.com
 [core]
-  editor = nvim
+  editor = nvr --remote-wait-silent
 	excludesfile = ~/.gitignore
 	autocrlf = input
 [alias]
