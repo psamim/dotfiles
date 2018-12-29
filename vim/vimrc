@@ -5,7 +5,7 @@ Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-" Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
@@ -15,7 +15,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-highlightedyank'
@@ -30,6 +29,12 @@ Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 Plug 'haya14busa/vim-keeppad'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'rbgrouleff/bclose.vim'
@@ -62,20 +67,41 @@ function! Z(...)
   endif
 endfunction
 
+" lsp
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/bin/flow-language-server', '--stdio' ],
+    \ 'javascript.jsx': ['/usr/bin/flow-language-server', '--stdio' ],
+    \ }"
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
 
 " Colors
 syntax enable
 set background=dark
 set termguicolors
-let g:solarized_termtrans=1
+" let g:solarized_termtrans=1
 colorscheme solarized8
 set cursorline
 if exists('g:GuiLoaded')
   Guifont! Iosevka:h13
 endif
 
+augroup TerminalStuff
+    " Clear old autocommands
+    au! 
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Other
 filetype plugin indent on
@@ -179,17 +205,19 @@ let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1 
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
+" set completeopt=menu,menuone,preview,noselect,noinsert "" see help *ale-completion-completopt-bug*
 let b:ale_set_balloons = 1
 " let g:ale_open_list = 'on_save'
+let g:ale_sign_column_always = 1
 
 " supertab
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " vim-javascript 
 let g:jsx_ext_required = 0
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_flow = 1
 
 " Navigation
 nnoremap <A-j> <C-w>h
