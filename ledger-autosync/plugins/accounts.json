@@ -51,11 +51,11 @@
         "account": "Expenses:Medical:Dental",
         "name": "Dr. Ghasemi"
     },
-    "830096 ": {
+    "830096": {
         "account": "Expenses:Groceries",
         "name": "Ghassani Gudarz"
     },
-    "962188 ": {
+    "962188": {
         "account": "Expenses:Groceries",
         "name": "Mive Jannat"
     },
@@ -78,5 +78,74 @@
     "92000846": {
         "account": "Expenses:Gift:Other",
         "name": "Flower Shop Nazar"
+    },
+    "44428966": {
+        "account": "Expenses:Groceries",
+        "name": "Morgh Hannaneh Nazar Gharbi"
+
+    },
+    "2795074": {
+        "account": "Expenses:Groceries",
+        "name": "Super Nazar Gharbi"
+    },
+    "3553255": {
+        "account": "Expenses:Furniture:Other",
+        "name": "Plasco Hakim Nezami"
+    },
+    "4348959642": {
+        "account": "Expenses:Rent",
+        "name": "Seraj"
+    },
+    "1936881": {
+        "account": "Expenses:Food:Cafe",
+        "name": "Chaykhane Tohid"
+    },
+    "23163356": {
+        "account": "Expenses:Fun:Plant",
+        "name": "Aquaplant Hakim Nezami"
+    },
+    "23263487": {
+        "account": "Expenses:Food:Lunch",
+        "name": "Akbar Joojeh"
+    },
+    "2723342": {
+        "account": "Expenses:Groceries",
+        "name": "Milad Shahin Shahr"
+    },
+    "3267100": {
+        "account": "Expenses:Groceries",
+        "name": "Super Faraz"
+    },
+    "6037697434105414": {
+        "account": "Expenses:Adjustment",
+        "name": "Parastoo Hakim"
+    },
+    "4655541923": {
+        "account": "Expenses:Adjustment",
+        "name": "Raffi Dilanchian"
+    },
+    "21229889": {
+        "account": "Expenses:Food:Dinner",
+        "name": "Nikan"
+    },
+    "6037997438990047": {
+        "account": "Expenses:Adjustment",
+        "name": "Zahra Bagheri"
+    },
+    "33129603": {
+        "account": "Expenses:Furniture:Other",
+        "name": "Flor Roshan"
+    },
+    "6037691515802056": {
+        "account": "Expenses:Adjustment",
+        "name": "Farshid Badakhsh"
+    },
+    "2877035": {
+        "account": "Expenses:Food:Lunch",
+        "name": "Akbar Joojeh"
+    },
+    "263290": {
+        "account": "Expenses:Furniture:Other",
+        "name": "Noel Barghi Khaghani"
     }
 }
