@@ -69,6 +69,7 @@ endfunction
 
 " lsp
 let g:LanguageClient_serverCommands = {
+    \ 'python': ['/usr/bin/pyls'],
     \ 'javascript': ['/usr/bin/flow-language-server', '--stdio' ],
     \ 'javascript.jsx': ['/usr/bin/flow-language-server', '--stdio' ],
     \ }"

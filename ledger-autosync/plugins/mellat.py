@@ -68,7 +68,7 @@ class Mellat(CsvConverter):
             jdate.weekday()]
         metadata['Time'] = row[t['time']]
 
-        unit = ''
+        unit = 'kIRT'
 
         return Transaction(
             cleared=True,
