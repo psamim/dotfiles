@@ -44,7 +44,7 @@
         "name": "Parking Alzahra"
     },
     "760007": {
-        "account": "Expenses:Groceries",
+        "account": "Expenses:Furniture:Plastic",
         "name": "Plasco Hakim Nezami"
     },
     "632081": {
@@ -89,7 +89,7 @@
         "name": "Super Nazar Gharbi"
     },
     "3553255": {
-        "account": "Expenses:Furniture:Other",
+        "account": "Expenses:Furniture:Plastic",
         "name": "Plasco Hakim Nezami"
     },
     "4348959642": {
@@ -147,5 +147,25 @@
     "263290": {
         "account": "Expenses:Furniture:Other",
         "name": "Noel Barghi Khaghani"
+    },
+    "98107094": {
+        "account": "Expenses:Medical:Beauty:Haircut",
+        "name": "Henrik Haricut"
+    },
+    "1954865": {
+        "account": "Expenses:Groceries",
+        "name": "Sahakian"
+    },
+    "3227431": {
+        "account": "Expenses:Furniture:Plastic",
+        "name": "Sahakian"
+    },
+    "1092849": {
+        "account": "Expenses:Groceries",
+        "name": "Nazar Gharbi Labaniait"
+    },
+    "586319": {
+        "account": "Expenses:Groceries",
+        "name": "Ajil Charsoogh Khaghani"
     }
 }

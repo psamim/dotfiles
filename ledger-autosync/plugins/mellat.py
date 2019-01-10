@@ -47,9 +47,11 @@ class Mellat(CsvConverter):
 
         fromAccount = self.unknownaccount
         foundAccount = self.accounts.get(str(accountNumber), None)
+        payee = name
         if accountNumber is not '' and foundAccount:
             fromAccount = foundAccount['account']
             metadata['POS'] = foundAccount['name']
+            payee = foundAccount['name']
 
         if outputAmount > 0:
             amount = outputAmount / 10000
@@ -73,7 +75,7 @@ class Mellat(CsvConverter):
         return Transaction(
             cleared=True,
             date=date,
-            payee='',
+            payee=payee,
             metadata=metadata,
             postings=[
                 Posting(
