@@ -19,3 +19,9 @@ __pycache__
 *~
 .dir-locals.el
 .tern-port
+
+.eslintrc.js
+.lvimrc
+.session.vim
+.undodir/
+

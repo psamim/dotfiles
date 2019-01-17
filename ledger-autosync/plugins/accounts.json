@@ -29,7 +29,7 @@
     },
     "44418023": {
         "account": "Expenses:Groceries",
-        "name": "Mive Jannat"
+        "name": "Grocery Store Jannat"
     },
     "10594497": {
         "account": "Expenses:Medical:Drugs",
@@ -57,7 +57,7 @@
     },
     "962188": {
         "account": "Expenses:Groceries",
-        "name": "Mive Jannat"
+        "name": "Grocery Store Jannat"
     },
     "1125934": {
         "account": "Expenses:Medical:Other",
@@ -167,5 +167,41 @@
     "586319": {
         "account": "Expenses:Groceries",
         "name": "Ajil Charsoogh Khaghani"
+    },
+    "98226459": {
+        "account": "Expenses:Groceries",
+        "name": "Bread Bakery Mostajeran"
+    },
+    "5082660341": {
+        "account": "Liabilities:Parham",
+        "name": "Parham Pezeshki"
+    },
+    "3161473": {
+        "account": "Expenses:Groceries",
+        "name": "Teen Doughnut"
+    },
+    "5892101173748514": {
+        "account": "Liabilities:Adib",
+        "name": "Adib Ferdosian"
+    },
+    "23147692": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Mohtasham"
+    },
+    "3452396": {
+        "account": "Expenses:Groceries",
+        "name": "Coffee Ghahvineh"
+    },
+    "3126910": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Sangtrashha"
+    },
+    "2716456": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Vali Asr Alley"
+    },
+    "3103180": {
+        "account": "Expenses:Groceries",
+      "name": "Gaz Antique"
     }
 }

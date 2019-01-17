@@ -82,7 +82,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 export JAVA_HOME=/usr/lib/jvm/default
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
-export ANDROID_HOME="/media/hdd/android-sdk/"
+export ANDROID_HOME="/home/samim/Android/Sdk"
 export EDITOR=nvr
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
@@ -96,6 +96,7 @@ export BORG_CACHE_DIR="/home/samim/borg/cache"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 alias e=$EDITOR
+alias cat=bat
 alias vim=nvim
 alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
 alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
