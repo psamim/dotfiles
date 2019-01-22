@@ -88,6 +88,7 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"
 export LEDGER_FILE="$HOME/Notes/accounting/ledger.ledger"
+export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
 export TOMBS="$HOME/tombs"
 export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
 export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
