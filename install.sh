@@ -6,6 +6,10 @@
 mkdir -p "$HOME/.aria2"
 ln -sf $PWD/aria2/* $HOME/.aria2/
 
+# tridactyl
+rm -f "$HOME/.tridactylrc"
+ln -sf $PWD/tridactyl/tridactylrc $HOME/.tridactylrc 
+
 # roffi pass
 mkdir -p "$HOME/.config/rofi-pass"
 ln -sf $PWD/rofi-pass/config $HOME/.config/rofi-pass/config

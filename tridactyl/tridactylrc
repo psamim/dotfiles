@@ -1,0 +1,76 @@
+" bovine3dom's dogfood  -*- mode: vimrc; -*-
+
+" Provided only as an example.
+" Do not install/run without reading through as you may be surprised by some
+" of the settings.
+
+" May require the latest beta builds.
+
+" Move this to $XDG_CONFIG_DIR/tridactyl/tridactylrc (that's
+" ~/.config/tridactyl/tridactylrc to mere mortals) or ~/.tridactylrc and
+" install the native messenger (:installnative in Tridactyl). Run :source to
+" get it in the browser, or just restart.
+
+" NB: If you want "vim-like" behaviour where removing a line from 
+" here makes the setting disappear, uncomment the line below.
+
+sanitise tridactyllocal tridactylsync
+
+"
+" Binds
+"
+
+" Comment toggler for Reddit and Hacker News
+bind ;c hint -c [class*="expand"],[class="togg"]
+bind <A-h> tabprev
+bind <A-l> tabnext_gt
+bind j scrollline 3
+bind k scrollline -3
+bind gs tab 3
+bind <space-tab> changelistjump -1
+" Use Firefox find
+unbind <C-f> 
+bind n exclaim_quiet xdotool getactivewindow key Ctrl+g 
+
+"
+" Misc settings
+"
+
+" Sane hinting mode
+set hintfiltermode vimperator-reflow
+set hintchars asdfjkl
+set theme dark
+
+" Make Tridactyl work on more sites at the expense of some security
+set csp clobber
+fixamo_quiet
+
+"
+" URL redirects
+"
+
+" New reddit is bad
+" autocmd DocStart www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
+
+autocmd TabEnter .* unfocus
+
+
+unbindurl mail.google.com j
+unbindurl mail.google.com k
+unbindurl mail.google.com gi
+unbindurl mail.google.com x
+unbindurl daskpos.slack.com <C-k>
+unbindurl app.clickup.com k
+unbindurl app.clickup.com j
+unbindurl app.clickup.com /
+unbindurl app.clickup.com n
+
+blacklistadd meet.google.com
+
+set searchurls.r   https://old.reddit.com/r/%s
+set searchurls.d https://duckduckgo.com/?q=%s
+quickmark l http://libgen.io/
+set editorcmd konsole -e nvim -c "call feedkeys('GA')"
+
+" This will have to do until someone writes us a nice syntax file :)
+" vim: set filetype=vim:
