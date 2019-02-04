@@ -3,11 +3,11 @@
 	name = Samim Pezeshki
 	email = psamim@gmail.com
 [core]
-  editor = nvr --remote-wait-silent
+  	editor = nvr --remote-wait-silent
 	excludesfile = ~/.gitignore
 	autocrlf = input
 [alias]
-  st = status
+  	st = status
 [push]
 	default = simple
 # [http]

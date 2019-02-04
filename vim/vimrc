@@ -12,6 +12,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'tomasr/molokai'
@@ -81,6 +82,7 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 
 " Colors
+set number
 syntax enable
 set background=dark
 set termguicolors
@@ -92,9 +94,11 @@ if exists('g:GuiLoaded')
 endif
 
 augroup TerminalStuff
-    " Clear old autocommands
-    au! 
-    autocmd TermOpen * setlocal nonumber norelativenumber
+    au!
+    autocmd TermOpen * nnoremap <buffer> <A-q> <Esc>:bdelete!<CR>
+    autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | silent! normal i | endif
+    autocmd TermOpen * setlocal nonumber norelativenumber noshowcmd noruler
+    autocmd TermOpen * echo ""
 augroup END
 
 " Deoplete
@@ -112,7 +116,7 @@ function! CompleteSnippet()
   if g:ulti_expand_res > 0
     return
   endif
-  
+
   let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
   let l:comp_len = len(l:complete)
 
@@ -143,13 +147,13 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 filetype plugin indent on
 set autowrite
 setlocal spell spelllang=en_us
- 
+
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 
 " Cd to current file directory
-command CDC cd %:p:h 
+command CDC cd %:p:h
 
 " vim-bufferline
  let g:bufferline_echo = 0
@@ -202,24 +206,15 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nmap <leader>o :History<CR>
 nmap <leader>p :GFiles<CR>
 nmap <C-p> :GFiles<CR>
-nmap <leader>/ :Ag<CR>
+nmap <leader>/ :Rg<CR>
 nmap <leader><leader> :Commands<CR>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
-" The Silver Searcher
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
+" Hide statusline in fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Ranger
 nnoremap <leader>d :Ranger<CR>
@@ -240,7 +235,7 @@ let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_fixers = ['eslint']
-let g:ale_fix_on_save = 1 
+let g:ale_fix_on_save = 1
 " let g:ale_completion_enabled = 1
 " set completeopt=menu,menuone,preview,noselect,noinsert "" see help *ale-completion-completopt-bug*
 let b:ale_set_balloons = 1
@@ -251,7 +246,7 @@ let g:ale_sign_column_always = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
-" vim-javascript 
+" vim-javascript
 let g:jsx_ext_required = 0
 " let g:javascript_plugin_flow = 1
 
@@ -298,12 +293,6 @@ if has('nvim')
   tnoremap <A-n> <C-\><C-n>:terminal<CR>i
 endif
 
-augroup MyTermMappings
-  autocmd!
-  autocmd TermOpen * nnoremap <buffer> <A-q> <Esc>:bdelete!<CR>
-augroup END
-
-autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | silent! normal i | endif
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -345,3 +334,4 @@ let g:airline_section_y=''
 " let g:airline_section_warning=''
 let g:airline#extensions#ale#enabled = 1
 " let g:airline#extensions#tabline#enabled = 1
+set noshowmode
