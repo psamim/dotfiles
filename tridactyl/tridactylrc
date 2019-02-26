@@ -66,6 +66,7 @@ unbindurl app.clickup.com /
 unbindurl app.clickup.com n
 
 blacklistadd meet.google.com
+blacklistadd hass.psam.im
 
 set searchurls.r   https://old.reddit.com/r/%s
 set searchurls.d https://duckduckgo.com/?q=%s

@@ -53,7 +53,7 @@
     },
     "830096": {
         "account": "Expenses:Groceries",
-        "name": "Ghassani Gudarz"
+        "name": "Ghassabi Gudarz"
     },
     "962188": {
         "account": "Expenses:Groceries",
@@ -158,7 +158,7 @@
     },
     "3227431": {
         "account": "Expenses:Furniture:Plastic",
-        "name": "Sahakian"
+        "name": "Shike No"
     },
     "1092849": {
         "account": "Expenses:Groceries",
@@ -227,5 +227,25 @@
     "3523810": {
         "account": "Expenses:Transportation:Fuel",
         "name": "Mardavij Station"
+    },
+    "2923498": {
+        "account": "Expenses:Groceries",
+        "name": "Super Rahimi"
+    },
+    "413011": {
+        "account": "Expenses:Groceries",
+        "name": "Super Jannat"
+    },
+    "91270857": {
+        "account": "Expenses:Groceries",
+        "name": "Super Jannat"
+    },
+    "21636792": {
+        "account": "Expenses:Groceries",
+        "name": "Super Faraz"
+    },
+    "963903": {
+        "account": "Expenses:Medical:Drugs",
+        "name": "Tebbolkabir"
     }
 }

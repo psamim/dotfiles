@@ -14,7 +14,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'francoiscabrol/ranger.vim'
+Plug 'shumphrey/fugitive-gitlab.vim'
+" Plug 'francoiscabrol/ranger.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'ledger/vim-ledger'
@@ -217,7 +219,8 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Ranger
-nnoremap <leader>d :Ranger<CR>
+" nnoremap <leader>d :Ran:ger<CR>
+nnoremap <leader>d :NERDTreeFind<CR>
 let g:ranger_replace_netrw = 1
 
 "" Split
@@ -321,7 +324,7 @@ endif
 
 " Clipboard
 noremap <C-c> "+y<CR>
-inoremap <C-v> <Esc>"+gPa
+inoremap <C-v> <Esc>l"+gPa
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv

@@ -58,7 +58,6 @@ group by commands.argv order by count(*) desc limit 1"
 tmb() {
     local WHERE=$TOMBS/$1
     tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
-    fm $WHERE
 }
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
@@ -110,6 +109,7 @@ alias jj='fasd_cd -d -i'
 alias tmux='direnv exec / tmux'
 alias magit='emacsclient -nw -e \(magit-status\)'
 alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
+alias ledger="ledger --pedantic --explicit --strict"
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH

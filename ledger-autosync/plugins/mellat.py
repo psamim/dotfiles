@@ -50,8 +50,10 @@ class Mellat(CsvConverter):
         payee = name
         if accountNumber is not '' and foundAccount:
             fromAccount = foundAccount['account']
-            metadata['POS'] = foundAccount['name']
             payee = foundAccount['name']
+
+        if accountNumber is not '':
+            payee = "(" + accountNumber + ") " + payee
 
         if outputAmount > 0:
             amount = outputAmount / 10000
