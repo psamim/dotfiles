@@ -1,0 +1,18 @@
+{
+  "tsserver.enable": false,
+  "languageserver": {
+    "flow": {
+      "command": "flow",
+      "args": ["lsp"],
+      "filetypes": ["javascript", "javascriptreact"],
+      "initializationOptions": {},
+      "requireRootPattern": true,
+      "settings": {},
+      "rootPatterns": [".flowconfig"]
+    }
+  },
+  "snippets.extends": {
+    "javascript.jsx": ["javascript"],
+    "javascriptreact": ["javascript"]
+  }
+}

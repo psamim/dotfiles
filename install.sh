@@ -52,6 +52,8 @@ ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
 # Vim
 rm -rf "$HOME/.vimrc"
 ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
+rm -rf "$HOME/.config/nvim"
+ln -sf "$PWD/vim/nvim" "$HOME/.config/nvim"
 
 # Muttator
 rm -rf "$HOME/.muttator"
