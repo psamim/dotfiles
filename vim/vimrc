@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
+Plug 'TaDaa/vimade'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -15,7 +16,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
-" Plug 'francoiscabrol/ranger.vim'
+Plug 'francoiscabrol/ranger.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
@@ -32,27 +33,16 @@ Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 Plug 'haya14busa/vim-keeppad'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'embear/vim-localvimrc'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'rbgrouleff/bclose.vim'
-  Plug 'codeindulgence/vim-tig'
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 call plug#end()
 
 " CtrlpZ, fasd intergration
 let g:ctrlp_map = ''
 let g:ctrlp_extensions = ['Z']
+
+let g:localvimrc_enable=1
 
 " vim-workspace
 let g:workspace_session_name = '.session.vim'
@@ -71,17 +61,23 @@ function! Z(...)
   endif
 endfunction
 
-" lsp
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['/usr/bin/pyls'],
-    \ 'javascript': ['/usr/bin/flow-language-server', '--stdio' ],
-    \ 'javascript.jsx': ['/usr/bin/flow-language-server', '--stdio' ],
-    \ }"
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
+" coc
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+imap <C-l> <Plug>(coc-snippets-expand)
 
 " Colors
 set number
@@ -102,47 +98,6 @@ augroup TerminalStuff
     autocmd TermOpen * setlocal nonumber norelativenumber noshowcmd noruler
     autocmd TermOpen * echo ""
 augroup END
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
-" snippets
-" https://github.com/autozimu/LanguageClient-neovim/issues/379"
-let g:ulti_expand_res = 0 "default value, just set once
-function! CompleteSnippet()
-  if empty(v:completed_item)
-    return
-  endif
-
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res > 0
-    return
-  endif
-
-  let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-  let l:comp_len = len(l:complete)
-
-  let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-  let l:cur_line = getline('.')
-
-  let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-  let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-
-  call setline('.', l:start . l:end)
-  call cursor('.', l:cur_col - l:comp_len + 2)
-
-  call UltiSnips#Anon(l:complete)
-endfunction
-
-autocmd CompleteDone * call CompleteSnippet()
-
-
-imap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
-
-let g:UltiSnipsExpandTrigger="<NUL>"
-let g:UltiSnipsListSnippets="<NUL>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
 " Other
@@ -218,12 +173,12 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" Ranger
-" nnoremap <leader>d :Ran:ger<CR>
+" File manager
+" nnoremap <leader>d :Ranger<CR>
 nnoremap <leader>d :NERDTreeFind<CR>
-let g:ranger_replace_netrw = 1
+" let g:ranger_replace_netrw = 1
 
-"" Split
+" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 " nnoremap <A-l> <C-W><C-L>
@@ -337,4 +292,6 @@ let g:airline_section_y=''
 " let g:airline_section_warning=''
 let g:airline#extensions#ale#enabled = 1
 " let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 set noshowmode
