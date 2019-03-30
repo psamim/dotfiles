@@ -3,6 +3,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'TaDaa/vimade'
+Plug 'mcchrish/nnn.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -47,6 +48,8 @@ let g:localvimrc_enable=1
 " vim-workspace
 let g:workspace_session_name = '.session.vim'
 let g:workspace_autosave = 0
+
+nnoremap <leader>n :NnnPicker %:p:h<CR>
 
 command! -nargs=* Z :call Z(<f-args>)
 function! Z(...)

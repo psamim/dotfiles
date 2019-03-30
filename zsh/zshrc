@@ -121,3 +121,5 @@ export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(direnv hook zsh)"
 eval $(keychain --eval --quiet)
 # eval "$(pyenv init -)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
