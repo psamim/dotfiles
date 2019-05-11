@@ -2,8 +2,8 @@
 # -*- mode: sh; -*-
 
 
-function info() { chalk -t "$(date) - {yellow $* }" }
-function error() { chalk -t "$(date) - {red $* }" }
+function info() { chalk -t "$(date -Iminutes) - {yellow $* }" }
+function error() { chalk -t "$(date -Iminutes) - {red $* }" }
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 
 
@@ -142,9 +142,9 @@ function make_tar_gpg_sym() {
 function send() {
     info "Sending '$1' to cloud as name '$2'"
     info "Sending to passport"
-    rclone sync --progress --quiet $1 passport:/mnt/mybook/$2
+    rclone sync --checkers=1 --progress --quiet $1 passport:/mnt/mybook/$2
     echo # New Line
-    for remote in dropbox drive; do
+    for remote in dropbox drive disroot; do
         info "Sending to remote '$remote'"
         rclone sync --progress --quiet --transfers=1 $1 $remote:$2
         echo # New Line
@@ -186,7 +186,7 @@ function main() {
 
     borg_backup /home/samim/tombs/backups/ backups
     borg_backup /home/samim/Calibre calibre
-    borg_remote_backup pi@192.168.31.20:/home/homeassistant/.homeassistant hass '-e *home-assistant_v2.db'
+    # borg_remote_backup pi@192.168.31.20:/home/pi/server-compose hass '-e *home-assistant_v2.db'
     borg_remote_backup pi@192.168.31.20:/etc hassetc
     send /home/samim/borg/repos borg-repos
 }

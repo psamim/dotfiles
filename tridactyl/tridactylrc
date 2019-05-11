@@ -64,9 +64,23 @@ unbindurl app.clickup.com k
 unbindurl app.clickup.com j
 unbindurl app.clickup.com /
 unbindurl app.clickup.com n
+unbindurl pinafore.social c
+unbindurl pinafore.social j
+unbindurl pinafore.social k
+unbindurl pinafore.social r
+unbindurl pinafore.social 1
+unbindurl pinafore.social 2
+unbindurl pinafore.social 3
+unbindurl pinafore.social 4
+unbindurl pinafore.social 5
+unbindurl pinafore.social .
+unbindurl pinafore.social b
+unbindurl pinafore.social ?
+unbindurl pinafore.social p
+unbindurl pinafore.social f
 
 blacklistadd meet.google.com
-blacklistadd hass.psam.im
+blacklistadd central.psam.im
 
 set searchurls.r   https://old.reddit.com/r/%s
 set searchurls.d https://duckduckgo.com/?q=%s
