@@ -8,18 +8,17 @@ import os
 
 t = {
     'mande': 'مانده',
-    'bestankar': 'مبلغ بستانكار',
-    'bedehkar': 'مبلغ بدهكار',
+    'mablagh': 'مبلغ گردش',
     'sharh': 'شرح',
-    'nam': 'نام واريز كننده',
-    'tarikh': 'تاريخ تراكنش',
-    'time': 'زمان تراكنش',
+    'zinaf': 'واریز کننده/ ذیتفع',
+    'time': 'زمان',
+    'date': 'تاریخ',
     'radif': 'رديف'
 }
 
 
 class Mellat(CsvConverter):
-    FIELDSET = set([t['radif'], t['mande']])
+    FIELDSET = set([t['mande'], t['mablagh']])
 
     def __init__(self, *args, **kwargs):
         super(Mellat, self).__init__(*args, **kwargs)
@@ -32,12 +31,10 @@ class Mellat(CsvConverter):
         metadata = {
             'Desc.': persian.convert_fa_numbers(row[t['sharh']]),
         }
-        inputAmount = int(row[t['bestankar']])
-        outputAmount = int(row[t['bedehkar']])
-        amount = 0
-        reverse = True
+        amount = int(row[t['mablagh']])
+        amount = amount / 10000
 
-        name = persian.convert_fa_numbers(row[t['nam']])
+        name = persian.convert_fa_numbers(row[t['zinaf']])
         matchNumber = re.findall('(\d+)', name)
         accountNumber = ''
         if matchNumber:
@@ -48,25 +45,25 @@ class Mellat(CsvConverter):
         fromAccount = self.unknownaccount
         foundAccount = self.accounts.get(str(accountNumber), None)
         payee = name
-        if accountNumber is not '' and foundAccount:
+        if accountNumber != '' and foundAccount:
             fromAccount = foundAccount['account']
             payee = foundAccount['name']
 
-        if accountNumber is not '':
+        if accountNumber != '':
             payee = "(" + accountNumber + ") " + payee
 
-        if outputAmount > 0:
-            amount = outputAmount / 10000
+        if amount < 0:
             reverse = True
+            amount = abs(amount)
         else:
-            amount = inputAmount / 10000
             reverse = False
+            amount = abs(amount)
             fromAccount = 'Income:Salary'
 
-        jdatestring = row[t['tarikh']]
+        jdatestring = row[t['date']]
         jdate = jdatetime.date(
-            int(jdatestring[0:4]), int(jdatestring[4:6]),
-            int(jdatestring[6:8]))
+            int(jdatestring[0:4]), int(jdatestring[5:7]),
+            int(jdatestring[9:11]))
         date = jdate.togregorian()
         metadata['Date'] = jdate.isoformat() + ', ' + jdate.j_weekdays_en[
             jdate.weekday()]
