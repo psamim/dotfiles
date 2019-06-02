@@ -1,7 +1,13 @@
 # load zgen  -*- mode: sh; -*-
+
+# These lines needs to be before loading oh-my-zsh
+zstyle :omz:plugins:keychain options --quiet
+zstyle :omz:plugins:keychain agents gpg,ssh
+
 source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
 # check if there's no init script
+
 if ! zgen saved; then
     echo "Creating a zgen save"
 
@@ -9,7 +15,14 @@ if ! zgen saved; then
 
     # plugins
     zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/git-extras
+    zgen oh-my-zsh plugins/tig
+    zgen oh-my-zsh plugins/virtualenvwrapper
+    zgen oh-my-zsh plugins/systemd
+    zgen oh-my-zsh plugins/fzf
+    zgen oh-my-zsh plugins/gpg-agent
+    zgen oh-my-zsh plugins/npm
+    zgen oh-my-zsh plugins/npx
+    zgen oh-my-zsh plugins/keychain
     zgen oh-my-zsh plugins/pass
     zgen oh-my-zsh plugins/archlinux
     zgen oh-my-zsh plugins/vi-mode
@@ -26,6 +39,8 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/cp
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/history-substring-search
+    zgen oh-my-zsh plugins/pip
+    zgen oh-my-zsh plugins/python
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
     zgen load zsh-users/zsh-completions src
@@ -44,6 +59,8 @@ if ! zgen saved; then
     # save all to init script
     zgen save
 fi
+
+export FZF_BASE="/usr/bin/fzf"
 
 _zsh_autosuggest_strategy_histdb_top_here() {
     local query="select commands.argv from
@@ -119,10 +136,8 @@ export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PYENV_ROOT/bin:$PATH
 
 eval "$(direnv hook zsh)"
-eval $(keychain --eval --quiet)
-# eval "$(pyenv init -)"
 
 export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper_lazy.sh
+# source /usr/bin/virtualenvwrapper_lazy.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

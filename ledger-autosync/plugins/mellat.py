@@ -62,8 +62,8 @@ class Mellat(CsvConverter):
 
         jdatestring = row[t['date']]
         jdate = jdatetime.date(
-            int(jdatestring[0:4]), int(jdatestring[5:7]),
-            int(jdatestring[9:11]))
+            int(jdatestring[:4]), int(jdatestring[5:7]),
+            int(jdatestring[8:]))
         date = jdate.togregorian()
         metadata['Date'] = jdate.isoformat() + ', ' + jdate.j_weekdays_en[
             jdate.weekday()]

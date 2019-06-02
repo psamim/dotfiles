@@ -343,5 +343,18 @@
     "555498": {
         "account": "Expenses:Groceries",
         "name": "Sahakian"
-    }
+    },
+    "3091921": {
+        "account": "Expenses:Transportation:Taxi",
+        "name": "Snap"
+    },
+    "21243633": {
+        "account": "Expenses:Groceries",
+        "name": "Andelos"
+    },
+  "6037691545433187": {
+        "account": "Expenses:Rent",
+    "name": "Apartment Charge to Raiszadeh"
+  }
+
 }

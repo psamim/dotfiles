@@ -37,7 +37,11 @@ Plug 'haya14busa/vim-keeppad'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'embear/vim-localvimrc'
+Plug 'rhysd/vim-grammarous'
 call plug#end()
+
+let g:grammarous#languagetool_cmd = 'languagetool'
+nmap <silent> gra <Plug>(grammarous-fixall)
 
 " CtrlpZ, fasd intergration
 let g:ctrlp_map = ''
@@ -49,7 +53,7 @@ let g:localvimrc_enable=1
 let g:workspace_session_name = '.session.vim'
 let g:workspace_autosave = 0
 
-nnoremap <leader>n :NnnPicker %:p:h<CR>
+nnoremap <leader>n :NnnPicker '%:p:h'<CR>
 
 command! -nargs=* Z :call Z(<f-args>)
 function! Z(...)
@@ -98,7 +102,7 @@ augroup TerminalStuff
     au!
     autocmd TermOpen * nnoremap <buffer> <A-q> <Esc>:bdelete!<CR>
     autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | silent! normal i | endif
-    autocmd TermOpen * setlocal nonumber norelativenumber noshowcmd noruler
+    autocmd TermOpen * setlocal nonumber norelativenumber noshowcmd noruler nospell
     autocmd TermOpen * echo ""
 augroup END
 
@@ -106,7 +110,7 @@ augroup END
 " Other
 filetype plugin indent on
 set autowrite
-setlocal spell spelllang=en_us
+set spell
 
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
