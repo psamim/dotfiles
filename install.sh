@@ -53,7 +53,11 @@ ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
 rm -rf "$HOME/.vimrc"
 ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 rm -rf "$HOME/.config/nvim"
-ln -sf "$PWD/vim/nvim" "$HOME/.config/nvim"
+ln -sf "$PWD/nvim" "$HOME/.config/nvim"
+
+# Install vim plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Muttator
 rm -rf "$HOME/.muttator"
@@ -82,8 +86,8 @@ ln -sf "$PWD/dunst" "$HOME/.config/dunst"
 # ~/.phpcs/commands.sh
 
 # password-store
-rm -rf "$HOME/.password-store"
-ln -sf "$PWD/password-store" "$HOME/.password-store"
+# rm -rf "$HOME/.password-store"
+# ln -sf "$PWD/password-store" "$HOME/.password-store"
 
 # systemd
 rm -rf "$HOME/.config/systemd"
@@ -134,5 +138,6 @@ mkdir -p  $HOME/.local/share/applications/
 for f in $PWD/desktop-files/*.desktop; do
     ln -sf $f $HOME/.local/share/applications/
 done
+
 
 kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
