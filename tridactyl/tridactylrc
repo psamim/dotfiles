@@ -60,6 +60,7 @@ unbindurl mail.google.com k
 unbindurl mail.google.com gi
 unbindurl mail.google.com x
 unbindurl daskpos.slack.com <C-k>
+unbindurl meet.google.com <C-d>
 unbindurl app.clickup.com k
 unbindurl app.clickup.com j
 unbindurl app.clickup.com /
@@ -79,7 +80,6 @@ unbindurl pinafore.social ?
 unbindurl pinafore.social p
 unbindurl pinafore.social f
 
-blacklistadd meet.google.com
 blacklistadd central.psam.im
 
 set searchurls.r   https://old.reddit.com/r/%s
