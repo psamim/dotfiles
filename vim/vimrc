@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
+Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'TaDaa/vimade'
@@ -25,7 +26,9 @@ Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
+" Plug 'ap/vim-buftabline'
+Plug 'lambdalisue/suda.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'amiorin/ctrlp-z'
@@ -41,6 +44,9 @@ Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/limelight.vim'
 call plug#end()
+
+" Suda
+let g:suda_smart_edit = 1
 
 let g:grammarous#languagetool_cmd = 'languagetool'
 nmap <silent> gra <Plug>(grammarous-fixall)
@@ -177,6 +183,20 @@ nmap <leader><leader> :Commands<CR>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+
 " Hide statusline in fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
@@ -198,7 +218,6 @@ nmap <silent> <leader>en :ALENext<cr>
 nmap <silent> <leader>ep :ALEPrevious<cr>
 nnoremap <C-q> :ALEHover<CR>
 let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
 let g:ale_fixers = ['eslint']
@@ -280,6 +299,10 @@ cnoreabbrev z Z
 cnoreabbrev j Z
 cnoreabbrev Qall qall
 
+
+nmap <leader>r <Plug>yankstack_substitute_older_paste
+nmap <leader>R <Plug>yankstack_substitute_newer_paste
+
 " Disable visualbell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -300,7 +323,9 @@ let g:airline_section_x=''
 let g:airline_section_y=''
 " let g:airline_section_warning=''
 let g:airline#extensions#ale#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#ignore_bufadd_pat =
+  \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 set noshowmode
