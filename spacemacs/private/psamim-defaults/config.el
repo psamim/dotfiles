@@ -61,3 +61,11 @@
 
 ;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+(add-hook 'text-mode-hook (lambda ()
+                            (interactive)
+                            (olivetti-set-width 120)
+                            (olivetti-mode 1)))
+(add-hook 'prog-mode-hook (lambda ()
+                            (interactive)
+                            (olivetti-set-width 120)
+                            (olivetti-mode 1)))

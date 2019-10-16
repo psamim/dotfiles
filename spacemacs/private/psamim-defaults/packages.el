@@ -1,6 +1,7 @@
 (setq psamim-defaults-packages
       '(ranger
-        sublimity))
+        ;; sublimity
+        olivetti))
 
 (defun psamim-defaults/post-init-ranger ()
   (use-package ranger
@@ -11,12 +12,15 @@
               (define-key ranger-mode-map (kbd "M-l") 'ranger-next-tab)
               (define-key ranger-mode-map (kbd "M-h") 'ranger-prev-tab))))
 
-(defun psamim-defaults/init-sublimity ()
-  (use-package sublimity
-    :config (progn
-              (require 'sublimity)
-              (require 'sublimity-scroll)
-              (setq sublimity-attractive-centering-width 110)
-              (require 'sublimity-attractive)
-              (sublimity-mode 1)
-              )))
+;; (defun psamim-defaults/init-sublimity ()
+;;   (use-package sublimity
+;;     :config (progn
+;;               (require 'sublimity)
+;;               (require 'sublimity-scroll)
+;;               (setq sublimity-attractive-centering-width 110)
+;;               (require 'sublimity-attractive)
+;;               ;; (sublimity-mode 1)
+;;               )))
+
+(defun psamim-defaults/init-olivetti ()
+  (use-package olivetti))
