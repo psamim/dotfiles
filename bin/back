@@ -142,9 +142,9 @@ function make_tar_gpg_sym() {
 function send() {
     info "Sending '$1' to cloud as name '$2'"
     info "Sending to passport"
-    rclone sync --checkers=1 --progress --quiet $1 passport:/mnt/mybook/$2
+    rclone sync --sftp-disable-hashcheck=true --transfers=1 --progress --quiet $1 passport:/mnt/mybook/$2
     echo # New Line
-    for remote in dropbox drive disroot; do
+    for remote in dropbox drive; do
         info "Sending to remote '$remote'"
         rclone sync --progress --quiet --transfers=1 $1 $remote:$2
         echo # New Line
