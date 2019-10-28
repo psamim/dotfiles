@@ -14,5 +14,10 @@
   "snippets.extends": {
     "javascript.jsx": ["javascript"],
     "javascriptreact": ["javascript"]
-  }
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.nodePath": "./node_modules",
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•"
 }

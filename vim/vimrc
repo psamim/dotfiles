@@ -2,13 +2,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
 Plug 'TaDaa/vimade'
 Plug 'mcchrish/nnn.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'ervandew/supertab'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
@@ -26,8 +24,6 @@ Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
 Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'bling/vim-bufferline'
-" Plug 'ap/vim-buftabline'
 Plug 'lambdalisue/suda.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -43,6 +39,10 @@ Plug 'embear/vim-localvimrc'
 Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/limelight.vim'
+Plug 'rhysd/git-messenger.vim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'janko/vim-test'
+Plug 'pbogut/fzf-mru.vim'
 call plug#end()
 
 " Suda
@@ -76,26 +76,14 @@ function! Z(...)
   endif
 endfunction
 
-
-" coc
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-imap <C-l> <Plug>(coc-snippets-expand)
-
 " Colors
+" Relative line numbers
 set number
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 syntax enable
 set background=dark
 set termguicolors
@@ -210,27 +198,7 @@ nnoremap <leader>d :NERDTreeFind<CR>
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-" nnoremap <A-l> <C-W><C-L>
-" nnoremap <A-h> <C-W><C-H>
 
-" Ale
-nmap <silent> <leader>en :ALENext<cr>
-nmap <silent> <leader>ep :ALEPrevious<cr>
-nnoremap <C-q> :ALEHover<CR>
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-let g:ale_fixers = ['eslint']
-let g:ale_fix_on_save = 1
-" let g:ale_completion_enabled = 1
-" set completeopt=menu,menuone,preview,noselect,noinsert "" see help *ale-completion-completopt-bug*
-let b:ale_set_balloons = 1
-" let g:ale_open_list = 'on_save'
-let g:ale_sign_column_always = 1
-
-" supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " vim-javascript
 let g:jsx_ext_required = 0
@@ -322,10 +290,58 @@ vmap > >gv
 let g:airline_section_x=''
 let g:airline_section_y=''
 " let g:airline_section_warning=''
-let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat =
   \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 set noshowmode
+
+lua require'colorizer'.setup()
+
+" coc
+"
+let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+imap <C-l> <Plug>(coc-snippets-expand)
+nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
