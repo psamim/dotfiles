@@ -145,3 +145,4 @@ kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedW
 # xmonad
 mkdir -p "$HOME/.xmonad"
 ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.hs
+ln -sf $PWD/xmobar/xmobarrc $HOME/.xmobarrc
