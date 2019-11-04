@@ -1,10 +1,10 @@
 Config { 
-  font =         "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
-  ,bgColor = "#000000"
-    , fgColor = "#C9A34E"
+  font = "xft:Noto Sans:size=11:antialias=true"
+    , bgColor = "#283339"
+    , fgColor = "#F9fAF9"
     , border = NoBorder
     , borderColor = "#000000"
-    , position = Top
+    , position = TopW L 100
     , lowerOnStart = True
     , hideOnStart = False
     , persistent = True
@@ -39,9 +39,7 @@ Config {
                              , "--high"     , "darkred"
                              ] 10
                                   -- keyboard layout indicator
-        , Run Kbd            [ ("us(dvorak)" , "<fc=#00008B>DV</fc>")
-                             , ("us"         , "<fc=#8B0000>US</fc>")
-                             ]
+        , Run Kbd            []
     ]
     , sepChar = "%"
     , alignSep = "}{"

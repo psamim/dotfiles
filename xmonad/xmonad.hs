@@ -8,6 +8,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
+import XMonad.Actions.WindowBringer
 
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -33,7 +34,7 @@ myConfig = ewmh $ defaultConfig
     , terminal = "alacritty"
     , borderWidth = 2
     , normalBorderColor  = "#333333"
-    , focusedBorderColor = "#AFAF87"
+    , focusedBorderColor = "#FF0000"
     , startupHook = myStartupHook
     , workspaces = myWorkspaces
     , manageHook = manageHook defaultConfig <+> manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads
@@ -46,7 +47,8 @@ myKeys = [
       ((mod4Mask, xK_p), spawn "rofi-pass"),
       ((mod4Mask, xK_v), namedScratchpadAction scratchpads "term"),
       ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
-      ((mod4Mask, xK_b), sendMessage ToggleStruts)
+      ((mod4Mask, xK_b), sendMessage ToggleStruts),
+      ((mod4Mask, xK_g     ), gotoMenu)
     ]
     ++
     [((m .|. noModMask, k), windows $ f i)
@@ -57,7 +59,7 @@ myKeys = [
 myStartupHook = do 
   spawn "setxkbmap -layout us,ir" 
   spawn "setxkbmap -option 'grp:alt_shift_toggle'"
-  spawn "setxkbmap -option caps:nocaps"
+  spawn "setxkbmap -option caps:ctrl_modifier"
   spawn "xsetroot -solid \"grey\"" 
 
 
