@@ -407,5 +407,9 @@
     "3419636": {
         "account": "Expenses:Medical:Drugs",
         "name": "Khaghani Drugstore"
+    },
+    "50049217": {
+        "account": "Expenses:Internet:ADSL:Home",
+        "name": "HiWeb"
     }
 }
