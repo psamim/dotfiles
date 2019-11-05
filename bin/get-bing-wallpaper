@@ -62,6 +62,6 @@ fi
 # Add title to image
 width=$(identify -format %w $saveDir$picName)
 height=$(identify -format %h $saveDir$picName)
-optirun convert -background '#0008' -fill white -gravity center -size $(($width/4))x$(($height/6)) -font Ubuntu \
+convert -background '#0008' -fill white -gravity center -size $(($width/4))x$(($height/6)) -font Ubuntu \
         caption:"$picTitle" \
         $saveDir$picName +swap -gravity east -composite $saveDir$picName

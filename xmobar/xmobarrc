@@ -1,10 +1,10 @@
 Config { 
-  font = "xft:Noto Sans:size=11:antialias=true"
-    , bgColor = "#283339"
-    , fgColor = "#F9fAF9"
-    , border = NoBorder
-    , borderColor = "#000000"
-    , position = TopW L 100
+  font = "xft:Source Code Pro:style=Regular:size=10,FontAwesome:size=9"
+    , bgColor = "#000000"
+    , fgColor = "#c5c8c6"
+    , border = BottomB 2
+    , borderColor = "#c5c8c6"
+    , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 20}
     , lowerOnStart = True
     , hideOnStart = False
     , persistent = True
@@ -15,12 +15,12 @@ Config {
       , Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
       , Run Memory ["-t","Mem: <usedratio>%"] 10
       , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-      , Run Battery        [ "--template" , "Batt: <acstatus>"
+      , Run Battery        [ "--template" , "  <acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
                              , "--low"      , "darkred"
                              , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
+                             , "--high"     , "#429942"
 
                              , "--" -- battery specific options
                                        -- discharging status
@@ -31,7 +31,7 @@ Config {
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
       , Run StdinReader
-      , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+      , Run DynNetwork     [ "--template" , " <tx>kB/s|<rx>kB/s"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
                              , "--low"      , "darkgreen"
@@ -40,8 +40,9 @@ Config {
                              ] 10
                                   -- keyboard layout indicator
         , Run Kbd            []
+        , Run Com "/home/samim/.bin/reboot-p" [] "reboot" 10
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = " %StdinReader% }{ %dynnetwork% <fc=#429942>|</fc> %cpu% <fc=#429942>|</fc> %memory% <fc=#429942>|</fc> %battery% <fc=#429942>|</fc> %kbd% <fc=#429942>|</fc> %date%"
+    , template = " %StdinReader% }{ %reboot% | %dynnetwork% | %cpu% | %memory% | %battery% | %kbd% | %date%"
 }

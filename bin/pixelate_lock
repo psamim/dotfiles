@@ -9,6 +9,6 @@ convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
 # [[ -f ~/.i3/lock-icon.png ]] && convert /tmp/screen.png ~/.i3/lock-icon.png -gravity center -composite -matte /tmp/screen.png
 # [[ -f ~/.i3/lock-icon.png ]] && convert /tmp/screen.png  -gravity center -composite -matte /tmp/screen.png
 # i3lock -u -i /tmp/screen.png
-i3lock -i /tmp/screen.png -c '#000000' -o '#191d0f' -w '#572020' -l '#ffffff' -e
+i3lock -i /tmp/screen.png 
 
 

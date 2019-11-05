@@ -9,6 +9,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Actions.WindowBringer
+import XMonad.Hooks.FadeInactive
+import XMonad.Util.WorkspaceCompare (getSortByIndex)
 
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -16,13 +18,14 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myBar = "xmobar"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
-myPP = defaultPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
+myPP = defaultPP { ppCurrent = xmobarColor "#429942" "" 
                      , ppHidden = xmobarColor "#C98F0A" ""
                      , ppHiddenNoWindows = xmobarColor "#C9A34E" ""
                      , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]" 
                      , ppLayout = xmobarColor "#C9A34E" ""
                      , ppTitle =  xmobarColor "#C9A34E" "" . shorten 80
                      , ppSep = xmobarColor "#429942" "" " | "
+                     , ppSort = fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
                      }
 
 -- Key binding to toggle the gap for the bar.
@@ -32,19 +35,25 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myConfig = ewmh $ defaultConfig
     { modMask = mod4Mask -- use the Windows button as mod
     , terminal = "alacritty"
-    , borderWidth = 2
+    , borderWidth = 0
     , normalBorderColor  = "#333333"
     , focusedBorderColor = "#FF0000"
-    , startupHook = myStartupHook
     , workspaces = myWorkspaces
+    , logHook = myLogHook
     , manageHook = manageHook defaultConfig <+> manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads
     , layoutHook = smartBorders $ desktopLayoutModifiers $ spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $
                    layoutHook def
-    } `additionalKeys` myKeys
+    } `additionalKeys` myKeys `additionalKeysP` [
+      -- Media keys
+      ("<XF86AudioLowerVolume>", spawn "pactl -- set-sink-volume 8 -10%"),
+      ("<XF86AudioRaiseVolume>", spawn "pactl -- set-sink-volume 8 +10%"),
+      ("<XF86AudioMute>", spawn "pactl -- set-sink-mute 8 toggle")
+    ]
 
 myKeys = [
       ((mod4Mask, xK_d), spawn "rofi -show combi"),
       ((mod4Mask, xK_p), spawn "rofi-pass"),
+      (((0, xK_Print)), spawn "flameshot gui"),
       ((mod4Mask, xK_v), namedScratchpadAction scratchpads "term"),
       ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
       ((mod4Mask, xK_b), sendMessage ToggleStruts),
@@ -55,30 +64,30 @@ myKeys = [
         | (i, k) <- zip myWorkspaces [xK_F1..xK_F12]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
+firefox = "\xf269"
+code = "\xf121"
+music = "\xf001"
+chat = "\xf075"
 
-myStartupHook = do 
-  spawn "setxkbmap -layout us,ir" 
-  spawn "setxkbmap -option 'grp:alt_shift_toggle'"
-  spawn "setxkbmap -option caps:ctrl_modifier"
-  spawn "xsetroot -solid \"grey\"" 
-
-
-myWorkspaces = map show [1..4]
+myWorkspaces = [code, firefox, chat, music]
 
 myManageHook = composeAll . concat $
     [ [ className   =? c --> doFloat           | c <- myFloats]
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
-    , [ className   =? c --> doF (W.shift "2") | c <- webApps]
-    , [ className   =? c --> doF (W.shift "3") | c <- ircApps]
+    , [ className   =? c --> doF (W.shift firefox) | c <- webApps]
+    , [ className   =? c --> doF (W.shift chat) | c <- ircApps]
     ]
   where myFloats      = ["MPlayer", "Gimp", "plasma", "yakuake", "Yakuake",
                          "plasma", "Plasma", "plasma-desktop", "Plasma-desktop",
                          "krunner" , "ksplashsimple", "ksplashqml", "plasmashell"]
         myOtherFloats = ["alsamixer"]
-        webApps       = ["Firefox-bin", "Opera"] -- open on desktop 2
-        ircApps       = ["Ksirc"]                -- open on desktop 3
+        webApps       = ["firefox"]
+        ircApps       = ["Ksirc","TelegramDesktop"]              
 
 scratchpads = [
   NS "term" "alacritty --title term" (title =? "term") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)),
   NS "nvim" "alacritty --title nvim" (title =? "nvim") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5))
   ] where role = stringProperty "WM_WINDOW_ROLE"
+
+myLogHook = fadeInactiveLogHook fadeAmount
+  where fadeAmount = 0.8

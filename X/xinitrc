@@ -43,4 +43,4 @@ xset dpms 0 0 300
 udiskie --no-tray &
 
 xrdb -merge ~/.Xresources
-exec i3
+exec dbus-launch xmonad
