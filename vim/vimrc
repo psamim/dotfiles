@@ -79,16 +79,12 @@ endfunction
 " Colors
 " Relative line numbers
 set number
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 syntax enable
 set background=dark
 set termguicolors
-" let g:solarized_termtrans=1
-colorscheme gruvbox
+let g:solarized_termtrans=1
+colorscheme solarized8
 set cursorline
 if exists('g:GuiLoaded')
   Guifont! Iosevka:h13
@@ -302,7 +298,8 @@ lua require'colorizer'.setup()
 
 " coc
 "
-let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word']
+let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word'
+      \, 'coc-sh']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
