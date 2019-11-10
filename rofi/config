@@ -1,0 +1,4 @@
+rofi.combi-modi:    window,drun,run
+rofi.theme:         solarized
+rofi.font:          fira code 12
+rofi.modi:          combi

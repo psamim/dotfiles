@@ -48,25 +48,3 @@ URxvt*.color14: #93a1a1
 !! white dark/light
 URxvt*.color7: #eee8d5
 URxvt*.color15: #fdf6e3
-
-! ------------------------------------------------------------------------------
-! ROFI Color theme
-! ------------------------------------------------------------------------------
-rofi.color-enabled: true
-rofi.color-window: #002b37, #002b37, #003642
-rofi.color-normal: #002b37, #819396, #002b37, #003642, #819396
-rofi.color-active: #002b37, #008ed4, #002b37, #003642, #008ed4
-rofi.color-urgent: #002b37, #da4281, #002b37, #003642, #da4281
-rofi.fullscreen:        false
-rofi.padding: 15
-rofi.opacity: 93
-rofi.modi: run
-rofi.fixed-num-lines: 8
-rofi.lines: 8
-! row size
-rofi.eh: 1
-rofi.auto-select: true
-rofi.separator-style: solid
-rofi.sidebar-mode: false
-rofi.font: RobotoMono 12
-rofi.line-margin: 3
