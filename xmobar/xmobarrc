@@ -4,7 +4,7 @@ Config {
     , fgColor = "#FFFFFF"
     , border = BottomB 2
     , borderColor = "#000000"
-    , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 20}
+    , position = Static { xpos = 0 , ypos = 0, width = 1844, height = 20}
     , lowerOnStart = True
     , hideOnStart = False
     , persistent = True

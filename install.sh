@@ -150,3 +150,7 @@ ln -sf $PWD/xmobar/xmobarrc $HOME/.xmobarrc
 # rofi
 rm -rf $HOME/.config/rofi
 ln -sf $PWD/rofi $HOME/.config/rofi
+
+# alacritty
+rm -rf $HOME/.config/alacritty
+ln -sf $PWD/rofi $HOME/.config/alacritty
