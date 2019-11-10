@@ -146,3 +146,7 @@ kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedW
 mkdir -p "$HOME/.xmonad"
 ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.hs
 ln -sf $PWD/xmobar/xmobarrc $HOME/.xmobarrc
+
+# rofi
+rm -rf $HOME/.config/rofi
+ln -sf $PWD/rofi $HOME/.config/rofi

@@ -20,11 +20,11 @@ export DE=xfce
 # Keyboard layout
 setxkbmap -layout us,ir
 setxkbmap -option 'grp:alt_shift_toggle'
-setxkbmap -option caps:escape
+setxkbmap -option caps:ctrl_modifier
 perWindowLayoutD
 
 # Disable touchpad taps while typing
-syndaemon -t -k -i 1 &
+# syndaemon -t -k -i 1 &
 
 # Set background
 [ -e ~/.fehbg ] && source ~/.fehbg
@@ -32,15 +32,19 @@ syndaemon -t -k -i 1 &
 # Hide mouse when not used
 unclutter &
 
-# Compton window compositor
-/usr/bin/compton -b --config ~/.compton &
+dunst &
+
+# Picom window compositor
+/usr/bin/picom -b --config ~/.compton &
 
 # screen powersave
 xset +dpms
 xset dpms 0 0 300
 
 # Automount disks
-udiskie --no-tray &
+# udiskie --no-tray &
+
+greenclip daemon &
 
 xrdb -merge ~/.Xresources
-exec dbus-launch xmonad
+exec xmonad
