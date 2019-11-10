@@ -42,7 +42,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'janko/vim-test'
-Plug 'pbogut/fzf-mru.vim'
+Plug 'RRethy/vim-illuminate'
+Plug 'junegunn/vim-slash'
 call plug#end()
 
 " Suda
@@ -342,3 +343,4 @@ nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+hi illuminatedWord cterm=bold ctermfg=121 gui=bold guifg=#2aa198
