@@ -62,8 +62,8 @@ myKeys = [
       -- ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
       ((mod4Mask, xK_b), sendMessage ToggleStruts),
       ((mod4Mask, xK_g), gotoMenu),
-      ((mod4Mask, xK_l), nextWS),
-      ((mod4Mask, xK_h), prevWS),
+      -- ((mod4Mask, xK_l), nextWS),
+      -- ((mod4Mask, xK_h), prevWS),
       ((mod4Mask, xK_v), spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"),
       -- ((mod4Mask, xK_c), lookupProject editor >>= mapM_ switchProject),
       ((0, xK_F1), lookupProject chrome >>= mapM_ switchProject),
@@ -90,14 +90,16 @@ myManageHook = composeAll . concat $
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
     , [ title =? "editor" --> doRectFloat (W.RationalRect (1/12) (1/12) (10/12) (10/12))]
     , [ className   =? c --> doF (W.shift firefox) | c <- webApps]
-    , [ className   =? c --> doF (W.shift chat) | c <- ircApps]
+    , [ className   =? c --> doF (W.shift chat) | c <- chatApps]
+    , [ className   =? c --> doF (W.shift chrome) | c <- chromeApps]
     ]
   where myFloats      = ["MPlayer", "Gimp", "plasma", "yakuake", "Yakuake",
                          "plasma", "Plasma", "plasma-desktop", "Plasma-desktop",
                          "krunner" , "ksplashsimple", "ksplashqml", "plasmashell"]
         myOtherFloats = ["alsamixer"]
         webApps       = ["firefox"]
-        ircApps       = ["TelegramDesktop", "Slack"]              
+        chromeApps = ["Google-chrome"]
+        chatApps       = ["TelegramDesktop", "Slack"]              
 
 scratchpads = [
   NS "term" "alacritty --title term" (title =? "term") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5))

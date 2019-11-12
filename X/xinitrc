@@ -19,8 +19,7 @@ export DE=xfce
 export PATH="${PATH}:/home/samim/.bin"
 
 # Keyboard layout
-setxkbmap -layout us,ir
-setxkbmap -option 'grp:alt_shift_toggle'
+setxkbmap -layout us,ir -option 'grp:shift_toggle'
 setxkbmap -option caps:ctrl_modifier
 perWindowLayoutD
 
