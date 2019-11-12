@@ -154,3 +154,7 @@ ln -sf $PWD/rofi $HOME/.config/rofi
 # alacritty
 rm -rf $HOME/.config/alacritty
 ln -sf $PWD/rofi $HOME/.config/alacritty
+
+# autorandr
+rm -rf $HOME/.config/autorandr
+ln -sf $PWD/autorandr $HOME/.config/autorandr

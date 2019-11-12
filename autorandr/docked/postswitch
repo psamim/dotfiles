@@ -1,0 +1,4 @@
+#!/bin/bash
+
+notify-send "Switched to docked mode"
+/home/samim/.bin/hdmi_sound_toggle.sh
