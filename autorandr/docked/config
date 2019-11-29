@@ -1,9 +1,7 @@
 output eDP-1
-mode 1920x1080
-pos 0x0
-primary
-rate 60.01
+off
 output HDMI-1
+gamma 1.0:0.833:0.714
 mode 1920x1080
 pos 0x0
 rate 60.00

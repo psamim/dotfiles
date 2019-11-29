@@ -18,13 +18,11 @@ fi
 export DE=xfce
 export PATH="${PATH}:/home/samim/.bin"
 
-# Keyboard layout
-setxkbmap -layout us,ir -option 'grp:shift_toggle'
-setxkbmap -option caps:ctrl_modifier
+/home/samim/.bin/keyboard_configure.sh
 perWindowLayoutD
 
 # Disable touchpad taps while typing
-# syndaemon -t -k -i 1 &
+syndaemon -t -k -i 1 &
 
 # Set background
 [ -e ~/.fehbg ] && source ~/.fehbg
@@ -42,16 +40,23 @@ xset +dpms
 xset dpms 0 0 300
 
 # Automount disks
-# udiskie --no-tray &
+thunar --daemon &
 
 greenclip daemon &
 
 xrdb -merge ~/.Xresources
 
 trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-  --expand true --width 4 --transparent true --alpha 0 --tint 0x00000000 --height 20\
+  --expand true --width 6 --transparent true --alpha 0 --tint 0x00000000 --height 20\
   --monitor 1 &
 
 nm-applet &
+# blueman-applet &
+redshift-gtk &
+xfce-power-manager & 
+kdeconnect-indicator &
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
+pasystray &
+synclient TapButton1=1
 
 exec xmonad

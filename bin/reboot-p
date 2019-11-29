@@ -18,6 +18,6 @@ if [ ! "${FIND}" = "" ]; then
         echo " REBOOT REQUIRED "
         echo
         echo \#D32F2F
-        exit 33
+        # exit 33
     fi
 fi

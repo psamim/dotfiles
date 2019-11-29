@@ -4,7 +4,6 @@ Config {
     , fgColor = "#FFFFFF"
     , border = BottomB 2
     , borderColor = "#000000"
-    , position = Static { xpos = 0 , ypos = 0, width = 1844, height = 20}
     , lowerOnStart = True
     , hideOnStart = False
     , persistent = True
@@ -41,8 +40,9 @@ Config {
                                   -- keyboard layout indicator
         , Run Kbd            []
         , Run Com "/home/samim/.bin/reboot-p" [] "reboot" 10
+        , Run Com "/home/samim/.bin/trayer-padding-icon.sh" ["stalonetray"] "tray" 10
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = " %StdinReader% }{ %reboot% | %dynnetwork% | %cpu% | %memory% | %battery% | %kbd% | %date%"
+    , template = " %StdinReader% }{ %reboot% | %dynnetwork% | %cpu% | %memory% | %battery% | %kbd% | %date% %tray%"
 }
