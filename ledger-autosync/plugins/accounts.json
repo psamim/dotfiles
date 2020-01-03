@@ -411,5 +411,13 @@
     "50049217": {
         "account": "Expenses:Internet:ADSL:Home",
         "name": "HiWeb"
+    },
+    "5859831068168870": {
+        "account": "Assets:Bank:Tejarat",
+        "name": "Move"
+    },
+    "667055": {
+        "account": "Expenses:Internet:ADSL:Home",
+        "name": "HiWeb"
     }
 }

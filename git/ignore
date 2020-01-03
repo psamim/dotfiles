@@ -24,4 +24,5 @@ __pycache__
 .vim/*
 .session.vim
 .undodir/
+.envrc
 

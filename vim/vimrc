@@ -44,6 +44,10 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'janko/vim-test'
 Plug 'RRethy/vim-illuminate'
 Plug 'junegunn/vim-slash'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+" Plug 'Quramy/vim-js-pretty-template'
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 " Suda
@@ -77,7 +81,6 @@ function! Z(...)
   endif
 endfunction
 
-" Colors
 " Relative line numbers
 set number
 syntax enable
@@ -263,7 +266,6 @@ cnoreabbrev z Z
 cnoreabbrev j Z
 cnoreabbrev Qall qall
 
-
 nmap <leader>r <Plug>yankstack_substitute_older_paste
 nmap <leader>R <Plug>yankstack_substitute_newer_paste
 
@@ -296,11 +298,6 @@ set noshowmode
 
 lua require'colorizer'.setup()
 
-" coc
-"
-let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word'
-      \, 'coc-sh']
-
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -323,11 +320,16 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" coc-vim
+let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word'
+      \, 'coc-sh', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-tslint-plugin', 'coc-syntax', 'coc-yaml'
+      \]
+
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -342,5 +344,13 @@ nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" RRethy/vim-illuminate
 hi illuminatedWord cterm=bold ctermfg=121 gui=bold guifg=#2aa198
 
+" Quramy/vim-js-pretty-template
+" " Register tag name associated the filetype
+" call jspretmpl#register_tag('gql', 'graphql')
+
+" autocmd FileType typescript JsPreTmpl
+" autocmd FileType typescript.tsx JsPreTmpl
+" autocmd FileType typescript syn clear foldBraces
