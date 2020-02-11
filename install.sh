@@ -69,8 +69,8 @@ rm -rf "$HOME/.i3"
 ln -sf "$PWD/i3" "$HOME/.i3"
 ln -sf "$PWD/i3/i3blocks.conf" "$HOME/.i3blocks.conf"
 
-# compton
-ln -sf "$PWD/compton/compton.conf" "$HOME/.compton"
+# picomm
+ln -sf "$PWD/picom/picom.conf" "$HOME/.picom"
 
 # X
 ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"

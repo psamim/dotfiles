@@ -145,3 +145,8 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null&
+
+# nvim
+# export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
+# export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
+# [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM

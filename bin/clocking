@@ -22,6 +22,7 @@ else
     TIME=`emacsclient --eval "$elisp" \
         | grep -s -o "\".*\"" | sed 's/\"//g' | sed 's/^ //g' | sed 's/ $//g'  | sed 's/\[//g' | sed 's/\]//g'`
         if [ -n "$TIME" ]; then
-            echo "<font color='#ffc107'>&nbsp;&nbsp;  $TIME &nbsp;&nbsp;</font>"
+            # echo "<font color='#ffc107'>&nbsp;&nbsp;  $TIME &nbsp;&nbsp;</font>"
+            echo " $TIME"
         fi
 fi

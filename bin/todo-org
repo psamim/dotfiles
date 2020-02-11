@@ -2,4 +2,6 @@
 
 # Open my todo list in emacs org-mode
 
-emacsclient -c --frame-parameters="((font . \"Ubuntu Mono-12\")(internal-border-width . 15) (width . 72) (height . 20) (name . \"TODOs\") (top . 180) (left . 440) (left-fringe . 0) (right-fringe . 0) (auto-raise t) (alpha . 0.9))" --eval "(progn (org-agenda nil \"u\") (setq mode-line-format nil) (delete-other-windows))" 
+# emacsclient -c --frame-parameters="((font . \"Ubuntu Mono-12\")(internal-border-width . 15) (width . 72) (height . 20) (name . \"TODOs\") (top . 180) (left . 440) (left-fringe . 0) (right-fringe . 0) (auto-raise t) (alpha . 0.9))" --eval "(progn (org-agenda nil \"u\") (setq mode-line-format nil) (delete-other-windows))" 
+
+emacs --file="~/Notes/todo.org" --name="TODOs" --title="TODOs" -mm

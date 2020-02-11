@@ -33,7 +33,7 @@ unclutter &
 dunst &
 
 # Picom window compositor
-/usr/bin/picom -b --config ~/.compton &
+/usr/bin/picom -b --config ~/.picom &
 
 # screen powersave
 xset +dpms
@@ -47,7 +47,7 @@ greenclip daemon &
 xrdb -merge ~/.Xresources
 
 trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-  --expand true --width 6 --transparent true --alpha 0 --tint 0x00000000 --height 20\
+  --expand true --width 8 --transparent true --alpha 0 --tint 0x00000000 --height 20\
   --monitor 1 &
 
 nm-applet &

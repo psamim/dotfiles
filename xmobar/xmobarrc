@@ -40,9 +40,10 @@ Config {
                                   -- keyboard layout indicator
         , Run Kbd            []
         , Run Com "/home/samim/.bin/reboot-p" [] "reboot" 10
+        , Run Com "/home/samim/.bin/clocking" [] "clocking" 10
         , Run Com "/home/samim/.bin/trayer-padding-icon.sh" ["stalonetray"] "tray" 10
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = " %StdinReader% }{ %reboot% | %dynnetwork% | %cpu% | %memory% | %battery% | %kbd% | %date% %tray%"
+    , template = " %StdinReader% }{ %reboot% %clocking% | %dynnetwork% | %cpu% | %memory% | %battery% | %kbd% | %date% %tray%"
 }

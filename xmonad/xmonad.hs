@@ -61,9 +61,9 @@ myConfig = dynamicProjects projects $ ewmh $ defaultConfig
                    layoutHook def
     } `additionalKeys` myKeys `additionalKeysP` [
       -- Media keys
-      ("<XF86AudioLowerVolume>", spawn "pactl -- set-sink-volume 8 -10%"),
-      ("<XF86AudioRaiseVolume>", spawn "pactl -- set-sink-volume 8 +10%"),
-      ("<XF86AudioMute>", spawn "pactl -- set-sink-mute 8 toggle")
+      ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) -10%&&notify-send Volume Down"),
+      ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) +10%&&notify-send Volume Up"),
+      ("<XF86AudioMute>", spawn "pactl -- set-sink-mute $(pactl list sinks short|head -n1|cut  -f1) toggle&&notify-send Toggle mute")
     ]
 
 myKeys = [
@@ -84,7 +84,9 @@ myKeys = [
       ((0, xK_F3), bindProject "chat"),
       ((0, xK_F4), bindProject "music"),
       ((mod4Mask, xK_c), bindProject "editor"),
-      ((mod4Mask, xK_m), bindProject "todo")
+      ((mod4Mask, xK_m), bindProject "todo"),
+      ((mod1Mask, xK_j), spawn "key-whatsapp down"),
+      ((mod1Mask, xK_k), spawn "key-whatsapp up")
     ]
     -- ++
     -- [((m .|. noModMask, k), windows $ f i)
@@ -146,7 +148,7 @@ scratchpads = [
   ] where role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook = fadeInactiveLogHook fadeAmount
-  where fadeAmount = 0.8
+  where fadeAmount = 0.74
 
 projects :: [Project]
 projects =

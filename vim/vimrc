@@ -48,6 +48,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 " Plug 'Quramy/vim-js-pretty-template'
 Plug 'jparise/vim-graphql'
+Plug 'digitaltoad/vim-pug'
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 " Suda

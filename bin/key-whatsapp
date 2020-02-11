@@ -1,0 +1,14 @@
+#!/bin/bash
+CURRENT_WIN=$(xdotool getactivewindow)
+WHATSAPP=$(xdotool search --name WhatsApp)
+DIR=$1
+
+if [ "$CURRENT_WIN" = "$WHATSAPP" ]; then
+  if [ "$DIR" = "down" ]; then
+    xdotool keydown alt keydown ctrl key Tab keyup alt keyup ctrl
+  fi
+
+  if [ "$DIR" = "up" ]; then
+    xdotool keydown alt keydown ctrl keydown shift key Tab keyup alt keyup ctrl keyup shift
+  fi
+fi

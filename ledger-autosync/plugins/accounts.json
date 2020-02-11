@@ -419,5 +419,9 @@
     "667055": {
         "account": "Expenses:Internet:ADSL:Home",
         "name": "HiWeb"
+    },
+    "1347143": {
+        "account": "Expenses:Food:Cafe",
+        "name": "Meev"
     }
 }

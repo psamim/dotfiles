@@ -29,7 +29,7 @@ def effort():
      (org-duration-string-to-minutes
       org-clock-effort)))
     """)
-    if s is not '':
+    if s != '':
         return '/' + s
 
     return ''
@@ -78,7 +78,7 @@ def current_pomodoro():
     s = run_elisp("""
     (if (org-pomodoro-active-p) (org-pomodoro-format-seconds))
     """)
-    if s is not '':
+    if s != '':
         return "(<img src='{}' width='18' height='18'/> {})".format(tomato, s)
 
     return ''
