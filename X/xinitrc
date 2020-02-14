@@ -18,6 +18,8 @@ fi
 export DE=xfce
 export PATH="${PATH}:/home/samim/.bin"
 
+autorandr -c
+
 /home/samim/.bin/keyboard_configure.sh
 perWindowLayoutD
 
@@ -47,8 +49,8 @@ greenclip daemon &
 xrdb -merge ~/.Xresources
 
 trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-  --expand true --width 8 --transparent true --alpha 0 --tint 0x00000000 --height 20\
-  --monitor 1 &
+  --expand true --width 8 --transparent true --alpha 85 --tint 0x00000000 --height 20 \
+  --monitor 0 &
 
 nm-applet &
 # blueman-applet &

@@ -17,6 +17,7 @@ import qualified XMonad.StackSet                 as W
 import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.WorkspaceCompare    (getSortByIndex)
+import XMonad.Actions.GroupNavigation
 
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -26,6 +27,7 @@ myBar = "xmobar"
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = defaultPP { ppCurrent = xmobarColor "#aa5500" "" . myIconMapper
                      , ppHidden = xmobarColor "#FFFFFF" "" . myIconMapper
+                     , ppVisible = xmobarColor "#FFFFFF" "" . myIconMapper
                      , ppHiddenNoWindows = xmobarColor "#FFFFFF" "" . myIconMapper
                      , ppUrgent = xmobarColor "#FFFFAF" "" . wrap "[" "]"
                      , ppLayout = \x -> ""
@@ -69,7 +71,7 @@ myConfig = dynamicProjects projects $ ewmh $ defaultConfig
 myKeys = [
       ((mod4Mask, xK_d), spawn "rofi -show combi"),
       ((mod4Mask, xK_p), spawn "rofi-pass"),
-      (((0, xK_Print)), spawn "scrot -e 'kolourpaint $f'"),
+      (((0, xK_Print)), spawn "flameshot gui"),
       ((mod4Mask, xK_x), namedScratchpadAction scratchpads "term"),
       -- ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
       ((mod4Mask, xK_b), sendMessage ToggleStruts),
@@ -77,8 +79,9 @@ myKeys = [
       ((mod4Mask, xK_o), nextWS),
       ((mod4Mask, xK_i), prevWS),
       ((mod4Mask, xK_v), spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"),
-      ((mod4Mask, xK_w), switchProjectPrompt  promptConfig),
-      ((mod4Mask, xK_Tab), toggleWS),
+      ((mod4Mask, xK_u), switchProjectPrompt  promptConfig),
+      -- ((mod4Mask, xK_Tab), toggleWS),
+      ((mod4Mask, xK_Tab), nextMatch History (return True)),
       ((0, xK_F1), bindProject "star"),
       ((0, xK_F2), bindProject "firefox"),
       ((0, xK_F3), bindProject "chat"),
@@ -129,6 +132,7 @@ myWorkspaces = ["star", "firefox", "chat", "music", "editor"]
 myManageHook = composeAll . concat $
     [ [ className   =? c --> doFloat           | c <- myFloats]
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
+    -- , [ stringProperty "_NET_WM_NAME" =? "Media Viewer" --> doFloat]
     , [ title =? "editor" --> doRectFloat (W.RationalRect (1/12) (1/12) (10/12) (10/12))]
     , [ title =? "TODOs" --> doRectFloat (W.RationalRect (1/12) (1/12) (10/12) (10/12))]
     , [ className   =? c --> doF (W.shift "firefox") | c <- webApps]
@@ -138,7 +142,7 @@ myManageHook = composeAll . concat $
   where myFloats      = ["MPlayer", "Gimp", "plasma", "yakuake", "Yakuake",
                          "plasma", "Plasma", "plasma-desktop", "Plasma-desktop", "File Operation Progress",
                          "krunner" , "ksplashsimple", "ksplashqml", "plasmashell"]
-        myOtherFloats = ["alsamixer", "File Operation Progress", "Launch Application"]
+        myOtherFloats = ["alsamixer", "File Operation Progress", "Launch Application", "Media viewer"]
         webApps       = ["firefox"]
         starApps = ["Google-chrome"]
         chatApps       = ["TelegramDesktop", "Slack"]
@@ -147,8 +151,8 @@ scratchpads = [
   NS "term" "alacritty --title term" (title =? "term") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5))
   ] where role = stringProperty "WM_WINDOW_ROLE"
 
-myLogHook = fadeInactiveLogHook fadeAmount
-  where fadeAmount = 0.74
+myLogHook = fadeInactiveCurrentWSLogHook fadeAmount <+> historyHook
+  where fadeAmount = 0.76
 
 projects :: [Project]
 projects =
