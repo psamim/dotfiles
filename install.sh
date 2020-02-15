@@ -92,7 +92,8 @@ ln -sf "$PWD/dunst" "$HOME/.config/dunst"
 # systemd
 rm -rf "$HOME/.config/systemd"
 mkdir -p "$HOME/.config/systemd/"
-cp -r "$PWD/systemd" "$HOME/.config/systemd/user"
+cp -r "$PWD/systemd/user" "$HOME/.config/systemd/user"
+cp -r "$PWD/systemd/system/*" "/etc/systemd/system"
 
 # beets
 mkdir -p "$HOME/.config/beets"
