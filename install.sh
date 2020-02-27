@@ -32,11 +32,13 @@ ln -sf $PWD/tpm $HOME/.tmux/plugins/tpm
 
 # emacs
 rm -rf "$HOME/.emacs.d"
-ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
-ln -sf "$PWD/spacemacs/exclude" "$PWD/.git/modules/emacs.d/info/exclude"
-ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
-rm -rf "$HOME/.emacs.d/private"
-ln -sf "$PWD/spacemacs/private" "$HOME/.emacs.d/private"
+rm -rf "$HOME/.doom.d"
+# ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
+# ln -sf "$PWD/spacemacs/exclude" "$PWD/.git/modules/emacs.d/info/exclude"
+# ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
+# rm -rf "$HOME/.emacs.d/private"
+# ln -sf "$PWD/spacemacs/private" "$HOME/.emacs.d/private"
+ln -sf "$PWD/doom" "$HOME/.doom.d"
 
 # vrapperrc
 ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
