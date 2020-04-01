@@ -71,6 +71,10 @@
         "account": "Expenses:Transportation:Fuel",
         "name": "Emamat Gas Station"
     },
+    "5231698": {
+        "account": "Expenses:Transportation:Fuel",
+        "name": "Felezi Gas Station"
+    },
     "1972432": {
         "account": "Expenses:Groceries",
         "name": "Photocopy Hamsayeh Mohtasham"
@@ -80,6 +84,10 @@
         "name": "Flower Shop Nazar"
     },
     "44428966": {
+        "account": "Expenses:Groceries",
+        "name": "Morgh Hannaneh Nazar Gharbi"
+    },
+    "44679784": {
         "account": "Expenses:Groceries",
         "name": "Morgh Hannaneh Nazar Gharbi"
 
@@ -423,5 +431,17 @@
     "1347143": {
         "account": "Expenses:Food:Cafe",
         "name": "Meev"
+    },
+    "11641961": {
+        "account": "Expenses:Groceries",
+        "name": "Ararat Super"
+    },
+    "4120167": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Mehrdad"
+    },
+    "5273078": {
+        "account": "Expenses:Groceries",
+        "name": "Morgh Hannaneh Nazar Gharbi"
     }
 }

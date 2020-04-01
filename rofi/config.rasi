@@ -1,0 +1,11 @@
+/* vi: ft=css */
+configuration {
+  combi-modi: "window,drun,run";
+  font: "Iosevka 13";
+  modi: "combi";
+  display-drun: " App:";
+  display-window: " Window:";
+  display-run: " Run:";
+}
+
+@theme "./style_normal.rasi"

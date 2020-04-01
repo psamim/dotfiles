@@ -356,3 +356,8 @@ hi illuminatedWord cterm=bold ctermfg=121 gui=bold guifg=#2aa198
 " autocmd FileType typescript JsPreTmpl
 " autocmd FileType typescript.tsx JsPreTmpl
 " autocmd FileType typescript syn clear foldBraces
+
+map <F1> <Esc>
+imap <F1> <Esc>
+
+set lazyredraw

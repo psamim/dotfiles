@@ -2,13 +2,16 @@
 
 from subprocess import check_output
 
-command = "xprop -root _NET_DESKTOP_VIEWPORT | grep -oh '[0-9]\{4\}'"
+command = "xprop -root -notype  _NET_CURRENT_DESKTOP | perl -pe 's/.*?= (\d+)/$1/'"
 
 try:
     output = check_output(command, shell=True)
 except Exception:
     output = 0
 
-viewport = int(int(output) / 1920)
-name = ['', '', '', '♬', '']
-print(" " + name[viewport] + " ")
+viewport = int(int(output))
+name = ['', '', '', '♬', '']
+try:
+    print(" " + name[viewport] + " ")
+except:
+    print("No.: " + str(viewport))
