@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mxw/vim-jsx'
-Plug 'TaDaa/vimade'
 Plug 'mcchrish/nnn.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
@@ -13,7 +12,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -23,16 +22,16 @@ Plug 'iberianpig/tig-explorer.vim'
 Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'lambdalisue/suda.vim'
 Plug 'lifepillar/vim-solarized8'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'amiorin/ctrlp-z'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'amiorin/ctrlp-z'
 Plug 'tpope/vim-surround'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
-Plug 'haya14busa/vim-keeppad'
+" Plug 'haya14busa/vim-keeppad'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'embear/vim-localvimrc'
@@ -41,15 +40,16 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/limelight.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'janko/vim-test'
+" Plug 'janko/vim-test'
 Plug 'RRethy/vim-illuminate'
-Plug 'junegunn/vim-slash'
+" Plug 'junegunn/vim-slash'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 " Plug 'Quramy/vim-js-pretty-template'
 Plug 'jparise/vim-graphql'
 Plug 'digitaltoad/vim-pug'
 Plug 'farmergreg/vim-lastplace'
+" Plug 'edvb/dmenu.vim'
 call plug#end()
 
 " Suda
@@ -58,9 +58,9 @@ let g:suda_smart_edit = 1
 let g:grammarous#languagetool_cmd = 'languagetool'
 nmap <silent> gra <Plug>(grammarous-fixall)
 
-" CtrlpZ, fasd intergration
-let g:ctrlp_map = ''
-let g:ctrlp_extensions = ['Z']
+" " CtrlpZ, fasd intergration
+" let g:ctrlp_map = ''
+" let g:ctrlp_extensions = ['Z']
 
 let g:localvimrc_enable=1
 
@@ -343,6 +343,8 @@ nmap <silent> gr <Plug>(coc-references)
 imap <C-l> <Plug>(coc-snippets-expand)
 nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
+" nnoremap <leader>b :DmenuBuf "e"<CR>
+" nnoremap <leader>p :DmenuFile "e"<CR>
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 

@@ -30,8 +30,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+(setq
+  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/appointments.org"))
+  org-directory "~/Notes")
+
 (setq-hook! org-mode
-  org-default-notes-file "~/Notes/notes.org"
   org-log-done t
   org-image-actual-width '(700)
   org-clock-into-drawer t
@@ -42,26 +45,71 @@
   org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
-  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/appointments.org"))
-  org-directory "~/Notes"
   org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
   org-archive-location "~/Notes/archive/todo.org::"
   org-duration-format 'h:mm
   org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
   bidi-paragraph-direction t
-  org-caldav-url 'google
-  org-caldav-calendar-id "ovuticv96133cisuc0pm8f7d6g@group.calendar.google.com"
-  org-caldav-files '("~/Notes/appointments.org")
   org-icalendar-timezone "Asia/Tehran"
-  org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
-  org-caldav-oauth2-client-secret "tGlcde8zVpUiXFPuLOMb-DCB"
-  org-caldav-inbox "~/Notes/calendar-inbox.org")
+  ;; org-caldav-url 'google
+  ;; org-caldav-calendar-id "ovuticv96133cisuc0pm8f7d6g@group.calendar.google.com"
+  ;; org-caldav-files '("~/Notes/appointments.org")
+  ;; org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
+  ;; org-caldav-oauth2-client-secret "SECRET"
+  ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
+  )
+
+
+
+(defun psamim-journal-prefix ()
+  (let*
+      (
+       (time (format-time-string "%s"))
+       (decodedTime (decode-time time))
+       (now (list (nth 4 decodedTime) (nth 3 decodedTime) (nth 5 decodedTime))))
+    (concat
+     ;; (format-time-string "%B %e, %Y" time) "\n"
+     (format-time-string "%A" time)
+     (calendar-persian-date-string now)
+     ;; (calendar-bahai-date-string now) "\n\n")
+    )))
+
+(customize-set-variable 'org-journal-file-type `weekly)
+(setq!
+ org-journal-dir "~/Notes/journal"
+ org-journal-encrypt-journal t)
+ ; org-journal-date-prefix (psamim-journal-prefix))
+
+(defun org-journal-find-location ()
+  ;; Open today's journal, but specify a non-nil prefix argument in order to
+  ;; inhibit inserting the heading; org-capture will insert the heading.
+  (org-journal-new-entry t)
+  ;; Position point on the journal's top-level heading so that org-capture
+  ;; will add the new entry as a child entry.
+  (goto-char (point-min)))
+
+(setq org-capture-templates '(("j" "Journal entry" entry (function org-journal-find-location)
+                               "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
+
+
+(add-hook! '(org-clock-out-hook org-clock-in-hook) #'org-save-all-org-buffers)
+(advice-add 'org-archive-subtree :after #'org-save-all-org-buffers)
+(defun my-org-mode-autosave-settings ()
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
+(add-hook 'org-mode-hook 'my-org-mode-autosave-settings)
+
+
+(defun export-clock ()
+  (interactive)
+  (org-clock-csv-to-file "~/clock.csv" "~/Notes/clock.org"))
 
 (map! :localleader
       (:map org-mode-map
-        "b e" #'org-babel-execute-maybe
-        "b j" #'jupyter-org-execute-and-next-block
-        ))
+        "c e" #'export-clock))
+
+(map! :localleader
+      (:map ledger-mode-map
+        "c" #'ledger-sort-buffer))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -89,3 +137,7 @@
  (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
  ;; "Vazir Code-13")
  "Shabnam-12")
+
+;; (after! org-mode
+;;   (set-company-backend! 'company-dabbrev)
+;;   )

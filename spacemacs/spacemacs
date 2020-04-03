@@ -33,10 +33,11 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(csv
      ;; (dash :variables
      ;;       helm-dash-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
      markdown
+     haskell
      json
      systemd
      ;; php
@@ -74,6 +75,8 @@ This function should only modify configuration layer settings."
      javascript
      ;; docker
      ;; neotree
+     (typescript :variables
+                 typescript-linter 'eslint)
 
      ;; private
      ;; aj-javascript
@@ -559,6 +562,7 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     (("u" alltodo ""
       ((org-agenda-overriding-header "Next Actions"))))))
+ '(org-agenda-files (quote ("~/Notes/todo.org")))
  '(org-agenda-ndays 7)
  '(org-deadline-warning-days 5)
  '(org-file-apps
@@ -573,8 +577,25 @@ This function is called at the very end of Spacemacs initialization."
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode visual-fill-column winum web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen treemacs-projectile treemacs-evil treemacs ht pfuture toc-org tide typescript-mode tagedit systemd symon super-save sublimity string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pytest pyenv-mode py-isort pug-mode prettier-js popwin pkgbuild-mode pippel pipenv pyvenv pip-requirements persp-mode password-generator paradox ox-reveal overseer org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-journal org-download org-caldav org-bullets org-brain open-junk-file oauth2 nameless multi-term move-text mmm-mode markdown-toc markdown-mode magit-svn magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode live-py-mode link-hint json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode groovy-mode graphql-mode google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-ledger flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit transient git-commit with-editor evil-lisp-state evil-lion evil-ledger ledger-mode evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline eldoc-eval shrink-path diff-hl define-word cython-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-anaconda company column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed arduino-mode spinner anaconda-mode pythonic f dash s all-the-icons-dired all-the-icons memoize aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra lv font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
- '(paradox-github-token t))
+    (ansi package-build shut-up git commander csv-mode flucui-themes focus yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode visual-fill-column winum web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen treemacs-projectile treemacs-evil treemacs ht pfuture toc-org tide typescript-mode tagedit systemd symon super-save sublimity string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pytest pyenv-mode py-isort pug-mode prettier-js popwin pkgbuild-mode pippel pipenv pyvenv pip-requirements persp-mode password-generator paradox ox-reveal overseer org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-journal org-download org-caldav org-bullets open-junk-file oauth2 nameless multi-term move-text mmm-mode markdown-toc markdown-mode magit-svn magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode live-py-mode link-hint json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode groovy-mode graphql-mode google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-ledger flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit transient git-commit with-editor evil-lisp-state evil-lion evil-ledger ledger-mode evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline eldoc-eval shrink-path diff-hl define-word cython-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-anaconda company column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed arduino-mode spinner anaconda-mode pythonic f dash s all-the-icons-dired all-the-icons memoize aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package pcre2el hydra lv font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
+ '(paradox-github-token t)
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "node_modules/.bin/"))
+           (add-to-list
+            (quote exec-path)
+            (concat
+             (locate-dominating-file default-directory ".dir-locals.el")
+             "../.node_modules/bin/")))
+     (typescript-backend . tide)
+     (typescript-backend . lsp)
+     (javascript-backend . tern)
+     (javascript-backend . lsp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -5,6 +5,7 @@
 
 elisp=$(cat <<'END_HEREDOC'
 (concat
+;; (setq org-duration-format 'h:mm)
  (if (org-clock-is-active) (org-clock-get-clock-string) "")
 ;; " "
 ;; (when (org-pomodoro-active-p)

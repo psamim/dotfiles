@@ -18,6 +18,9 @@ import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.WorkspaceCompare    (getSortByIndex)
 import XMonad.Actions.GroupNavigation
+import XMonad.Config.Xfce
+
+import XMonad.Layout.NoFrillsDecoration
 
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -49,8 +52,36 @@ myIconMapper = (\x -> case x of
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
+base03  = "#002b36"
+red     = "#dc322f"
+yellow  = "#b58900"
+blue    = "#268bd2"
+active = blue
+barHeight = 10
+topBarTheme = def
+    { inactiveBorderColor   = base03
+    , inactiveColor         = base03
+    , inactiveTextColor     = base03
+    , activeBorderColor     = active
+    , activeColor           = active
+    , activeTextColor       = active
+    , urgentBorderColor     = red
+    , urgentTextColor       = yellow
+    , decoHeight            = barHeight
+    }
+
+myLayouts = smartBorders 
+    $ spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True 
+    $ tall
+    ||| mTall
+    ||| Full 
+    where
+        addTopBar = noFrillsDeco shrinkText topBarTheme
+        tall = addTopBar $ Tall 1 (3/100) (1/2)
+        mTall =  addTopBar $ Mirror $ Tall 1 (3/100) (3/4)
+
 -- Main configuration, override the defaults to your liking.
-myConfig = dynamicProjects projects $ ewmh $ defaultConfig
+myConfig = dynamicProjects projects $ ewmh $ xfceConfig
     { modMask = mod4Mask -- use the Windows button as mod
     , terminal = "alacritty"
     , borderWidth = 0
@@ -59,18 +90,18 @@ myConfig = dynamicProjects projects $ ewmh $ defaultConfig
     , workspaces = myWorkspaces
     , logHook = myLogHook
     , manageHook = manageHook defaultConfig <+> manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads
-    , layoutHook = smartBorders $ spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $
-                   layoutHook def
+    , layoutHook = myLayouts
     } `additionalKeys` myKeys `additionalKeysP` [
       -- Media keys
-      ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) -10%&&notify-send Volume Down"),
-      ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) +10%&&notify-send Volume Up"),
-      ("<XF86AudioMute>", spawn "pactl -- set-sink-mute $(pactl list sinks short|head -n1|cut  -f1) toggle&&notify-send Toggle mute")
+      -- ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) -10%&&notify-send Volume Down"),
+      -- ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume $(pactl list sinks short|head -n1|cut  -f1) +10%&&notify-send Volume Up"),
+      -- ("<XF86AudioMute>", spawn "pactl -- set-sink-mute $(pactl list sinks short|head -n1|cut  -f1) toggle&&notify-send Toggle mute")
     ]
 
 myKeys = [
       ((mod4Mask, xK_d), spawn "rofi -show combi"),
       ((mod4Mask, xK_p), spawn "rofi-pass"),
+      ((mod4Mask, xK_f), spawn "rofi -show file-browser -file-browser-dir ~"),
       (((0, xK_Print)), spawn "flameshot gui"),
       ((mod4Mask, xK_x), namedScratchpadAction scratchpads "term"),
       -- ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
@@ -137,7 +168,7 @@ myManageHook = composeAll . concat $
     , [ title =? "TODOs" --> doRectFloat (W.RationalRect (1/12) (1/12) (10/12) (10/12))]
     , [ className   =? c --> doF (W.shift "firefox") | c <- webApps]
     , [ className   =? c --> doF (W.shift "chat") | c <- chatApps]
-    , [ className   =? c --> doF (W.shift "star") | c <- starApps]
+    -- , [ className   =? c --> doF (W.shift "star") | c <- starApps]
     ]
   where myFloats      = ["MPlayer", "Gimp", "plasma", "yakuake", "Yakuake",
                          "plasma", "Plasma", "plasma-desktop", "Plasma-desktop", "File Operation Progress",
@@ -146,6 +177,7 @@ myManageHook = composeAll . concat $
         webApps       = ["firefox"]
         starApps = ["Google-chrome"]
         chatApps       = ["TelegramDesktop", "Slack"]
+        otherChatApps = ["crx_hnpfjngllnobngcgfapefoaidbinmjnm"]
 
 scratchpads = [
   NS "term" "alacritty --title term" (title =? "term") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5))
@@ -184,12 +216,14 @@ projects =
 
   , Project { projectName      = "music"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "pavucontrol"
-                                           spawn "spotify"
+            , projectStartHook = Nothing
+            -- , projectStartHook = Just $ do spawn "pavucontrol"
+            --                                spawn "spotify"
             }
 
   , Project { projectName      = "todo"
             , projectDirectory = "~/Notes"
-            , projectStartHook = Just $ do spawn "/home/samim/.bin/todo-org"
+            , projectStartHook = Nothing
+            -- , projectStartHook = Just $ do spawn "/home/samim/.bin/todo-org"
             }
   ]
