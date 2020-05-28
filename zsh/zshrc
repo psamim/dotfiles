@@ -52,6 +52,9 @@ if ! zgen saved; then
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
     # zgen load lukechilds/zsh-nvm
+    # zgen load marlonrichert/zsh-autocomplete 
+    # zgen load chisui/zsh-nix-shell
+    # zgen load spwhitt/nix-zsh-completions
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -104,7 +107,7 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"
 export LEDGER_FILE="$HOME/Notes/accounting/ledger.ledger"
-export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
+# export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
 export TOMBS="$HOME/tombs"
 export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
 export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
@@ -145,10 +148,15 @@ export WORKON_HOME=~/.virtualenvs
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null&
+ export GPG_TTY=$(tty)
+ gpg-connect-agent updatestartuptty /bye >/dev/null&
 
-# nvim
+# nvm
 # export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
 # export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
 # [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
+
+export TERM=xterm
+# source <(kubectl completion zsh)
+
+# if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -1,18 +1,26 @@
 # vim:ft=gitconfig:
 [user]
-	name = Samim Pezeshki
-	email = psamim@gmail.com
+  name = Samim Pezeshki
+  email = psamim@gmail.com
 [core]
-  	editor = nvr --remote-wait-silent
-	excludesfile = ~/.gitignore
-	autocrlf = input
+  editor = nvr --remote-wait-silent
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+[interactive]
+  diffFilter = delta --color-only
 [alias]
-  	st = status
+  st = status
 [push]
-	default = simple
+  default = simple
 # [http]
 # 	proxy = http://127.0.0.1:7777
 # [https]
 # 	proxy = http://127.0.0.1:7777
 [magit]
-	hideCampaign = true
+  hideCampaign = true
+
+; [pager]
+;   log = /usr/share/git/diff-highlight/diff-highlight | less
+;   show = /usr/share/git/diff-highlight/diff-highlight | less
+;   diff = /usr/share/git/diff-highlight/diff-highlight | less

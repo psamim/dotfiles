@@ -21,6 +21,7 @@ import           XMonad.Actions.GroupNavigation
 import           XMonad.Config.Xfce
 import           XMonad.Layout.NoFrillsDecoration
 import           XMonad.Layout.Tabbed
+import XMonad.Actions.CopyWindow
 
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -151,6 +152,8 @@ myKeys =
   , ((mod4Mask, xK_m)  , bindProject "todo")
   , ((mod1Mask, xK_j)  , spawn "key-whatsapp down")
   , ((mod1Mask, xK_k)  , spawn "key-whatsapp up")
+  , ((mod4Mask, xK_a ), windows copyToAll) -- @@ Make focused window always visible
+  , ((mod4Mask .|. shiftMask, xK_a ),  killAllOtherCopies) -- @@ Toggle window state back
   ]
     -- ++
     -- [((m .|. noModMask, k), windows $ f i)
@@ -244,8 +247,7 @@ scratchpads =
   ]
   where role = stringProperty "WM_WINDOW_ROLE"
 
-myLogHook = fadeInactiveCurrentWSLogHook fadeAmount <+> historyHook
-  where fadeAmount = 0.76
+myLogHook =  historyHook
 
 projects :: [Project]
 projects =

@@ -45,7 +45,7 @@
   org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
-  org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
+  ;; org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
   org-archive-location "~/Notes/archive/todo.org::"
   org-duration-format 'h:mm
   org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
