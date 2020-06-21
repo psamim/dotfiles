@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mxw/vim-jsx'
 Plug 'mcchrish/nnn.vim'
@@ -52,6 +53,7 @@ Plug 'farmergreg/vim-lastplace'
 " Plug 'edvb/dmenu.vim'
 Plug 'LnL7/vim-nix'
 Plug 'Konfekt/vim-CtrlXA'
+Plug 'AlphaMycelium/pathfinder.vim'
 call plug#end()
 
 " Suda

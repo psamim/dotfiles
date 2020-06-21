@@ -51,3 +51,6 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! org-clock-csv)
+(package! org-ql)
+(package! poet-theme)
+(package! leuven-theme)

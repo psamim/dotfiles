@@ -131,7 +131,7 @@ alias tmux='direnv exec / tmux'
 alias magit='emacsclient -nw -e \(magit-status\)'
 alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
 alias ledger="ledger --pedantic --explicit --strict"
-alias org-csv="emacs -batch -l ~/.emacs.d/core/core.el -l ~/.emacs.d/core/core-packages.el -l "~/.emacs.d/init.el" -f org-clock-csv-batch-and-exit ~/Notes/clock.org"
+alias org-csv="emacs -batch -l ~/.emacs.d/core/core.el -l ~/.emacs.d/core/core-packages.el -l "~/.emacs.d/init.el" -f org-clock-csv-batch-and-exit ~/Notes/todo.org"
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH
@@ -157,6 +157,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
 
 export TERM=xterm
-# source <(kubectl completion zsh)
+source <(kubectl completion zsh)
 
-# if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999

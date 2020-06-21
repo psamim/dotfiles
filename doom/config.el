@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-material)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -34,15 +34,18 @@
   org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/appointments.org"))
   org-directory "~/Notes")
 
+(require org-id)
+
 (setq-hook! org-mode
   org-log-done t
   org-image-actual-width '(700)
   org-clock-into-drawer t
   org-clock-persist t
+  org-id-link-to-org-use-id t
   org-columns-default-format "%60ITEM(Task) %20TODO %10Effort(Effort){:} %10CLOCKSUM"
   org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
                                 ("STYLE_ALL" . "habit")))
-  org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
+  ;; org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
   ;; org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
@@ -57,28 +60,37 @@
   ;; org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
   ;; org-caldav-oauth2-client-secret "SECRET"
   ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
+  org-hide-emphasis-markers t
   )
 
+(setq org-agenda-custom-commands
+      '(("o" "My Agenda"
+         ((org-ql-block '(and (todo "TODO"))
+                        ((org-ql-block-header "Todos:")))
+          (agenda)))))
 
-
-(defun psamim-journal-prefix ()
+(defun psamim-journal-prefix (time)
   (let*
       (
-       (time (format-time-string "%s"))
        (decodedTime (decode-time time))
        (now (list (nth 4 decodedTime) (nth 3 decodedTime) (nth 5 decodedTime))))
     (concat
      ;; (format-time-string "%B %e, %Y" time) "\n"
-     (format-time-string "%A" time)
-     (calendar-persian-date-string now)
-     ;; (calendar-bahai-date-string now) "\n\n")
-    )))
+     ;; (format-time-string "%A" time)
+     "- امروز چی کارا کردی؟" "\n"
+     "- چیز خاصی ازشون یادگرفتی که بخوای یادت بمونه؟" "\n"
+     "- چه احساسی داری؟" "\n"
+     "- چیزی هست که خیلی داری بش فکر می‌کنی؟ زودتر حلش کن." "\n"
+     "- فردا چی کارا داری؟" "\n\n"
+     "# " (calendar-persian-date-string now) "\n"
+     "# " (calendar-bahai-date-string now) "\n\n")
+    ))
 
-(customize-set-variable 'org-journal-file-type `weekly)
+;; (customize-set-variable 'org-journal-file-type "daily")
 (setq!
- org-journal-dir "~/Notes/journal"
- org-journal-encrypt-journal t)
- ; org-journal-date-prefix (psamim-journal-prefix))
+ org-journal-dir "~/Notes/journal/daily"
+ org-journal-encrypt-journal t
+ org-journal-file-header 'psamim-journal-prefix)
 
 (defun org-journal-find-location ()
   ;; Open today's journal, but specify a non-nil prefix argument in order to
@@ -117,7 +129,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -145,3 +157,15 @@
 ;; (after! org-mode
 ;;   (set-company-backend! 'company-dabbrev)
 ;;   )
+;;
+
+(add-hook 'text-mode-hook
+           (lambda ()
+            (variable-pitch-mode 1)))
+
+(set-face-attribute 'fixed-pitch nil :family "Iosevka")
+(set-face-attribute 'variable-pitch nil :family "Fira Sans")
+
+(set-frame-parameter (selected-frame) 'alpha '(95 95))
+
+(setq org-journal-enable-agenda-integration t)
