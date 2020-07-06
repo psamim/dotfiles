@@ -6,5 +6,5 @@
 
 export DISPLAY=:0
 export XAUTHORITY=/home/samim/.Xauthority 
-setxkbmap -layout us,ir -option 'grp:shift_toggle'
+setxkbmap -layout us,ir -option ''
 setxkbmap -option caps:ctrl_modifier

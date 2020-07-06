@@ -54,3 +54,5 @@
 (package! org-ql)
 (package! poet-theme)
 (package! leuven-theme)
+(package! activity-watch-mode)
+(package! org-pretty-tags)

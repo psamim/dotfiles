@@ -54,6 +54,9 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'LnL7/vim-nix'
 Plug 'Konfekt/vim-CtrlXA'
 Plug 'AlphaMycelium/pathfinder.vim'
+" Plug 'ipod825/vim-netranger'
+Plug 'ActivityWatch/aw-watcher-vim'
+Plug 'diepm/vim-rest-console'
 call plug#end()
 
 " Suda
@@ -382,3 +385,5 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 set lazyredraw
+
+let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
