@@ -73,12 +73,12 @@
 (customize-set-value
     'org-agenda-category-icon-alist
     `(
-      ("work" "~/Downloads/money-bag(1).svg" nil nil :ascent center)
-      ("chore" "~/Downloads/loop(1).svg" nil nil :ascent center)
-      ("events" "~/Downloads/calendar(1).svg" nil nil :ascent center)
-      ("todo" "~/Downloads/checklist(1).svg" nil nil :ascent center)
-      ("walk" "~/Downloads/walk(1).svg" nil nil :ascent center)
-      ("solution" "~/Downloads/solution(1).svg" nil nil :ascent center)
+      ("work" "~/.dotfiles/icons/money-bag.svg" nil nil :ascent center)
+      ("chore" "~/.dotfiles/icons/loop.svg" nil nil :ascent center)
+      ("events" "~/.dotfiles/icons/calendar.svg" nil nil :ascent center)
+      ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center)
+      ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center)
+      ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center)
       ))
 
 
