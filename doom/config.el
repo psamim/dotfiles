@@ -82,8 +82,6 @@
       ))
 
 
-;; (add-hook 'org-agenda-finalize-hook
-;;           #'eh-org-agenda-change-breadcrumbs-color)
 
 ;; (defun eh-org-agenda-change-breadcrumbs-color ()
 ;;   (save-excursion
@@ -238,9 +236,18 @@ This function makes sure that dates are aligned for easy reading."
 ;;             (variable-pitch-mode 1)))
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(95 95))
-(add-to-list 'default-frame-alist '(alpha . (97 . 95)))
+(set-frame-parameter (selected-frame) 'alpha '(92 92))
+(add-to-list 'default-frame-alist '(alpha . (92 . 92)))
+
+
+(add-hook 'org-agenda-finalize-hook #'set-window-clean)
+
+(defun set-window-clean ()
+  (interactive)
+  (setq mode-line-format nil)
+  (set-frame-parameter nil 'font "Iosevka-18")
+  (set-window-margins (frame-selected-window) 4))
 
 (setq org-journal-enable-agenda-integration t)
 
-(global-activity-watch-mode)
+;; (global-activity-watch-mode)
