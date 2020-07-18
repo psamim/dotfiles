@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
 # -*- mode: sh; -*-
 
+# To restore backup:
+# Have the keys in ~/$BORG_CONFIG_DIR/keys
+# export NAME=backups
+# export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
+# list backups
+# borg list path/to/borg/bakcup
+# borg export-tar /path/to/borg/backup::archive out.tar
 
 function info() { chalk -t "$(date -Iminutes) - {yellow $* }" }
 function error() { chalk -t "$(date -Iminutes) - {red $* }" }
@@ -156,8 +163,8 @@ function create_private_file() {
     local TEMP_PRIVATE_DIR=/tmp/$RANDOM
     local PRIVATE_FILE=$1
     mkdir -p $TEMP_PRIVATE_DIR
-    rsync -rvzl ~/.gnupg $TEMP_PRIVATE_DIR/gnugp
-    rsync -rvzl ~/.ssh $TEMP_PRIVATE_DIR/ssh
+    rsync -rvzl ~/.gnupg/ $TEMP_PRIVATE_DIR/gnugp
+    rsync -rvzl ~/.ssh/ $TEMP_PRIVATE_DIR/ssh
     rsync -rvzl  --exclude "repos" --exclude "cache" ~/borg $TEMP_PRIVATE_DIR
     make_tar_gpg_sym $TEMP_PRIVATE_DIR $PRIVATE_FILE
     rm -rf $TEMP_PRIVATE_DIR

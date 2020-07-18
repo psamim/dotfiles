@@ -87,16 +87,16 @@ myTabTheme = def { activeColor         = active
                  }
 
 myLayouts =
-  smartBorders
-    $   spacingRaw True (Border 0 4 4 4) True (Border 0 4 4 4) True
+  -- smartBorders
+    spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True
     $   tall
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
     ||| Full
  where
-  addTopBar = noFrillsDeco shrinkText topBarTheme
-  tall      = addTopBar $ Tall 1 (3 / 100) (1 / 2)
-  mTall     = addTopBar $ Mirror $ Tall 1 (3 / 100) (3 / 4)
+  -- addTopBar = noFrillsDeco shrinkText topBarTheme
+  tall      = Tall 1 (3 / 100) (1 / 2)
+  mTall     = Mirror $ Tall 1 (3 / 100) (3 / 4)
 
 -- Main configuration, override the defaults to your liking.
 myConfig =
@@ -136,6 +136,8 @@ myKeys =
   , ((mod4Mask, xK_g), gotoMenu)
   , ((mod4Mask, xK_o), nextWS)
   , ((mod4Mask, xK_i), prevWS)
+  , ((mod4Mask, xK_s), incWindowSpacing 1)
+  , ((mod4Mask .|. shiftMask, xK_s), decWindowSpacing 1)
   , ( (mod4Mask, xK_v)
     , spawn
       "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"
@@ -150,6 +152,7 @@ myKeys =
   , ((0, xK_F4)        , bindProject "music")
   , ((mod4Mask, xK_c)  , bindProject "editor")
   , ((mod4Mask, xK_m)  , bindProject "todo")
+  , ((mod4Mask, xK_n)  , spawn "~/.emacs.d/bin/org-capture")
   , ((mod1Mask, xK_j)  , spawn "key-whatsapp down")
   , ((mod1Mask, xK_k)  , spawn "key-whatsapp up")
   , ((mod4Mask, xK_slash)  , spawn "xkb-switch -n")
@@ -248,7 +251,8 @@ scratchpads =
   ]
   where role = stringProperty "WM_WINDOW_ROLE"
 
-myLogHook =  historyHook
+myLogHook = historyHook <+> fadeInactiveLogHook fadeAmount
+    where fadeAmount = 0.92
 
 projects :: [Project]
 projects =

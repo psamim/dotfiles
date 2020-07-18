@@ -20,7 +20,7 @@ if [[ -z $(pidof emacs) ]]
 then
     echo ""
 else
-    TIME=`emacsclient --eval "$elisp" \
+    TIME=`emacsclient --socket-name /var/run/user/1000/emacs1000/server --eval "$elisp" \
         | grep -s -o "\".*\"" | sed 's/\"//g' | sed 's/^ //g' | sed 's/ $//g'  | sed 's/\[//g' | sed 's/\]//g'`
         if [ -n "$TIME" ]; then
             # echo "<font color='#ffc107'>&nbsp;&nbsp;  $TIME &nbsp;&nbsp;</font>"

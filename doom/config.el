@@ -21,23 +21,47 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 18))
-(setq doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18))
+(setq doom-font (font-spec :family "Iosevka" :size 18)
+      doom-variable-pitch-font (font-spec :family "Fira Sans")
+      doom-unicode-font (font-spec :family "DejaVu Sans Mono")
+      doom-big-font (font-spec :family "Fira Mono" :size 19))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-solarized-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
+  org-icalendar-timezone "Asia/Tehran"
+  org-caldav-url 'google
+  org-caldav-calendar-id "samim@globalworkandtravel.com"
+  org-caldav-files '("~/Notes/appointments.org")
+  org-caldav-oauth2-client-id "702215651471-9g9vjg9hhnp7hathnteh4iajecp91atm.apps.googleusercontent.com"
+  org-caldav-oauth2-client-secret "SECRET"
+  org-caldav-inbox "~/Notes/calendar-inbox.org"
+  org-caldav-delete-org-entries 'always
+  org-caldav-sync-changes-to-org 'all
+  org-caldav-sync-direction 'cal->org
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/appointments.org"))
+  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
   org-directory "~/Notes")
+
+(defun add-property-with-date-captured ()
+  "Add DATE_CAPTURED property to the current item."
+  (interactive)
+  (org-set-property "CREATED" (format-time-string "%F")))
+
+(add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file+headline "~/Notes/todo.org" "Inbox")
+               "* %?\n%a\n"))))
+
 
 
 (setq-hook! org-mode
@@ -56,13 +80,6 @@
   org-duration-format '((special . h:mm))
   org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
   bidi-paragraph-direction t
-  org-icalendar-timezone "Asia/Tehran"
-  ;; org-caldav-url 'google
-  ;; org-caldav-calendar-id "ovuticv96133cisuc0pm8f7d6g@group.calendar.google.com"
-  ;; org-caldav-files '("~/Notes/appointments.org")
-  ;; org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
-  ;; org-caldav-oauth2-client-secret "SECRET"
-  ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
   org-hide-emphasis-markers t
   org-fontify-done-headline t
   org-fontify-whole-heading-line t
@@ -83,12 +100,19 @@
 
 
 
-;; (defun eh-org-agenda-change-breadcrumbs-color ()
-;;   (save-excursion
-;;     (goto-char (point-min))
-;;     (while (re-search-forward org-agenda-breadcrumbs-separator nil t)
-;;       (put-text-property (match-beginning 0) (match-end 0)
-;;                          'face '(:foreground "grey" :bold t)))))
+(setq org-agenda-hidden-separator "‌‌ ")
+(defun agenda-color-char ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "⚡" nil t)
+      (put-text-property (match-beginning 0) (match-end 0)
+                         'face '(:height 300 :foreground "gold2" :bold t))))
+
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward org-agenda-hidden-separator nil t)
+      (put-text-property (match-beginning 0) (- (match-end 0) 20)
+                         'face '(:foreground "SlateGray")))))
 
 (setq org-agenda-block-separator (string-to-char " "))
 (setq org-agenda-format-date 'my-org-agenda-format-date-aligned)
@@ -114,32 +138,29 @@ This function makes sure that dates are aligned for easy reading."
          (weekstring (if (= day-of-week 1)
                          (format " W%02d" iso-week)
                        "")))
-         (format "%-2s. %2d %s, %s"
+         (format " %-2s. %2d %s, %s"
             dayname day monthname persian)))
 
 (setq org-agenda-custom-commands
       '(("o" "My Agenda"
          ((todo "TODO" (
-                      (org-agenda-overriding-header "\n⚡ Do Today:\n⎺⎺⎺⎺⎺⎺⎺⎺⎺")
+                      (org-agenda-overriding-header "⚡ Do Today:\n")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format " %-2i %-15b")
-                      (org-agenda-todo-keyword-format "")
-                       ))
+                      (org-agenda-prefix-format (concat "  %-2i %-13b" org-agenda-hidden-separator))
+                      (org-agenda-todo-keyword-format "")))
           (agenda "" (
                       (org-agenda-start-day "+0d")
                       (org-agenda-span 5)
-                      (org-agenda-overriding-header "⚡ Schedule:\n⎺⎺⎺⎺⎺⎺⎺⎺⎺")
+                      (org-agenda-overriding-header "⚡ Schedule:\n")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format   "  %-3i  %-15b %t%s")
+                      (org-agenda-prefix-format   (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-current-time-string "⮜┈┈┈┈┈┈┈ now")
                       (org-agenda-scheduled-leaders '("" ""))
                       (org-agenda-time-grid (quote ((daily today remove-match)
-                                                    (0900 1200 1500 1800 2100)
-                                                    "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))
-                       ))
-          ))))
+                                                    (0900 1200 1800 2100)
+                                                    "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -178,9 +199,6 @@ This function makes sure that dates are aligned for easy reading."
 
 (add-hook! '(org-clock-out-hook org-clock-in-hook) #'org-save-all-org-buffers)
 (advice-add 'org-archive-subtree :after #'org-save-all-org-buffers)
-(defun my-org-mode-autosave-settings ()
-  (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
-(add-hook 'org-mode-hook 'my-org-mode-autosave-settings)
 
 
 (defun export-clock ()
@@ -219,12 +237,14 @@ This function makes sure that dates are aligned for easy reading."
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
-
-(set-fontset-font
- "fontset-default"
- (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
- ;; "Vazir Code-13")
- "Shabnam-12")
+(defun set-farsi-font ()
+  (interactive)
+  (set-fontset-font
+   "fontset-default"
+   (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
+   ;; "Vazir Code-13")
+   ;; "Tanha-16"))
+   "Mikhak-16"))
 
 ;; (after! org-mode
 ;;   (set-company-backend! 'company-dabbrev)
@@ -236,18 +256,93 @@ This function makes sure that dates are aligned for easy reading."
 ;;             (variable-pitch-mode 1)))
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(92 92))
-(add-to-list 'default-frame-alist '(alpha . (92 . 92)))
+;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+;; (add-to-list 'default-frame-alist '(alpha . (92 . 92)))
 
+
+(defun my-org-mode-autosave-settings ()
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
 
 (add-hook 'org-agenda-finalize-hook #'set-window-clean)
+(add-hook! 'org-mode-hook
+           #'set-farsi-font
+           #'olivetti-mode
+           #'my-org-mode-autosave-settings)
+(add-hook 'org-journal-mode-hook #'doom-modeline-mode)
+
+
+(custom-set-faces!
+  ;; '((org-agerda-date-today
+  ;;    org-agenda-date
+  ;;    org-agenda-date-weekend)
+  ;;   :box (:line-width 32 :color "Gray10"))
+  ;; '(org-scheduled
+  ;;   :foreground "grey")
+  '(org-agenda-structure
+    :family "Pacifico"
+    :height 200
+    :underline "on"))
 
 (defun set-window-clean ()
-  (interactive)
+  (agenda-color-char)
   (setq mode-line-format nil)
   (set-frame-parameter nil 'font "Iosevka-18")
+  (setq header-line-format " ")
+  (set-face-attribute 'header-line nil :background "#00000000")
   (set-window-margins (frame-selected-window) 4))
 
 (setq org-journal-enable-agenda-integration t)
 
 ;; (global-activity-watch-mode)
+
+(defun string-to-int (s) (string-to-number s))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#f0f0f0" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
+ '(custom-safe-themes
+   (quote
+    ("7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" "632694fd8a835e85bcc8b7bb5c1df1a0164689bc6009864faed38a9142b97057" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" default)))
+ '(fci-rule-color "#5B6268")
+ '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
+ '(objed-cursor-color "#ff6c6b")
+ '(package-selected-packages
+   (quote
+    (oauth oauth2 org-pretty-tags org-beautify-theme olivetti moe-theme lastfm emojify dired-quick-sort centered-window)))
+ '(pdf-view-midnight-colors (cons "#bbc2cf" "#282c34"))
+ '(rustic-ansi-faces
+   ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
+ '(vc-annotate-background "#282c34")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#98be65")
+    (cons 40 "#b4be6c")
+    (cons 60 "#d0be73")
+    (cons 80 "#ECBE7B")
+    (cons 100 "#e6ab6a")
+    (cons 120 "#e09859")
+    (cons 140 "#da8548")
+    (cons 160 "#d38079")
+    (cons 180 "#cc7cab")
+    (cons 200 "#c678dd")
+    (cons 220 "#d974b7")
+    (cons 240 "#ec7091")
+    (cons 260 "#ff6c6b")
+    (cons 280 "#cf6162")
+    (cons 300 "#9f585a")
+    (cons 320 "#6f4e52")
+    (cons 340 "#5B6268")
+    (cons 360 "#5B6268")))
+ '(vc-annotate-very-old-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-structure ((t (:family "Pacifico" :height 200 :underline "on"))))
+ '(org-scheduled ((t (:foreground "grey")))))
