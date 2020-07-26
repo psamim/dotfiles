@@ -59,5 +59,6 @@
 (package! olivetti)
 ;; (package! tea-time :recipe (:host github :repo "dakra/tea-timer.el"))
 ;; (package! tea-time :recipe (:host github :repo "konzeptual/tea-time"))
-(package! org-caldav)
+;; (package! org-caldav)
+(package! org-gcal)
 (package! oauth2)
