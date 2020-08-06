@@ -72,7 +72,8 @@ ln -sf "$PWD/i3" "$HOME/.i3"
 ln -sf "$PWD/i3/i3blocks.conf" "$HOME/.i3blocks.conf"
 
 # picomm
-ln -sf "$PWD/picom/picom.conf" "$HOME/.picom"
+mkdir -p "$HOME/.config/picom"
+ln -sf $PWD/picom/picom.conf $HOME/.config/picom/picom.conf
 
 # X
 ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
@@ -161,3 +162,7 @@ ln -sf $PWD/rofi $HOME/.config/alacritty
 # autorandr
 rm -rf $HOME/.config/autorandr
 ln -sf $PWD/autorandr $HOME/.config/autorandr
+
+# autorandr
+rm -rf $HOME/.mbsyncrc
+ln -sf $PWD/mbsync/mbsyncrc $HOME/.mbsyncrc

@@ -158,6 +158,9 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-prefix-format "  %-2i %-13b")
                       (org-agenda-todo-keyword-format "")))
           (agenda "" (
+                      (org-agenda-skip-scheduled-if-done t)
+                      (org-agenda-skip-timestamp-if-done t)
+                      (org-agenda-skip-deadline-if-done t)
                       (org-agenda-start-day "+0d")
                       (org-agenda-span 5)
                       (org-agenda-overriding-header "⚡ Schedule:\n")
@@ -296,7 +299,9 @@ This function makes sure that dates are aligned for easy reading."
            #'olivetti-mode
            #'mixed-pitch-mode
            #'my-org-mode-autosave-settings)
-(add-hook 'org-journal-mode-hook #'doom-modeline-mode)
+
+(add-hook! 'mu4e-view-mode-hook
+           #'olivetti-mode)
 
 
 (custom-set-faces!
@@ -338,9 +343,32 @@ This function makes sure that dates are aligned for easy reading."
             (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(after! doom-modeline
+(defun loadSecrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
+
+
+(use-package! mu4e
+  :config
+  (setq mu4e-use-fancy-chars nil
+        mu4e-update-interval 300
+        mu4e-headers-draft-mark '("D" . "")
+        mu4e-headers-flagged-mark '("F" . "")
+        mu4e-headers-new-mark '("N" . "✱")
+        mu4e-headers-passed-mark '("P" . "❯")
+        mu4e-headers-replied-mark '("R" . "❮")
+        mu4e-headers-seen-mark '("S" . "✔")
+        mu4e-headers-trashed-mark '("T" . "")
+        mu4e-headers-attach-mark '("a" . "")
+        mu4e-headers-encrypted-mark '("x" . "")
+        mu4e-headers-signed-mark '("s" . "☡")
+        mu4e-headers-unread-mark '("u" . "⎕")))
+
+(use-package! doom-modeline
+  :init
+  (setq doom-modeline-checker-simple-format t)
   (setq doom-modeline-percent-position nil)
   (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-env-enable-python nil))
+  (setq doom-modeline-mu4e t)
+  (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode org-journal-mode)))
 
-(defun loadSecrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
+(mu4e-alert-set-default-style 'libnotify)
+(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)

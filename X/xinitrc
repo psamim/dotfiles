@@ -35,7 +35,7 @@ unclutter &
 # dunst &
 
 # Picom window compositor
-/usr/bin/picom -b --config ~/.picom &
+/usr/bin/picom &
 
 # screen powersave
 xset +dpms

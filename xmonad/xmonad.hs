@@ -88,7 +88,7 @@ myTabTheme = def { activeColor         = active
 
 myLayouts =
   -- smartBorders
-    spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True
+    spacingRaw True (Border 6 6 6 6) True (Border 6 6 6 6) True
     $   tall
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
@@ -252,7 +252,7 @@ scratchpads =
   where role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook = historyHook <+> fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.92
+    where fadeAmount = 0.88
 
 projects :: [Project]
 projects =
