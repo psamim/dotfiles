@@ -62,3 +62,8 @@
 ;; (package! org-caldav)
 (package! org-gcal)
 (package! oauth2)
+(package! mu4e-alert)
+(package! modus-operandi-theme)
+(package! modus-vivendi-theme)
+(package! web-mode)
+(package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))

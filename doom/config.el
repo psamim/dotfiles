@@ -21,11 +21,33 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Noto Sans Mono" :size 18)
-      doom-variable-pitch-font (font-spec :family "Noto Sans")
-      doom-unicode-font (font-spec :family "Noto Sans Mono")
+(setq doom-font (font-spec :family "Iosevka" :size 18)
+      doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
+      doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
       )
+
+;; (setq
+;;  modus-operandi-theme-bold-constructs t
+;;  modus-operandi-theme-slanted-constructs t
+;;  modus-operandi-theme-org-blocks 'greyscale
+;;  modus-operandi-theme-section-headings nil
+;;  modus-operandi-theme-rainbow-headings nil
+;;  modus-operandi-theme-scale-headings t
+;;  modus-operandi-theme-variable-pitch-headings t
+;;  modus-operandi-theme-3d-modeline nil)
+
+;; (custom-theme-set-faces!
+;;   'modus-operandi
+;;   '((org-tag) :foreground "#f8f8f8")
+;;   '((org-drawer org-meta-line org-headline-done) :foreground "grey58"))
+
+  ;; invoke the above function when appropriate in order to override the
+  ;; styles of the desired faces
+  ;; (add-hook 'after-load-theme-hook 'customize-modus-operandi)
+
+  ;; load the theme
+  ;; (load-theme 'modus-operandi t)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -35,6 +57,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
+  org-clock-persist 'history
   org-icalendar-timezone "Asia/Tehran"
   ;; org-caldav-url 'google
   ;; org-caldav-calendar-id "samim@globalworkandtravel.com"
@@ -153,7 +176,7 @@ This function makes sure that dates are aligned for easy reading."
 (setq org-agenda-custom-commands
       '(("o" "My Agenda"
          ((todo "TODO" (
-                      (org-agenda-overriding-header "⚡ Do Today:\n")
+                      (org-agenda-overriding-header "⚡ TO DO:\n")
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "  %-2i %-13b")
                       (org-agenda-todo-keyword-format "")))
@@ -163,16 +186,17 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-skip-deadline-if-done t)
                       (org-agenda-start-day "+0d")
                       (org-agenda-span 5)
-                      (org-agenda-overriding-header "⚡ Schedule:\n")
+                      (org-agenda-overriding-header "⚡ SCHEDULE:\n")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "  %-3i  %-15b%t %s")
                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       (org-agenda-todo-keyword-format " ☐ ")
+                      (org-agenda-time)
                       (org-agenda-current-time-string "⮜┈┈┈┈┈┈┈ now")
                       ;; (org-agenda-scheduled-leaders '("" ""))
                       ;; (org-agenda-deadline-leaders '("" ""))
-                      (org-agenda-time-grid (quote ((daily today remove-match) (0900 1200 1800 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
+                      (org-agenda-time-grid (quote ((require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -281,9 +305,9 @@ This function makes sure that dates are aligned for easy reading."
   company-dabbrev-code-everywhere t
   company-dabbrev-code-other-buffers 'all))
 
-;; (add-hook 'text-mode-hook
-;;            (lambda ()
-;;             (variable-pitch-mode 1)))
+(add-hook 'text-mode-hook
+           (lambda ()
+            (mixed-pitch-mode 1)))
 
 ;; Transparency
 ;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
@@ -300,17 +324,20 @@ This function makes sure that dates are aligned for easy reading."
            #'mixed-pitch-mode
            #'my-org-mode-autosave-settings)
 
+(add-hook 'org-mode-local-vars-hook #'(lambda () (eldoc-mode -1)))
+
 (add-hook! 'mu4e-view-mode-hook
            #'olivetti-mode)
 
+(global-org-pretty-table-mode)
 
 (custom-set-faces!
-  ;; '((org-agerda-date-today
-  ;;    org-agenda-date
-  ;;    org-agenda-date-weekend)
-  ;;   :box (:line-width 32 :color "Gray10"))
-  ;; '(org-scheduled
-  ;;   :foreground "grey")
+  '((org-agerda-date-today
+     org-agenda-date
+     org-agenda-date-weekend)
+    :box (:line-width 32 :color "Gray10"))
+  '(org-scheduled
+    :foreground "grey")
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
   '(org-tag :foreground "#fbf5e3"  )
   '(org-ellipsis :height 1.0)
@@ -318,10 +345,13 @@ This function makes sure that dates are aligned for easy reading."
   '(org-level-2 :weight normal :foreground "#424242" :inherit outline-2)
   '(org-level-3 :weight normal :inherit outline-3)
   '(org-link :weight normal :inherit link)
+  '(org-table :background "LightGoldenrodYellow")
+  '(org-agenda-date-today :foreground "grey40")
+  '(org-agenda-date :foreground "grey40")
+  '(org-agenda-date-weekend :foreground "grey40")
   '(org-agenda-structure
-    :family "Pacifico"
-    :height 200
-    :underline "on"))
+    :family "Iosevka Etoile"
+    :height 240))
 
 (defun set-window-clean ()
   (agenda-color-char)
@@ -367,8 +397,19 @@ This function makes sure that dates are aligned for easy reading."
   (setq doom-modeline-checker-simple-format t)
   (setq doom-modeline-percent-position nil)
   (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-mu4e t)
   (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode org-journal-mode)))
+
+;; Define your custom doom-modeline
+(doom-modeline-def-modeline 'my-simple-line
+  '(buffer-info selection-info)
+  '(misc-info input-method process))
+
+;; Add to `doom-modeline-mode-hook` or other hooks
+(defun setup-custom-doom-modeline ()
+   (doom-modeline-set-modeline 'my-simple-line 'default))
+(add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+
 
 (mu4e-alert-set-default-style 'libnotify)
 (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+

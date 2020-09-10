@@ -43,7 +43,7 @@
        ;;pretty-code       ; replace bits of code with pretty symbols
        ;;tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
-       unicode           ; extended unicode support for various languages
+       ;; unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;; window-select     ; visually switch windows
@@ -93,7 +93,7 @@
        ;;gist              ; interacting with github gists
        ;; (lookup           ; helps you navigate your code and documentation
         ;; +docsets)        ; ...or in Dash docsets locally
-       ;;lsp
+       lsp
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
@@ -148,6 +148,7 @@
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
         +journal
+        +pretty
         +pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
@@ -167,7 +168,7 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;; web               ; the tubes
+       web               ; the tubes
 
        :email
        (mu4e +gmail)

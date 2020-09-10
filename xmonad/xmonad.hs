@@ -87,9 +87,8 @@ myTabTheme = def { activeColor         = active
                  }
 
 myLayouts =
-  -- smartBorders
     spacingRaw True (Border 6 6 6 6) True (Border 6 6 6 6) True
-    $   tall
+    $ smartBorders $  tall
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
     ||| Full
@@ -105,9 +104,9 @@ myConfig =
     $                 xfceConfig
                         { modMask            = mod4Mask -- use the Windows button as mod
                         , terminal           = "alacritty"
-                        , borderWidth        = 0
-                        , normalBorderColor  = "#333333"
-                        , focusedBorderColor = "#FF0000"
+                        , borderWidth        = 2
+                        , focusedBorderColor = "#333333"
+                        , normalBorderColor  = "#aaaaaa"
                         , workspaces         = myWorkspaces
                         , logHook            = myLogHook
                         , manageHook         = manageHook defaultConfig
@@ -171,7 +170,7 @@ bindProject =
 promptConfig :: XPConfig
 promptConfig = def { position          = CenteredAt (1 / 3) (1 / 2)
                    , height            = 50
-                   , font              = "xft:Fira Code:size=14"
+                   , font              = "xft:Iosevka:size=14"
                    , bgColor           = "#262e3d"
                    , fgColor           = "#eeeeee"
                    , fgHLight          = "#ffffff"

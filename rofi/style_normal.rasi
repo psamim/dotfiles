@@ -27,7 +27,7 @@ configuration {
 }
 
 // white version
-/*
+
 * {
   bg: #ffffff;
   ac: #e5e5e5;
@@ -35,11 +35,11 @@ configuration {
   item: #454545;
   txt: #252525;
 }
-*/
+
 
 * {
   background-color: rgba(0,0,0,0);
-  font: "FantasqueSansMono Nerd Font 12";
+  font: "Iosevka Etoile 12";
 }
 
 window {
@@ -65,7 +65,7 @@ listview {
 element {
   border: 1;
   text-color: @item;
-  orientation: vertical;
+  orientation: horizontal;
   padding: 8 12 8 12;
   border-radius: 6;
 }
@@ -90,9 +90,8 @@ element-icon {
 }
 
 element-text {
-  horizontal-align: 0.5;
-  vertical-align: 0.5;
   text-color: inherit;
+  horizontal-align: 0;
 }
 
 inputbar {

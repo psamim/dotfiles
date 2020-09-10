@@ -244,6 +244,10 @@
         "account": "Expenses:Medical:Drugs",
         "name": "Mohtasham Drugstore"
     },
+    "12158730": {
+        "account": "Expenses:Medical:Drugs",
+        "name": "Shaygan Drugstore"
+    },
     "946153": {
         "account": "Expenses:Medical:Drugs",
         "name": "Hossein Abad Drugstore"

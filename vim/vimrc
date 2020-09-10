@@ -7,6 +7,7 @@ Plug 'mcchrish/nnn.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
@@ -20,6 +21,7 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'ledger/vim-ledger'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
@@ -53,10 +55,17 @@ Plug 'farmergreg/vim-lastplace'
 " Plug 'edvb/dmenu.vim'
 Plug 'LnL7/vim-nix'
 Plug 'Konfekt/vim-CtrlXA'
-Plug 'AlphaMycelium/pathfinder.vim'
+" Plug 'AlphaMycelium/pathfinder.vim'
 " Plug 'ipod825/vim-netranger'
-Plug 'ActivityWatch/aw-watcher-vim'
-Plug 'diepm/vim-rest-console'
+" Plug 'ActivityWatch/aw-watcher-vim'
+" Plug 'diepm/vim-rest-console'
+Plug 'Valloric/MatchTagAlways'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'Valloric/ListToggle'
+" Plug 'AndrewRadev/tagalong.vim'
+Plug 'tommcdo/vim-exchange'
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 " Suda
@@ -173,7 +182,8 @@ inoremap jj <Esc>
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nmap <leader>o :History<CR>
-nmap <leader>p :GFiles<CR>
+" nmap <leader>p :GFiles<CR>
+nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
 nmap <C-p> :GFiles<CR>
 nmap <leader>/ :Rg<CR>
 nmap <leader><leader> :Commands<CR>
@@ -181,18 +191,18 @@ autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
 
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#ag(<q-args>,
+"   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \                 <bang>0)
 
 
 " Hide statusline in fzf
