@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#ffffff" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
+   ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(custom-safe-themes
    '("37144b437478e4c235824f0e94afa740ee2c7d16952e69ac3c5ed4352209eefb" "30095d77cf3b19b736e472f56899df6e072c9c3c404ea1e16dbcffb1544eaf08" "f908b0b99115953beaa28cafa4868a5ee2a723526bebababbb2f8caf18280b86" "3b116632d401aa4a6fce54b82d746b5441f543fa96619c1c79923e2f68ce1665" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" "5d09b4ad5649fea40249dd937eaaa8f8a229db1cec9a1a0ef0de3ccf63523014" default))
  '(default-input-method "farsi-isiri-9147")
@@ -29,7 +29,7 @@
 %a
 " :clock-keep t)))
  '(package-selected-packages
-   '(modus-vivendi-theme modus-operandi-theme zen-mode web-mode org-pretty-tags org-beautify-theme olivetti oauth2 oauth moe-theme lastfm emojify dired-quick-sort centered-window))
+   '(org-msg modus-vivendi-theme modus-operandi-theme zen-mode web-mode org-pretty-tags org-beautify-theme olivetti oauth2 oauth moe-theme lastfm emojify dired-quick-sort centered-window))
  '(pdf-view-midnight-colors (cons "#556b72" "#FDF6E3"))
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
@@ -83,4 +83,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-structure ((t (:family "Iosevka Etoile" :height 240)))))
+ '(org-agenda-date ((t (:box (:line-width 32 :color "Gray10")))))
+ '(org-agenda-date-today ((t (:foreground "grey40"))))
+ '(org-agenda-date-weekend ((t (:box (:line-width 32 :color "Gray10")))))
+ '(org-agenda-structure ((t (:family "Iosevka Etoile" :height 240))))
+ '(org-agerda-date-today ((t (:box (:line-width 32 :color "Gray10")))))
+ '(org-drawer ((t (:foreground "dark gray"))))
+ '(org-ellipsis ((t (:height 1.0))))
+ '(org-headline-done ((t (:foreground "dark gray"))))
+ '(org-level-1 ((t (:foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1))))
+ '(org-level-2 ((t (:weight normal :foreground "#424242" :inherit outline-2))))
+ '(org-level-3 ((t (:weight normal :inherit outline-3))))
+ '(org-link ((t (:weight normal :inherit link))))
+ '(org-meta-line ((t (:foreground "dark gray"))))
+ '(org-scheduled ((t (:foreground "grey"))))
+ '(org-table ((t (:background "LightGoldenrodYellow"))))
+ '(org-tag ((t (:foreground "#fbf5e3")))))

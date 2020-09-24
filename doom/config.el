@@ -233,17 +233,17 @@ This function makes sure that dates are aligned for easy reading."
                                "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
 
 
-(set-email-account! "psamim@gmail.com"
-  '((mu4e-sent-folder       . "/[Gmail].Sent Mail")
-    (mu4e-drafts-folder     . "/[Gmail].Drafts")
-    (mu4e-trash-folder      . "/[Gmail].Bin")
-    (mu4e-refile-folder     . "/[Gmail].All Mail")
-    (smtpmail-smtp-user     . "psamim@gmail.com")
-    (smtpmail-default-smtp-server . "smtp.gmail.com")
-    (smtpmail-smtp-server . "smtp.gmail.com")
-    (smtpmail-smtp-service . 587)
-    (mu4e-compose-signature . "---\nSamim Pezeshki"))
-  t)
+;; (set-email-account! "psamim@gmail.com"
+;;   '((mu4e-sent-folder       . "/[Gmail].Sent Mail")
+;;     (mu4e-drafts-folder     . "/[Gmail].Drafts")
+;;     (mu4e-trash-folder      . "/[Gmail].Bin")
+;;     (mu4e-refile-folder     . "/[Gmail].All Mail")
+;;     (smtpmail-smtp-user     . "psamim@gmail.com")
+;;     (smtpmail-default-smtp-server . "smtp.gmail.com")
+;;     (smtpmail-smtp-server . "smtp.gmail.com")
+;;     (smtpmail-smtp-service . 587)
+;;     (mu4e-compose-signature . "---\nSamim Pezeshki"))
+;;   t)
 
 
 (add-hook! '(org-clock-out-hook org-clock-in-hook) #'org-save-all-org-buffers)
@@ -326,8 +326,8 @@ This function makes sure that dates are aligned for easy reading."
 
 (add-hook 'org-mode-local-vars-hook #'(lambda () (eldoc-mode -1)))
 
-(add-hook! 'mu4e-view-mode-hook
-           #'olivetti-mode)
+;; (add-hook! 'mu4e-view-mode-hook
+;;            #'olivetti-mode)
 
 (global-org-pretty-table-mode)
 
@@ -376,21 +376,21 @@ This function makes sure that dates are aligned for easy reading."
 (defun loadSecrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
 
 
-(use-package! mu4e
-  :config
-  (setq mu4e-use-fancy-chars nil
-        mu4e-update-interval 300
-        mu4e-headers-draft-mark '("D" . "")
-        mu4e-headers-flagged-mark '("F" . "")
-        mu4e-headers-new-mark '("N" . "✱")
-        mu4e-headers-passed-mark '("P" . "❯")
-        mu4e-headers-replied-mark '("R" . "❮")
-        mu4e-headers-seen-mark '("S" . "✔")
-        mu4e-headers-trashed-mark '("T" . "")
-        mu4e-headers-attach-mark '("a" . "")
-        mu4e-headers-encrypted-mark '("x" . "")
-        mu4e-headers-signed-mark '("s" . "☡")
-        mu4e-headers-unread-mark '("u" . "⎕")))
+;; (use-package! mu4e
+;;   :config
+;;   (setq mu4e-use-fancy-chars nil
+;;         mu4e-update-interval 300
+;;         mu4e-headers-draft-mark '("D" . "")
+;;         mu4e-headers-flagged-mark '("F" . "")
+;;         mu4e-headers-new-mark '("N" . "✱")
+;;         mu4e-headers-passed-mark '("P" . "❯")
+;;         mu4e-headers-replied-mark '("R" . "❮")
+;;         mu4e-headers-seen-mark '("S" . "✔")
+;;         mu4e-headers-trashed-mark '("T" . "")
+;;         mu4e-headers-attach-mark '("a" . "")
+;;         mu4e-headers-encrypted-mark '("x" . "")
+;;         mu4e-headers-signed-mark '("s" . "☡")
+;;         mu4e-headers-unread-mark '("u" . "⎕")))
 
 (use-package! doom-modeline
   :init
@@ -410,6 +410,35 @@ This function makes sure that dates are aligned for easy reading."
 (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
 
 
-(mu4e-alert-set-default-style 'libnotify)
-(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+;; (mu4e-alert-set-default-style 'libnotify)
+;; (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
 
+(use-package unidecode
+  :defer t
+  :commands unidecode-region unidecode-sanitize-region
+  :config
+  (evil-define-operator evil-unidecode (beg end type register)
+    "Applies unidecode to text as an Evil operator"
+    :move-point nil
+    :keep-visual nil
+    (interactive "<R><x>")
+    (when (evil-visual-state-p)
+      (let ((range (evil-expand beg end
+                                (if (and evil-respect-visual-line-mode
+                                         visual-line-mode)
+                                    'screen-line
+                                  'line))))
+        (setq beg (evil-range-beginning range)
+              end (evil-range-end range)
+              type (evil-type range))))
+    (unidecode-region beg end))
+  :general
+  (general-define-key
+   :states '(normal visual)
+   "gt" 'evil-unidecode))
+
+(require 'notmuch)
+(add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
+
+(setq sendmail-program "gmi")
+(setq message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.mail/account.gmail"))
