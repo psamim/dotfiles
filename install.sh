@@ -168,3 +168,6 @@ ln -sf $PWD/mbsync/mbsyncrc $HOME/.mbsyncrc
 
 rm -rf $HOME/.config/astroid
 ln -sf $PWD/astroid $HOME/.config/astroid
+
+rm -rf $HOME/.notmuch-config
+ln -sf $PWD/notmuch/notmuch-config $HOME/.notmuch-config
