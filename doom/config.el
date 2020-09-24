@@ -442,3 +442,18 @@ This function makes sure that dates are aligned for easy reading."
 
 (setq sendmail-program "gmi")
 (setq message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.mail/account.gmail"))
+
+(require 'org-msg)
+(setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	org-msg-startup "hidestars indent inlineimages"
+	;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
+	org-msg-greeting-name-limit 3
+	org-msg-text-plain-alternative t
+	org-msg-signature "
+
+ Regards,
+
+ #+begin_signature
+ -- *Samim Pezeshki* \\\\
+ #+end_signature")
+(org-msg-mode)
