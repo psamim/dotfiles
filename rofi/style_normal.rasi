@@ -28,13 +28,14 @@ configuration {
 
 // white version
 
-* {
+/* * {
   bg: #ffffff;
   ac: #e5e5e5;
   ac-txt: #101010;
   item: #454545;
   txt: #252525;
 }
+*/
 
 
 * {
