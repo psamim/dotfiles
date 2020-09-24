@@ -1,5 +1,6 @@
 Config { 
-  font = "xft:Source Code Pro:style=Regular:size=10,FontAwesome:size=9"
+  font = "xft:Iosevka Etoile:style=Regular:size=10,FontAwesome:size=9"
+    , position = Static { xpos = 0, ypos = 0, width = 1920, height = 20 }
     , bgColor = "#000000"
     , fgColor = "#FFFFFF"
     , border = BottomB 2
@@ -8,6 +9,7 @@ Config {
     , hideOnStart = False
     , persistent = True
     , allDesktops = True
+    , alpha = 185
     , commands = [ 
     Run Network "eno1" [
     "-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-t", "<dev>: <rx> : <tx>"] 10
@@ -33,15 +35,15 @@ Config {
       , Run DynNetwork     [ "--template" , " <tx>kB/s|<rx>kB/s"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
+--                             , "--low"      , "darkgreen"
+--                             , "--normal"   , "darkorange"
+--                             , "--high"     , "darkred"
                              ] 10
                                   -- keyboard layout indicator
         , Run Kbd            []
         , Run Com "/home/samim/.bin/reboot-p" [] "reboot" 10
         , Run Com "/home/samim/.bin/clocking" [] "clocking" 10
-        , Run Com "/home/samim/.bin/trayer-padding-icon.sh" ["stalonetray"] "tray" 10
+        , Run Com "/home/samim/.bin/trayer-padding-icon.sh" ["trayer"] "tray" 10
     ]
     , sepChar = "%"
     , alignSep = "}{"

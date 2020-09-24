@@ -18,7 +18,7 @@ import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.WorkspaceCompare   ( getSortByIndex )
 import           XMonad.Actions.GroupNavigation
-import           XMonad.Config.Xfce
+import           XMonad.Config.Desktop
 import           XMonad.Layout.NoFrillsDecoration
 import           XMonad.Layout.Tabbed
 import XMonad.Actions.CopyWindow
@@ -28,7 +28,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 -- Command to launch the bar.
 myBar = "xmobar"
 
-myFont = "xft:Fira Code:size=12"
+myFont = "xft:Iosevka:size=12"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = defaultPP
@@ -101,7 +101,7 @@ myLayouts =
 myConfig =
   dynamicProjects projects
     $                 ewmh
-    $                 xfceConfig
+    $                 desktopConfig
                         { modMask            = mod4Mask -- use the Windows button as mod
                         , terminal           = "alacritty"
                         , borderWidth        = 2

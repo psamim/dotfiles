@@ -48,18 +48,18 @@ greenclip daemon &
 
 xrdb -merge ~/.Xresources
 
-# trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-#   --expand true --width 8 --transparent true --alpha 85 --tint 0x00000000 --height 20 \
-#   --monitor 0 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true \
+  --expand true --width 5 --transparent true --alpha 70 --tint 0x000000 --height 20 \
+  --monitor 0 &
 
-# nm-applet &
+nm-applet &
 # blueman-applet &
 redshift-gtk &
-# xfce-power-manager & 
+xfce-power-manager & 
 # kdeconnect-indicator &
-# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
-# pasystray &
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
+pasystray &
 synclient TapButton1=1
 
-# exec xmonad
-exec startxfce4
+exec xmonad
+# exec startxfce4
