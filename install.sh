@@ -163,6 +163,8 @@ ln -sf $PWD/rofi $HOME/.config/alacritty
 rm -rf $HOME/.config/autorandr
 ln -sf $PWD/autorandr $HOME/.config/autorandr
 
-# autorandr
 rm -rf $HOME/.mbsyncrc
 ln -sf $PWD/mbsync/mbsyncrc $HOME/.mbsyncrc
+
+rm -rf $HOME/.config/astroid
+ln -sf $PWD/astroid $HOME/.config/astroid

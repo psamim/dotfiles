@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+
+notmuch tag +trash -inbox thread:$1

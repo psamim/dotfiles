@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+#
+# get a tag as first argument and thread id as second argument
+#
+
+if [[ $(notmuch search thread:$2 and tag:$1) ]]; then # check if the thread matches the tag
+  echo "removing tag: $1 from thread:$2"              # 
+  notmuch tag -$1 thread:$2                           # remove the tag
+else
+  echo "adding tag: $1 to thread:$2"                  #
+  notmuch tag +$1 thread:$2                           # add the tag
+fi
