@@ -3,7 +3,7 @@ Description=Random wallpaper with feh
 
 [Service]
 Type=oneshot
-Environment=WD=~/Pictures/Bing
+Environment=WD=~/Pictures/Wallpaper
 Environment=WP=~/.wallpaper
 ExecStart=/bin/bash -c 'rm -rf ${WP}&&ln -sf "$(find ${WD}|shuf|head -n 1)" ${WP}&&/usr/bin/feh --bg-scale ${WP}'
 
