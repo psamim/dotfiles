@@ -36,7 +36,7 @@ Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 " Plug 'haya14busa/vim-keeppad'
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': { -> coc#util#install()}}
 Plug 'embear/vim-localvimrc'
 Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'

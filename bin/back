@@ -184,6 +184,7 @@ function main() {
 
     # gpg encrypted backup of passwords and send to cloud
 
+    tmb borg
     local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
     make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
     send $TEMP_PASS_BACKUP ""
@@ -200,4 +201,3 @@ function main() {
 
 main $@
 info Done
-

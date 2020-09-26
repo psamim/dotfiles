@@ -11,3 +11,4 @@ notmuch tag --batch <<EOF
     # We've finished processing incoming mail
     # -new tag:new
 EOF
+notifymuch
