@@ -13,7 +13,6 @@ function info() { chalk -t "$(date -Iminutes) - {yellow $* }" }
 function error() { chalk -t "$(date -Iminutes) - {red $* }" }
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 
-
 function borg_backup() {
     local SOURCE=$1
     local NAME=$2
@@ -182,20 +181,19 @@ function main() {
         exit
     fi
 
-    # gpg encrypted backup of passwords and send to cloud
+    if [ "$1" != "--only-send" ]; then
+      tmb borg
+      local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+      make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+      send $TEMP_PASS_BACKUP ""
+      rm $TEMP_PASS_BACKUP
 
-    tmb borg
-    local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
-    make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-    send $TEMP_PASS_BACKUP ""
-    rm $TEMP_PASS_BACKUP
-
-    # encrypted backup with borg and send to cloud
-
-    borg_backup /home/samim/tombs/backups/ backups
-    borg_backup /home/samim/Calibre calibre
+      borg_backup /home/samim/tombs/backups/ backups
+      borg_backup /home/samim/Calibre calibre
     # borg_remote_backup pi@192.168.31.20:/home/pi/server-compose hass '-e *home-assistant_v2.db'
     # borg_remote_backup pi@192.168.31.20:/etc hassetc
+    fi
+
     send /home/samim/borg/repos borg-repos
 }
 

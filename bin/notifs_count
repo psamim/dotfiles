@@ -1,0 +1,9 @@
+# Using https://github.com/sencer/i3-notifier/blob
+
+count=$((dbus-send --session --print-reply=literal --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotificationCount 2>/dev/null)|tr -s ' '|cut -d' ' -f 3 | head -n 1)
+
+if [ "$count" -eq "0" ]; then
+   exit;
+fi
+
+echo "<fc=#fce94f> $count </fc>"

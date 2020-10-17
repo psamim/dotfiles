@@ -397,3 +397,4 @@ imap <F1> <Esc>
 set lazyredraw
 
 let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
+nvimux.bootstrap()

@@ -14,6 +14,7 @@
  '(jdee-db-active-breakpoint-face-colors (cons "#FFFBF0" "#268bd2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#FFFBF0" "#859900"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#FFFBF0" "#E1DBCD"))
+ '(ledger-complete-in-steps t)
  '(mu4e-bookmarks
    '((:name "Inbox" :query "maildir:/INBOX" :key 100)
      (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key 117)
@@ -29,10 +30,13 @@
 %a
 " :clock-keep t)))
  '(package-selected-packages
-   '(org-msg modus-vivendi-theme modus-operandi-theme zen-mode web-mode org-pretty-tags org-beautify-theme olivetti oauth2 oauth moe-theme lastfm emojify dired-quick-sort centered-window))
+   '(bbdb org-msg modus-vivendi-theme modus-operandi-theme zen-mode web-mode org-pretty-tags org-beautify-theme olivetti oauth2 oauth moe-theme lastfm emojify dired-quick-sort centered-window))
  '(pdf-view-midnight-colors (cons "#556b72" "#FDF6E3"))
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
+ '(safe-local-variable-values
+   '((org-use-property-inheritance . t)
+     (org-re-reveal-title-slide)))
  '(send-mail-function 'mailclient-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 25)

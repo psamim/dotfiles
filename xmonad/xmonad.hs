@@ -104,7 +104,7 @@ myConfig =
     $                 desktopConfig
                         { modMask            = mod4Mask -- use the Windows button as mod
                         , terminal           = "alacritty"
-                        , borderWidth        = 2
+                        , borderWidth        = 0
                         , focusedBorderColor = "#333333"
                         , normalBorderColor  = "#aaaaaa"
                         , workspaces         = myWorkspaces
@@ -116,6 +116,12 @@ myConfig =
                         , layoutHook         = myLayouts
                         }
     `additionalKeys`  myKeys
+    `removeKeys` 
+    [ (mod4Mask .|. shiftMask, xK_q)
+    , (mod4Mask , xK_period)
+    , (mod4Mask , xK_comma)
+    , (mod4Mask .|. shiftMask, xK_w)
+    ]
     `additionalKeysP` []
 
 -- Media keys
@@ -134,13 +140,14 @@ myKeys =
     ((mod4Mask, xK_b), sendMessage ToggleStruts)
   , ((mod4Mask, xK_g), gotoMenu)
   , ((mod4Mask, xK_o), nextWS)
-  , ((mod4Mask, xK_i), prevWS)
+  -- , ((mod4Mask, xK_i), prevWS)
   , ((mod4Mask, xK_s), incWindowSpacing 1)
   , ((mod4Mask .|. shiftMask, xK_s), decWindowSpacing 1)
   , ( (mod4Mask, xK_v)
     , spawn
       "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"
     )
+  , ((mod4Mask, xK_i), spawn "dbus-send --session --print-reply --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotifications")
   , ((mod4Mask, xK_u)  , switchProjectPrompt promptConfig)
   ,
       -- ((mod4Mask, xK_Tab), toggleWS),
@@ -251,7 +258,7 @@ scratchpads =
   where role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook = historyHook <+> fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.88
+    where fadeAmount = 0.70
 
 projects :: [Project]
 projects =

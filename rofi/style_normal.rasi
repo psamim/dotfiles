@@ -79,12 +79,6 @@ element selected {
 }
 
 element-icon {
-  size: 60;
-  horizontal-align: 0.5;
-  vertical-align: 0.5;
-}
-
-element-icon {
   size: 40;
   horizontal-align: 0.5;
   vertical-align: 0.5;
@@ -93,6 +87,7 @@ element-icon {
 element-text {
   text-color: inherit;
   horizontal-align: 0;
+  padding: 8 12 8 12;
 }
 
 inputbar {

@@ -262,8 +262,8 @@ This function makes sure that dates are aligned for easy reading."
       (:map ledger-mode-map
         "c" #'ledger-mode-clean-buffer))
 
-(after! ledger-mode
-  (set-company-backend! 'ledger-mode 'ledger-mode))
+;; (after! ledger-mode
+;;   (set-company-backend! 'ledger-mode 'ledger-mode))
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -299,11 +299,11 @@ This function makes sure that dates are aligned for easy reading."
 ;;   (set-company-backend! 'company-dabbrev)
 ;;   )
 ;;
-(after! company
-  (setq company-idle-delay 0.3
-        company-minimum-prefix-length 1
-  company-dabbrev-code-everywhere t
-  company-dabbrev-code-other-buffers 'all))
+;; (after! company
+;;   (setq company-idle-delay 0.3
+;;         company-minimum-prefix-length 1
+;;   company-dabbrev-code-everywhere t
+;;   company-dabbrev-code-other-buffers 'all))
 
 (add-hook 'text-mode-hook
            (lambda ()

@@ -21,7 +21,7 @@ export PATH="${PATH}:/home/samim/.bin"
 autorandr -c
 
 /home/samim/.bin/keyboard_configure.sh
-# perWindowLayoutD
+perWindowLayoutD
 
 # Disable touchpad taps while typing
 syndaemon -t -k -i 1 &
@@ -33,6 +33,7 @@ syndaemon -t -k -i 1 &
 unclutter &
 
 # dunst &
+i3-notifier
 
 # Picom window compositor
 /usr/bin/picom &
@@ -58,7 +59,8 @@ redshift-gtk &
 xfce-power-manager & 
 # kdeconnect-indicator &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
-pasystray &
+# pasystray &
+volctl &
 synclient TapButton1=1
 
 exec xmonad
