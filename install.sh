@@ -171,3 +171,6 @@ ln -sf $PWD/astroid $HOME/.config/astroid
 
 rm -rf $HOME/.notmuch-config
 ln -sf $PWD/notmuch/notmuch-config $HOME/.notmuch-config
+
+rm -rf "$HOME/.config/fontconfig"
+ln -sf $PWD/fontconfig $HOME/.config/fontconfig
