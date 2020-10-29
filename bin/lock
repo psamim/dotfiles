@@ -6,10 +6,11 @@
 xkb-switch -s us
 
 # Locker
-pixelate_lock
+# pixelate_lock
 # physlock -ds -u samim
 # i3lock-wrapper
+betterlockscreen -s dim
 
 # Suspend
-systemctl suspend
+# systemctl suspend
 # pm-suspend
