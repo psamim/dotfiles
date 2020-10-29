@@ -460,6 +460,10 @@
         "account": "Expenses:Groceries",
         "name": "Grocery Store Mehrdad"
     },
+    "12131035": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Mehrdad"
+    },
     "5273078": {
         "account": "Expenses:Groceries",
         "name": "Morgh Hannaneh Nazar Gharbi"
@@ -471,5 +475,9 @@
     "5190171": {
         "account": "Expenses:Utilities:Mobile",
         "name": "Irancell"
+    },
+    "44823507": {
+        "account": "Expenses:Utilities:Electricity",
+        "name": "Electricity Bill"
     }
 }
