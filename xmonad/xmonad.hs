@@ -258,7 +258,7 @@ scratchpads =
   where role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook = historyHook <+> fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.70
+    where fadeAmount = 0.55
 
 projects :: [Project]
 projects =
