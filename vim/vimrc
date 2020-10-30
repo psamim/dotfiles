@@ -12,8 +12,8 @@ Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
@@ -66,6 +66,11 @@ Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 Plug 'tommcdo/vim-exchange'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/lib.kom'
+Plug 'romgrk/barbar.nvim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'romgrk/doom-one.vim'
 call plug#end()
 
 " Suda
@@ -100,7 +105,7 @@ function! Z(...)
 endfunction
 
 " Relative line numbers
-set number
+set nonumber
 syntax enable
 set background=dark
 set termguicolors
@@ -133,8 +138,8 @@ endif
 command CDC cd %:p:h
 
 " vim-bufferline
- let g:bufferline_echo = 0
- let g:bufferline_show_bufnr = 0
+ " let g:bufferline_echo = 0
+ " let g:bufferline_show_bufnr = 0
 
 " Color terminal curser
 " :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
@@ -182,8 +187,8 @@ inoremap jj <Esc>
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nmap <leader>o :History<CR>
-" nmap <leader>p :GFiles<CR>
-nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+nmap <leader>p :GFiles<CR>
+" nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
 nmap <C-p> :GFiles<CR>
 nmap <leader>/ :Rg<CR>
 nmap <leader><leader> :Commands<CR>
@@ -313,6 +318,9 @@ let g:airline_section_y=''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat =
   \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
+let g:airline#extensions#tabline#buffers_label = ''
+let g:airline#extensions#tabline#buffer_min_count = 2  
+let g:airline#extensions#tabline#tab_min_count = 2    
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 set noshowmode
@@ -397,4 +405,52 @@ imap <F1> <Esc>
 set lazyredraw
 
 let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
-nvimux.bootstrap()
+
+let g:jellybeans_overrides = {
+\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+\}
+if has('termguicolors') && &termguicolors
+    let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+
+" gutter is the same color as where your line numbers show up is the following:
+" https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
+highlight SignColumn guibg=none
+highlight GitGutterAdd    guifg=#98971a ctermfg=2 guibg=NONE 
+highlight GitGutterChange guifg=#d79921 ctermfg=3 guibg=NONE
+highlight GitGutterDelete guifg=#cc241d ctermfg=1 guibg=NONE
+highlight GruvboxRedSign guibg=NONE
+let g:gitgutter_sign_added = '+ '
+let g:gitgutter_sign_modified = '~ '
+let g:gitgutter_sign_removed = '- '
+
+let bg_current = get(nvim_get_hl_by_name('Normal',     1), 'background', '#000000')
+let bg_visible = get(nvim_get_hl_by_name('TabLineSel', 1), 'background', '#000000')
+let bg_inactive = get(nvim_get_hl_by_name('TabLine',   1), 'background', '#000000')
+
+" For the current active buffer
+hi default link BufferCurrent      Normal
+" For the current active buffer when modified
+hi default link BufferCurrentMod   Normal
+" For the current active buffer icon
+hi default link BufferCurrentSign  Normal
+" For the current active buffer target when buffer-picking
+exe 'hi default BufferCurrentTarget   guifg=red gui=bold guibg=' . bg_current
+
+" For buffers visible but not the current one
+hi default link BufferVisible      TabLineSel
+hi default link BufferVisibleMod   TabLineSel
+hi default link BufferVisibleSign  TabLineSel
+exe 'hi default BufferVisibleTarget   guifg=red gui=bold guibg=' . bg_visible
+
+" For buffers invisible buffers
+hi default link BufferInactive     TabLine
+hi default link BufferInactiveMod  TabLine
+hi default link BufferInactiveSign TabLine
+exe 'hi default BufferInactiveTarget   guifg=red gui=bold guibg=' . bg_inactive
+
+
+" For the shadow in buffer-picking mode
+hi default BufferShadow guifg=#000000 guibg=#000000
+
+" let bufferline.clickable = v:true
