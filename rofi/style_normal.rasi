@@ -19,7 +19,7 @@ configuration {
 
 // black version
 * {
-  bg: #222;
+  bg: #222222B0;
   ac: #869fa214;
   ac-txt: #869fa2;
   item: #bdc3c3;
