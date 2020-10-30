@@ -174,3 +174,6 @@ ln -sf $PWD/notmuch/notmuch-config $HOME/.notmuch-config
 
 rm -rf "$HOME/.config/fontconfig"
 ln -sf $PWD/fontconfig $HOME/.config/fontconfig
+
+rm -rf "$HOME/.config/polybar"
+ln -sf $PWD/polybar $HOME/.config/polybar

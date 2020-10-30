@@ -25,5 +25,7 @@ else
         if [ -n "$TIME" ]; then
             # echo "<font color='#ffc107'>&nbsp;&nbsp;  $TIME &nbsp;&nbsp;</font>"
             echo " $TIME"
+        else
+          exit 1
         fi
 fi

@@ -32,8 +32,8 @@ syndaemon -t -k -i 1 &
 # Hide mouse when not used
 unclutter &
 
-# dunst &
-i3-notifier
+dunst &
+# i3-notifier
 
 # Picom window compositor
 /usr/bin/picom &
@@ -49,18 +49,18 @@ greenclip daemon &
 
 xrdb -merge ~/.Xresources
 
-trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-  --expand true --width 5 --transparent true --alpha 70 --tint 0x000000 --height 20 \
-  --monitor 0 &
+# trayer --edge top --align right --SetDockType true --SetPartialStrut true \
+#   --expand true --width 5 --transparent true --alpha 70 --tint 0x000000 --height 20 \
+#   --monitor 0 &
 
 nm-applet &
 # blueman-applet &
-redshift-gtk &
+# redshift-gtk &
 xfce-power-manager & 
 # kdeconnect-indicator &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
 # pasystray &
-volctl &
+# volctl &
 synclient TapButton1=1
 
 exec xmonad

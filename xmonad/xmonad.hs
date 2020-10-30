@@ -26,7 +26,7 @@ import XMonad.Actions.CopyWindow
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
 -- Command to launch the bar.
-myBar = "xmobar"
+myBar = "launch_polybar"
 
 myFont = "xft:Iosevka:size=12"
 
