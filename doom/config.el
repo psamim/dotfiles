@@ -310,7 +310,7 @@ This function makes sure that dates are aligned for easy reading."
             (mixed-pitch-mode 1)))
 
 ;; Transparency
-;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+;; (set-frame-parameter (selected-frame) 'alpha '(92 92))
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 92)))
 
 
@@ -457,3 +457,11 @@ This function makes sure that dates are aligned for easy reading."
  -- *Samim Pezeshki* \\\\
  #+end_signature")
 (org-msg-mode)
+
+(after! evil-org (progn
+                   (map! :map evil-org-mode-map :n "M-l" #'centaur-tabs-forward)
+                   (map! :map evil-org-mode-map :n "M-h" #'centaur-tabs-backward)))
+(map! "M-l" #'centaur-tabs-forward)
+(map! "M-h" #'centaur-tabs-backward)
+(map! "M-q" #'kill-current-buffer)
+(map! "M-n" #'vterm)

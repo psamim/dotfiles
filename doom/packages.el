@@ -69,3 +69,4 @@
 (package! unidecode)
 (package! org-msg)
 (package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
+(package! literate-calc-mode)
