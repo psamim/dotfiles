@@ -52,6 +52,7 @@ xrdb -merge ~/.Xresources
 # trayer --edge top --align right --SetDockType true --SetPartialStrut true \
 #   --expand true --width 5 --transparent true --alpha 70 --tint 0x000000 --height 20 \
 #   --monitor 0 &
+launch_polybar
 
 nm-applet &
 # blueman-applet &

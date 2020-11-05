@@ -71,7 +71,7 @@
   plstore-cache-passphrase-for-symmetric-encryption t
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org"))
+  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
   org-directory "~/Notes")
@@ -465,3 +465,5 @@ This function makes sure that dates are aligned for easy reading."
 (map! "M-h" #'centaur-tabs-backward)
 (map! "M-q" #'kill-current-buffer)
 (map! "M-n" #'vterm)
+
+(add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)

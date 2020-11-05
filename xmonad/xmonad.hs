@@ -23,7 +23,7 @@ import           XMonad.Layout.NoFrillsDecoration
 import           XMonad.Layout.Tabbed
 import XMonad.Actions.CopyWindow
 
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+main = xmonad myConfig
 
 -- Command to launch the bar.
 myBar = "launch_polybar"
@@ -88,6 +88,7 @@ myTabTheme = def { activeColor         = active
 
 myLayouts =
     spacingRaw True (Border 6 6 6 6) True (Border 6 6 6 6) True
+    $ avoidStruts
     $ smartBorders $  tall
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
@@ -131,6 +132,7 @@ myConfig =
 
 myKeys =
   [ ((mod4Mask, xK_d), spawn "rofi -show combi")
+  , ((mod4Mask, xK_y), spawn "polybar-msg cmd toggle" )
   , ((mod4Mask, xK_p), spawn "rofi-pass")
   , ((mod4Mask, xK_f), spawn "rofi -show file-browser -file-browser-dir ~")
   , (((0, xK_Print)) , spawn "flameshot gui")

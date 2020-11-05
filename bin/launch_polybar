@@ -6,6 +6,6 @@ killall -q polybar
 # polybar-msg cmd quit
 
 echo "---" | tee -a /tmp/polybar1.log
-polybar i3bar >>/tmp/polybar1.log 2>&1 & disown
+polybar xmonad >>/tmp/polybar1.log 2>&1 & disown
 
 echo "Bars launched..."
