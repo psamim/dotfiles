@@ -23,17 +23,17 @@ colorE=#7851a9 # purple
 colorF=#574F4A # brown
 
 [variables]
-mpadding = 1
+mpadding = 2
 margin = 3 
 
 [bar/xmonad]
 background = ${colors.xbg}
 foreground = ${colors.xfg}
 
-width = 100%
-height = 35
-;offset-y = 10
-;offset-x = 20
+width = 90%
+height = 25
+offset-y = 0
+offset-x = 5%
 
 dim-value = 1.0
 
@@ -42,13 +42,13 @@ border-bottom-size = 5
 border-right-size = 0
 border-left-size = 0
 
-# bottom = true
+bottom = true
 #override-redirect = true
 
-font-0 = "Iosevka Etoile:style=regular:size=12;3"
-font-1 = "Iosevka Nerd Font:style=regular:size=12;3"
+font-0 = "Iosevka Etoile:style=regular:size=10;3"
+font-1 = "Iosevka Nerd Font:style=regular:size=10;3"
 
-fixed-center = true
+# fixed-center = true
 spacing = 0
 padding-left = 0
 padding-right = 0
@@ -57,14 +57,14 @@ module-margin-right = 0
 
 modules-left = ewmh line title
 modules-center = date clocking
-modules-right = netspeed memory cpu battery xkeyboard pulseaudio dunst vpn
+modules-right = netspeed memory cpu battery xkeyboard pulseaudio dunst vpn wallpaper
 overline-size = 6
 overline-color=${colors.xbs}
 underline-size = 3
 underline-color=${colors.xbs}
 
 tray-maxsize = 22
-tray-padding = 1
+tray-padding = 8
 tray-position = right
 #tray-background = ${colors.xbg2}
 
@@ -76,6 +76,9 @@ cursor-scroll = ns-resize
 
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
+# radius = 10
+# border-size = 10%
+# padding = 40
 
 [settings]
 ;https://github.com/jaagr/polybar/wiki/Configuration#application-settings
@@ -98,25 +101,8 @@ format-margin =
 format-offset =
 
 [global/wm]
-margin-top =0
-margin-bottom = 1
-
-
-[module/left]
-type = custom/text
-#content="%{T3}%{T-}"
-content=""
-
-content-foreground = ${colors.xbg2}
-content-background = #00000000
-
-[module/right]
-type = custom/text
-content=""
-#content="%{T3}%{T-}   "
-
-content-foreground = ${colors.xbg2}
-content-background = #00000000
+margin-top = 12
+margin-bottom = 8
 
 [module/ewmh]
 type = internal/xworkspaces
@@ -132,13 +118,14 @@ label-active = %icon%
 label-occupied = %icon%
 label-urgent = %icon%
 label-empty = %icon%
-label-active-padding = 2
-label-empty-padding = 2
-label-active-foreground = #fba922
+label-active-padding = ${variables.mpadding}
+label-urgent-padding = ${variables.mpadding}
+label-empty-padding = ${variables.mpadding}
+label-active-foreground = #6eaca8
 
 [module/line]
 type = custom/text
-content="%{T3} | %{T-}"
+content=" | "
 
 [module/date]
 format-background=${colors.xbg2}
@@ -206,7 +193,7 @@ format-charging-padding = ${variables.mpadding}
 format-charging-background=${colors.xbg2}
 format-discharging-padding = ${variables.mpadding}
 format-discharging-background=${colors.xbg2}
-format-discharging = <ramp-capacity>  <label-discharging>
+format-discharging = <ramp-capacity>   <label-discharging>
 format-full-prefix =  
 format-full-background=${colors.xbg2}
 label-charging =   %percentage%%
@@ -215,22 +202,6 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 50
-format = <label>
-format-padding = ${variables.mpadding}
-format-background=${colors.xbg2}
-format-prefix = " 􀇬"
-format-warn-prefix = " 􀇬"
-format-warn =<label-warn> 
-format-warn-padding = ${variables.mpadding}
-format-warn-background=${colors.xbg2}
-format-warn-underline = #ff0000
-label = %temperature-c%
-label-warn = %temperature-c%
 
 [module/cpu]
 format-padding = ${variables.mpadding}
@@ -271,10 +242,11 @@ format-prefix = " Mem: "
 [module/title]
 type = internal/xwindow
 label-maxlen = 50
+label-empty = No Window
 
 [module/xkeyboard]
 type = internal/xkeyboard
-label-layout-padding = 2
+label-layout-padding = ${variables.mpadding}
 label-layout =   %layout%
 
 [module/clocking]
@@ -286,7 +258,7 @@ exec-if = clocking
 
 [module/vpn]
 type = custom/script
-exec = nordvpnteams status|grep -i vpn|grep -iq Connected && echo 
+exec = nordvpnteams status|grep -i vpn|grep -q Connected && echo 
 exec-if = nordvpnteams status|grep -i vpn|grep -q Connected
 format = <label>
 format-padding = 1
@@ -298,4 +270,10 @@ exec = dunstctl is-paused|grep -q true && echo   || echo 
 format = <label>
 interval = 1
 click-left = dunstctl set-paused toggle
-format-padding = 1
+format-padding = ${variables.mpadding}
+
+[module/wallpaper]
+type = custom/text
+content = 
+click-left = systemctl --user restart feh-wallpaper.service
+content-padding = ${variables.mpadding}
