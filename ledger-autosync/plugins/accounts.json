@@ -479,5 +479,9 @@
     "44823507": {
         "account": "Expenses:Utilities:Electricity",
         "name": "Electricity Bill"
+    },
+    "613398": {
+        "account": "Expenses:Groceries",
+        "name": "Small Grocery Store"
     }
 }
