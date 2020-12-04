@@ -182,7 +182,6 @@ function main() {
     fi
 
     if [ "$1" != "--only-send" ]; then
-      tmb borg
       local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
       make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
       send $TEMP_PASS_BACKUP ""

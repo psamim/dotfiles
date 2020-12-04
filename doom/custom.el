@@ -37,6 +37,8 @@
      (:name "Messages with images" :query "mime:image/*" :key 112)))
  '(mu4e-update-interval 300)
  '(objed-cursor-color "#dc322f")
+ '(org-agenda-files
+   '("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org" "/home/samim/Notes/journal/daily/20201108.gpg"))
  '(org-capture-templates
    '(("t" "todo" entry
       (file+headline "~/Notes/todo.org" "Inbox")
@@ -49,7 +51,10 @@
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(safe-local-variable-values
-   '((org-use-property-inheritance . t)
+   '((eval progn
+           (literate-calc-minor-mode))
+     (org-confirm-babel-evaluate)
+     (org-use-property-inheritance . t)
      (org-re-reveal-title-slide)))
  '(send-mail-function 'mailclient-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")

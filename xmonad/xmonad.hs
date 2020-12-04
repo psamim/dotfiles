@@ -25,9 +25,6 @@ import XMonad.Actions.CopyWindow
 
 main = xmonad myConfig
 
--- Command to launch the bar.
-myBar = "launch_polybar"
-
 myFont = "xft:Iosevka:size=12"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.

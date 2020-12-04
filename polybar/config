@@ -57,7 +57,7 @@ module-margin-right = 0
 
 modules-left = ewmh line title
 modules-center = date clocking
-modules-right = netspeed memory cpu battery xkeyboard pulseaudio dunst vpn wallpaper
+modules-right = netspeed memory cpu battery xkeyboard wlan vpn pulseaudio dunst wallpaper
 overline-size = 6
 overline-color=${colors.xbs}
 underline-size = 3
@@ -121,6 +121,7 @@ label-empty = %icon%
 label-active-padding = ${variables.mpadding}
 label-urgent-padding = ${variables.mpadding}
 label-empty-padding = ${variables.mpadding}
+label-occupied-padding = ${variables.mpadding}
 label-active-foreground = #6eaca8
 
 [module/line]
@@ -194,7 +195,7 @@ format-charging-background=${colors.xbg2}
 format-discharging-padding = ${variables.mpadding}
 format-discharging-background=${colors.xbg2}
 format-discharging = <ramp-capacity>   <label-discharging>
-format-full-prefix =  
+format-full-prefix = "   "
 format-full-background=${colors.xbg2}
 label-charging =   %percentage%%
 ramp-capacity-0 = 
@@ -247,6 +248,7 @@ label-empty = No Window
 [module/xkeyboard]
 type = internal/xkeyboard
 label-layout-padding = ${variables.mpadding}
+blacklist-0 = num lock
 label-layout =   %layout%
 
 [module/clocking]

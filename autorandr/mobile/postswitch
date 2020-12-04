@@ -1,7 +1,6 @@
 #!/bin/bash
 
-notify-send "Switched to docked mode"
-# /home/samim/.bin/hdmi_sound_toggle.sh
+notify-send "Switched to mobile mode"
 /home/samim/.bin/launch_polybar
 /home/samim/.bin/keyboard_configure.sh
 

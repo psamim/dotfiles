@@ -11,6 +11,10 @@
         "account": "Expenses:Furniture:Stationary",
         "name": "Shahre Ketab Nazar"
     },
+    "2774825": {
+        "account": "Expenses:Furniture:Stationary",
+        "name": "Shahre Ketab Khaghani"
+    },
     "5141205": {
         "account": "Expenses:Food:Dinner",
         "name": "Edmond"
@@ -99,6 +103,10 @@
         "account": "Expenses:Groceries",
         "name": "Morgh Hannaneh Nazar Gharbi"
     },
+    "5373815": {
+        "account": "Expenses:Groceries",
+        "name": "Morgh Hannaneh Nazar Gharbi"
+    },
     "44679784": {
         "account": "Expenses:Groceries",
         "name": "Morgh Hannaneh Nazar Gharbi"
@@ -180,13 +188,13 @@
         "account": "Expenses:Groceries",
         "name": "Sahakian"
     },
-    "3227431": {
+    "6673161": {
         "account": "Expenses:Furniture:Plastic",
         "name": "Shike No"
     },
     "1092849": {
         "account": "Expenses:Groceries",
-        "name": "Nazar Gharbi Labaniait"
+        "name": "Nazar Gharbi Labaniati"
     },
     "586319": {
         "account": "Expenses:Groceries",
@@ -229,6 +237,10 @@
         "name": "Gaz Antique"
     },
     "3411665": {
+        "account": "Expenses:Groceries",
+        "name": "Super Jolfa"
+    },
+    "44880650": {
         "account": "Expenses:Groceries",
         "name": "Super Jolfa"
     },
@@ -372,7 +384,15 @@
         "account": "Expenses:Transportation:Taxi",
         "name": "Snap"
     },
+    "121643": {
+        "account": "Expenses:Transportation:Taxi",
+        "name": "Snap"
+    },
     "21243633": {
+        "account": "Expenses:Groceries",
+        "name": "Andelos"
+    },
+    "44451946": {
         "account": "Expenses:Groceries",
         "name": "Andelos"
     },

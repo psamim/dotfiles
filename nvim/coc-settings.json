@@ -1,5 +1,5 @@
 {
-  "tsserver.enable": false,
+  "tsserver.enable": true,
   "snippets.extends": {
     "javascript.jsx": ["javascript"],
     "javascriptreact": ["javascript"]
@@ -8,5 +8,13 @@
   "eslint.nodePath": "./node_modules",
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"]
+    }
+  }
 }
