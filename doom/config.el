@@ -137,7 +137,7 @@
     (goto-char (point-min))
     (while (re-search-forward "⚡" nil t)
       (put-text-property (match-beginning 0) (match-end 0)
-                         'face '(:height 300 :foreground "gold2" :bold t))))
+                         'face '(:height 240 :foreground "gold2" :bold t))))
 
   ;; (save-excursion
   ;;   (goto-char (point-min))
@@ -178,7 +178,7 @@ This function makes sure that dates are aligned for easy reading."
          ((todo "TODO" (
                       (org-agenda-overriding-header "⚡ TO DO:\n")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %-2i %-13b")
+                      (org-agenda-prefix-format "  %-2i  %b")
                       (org-agenda-todo-keyword-format "")))
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done t)
@@ -194,9 +194,9 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-time)
                       (org-agenda-current-time-string "⮜┈┈┈┈┈┈┈ now")
-                      ;; (org-agenda-scheduled-leaders '("" ""))
-                      ;; (org-agenda-deadline-leaders '("" ""))
-                      (org-agenda-time-grid (quote ((require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
+                      (org-agenda-scheduled-leaders '("" ""))
+                      (org-agenda-deadline-leaders '("" ""))
+                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -306,7 +306,11 @@ This function makes sure that dates are aligned for easy reading."
 ;;   company-dabbrev-code-other-buffers 'all))
 
 (add-hook 'text-mode-hook
-           (lambda ()
+          (lambda ()
+            (set-farsi-font)
+            (setq olivetti-body-width 0.91)
+            (olivetti-mode)
+            (setq header-line-format " ")
             (mixed-pitch-mode 1)))
 
 ;; Transparency
@@ -318,11 +322,7 @@ This function makes sure that dates are aligned for easy reading."
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
 
 (add-hook 'org-agenda-finalize-hook #'set-window-clean)
-(add-hook! 'org-mode-hook
-           #'set-farsi-font
-           #'olivetti-mode
-           #'mixed-pitch-mode
-           #'my-org-mode-autosave-settings)
+(add-hook! 'org-mode-hook #'my-org-mode-autosave-settings)
 
 (add-hook 'org-mode-local-vars-hook #'(lambda () (eldoc-mode -1)))
 
@@ -339,7 +339,7 @@ This function makes sure that dates are aligned for easy reading."
   '(org-scheduled
     :foreground "grey")
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
-  '(org-tag :foreground "#fbf5e3"  )
+  ;; '(org-tag :foreground "#fbf5e3"  )
   '(org-ellipsis :height 1.0)
   '(org-level-1 :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
   '(org-level-2 :weight normal :foreground "#424242" :inherit outline-2)
@@ -458,12 +458,59 @@ This function makes sure that dates are aligned for easy reading."
  #+end_signature")
 (org-msg-mode)
 
-(after! evil-org (progn
-                   (map! :map evil-org-mode-map :n "M-l" #'centaur-tabs-forward)
-                   (map! :map evil-org-mode-map :n "M-h" #'centaur-tabs-backward)))
-(map! "M-l" #'centaur-tabs-forward)
-(map! "M-h" #'centaur-tabs-backward)
+;; (after! evil-org (progn
+;;                    (map! :map evil-org-mode-map :n "M-l" #'centaur-tabs-forward)
+;;                    (map! :map evil-org-mode-map :n "M-h" #'centaur-tabs-backward)))
+;; (map! "M-l" #'centaur-tabs-forward)
+;; (map! "M-h" #'centaur-tabs-backward)
 (map! "M-q" #'kill-current-buffer)
 (map! "M-n" #'vterm)
 
-(add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)
+;; (add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)
+
+(setq evil-normal-state-cursor '(box "light blue")
+      evil-insert-state-cursor '(bar "medium sea green")
+      evil-visual-state-cursor '(hollow "orange"))
+
+(defun org-toggle-tag-visibility (state)
+  "Run in `org-cycle-hook'."
+  (message "%s" state)
+  (cond
+   ;; global cycling
+   ((memq state '(overview contents showall))
+    (org-map-entries
+     (lambda ()
+       (let ((tagstring (nth 5 (org-heading-components)))
+         start end)
+     (when tagstring
+       (save-excursion
+         (beginning-of-line)
+         (re-search-forward tagstring)
+         (setq start (match-beginning 0)
+           end (match-end 0)))
+       (cond
+        ((memq state '(overview contents))
+         (outline-flag-region start end t))
+        (t
+         (outline-flag-region start end nil))))))))
+   ;; local cycling
+   ((memq state '(folded children subtree))
+    (save-restriction
+      (org-narrow-to-subtree)
+      (org-map-entries
+       (lambda ()
+     (let ((tagstring (nth 5 (org-heading-components)))
+           start end)
+       (when tagstring
+         (save-excursion
+           (beginning-of-line)
+           (re-search-forward tagstring)
+           (setq start (match-beginning 0)
+             end (match-end 0)))
+         (cond
+          ((memq state '(folded children))
+           (outline-flag-region start end t))
+          (t
+           (outline-flag-region start end nil)))))))))))
+
+(add-hook 'org-cycle-hook 'org-toggle-tag-visibility)

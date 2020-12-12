@@ -6,7 +6,7 @@
  '(ansi-color-names-vector
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(custom-safe-themes
-   '("2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "79278310dd6cacf2d2f491063c4ab8b129fee2a498e4c25912ddaa6c3c5b621e" "37144b437478e4c235824f0e94afa740ee2c7d16952e69ac3c5ed4352209eefb" "30095d77cf3b19b736e472f56899df6e072c9c3c404ea1e16dbcffb1544eaf08" "f908b0b99115953beaa28cafa4868a5ee2a723526bebababbb2f8caf18280b86" "3b116632d401aa4a6fce54b82d746b5441f543fa96619c1c79923e2f68ce1665" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" "5d09b4ad5649fea40249dd937eaaa8f8a229db1cec9a1a0ef0de3ccf63523014" default))
+   '("4a8d4375d90a7051115db94ed40e9abb2c0766e80e228ecad60e06b3b397acab" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "79278310dd6cacf2d2f491063c4ab8b129fee2a498e4c25912ddaa6c3c5b621e" "37144b437478e4c235824f0e94afa740ee2c7d16952e69ac3c5ed4352209eefb" "30095d77cf3b19b736e472f56899df6e072c9c3c404ea1e16dbcffb1544eaf08" "f908b0b99115953beaa28cafa4868a5ee2a723526bebababbb2f8caf18280b86" "3b116632d401aa4a6fce54b82d746b5441f543fa96619c1c79923e2f68ce1665" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" "5d09b4ad5649fea40249dd937eaaa8f8a229db1cec9a1a0ef0de3ccf63523014" default))
  '(default-input-method "farsi-isiri-9147")
  '(doom-modeline-mode t)
  '(fci-rule-color "#D6D6D6")
@@ -38,7 +38,7 @@
  '(mu4e-update-interval 300)
  '(objed-cursor-color "#dc322f")
  '(org-agenda-files
-   '("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org" "/home/samim/Notes/journal/daily/20201108.gpg"))
+   '("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org" "/home/samim/Notes/journal/daily/20201207.gpg"))
  '(org-capture-templates
    '(("t" "todo" entry
       (file+headline "~/Notes/todo.org" "Inbox")
@@ -51,7 +51,8 @@
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(safe-local-variable-values
-   '((eval progn
+   '((org-use-property-inheritance . reveal_)
+     (eval progn
            (literate-calc-minor-mode))
      (org-confirm-babel-evaluate)
      (org-use-property-inheritance . t)
@@ -120,5 +121,4 @@
  '(org-link ((t (:weight normal :inherit link))))
  '(org-meta-line ((t (:foreground "dark gray"))))
  '(org-scheduled ((t (:foreground "grey"))))
- '(org-table ((t (:background "LightGoldenrodYellow"))))
- '(org-tag ((t (:foreground "#fbf5e3")))))
+ '(org-table ((t (:background "LightGoldenrodYellow")))))
