@@ -1,20 +1,23 @@
 call plug#begin('~/.vim/plugged')
 " Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'
+Plug 'gcmt/wildfire.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mxw/vim-jsx'
 Plug 'mcchrish/nnn.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
+" Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
+" Plug 'pacha/vem-tabline'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -36,7 +39,7 @@ Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 " Plug 'haya14busa/vim-keeppad'
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'embear/vim-localvimrc'
 Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
@@ -68,9 +71,11 @@ Plug 'tommcdo/vim-exchange'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/lib.kom'
-Plug 'romgrk/barbar.nvim'
+" Plug 'romgrk/barbar.nvim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'romgrk/doom-one.vim'
+Plug 'unblevable/quick-scope'
+Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 call plug#end()
 
 " Suda
@@ -186,9 +191,11 @@ inoremap jj <Esc>
 " fzf
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-nmap <leader>o :History<CR>
-nmap <leader>p :GFiles<CR>
-" nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+" nmap <leader>o :History<CR>
+nmap <leader>o :CocCommand fzf-preview.MruFiles<CR>
+" nmap <leader>p :GFiles<CR>
+nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+let g:fzf_preview_use_dev_icons = 1
 nmap <C-p> :GFiles<CR>
 nmap <leader>/ :Rg<CR>
 nmap <leader><leader> :Commands<CR>
@@ -211,9 +218,9 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 
 
 " Hide statusline in fzf
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" autocmd! FileType fzf
+" autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " File manager
 " nnoremap <leader>d :Ranger<CR>
@@ -454,3 +461,12 @@ exe 'hi default BufferInactiveTarget   guifg=red gui=bold guibg=' . bg_inactive
 hi default BufferShadow guifg=#000000 guibg=#000000
 
 " let bufferline.clickable = v:true
+
+set laststatus=0
+
+" let g:ctrlp_working_path_mode = 'r'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': '',
+"   \ }
