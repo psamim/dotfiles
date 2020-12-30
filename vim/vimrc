@@ -1,10 +1,9 @@
 call plug#begin('~/.vim/plugged')
 " Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'
+" Plug 'othree/yajs.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'mxw/vim-jsx'
-Plug 'mcchrish/nnn.vim'
+" Plug 'mxw/vim-jsx'
 Plug 'skywind3000/asyncrun.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -20,17 +19,17 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'francoiscabrol/ranger.vim'
+" Plug 'francoiscabrol/ranger.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
-Plug 'rbgrouleff/bclose.vim'
+" Plug 'rbgrouleff/bclose.vim'
 Plug 'ledger/vim-ledger'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-peekaboo'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'lambdalisue/suda.vim'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'amiorin/ctrlp-z'
 Plug 'tpope/vim-surround'
@@ -40,10 +39,10 @@ Plug 'simnalamburt/vim-mundo'
 " Plug 'haya14busa/vim-keeppad'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'embear/vim-localvimrc'
+" Plug 'embear/vim-localvimrc'
 Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/limelight.vim'
+" Plug 'junegunn/limelight.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'janko/vim-test'
@@ -54,7 +53,7 @@ Plug 'peitalin/vim-jsx-typescript'
 " Plug 'Quramy/vim-js-pretty-template'
 Plug 'jparise/vim-graphql'
 Plug 'digitaltoad/vim-pug'
-Plug 'farmergreg/vim-lastplace'
+" Plug 'farmergreg/vim-lastplace'
 " Plug 'edvb/dmenu.vim'
 Plug 'LnL7/vim-nix'
 Plug 'Konfekt/vim-CtrlXA'
@@ -65,17 +64,18 @@ Plug 'Konfekt/vim-CtrlXA'
 Plug 'Valloric/MatchTagAlways'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'Valloric/ListToggle'
+" Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 Plug 'tommcdo/vim-exchange'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/lib.kom'
 " Plug 'romgrk/barbar.nvim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'romgrk/doom-one.vim'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'romgrk/doom-one.vim'
 Plug 'unblevable/quick-scope'
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+" Plug 'ttys3/nvim-blamer.lua'
 call plug#end()
 
 " Suda
@@ -370,8 +370,9 @@ set shortmess+=c
 set signcolumn=yes
 
 " coc-vim
-let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-flow', 'coc-eslint', 'coc-word'
-      \, 'coc-sh', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-tslint-plugin', 'coc-syntax', 'coc-yaml'
+let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-eslint', 'coc-word'
+      \, 'coc-sh', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-syntax', 'coc-yaml'
+      \, 'coc-angular', 'coc-spell-checker', 'coc-yaml'
       \]
 
 function! s:show_documentation()
@@ -381,6 +382,9 @@ function! s:show_documentation()
     call CocActionAsync('doHover')
   endif
 endfunction
+
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
@@ -392,6 +396,7 @@ nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
 " nnoremap <leader>b :DmenuBuf "e"<CR>
 " nnoremap <leader>p :DmenuFile "e"<CR>
+nmap <leader>f :CocCommand prettier.formatFile<CR>
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
@@ -470,3 +475,6 @@ set laststatus=0
 "   \ 'file': '\v\.(exe|so|dll)$',
 "   \ 'link': '',
 "   \ }
+"
+
+let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
