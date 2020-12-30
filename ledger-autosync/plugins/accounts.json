@@ -308,6 +308,10 @@
         "account": "Expenses:Groceries",
         "name": "Meat Store Khaghani"
     },
+    "185175": {
+        "account": "Expenses:Groceries",
+        "name": "Meat Store Khaghani (Lamb)"
+    },
     "3411664": {
         "account": "Expenses:Groceries",
         "name": "Super Jolfa"
