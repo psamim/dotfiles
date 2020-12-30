@@ -22,6 +22,9 @@ import           XMonad.Config.Desktop
 import           XMonad.Layout.NoFrillsDecoration
 import           XMonad.Layout.Tabbed
 import XMonad.Actions.CopyWindow
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.DragPane
+import XMonad.Layout.SimplestFloat
 
 main = xmonad myConfig
 
@@ -90,6 +93,9 @@ myLayouts =
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
     ||| Full
+    ||| ThreeColMid 1 (3/100) (3/7)
+    ||| dragPane Vertical 0.1 0.5 
+    ||| simplestFloat
  where
   -- addTopBar = noFrillsDeco shrinkText topBarTheme
   tall      = Tall 1 (3 / 100) (1 / 2)
@@ -102,8 +108,8 @@ myConfig =
     $                 desktopConfig
                         { modMask            = mod4Mask -- use the Windows button as mod
                         , terminal           = "alacritty"
-                        , borderWidth        = 0
-                        , focusedBorderColor = "#333333"
+                        , borderWidth        = 1
+                        , focusedBorderColor = "#ffa305"
                         , normalBorderColor  = "#aaaaaa"
                         , workspaces         = myWorkspaces
                         , logHook            = myLogHook
@@ -115,8 +121,7 @@ myConfig =
                         }
     `additionalKeys`  myKeys
     `removeKeys` 
-    [ (mod4Mask .|. shiftMask, xK_q)
-    , (mod4Mask , xK_period)
+    [  (mod4Mask , xK_period)
     , (mod4Mask , xK_comma)
     , (mod4Mask .|. shiftMask, xK_w)
     ]
@@ -131,7 +136,7 @@ myKeys =
   [ ((mod4Mask, xK_d), spawn "rofi -show combi")
   , ((mod4Mask, xK_y), spawn "polybar-msg cmd toggle" )
   , ((mod4Mask, xK_p), spawn "rofi-pass")
-  , ((mod4Mask, xK_f), spawn "rofi -show file-browser -file-browser-dir ~")
+  -- , ((mod4Mask, xK_f), spawn "rofi -show file-browser -file-browser-dir ~")
   , (((0, xK_Print)) , spawn "flameshot gui")
   , ((mod4Mask, xK_x), namedScratchpadAction scratchpads "term")
   ,
@@ -140,6 +145,9 @@ myKeys =
   , ((mod4Mask, xK_g), gotoMenu)
   , ((mod4Mask, xK_o), nextWS)
   -- , ((mod4Mask, xK_i), prevWS)
+  , ((mod4Mask, xK_w), toggleSmartSpacing)
+  , ((mod4Mask, xK_f), setScreenSpacing (Border 10 10 250 250))
+  , ((mod4Mask .|. shiftMask, xK_f), setScreenSpacing (Border 6 6 6 6))
   , ((mod4Mask, xK_s), incWindowSpacing 1)
   , ((mod4Mask .|. shiftMask, xK_s), decWindowSpacing 1)
   , ( (mod4Mask, xK_v)
@@ -257,7 +265,7 @@ scratchpads =
   where role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook = historyHook <+> fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.55
+    where fadeAmount = 0.7
 
 projects :: [Project]
 projects =
