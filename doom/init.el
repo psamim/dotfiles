@@ -46,10 +46,11 @@
        ;; unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       ;; window-select     ; visually switch windows
+       window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
-       (emoji +unicode +github)
+       (emoji +unicode +github +ascii)
+       (ligatures +iosevka +extra)
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -149,7 +150,7 @@
         ;;+hugo            ; use Emacs for hugo blogging
         +roam
         ;;+jupyter        ; ipython/jupyter support for babel
-        ;;+pandoc          ; export-with-pandoc support
+        +pandoc          ; export-with-pandoc support
         +journal
         +pretty
         +pomodoro        ; be fruitful with the tomato technique

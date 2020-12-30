@@ -21,21 +21,29 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 18)
+(setq doom-font (font-spec :family "Iosevka" :size 20)
       doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
       doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
       )
 
+;; (require 'modus-themes)
 ;; (setq
-;;  modus-operandi-theme-bold-constructs t
-;;  modus-operandi-theme-slanted-constructs t
-;;  modus-operandi-theme-org-blocks 'greyscale
-;;  modus-operandi-theme-section-headings nil
-;;  modus-operandi-theme-rainbow-headings nil
-;;  modus-operandi-theme-scale-headings t
-;;  modus-operandi-theme-variable-pitch-headings t
-;;  modus-operandi-theme-3d-modeline nil)
+;;  modus-themes-bold-constructs t
+;;  modus-themes-slanted-constructs t
+;;  modus-themes-org-blocks 'greyscale
+;;  modus-themes-fringes 'subtle
+;;  modus-themes-scale-headings nil
+;;  modus-themes-scale-headings nil
+;;  modus-themes-region 'bg-only-no-extend
+;;  modus-themes-variable-pitch-headings t
+;;  modus-themes-mode-line 'nil)
+
+;; (setq modus-themes-headings
+;;       '((1 . section)
+;;         (2 . rainbow)
+;;         (t . nil)))
+
 
 ;; (custom-theme-set-faces!
 ;;   'modus-operandi
@@ -46,8 +54,9 @@
   ;; styles of the desired faces
   ;; (add-hook 'after-load-theme-hook 'customize-modus-operandi)
 
-  ;; load the theme
-  ;; (load-theme 'modus-operandi t)
+;; load the theme
+;; (modus-themes-load-operandi)
+;; (load-theme 'modus-operandi)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -60,10 +69,10 @@
   org-clock-persist 'history
   org-icalendar-timezone "Asia/Tehran"
   ;; org-caldav-url 'google
-  ;; org-caldav-calendar-id "samim@globalworkandtravel.com"
+  ;; org-caldav-calendar-id "X"
   ;; org-caldav-files '("~/Notes/appointments.org")
-  ;; org-caldav-oauth2-client-id "702215651471-9g9vjg9hhnp7hathnteh4iajecp91atm.apps.googleusercontent.com"
-  ;; org-caldav-oauth2-client-secret "tnc8k2D9w0RqPIRyEag4AqhQ"
+  ;; org-caldav-oauth2-client-id "X"
+  ;; org-caldav-oauth2-client-secret "X"
   ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
   ;; org-caldav-delete-org-entries 'always
   ;; org-caldav-sync-changes-to-org 'all
@@ -92,8 +101,6 @@
 (customize-set-variable 'org-capture-templates
       (quote (("t" "todo" entry (file+headline "~/Notes/todo.org" "Inbox")
                "* %?\n%a\n" :clock-keep t))))
-
-
 
 (setq-hook! org-mode
   org-log-done t
@@ -174,9 +181,9 @@ This function makes sure that dates are aligned for easy reading."
             dayname day monthname persian)))
 
 (setq org-agenda-custom-commands
-      '(("o" "My Agenda"
+      '(("a" "My Agenda"
          ((todo "TODO" (
-                      (org-agenda-overriding-header "⚡ TO DO:\n")
+                      (org-agenda-overriding-header "⚡ TODAY:\n")
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "  %-2i  %b")
                       (org-agenda-todo-keyword-format "")))
@@ -196,7 +203,14 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-current-time-string "⮜┈┈┈┈┈┈┈ now")
                       (org-agenda-scheduled-leaders '("" ""))
                       (org-agenda-deadline-leaders '("" ""))
-                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))))
+                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+
+         (todo "NEXT" (
+                      (org-agenda-overriding-header "⚡ THIS WEEK:\n")
+                      (org-agenda-remove-tags t)
+                      (org-agenda-prefix-format "  %-2i  %b")
+                      (org-agenda-todo-keyword-format "")))
+          ))))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -261,6 +275,8 @@ This function makes sure that dates are aligned for easy reading."
 (map! :localleader
       (:map ledger-mode-map
         "c" #'ledger-mode-clean-buffer))
+
+(map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 
 ;; (after! ledger-mode
 ;;   (set-company-backend! 'ledger-mode 'ledger-mode))
@@ -514,3 +530,61 @@ This function makes sure that dates are aligned for easy reading."
            (outline-flag-region start end nil)))))))))))
 
 (add-hook 'org-cycle-hook 'org-toggle-tag-visibility)
+
+(doom-modeline-mode 0)
+
+
+(after! org
+  (appendq! +ligatures-extra-symbols
+            `(:clock      "🕑"
+              :circle "⚫"
+              :shogi "⛊"
+              :white_shogi "☖"
+              :two_lines "⚏"
+              ))
+  (set-ligatures! 'org-mode
+    :merge t
+    :clock ":LOGBOOK:"
+    :quote         "#+begin_quote"
+    :name "#+CAPTION:"
+    :quote_end     "#+end_quote"
+    :src_block         "#+begin_src"
+    :src_block_end     "#+end_src"
+    :src_block_end     ":END:"
+    :src_block_end     "#+END"
+    :two_lines   ":PROPERTIES:"
+    :shogi "#+title:"
+    :white_shogi "keywords:"
+    ))
+
+(use-package! org-fancy-priorities ; priority icons
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config (setq org-fancy-priorities-list '("⚑" "⬆" "⬇")))
+
+(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "☉" "◎" "○" "◎" "●"))
+
+(setq org-todo-keywords
+        '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; A project, which usually contains other tasks
+           "STRT(s)"  ; A task that is in progress
+           "WAIT(w)"  ; Something external is holding up this task
+           "HOLD(h)"  ; This task is paused/on hold because of me
+           "NEXT(n)"  ; This task going to be done thiw iteration (week)
+           "|"
+           "DONE(d)"  ; Task successfully completed
+           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-todo-keyword-faces
+        '(("[-]"  . +org-todo-active)
+          ("STRT" . +org-todo-active)
+          ("[?]"  . +org-todo-onhold)
+          ("WAIT" . +org-todo-onhold)
+          ("HOLD" . +org-todo-onhold)
+          ("NEXT" . +org-todo-project)
+          ("PROJ" . +org-todo-project)))
