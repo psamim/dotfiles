@@ -345,29 +345,7 @@ This function makes sure that dates are aligned for easy reading."
 ;; (add-hook! 'mu4e-view-mode-hook
 ;;            #'olivetti-mode)
 
-(global-org-pretty-table-mode)
-
-(custom-set-faces!
-  '((org-agerda-date-today
-     org-agenda-date
-     org-agenda-date-weekend)
-    :box (:line-width 32 :color "Gray10"))
-  '(org-scheduled
-    :foreground "grey")
-  '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
-  ;; '(org-tag :foreground "#fbf5e3"  )
-  '(org-ellipsis :height 1.0)
-  '(org-level-1 :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
-  '(org-level-2 :weight normal :foreground "#424242" :inherit outline-2)
-  '(org-level-3 :weight normal :inherit outline-3)
-  '(org-link :weight normal :inherit link)
-  '(org-table :background "LightGoldenrodYellow")
-  '(org-agenda-date-today :foreground "grey40")
-  '(org-agenda-date :foreground "grey40")
-  '(org-agenda-date-weekend :foreground "grey40")
-  '(org-agenda-structure
-    :family "Iosevka Etoile"
-    :height 240))
+;; (global-org-pretty-table-mode)
 
 (defun set-window-clean ()
   (agenda-color-char)
@@ -533,7 +511,6 @@ This function makes sure that dates are aligned for easy reading."
 
 (doom-modeline-mode 0)
 
-
 (after! org
   (appendq! +ligatures-extra-symbols
             `(:clock      "🕑"
@@ -549,6 +526,7 @@ This function makes sure that dates are aligned for easy reading."
     :name "#+CAPTION:"
     :quote_end     "#+end_quote"
     :src_block         "#+begin_src"
+    :src_block         "#+BEGIN:"
     :src_block_end     "#+end_src"
     :src_block_end     ":END:"
     :src_block_end     "#+END"
@@ -588,3 +566,21 @@ This function makes sure that dates are aligned for easy reading."
           ("HOLD" . +org-todo-onhold)
           ("NEXT" . +org-todo-project)
           ("PROJ" . +org-todo-project)))
+
+
+(custom-theme-set-faces!
+  'doom-solarized-light
+  ;; '((org-agenda-date) :box (:line-width 32 :color "Gray10"))
+  '((org-agenda-date-today org-agenda-date org-agenda-date-weekend) :foreground "grey40")
+  ;; '((org-agenda-date-weekend) :box (:line-width 32 :color "Gray10"))
+  '((org-agenda-structure) :family "Iosevka Etoile" :height 240)
+  ;; '((org-agerda-date-today) :box (:line-width 32 :color "Gray10"))
+  '((org-ellipsis) :height 1.0)
+  '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
+  '((org-level-2) :weight normal :foreground "#424242" :inherit outline-2)
+  '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
+  '((org-scheduled)  :foreground "#424242")
+  '((org-link) :weight normal :inherit link)
+  ;; '(org-tag :foreground "#fbf5e3"  )
+  '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
+  '((org-table) :background "LightGoldenrodYellow"))

@@ -8,7 +8,7 @@
  '(awesome-tray-mode-line-active-color "#0031a9")
  '(awesome-tray-mode-line-inactive-color "#d7d7d7")
  '(custom-safe-themes
-   '("e72f5955ec6d8585b8ddb2accc2a4cb78d28629483ef3dcfee00ef3745e2292f" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "08a27c4cde8fcbb2869d71fdc9fa47ab7e4d31c27d40d59bf05729c4640ce834" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "6084dce7da6b7447dcb9f93a981284dc823bab54f801ebf8a8e362a5332d2753" "cfa3b266957e26ed5a8637f43d443b4a921bb546381d7df97e7338d278184fa9" "18c5ec0e4d1723dbeadb65d17112f077529fd24261cb8cd4ceee145e6a6f4cd1" default))
+   '("e6ff132edb1bfa0645e2ba032c44ce94a3bd3c15e3929cdf6c049802cf059a2a" "990e24b406787568c592db2b853aa65ecc2dcd08146c0d22293259d400174e37" "e72f5955ec6d8585b8ddb2accc2a4cb78d28629483ef3dcfee00ef3745e2292f" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "08a27c4cde8fcbb2869d71fdc9fa47ab7e4d31c27d40d59bf05729c4640ce834" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "6084dce7da6b7447dcb9f93a981284dc823bab54f801ebf8a8e362a5332d2753" "cfa3b266957e26ed5a8637f43d443b4a921bb546381d7df97e7338d278184fa9" "18c5ec0e4d1723dbeadb65d17112f077529fd24261cb8cd4ceee145e6a6f4cd1" default))
  '(exwm-floating-border-color "#888888")
  '(fci-rule-color "#383a42")
  '(flymake-error-bitmap '(flymake-double-exclamation-mark modus-theme-fringe-red))
@@ -56,43 +56,9 @@
    ["black" "#a60000" "#005e00" "#813e00" "#0031a9" "#721045" "#00538b" "gray65"])
  '(xterm-color-names-bright
    ["gray35" "#972500" "#315b00" "#70480f" "#2544bb" "#8f0075" "#30517f" "white"]))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(org-agenda-date ((t (:foreground "grey31"))))
-;;  '(org-agenda-date-date ((t (:foreground "grey31"))))
-;;  '(org-agenda-date-today ((t (:underline "on"))))
-;;  '(org-agenda-date-weekend ((t (:foreground "grey31"))))
-;;  '(org-agenda-structure ((t (:family "Pacifico" :height 200 :underline "on"))))
-;;  '(org-drawer ((t (:foreground "dark gray"))))
-;;  '(org-ellipsis ((t (:height 1.0))))
-;;  '(org-headline-done ((t (:foreground "dark gray"))))
-;;  '(org-level-1 ((t (:foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1))))
-;;  '(org-level-2 ((t (:weight normal :foreground "#424242" :inherit outline-2))))
-;;  '(org-level-3 ((t (:weight normal :inherit outline-3))))
-;;  '(org-link ((t (:weight normal :inherit link))))
-;;  '(org-meta-line ((t (:foreground "dark gray"))))
-;;  '(org-table ((t (:foreground "grey"))))
-;;  '(org-tag ((t (:foreground "#fbf5e3")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-date ((t (:box (:line-width 32 :color "Gray10")))))
- '(org-agenda-date-today ((t (:foreground "grey40"))))
- '(org-agenda-date-weekend ((t (:box (:line-width 32 :color "Gray10")))))
- '(org-agenda-structure ((t (:family "Iosevka Etoile" :height 240))))
- '(org-agerda-date-today ((t (:box (:line-width 32 :color "Gray10")))))
- '(org-drawer ((t (:foreground "dark gray"))))
- '(org-ellipsis ((t (:height 1.0))))
- '(org-headline-done ((t (:foreground "dark gray"))))
- '(org-level-1 ((t (:foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1))))
- '(org-level-2 ((t (:weight normal :foreground "#424242" :inherit outline-2))))
- '(org-level-3 ((t (:weight normal :inherit outline-3))))
- '(org-link ((t (:weight normal :inherit link))))
- '(org-meta-line ((t (:foreground "dark gray"))))
- '(org-scheduled ((t (:foreground "grey"))))
- '(org-table ((t (:background "LightGoldenrodYellow")))))
+ )
