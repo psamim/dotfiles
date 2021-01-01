@@ -25,6 +25,8 @@ import XMonad.Actions.CopyWindow
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.DragPane
 import XMonad.Layout.SimplestFloat
+import XMonad.Layout.BorderResize
+import XMonad.Layout.WindowArranger
 
 main = xmonad myConfig
 
@@ -87,19 +89,21 @@ myTabTheme = def { activeColor         = active
                  }
 
 myLayouts =
-    spacingRaw True (Border 6 6 6 6) True (Border 6 6 6 6) True
+    borderResize
+    $ spacingRaw True (Border 6 6 6 6) True (Border 6 6 6 6) True
     $ avoidStruts
-    $ smartBorders $  tall
+    $ smartBorders $ tall
     ||| mTall
     -- ||| tabbed shrinkText myTabTheme
     ||| Full
-    ||| ThreeColMid 1 (3/100) (3/7)
-    ||| dragPane Vertical 0.1 0.5 
-    ||| simplestFloat
+    ||| three
+    -- ||| dragPane Vertical 0.1 0.5 
+    -- ||| simplestFloat
  where
   -- addTopBar = noFrillsDeco shrinkText topBarTheme
-  tall      = Tall 1 (3 / 100) (1 / 2)
-  mTall     = Mirror $ Tall 1 (3 / 100) (3 / 4)
+  three = windowArrange $ ThreeColMid 1 (3/100) (3/7)
+  tall      = windowArrange $ Tall 1 (3 / 100) (1 / 2)
+  mTall     = windowArrange $ Mirror $ Tall 1 (3 / 100) (3 / 4)
 
 -- Main configuration, override the defaults to your liking.
 myConfig =
@@ -134,6 +138,8 @@ myConfig =
 
 myKeys =
   [ ((mod4Mask, xK_d), spawn "rofi -show combi")
+  , ((mod4Mask .|. controlMask, xK_s), sendMessage  Arrange)
+  , ((mod4Mask .|. controlMask .|. shiftMask, xK_s), sendMessage  DeArrange)
   , ((mod4Mask, xK_y), spawn "polybar-msg cmd toggle" )
   , ((mod4Mask, xK_p), spawn "rofi-pass")
   -- , ((mod4Mask, xK_f), spawn "rofi -show file-browser -file-browser-dir ~")
