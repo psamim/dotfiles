@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samim Pezeshki"
@@ -26,37 +25,6 @@
       doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
       )
-
-;; (require 'modus-themes)
-;; (setq
-;;  modus-themes-bold-constructs t
-;;  modus-themes-slanted-constructs t
-;;  modus-themes-org-blocks 'greyscale
-;;  modus-themes-fringes 'subtle
-;;  modus-themes-scale-headings nil
-;;  modus-themes-scale-headings nil
-;;  modus-themes-region 'bg-only-no-extend
-;;  modus-themes-variable-pitch-headings t
-;;  modus-themes-mode-line 'nil)
-
-;; (setq modus-themes-headings
-;;       '((1 . section)
-;;         (2 . rainbow)
-;;         (t . nil)))
-
-
-;; (custom-theme-set-faces!
-;;   'modus-operandi
-;;   '((org-tag) :foreground "#f8f8f8")
-;;   '((org-drawer org-meta-line org-headline-done) :foreground "grey58"))
-
-  ;; invoke the above function when appropriate in order to override the
-  ;; styles of the desired faces
-  ;; (add-hook 'after-load-theme-hook 'customize-modus-operandi)
-
-;; load the theme
-;; (modus-themes-load-operandi)
-;; (load-theme 'modus-operandi)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -113,17 +81,14 @@
   ;; org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
-  ;; org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE"))
   org-archive-location "~/Notes/archive/todo.org.gpg::"
   org-duration-format '((special . h:mm))
-  org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
   bidi-paragraph-direction t
   org-hide-emphasis-markers t
   org-fontify-done-headline t
   org-fontify-whole-heading-line t
   org-fontify-quote-and-verse-blocks t
   )
-
 
 (customize-set-value
     'org-agenda-category-icon-alist
@@ -134,9 +99,8 @@
       ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center)
       ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center)
       ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center)
+      ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center)
       ))
-
-
 
 (setq org-agenda-hidden-separator "‌‌ ")
 (defun agenda-color-char ()
@@ -278,30 +242,10 @@ This function makes sure that dates are aligned for easy reading."
 
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 
-;; (after! ledger-mode
-;;   (set-company-backend! 'ledger-mode 'ledger-mode))
-
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
-;; they are implemented.
 (defun set-farsi-font ()
   (interactive)
   (set-fontset-font
@@ -332,7 +276,6 @@ This function makes sure that dates are aligned for easy reading."
 ;; Transparency
 ;; (set-frame-parameter (selected-frame) 'alpha '(92 92))
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 92)))
-
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
@@ -466,48 +409,48 @@ This function makes sure that dates are aligned for easy reading."
       evil-insert-state-cursor '(bar "medium sea green")
       evil-visual-state-cursor '(hollow "orange"))
 
-(defun org-toggle-tag-visibility (state)
-  "Run in `org-cycle-hook'."
-  (message "%s" state)
-  (cond
-   ;; global cycling
-   ((memq state '(overview contents showall))
-    (org-map-entries
-     (lambda ()
-       (let ((tagstring (nth 5 (org-heading-components)))
-         start end)
-     (when tagstring
-       (save-excursion
-         (beginning-of-line)
-         (re-search-forward tagstring)
-         (setq start (match-beginning 0)
-           end (match-end 0)))
-       (cond
-        ((memq state '(overview contents))
-         (outline-flag-region start end t))
-        (t
-         (outline-flag-region start end nil))))))))
-   ;; local cycling
-   ((memq state '(folded children subtree))
-    (save-restriction
-      (org-narrow-to-subtree)
-      (org-map-entries
-       (lambda ()
-     (let ((tagstring (nth 5 (org-heading-components)))
-           start end)
-       (when tagstring
-         (save-excursion
-           (beginning-of-line)
-           (re-search-forward tagstring)
-           (setq start (match-beginning 0)
-             end (match-end 0)))
-         (cond
-          ((memq state '(folded children))
-           (outline-flag-region start end t))
-          (t
-           (outline-flag-region start end nil)))))))))))
+;; (defun org-toggle-tag-visibility (state)
+;;   "Run in `org-cycle-hook'."
+;;   (message "%s" state)
+;;   (cond
+;;    ;; global cycling
+;;    ((memq state '(overview contents showall))
+;;     (org-map-entries
+;;      (lambda ()
+;;        (let ((tagstring (nth 5 (org-heading-components)))
+;;          start end)
+;;      (when tagstring
+;;        (save-excursion
+;;          (beginning-of-line)
+;;          (re-search-forward tagstring)
+;;          (setq start (match-beginning 0)
+;;            end (match-end 0)))
+;;        (cond
+;;         ((memq state '(overview contents))
+;;          (outline-flag-region start end t))
+;;         (t
+;;          (outline-flag-region start end nil))))))))
+;;    ;; local cycling
+;;    ((memq state '(folded children subtree))
+;;     (save-restriction
+;;       (org-narrow-to-subtree)
+;;       (org-map-entries
+;;        (lambda ()
+;;      (let ((tagstring (nth 5 (org-heading-components)))
+;;            start end)
+;;        (when tagstring
+;;          (save-excursion
+;;            (beginning-of-line)
+;;            (re-search-forward tagstring)
+;;            (setq start (match-beginning 0)
+;;              end (match-end 0)))
+;;          (cond
+;;           ((memq state '(folded children))
+;;            (outline-flag-region start end t))
+;;           (t
+;;            (outline-flag-region start end nil)))))))))))
 
-(add-hook 'org-cycle-hook 'org-toggle-tag-visibility)
+;; (add-hook 'org-cycle-hook 'org-toggle-tag-visibility)
 
 (doom-modeline-mode 0)
 
@@ -539,7 +482,7 @@ This function makes sure that dates are aligned for easy reading."
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚑" "⬆" "⬇")))
 
-(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "☉" "◎" "○" "◎" "●"))
+(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "◎" "○" "◎" "●"))
 
 (setq org-todo-keywords
         '((sequence
@@ -570,17 +513,17 @@ This function makes sure that dates are aligned for easy reading."
 
 (custom-theme-set-faces!
   'doom-solarized-light
-  ;; '((org-agenda-date) :box (:line-width 32 :color "Gray10"))
-  '((org-agenda-date-today org-agenda-date org-agenda-date-weekend) :foreground "grey40")
-  ;; '((org-agenda-date-weekend) :box (:line-width 32 :color "Gray10"))
+  '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75")
+  '((org-agenda-date-today) :foreground "#073642")
+  '((org-scheduled org-scheduled-today)  :foreground "#556b72")
   '((org-agenda-structure) :family "Iosevka Etoile" :height 240)
-  ;; '((org-agerda-date-today) :box (:line-width 32 :color "Gray10"))
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
   '((org-level-2) :weight normal :foreground "#424242" :inherit outline-2)
   '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
-  '((org-scheduled)  :foreground "#424242")
   '((org-link) :weight normal :inherit link)
   ;; '(org-tag :foreground "#fbf5e3"  )
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
   '((org-table) :background "LightGoldenrodYellow"))
+
+(map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
