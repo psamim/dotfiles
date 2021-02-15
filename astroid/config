@@ -41,8 +41,7 @@
             "Inbox": "tag:inbox",
             "Global": "tag:global and tag:inbox",
             "Quora": "tag:Quora",
-            "Recipe": "tag:Recipe",
-            "Org-mode": "tag:org-mode"
+            "Recipe": "tag:Recipe"
         }
     },
     "terminal": {

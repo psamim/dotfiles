@@ -224,9 +224,9 @@ myManageHook =
         | t <- myOtherFloats
         ]
     -- , [ stringProperty "_NET_WM_NAME" =? "Media Viewer" --> doFloat]
-      , [ title =? "editor" --> doRectFloat
-            (W.RationalRect (1 / 12) (1 / 12) (10 / 12) (10 / 12))
-        ]
+      -- , [ title =? "editor" --> doRectFloat
+      --       (W.RationalRect (1 / 12) (1 / 12) (10 / 12) (10 / 12))
+      --   ]
       , [ title =? "TODOs" --> doRectFloat
             (W.RationalRect (1 / 12) (1 / 12) (10 / 12) (10 / 12))
         ]

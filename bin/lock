@@ -9,7 +9,7 @@ xkb-switch -s us
 # pixelate_lock
 # physlock -ds -u samim
 # i3lock-wrapper
-betterlockscreen -s dim
+betterlockscreen  -s
 
 # Suspend
 # systemctl suspend
