@@ -76,6 +76,7 @@ Plug 'romgrk/lib.kom'
 Plug 'unblevable/quick-scope'
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 " Plug 'ttys3/nvim-blamer.lua'
+Plug 'APZelos/blamer.nvim'
 call plug#end()
 
 " Suda
@@ -478,3 +479,5 @@ set laststatus=0
 "
 
 let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
+
+let g:blamer_enabled = 1

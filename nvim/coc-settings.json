@@ -1,10 +1,12 @@
 {
+  "tabnine.enable": false,
   "tsserver.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": ["js"],
   "snippets.extends": {
     "javascript.jsx": ["javascript"],
     "javascriptreact": ["javascript"]
   },
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.nodePath": "./node_modules",
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
