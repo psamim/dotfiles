@@ -469,12 +469,17 @@ This function makes sure that dates are aligned for easy reading."
     :name "#+CAPTION:"
     :quote_end     "#+end_quote"
     :src_block         "#+begin_src"
+    :src_block         "#+BEGIN_SRC"
     :src_block         "#+BEGIN:"
     :src_block_end     "#+end_src"
+    :src_block_end     "#+END_SRC"
     :src_block_end     ":END:"
     :src_block_end     "#+END"
     :two_lines   ":PROPERTIES:"
     :shogi "#+title:"
+    :shogi "#+TITLE:"
+    :shogi "#+NAME:"
+    :shogi "#+name:"
     :white_shogi "keywords:"
     ))
 
@@ -522,8 +527,9 @@ This function makes sure that dates are aligned for easy reading."
   '((org-level-2) :weight normal :foreground "#424242" :inherit outline-2)
   '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
   '((org-link) :weight normal :inherit link)
-  ;; '(org-tag :foreground "#fbf5e3"  )
+  '(org-tag :foreground "#fbf5e3")
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
-  '((org-table) :background "LightGoldenrodYellow"))
+  '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
+  '((org-table) :background "#f7edd0"))
 
 (map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
