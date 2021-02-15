@@ -177,3 +177,6 @@ ln -sf $PWD/fontconfig $HOME/.config/fontconfig
 
 rm -rf "$HOME/.config/polybar"
 ln -sf $PWD/polybar $HOME/.config/polybar
+
+rm -rf "$HOME/.config/kmonad"
+ln -sf $PWD/kmonad $HOME/.config/kmonad

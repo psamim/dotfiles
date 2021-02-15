@@ -1,0 +1,9 @@
+[Unit]
+Description=kmonad keyboard daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kmonad /home/samim/.config/kmonad/config.kbd -l info
+
+[Install]
+WantedBy=default.target
