@@ -21,7 +21,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/fzf
     zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
-    zgen oh-my-zsh plugins/npx
+    # zgen oh-my-zsh plugins/npx
     # zgen oh-my-zsh plugins/keychain
     zgen oh-my-zsh plugins/pass
     zgen oh-my-zsh plugins/archlinux
@@ -108,7 +108,7 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"
 export LEDGER_FILE="$HOME/Notes/accounting/ledger.ledger"
-# export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
+export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
 export TOMBS="$HOME/tombs"
 export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
 export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
@@ -142,6 +142,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PYENV_ROOT/bin:$PATH
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.cargo/bin
 
 eval "$(direnv hook zsh)"
 
