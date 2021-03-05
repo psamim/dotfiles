@@ -141,7 +141,7 @@ label = %date% %time%
 
 [module/netspeed]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 1.0
 format-connected = <label-connected>
 format-connected-padding = ${variables.mpadding}
@@ -150,7 +150,7 @@ label-connected = "  %upspeed%   %downspeed%"
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 1.0
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
