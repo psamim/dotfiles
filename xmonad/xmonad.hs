@@ -27,6 +27,7 @@ import XMonad.Layout.DragPane
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.BorderResize
 import XMonad.Layout.WindowArranger
+import XMonad.Actions.PhysicalScreens
 
 main = xmonad myConfig
 
@@ -112,7 +113,7 @@ myConfig =
     $                 desktopConfig
                         { modMask            = mod4Mask -- use the Windows button as mod
                         , terminal           = "alacritty"
-                        , borderWidth        = 1
+                        , borderWidth        = 0
                         , focusedBorderColor = "#ffa305"
                         , normalBorderColor  = "#aaaaaa"
                         , workspaces         = myWorkspaces
@@ -148,10 +149,10 @@ myKeys =
   ,
       -- ((mod4Mask, xK_c), namedScratchpadAction scratchpads "nvim"),
     ((mod4Mask, xK_b), sendMessage ToggleStruts)
-  , ((mod4Mask, xK_g), gotoMenu)
+  -- , ((mod4Mask, xK_g), gotoMenu)
   , ((mod4Mask, xK_o), nextWS)
   -- , ((mod4Mask, xK_i), prevWS)
-  , ((mod4Mask, xK_w), toggleSmartSpacing)
+  , ((mod4Mask, xK_g), toggleSmartSpacing)
   , ((mod4Mask, xK_f), setScreenSpacing (Border 10 10 250 250))
   , ((mod4Mask .|. shiftMask, xK_f), setScreenSpacing (Border 6 6 6 6))
   , ((mod4Mask, xK_s), incWindowSpacing 1)
@@ -172,16 +173,18 @@ myKeys =
   , ((mod4Mask, xK_c)  , bindProject "editor")
   , ((mod4Mask, xK_m)  , bindProject "todo")
   , ((mod4Mask, xK_n)  , spawn "~/.emacs.d/bin/org-capture")
-  , ((mod1Mask, xK_j)  , spawn "key-whatsapp down")
-  , ((mod1Mask, xK_k)  , spawn "key-whatsapp up")
+  -- , ((mod1Mask, xK_j)  , spawn "key-whatsapp down")
+  -- , ((mod1Mask, xK_k)  , spawn "key-whatsapp up")
   , ((mod4Mask, xK_slash)  , spawn "xkb-switch -n")
   , ((mod4Mask, xK_a ), windows copyToAll) -- @@ Make focused window always visible
   , ((mod4Mask .|. shiftMask, xK_a ),  killAllOtherCopies) -- @@ Toggle window state back
   ]
-    -- ++
-    -- [((m .|. noModMask, k), windows $ f i)
-    --     | (i, k) <- zip myWorkspaces [xK_F1..xK_F12]
-    --     , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  ++
+  [((m .|. mod4Mask, k), windows $ f i) -- Replace 'mod1Mask' with your mod key of choice.
+  | (i, k) <- zip myWorkspaces [xK_1 .. xK_9]
+  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+
     --
 
 bindProject =
