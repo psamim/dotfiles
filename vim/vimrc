@@ -32,7 +32,7 @@ Plug 'lambdalisue/suda.vim'
 " Plug 'lifepillar/vim-solarized8'
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'amiorin/ctrlp-z'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
@@ -77,6 +77,7 @@ Plug 'unblevable/quick-scope'
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 " Plug 'ttys3/nvim-blamer.lua'
 Plug 'APZelos/blamer.nvim'
+Plug 'machakann/vim-sandwich'
 call plug#end()
 
 " Suda
@@ -263,6 +264,7 @@ endif
 " Teminal mode, make it like tmux
 if has('nvim')
   nnoremap <A-n> :terminal<CR>i
+  nnoremap <A-m> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>icd $VIM_DIR<CR>
   inoremap <A-h> <C-\><C-N><C-w>h
   inoremap <A-j> <C-\><C-N><C-w>j
   inoremap <A-k> <C-\><C-N><C-w>k
@@ -390,7 +392,7 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 imap <C-l> <Plug>(coc-snippets-expand)
 nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
@@ -481,3 +483,5 @@ set laststatus=0
 let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 
 let g:blamer_enabled = 1
+
+runtime macros/sandwich/keymap/surround.vim
