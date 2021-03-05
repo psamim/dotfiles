@@ -35,6 +35,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq
   org-clock-persist 'history
+  org-export-with-section-numbers nil
   org-icalendar-timezone "Asia/Tehran"
   ;; org-caldav-url 'google
   ;; org-caldav-calendar-id "X"
@@ -147,30 +148,31 @@ This function makes sure that dates are aligned for easy reading."
 (setq org-agenda-custom-commands
       '(("a" "My Agenda"
          ((todo "TODO" (
-                      (org-agenda-overriding-header "⚡ TODAY:\n")
+                      (org-agenda-overriding-header "⚡ TODAY\n")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %-2i  %b")
+                      (org-agenda-prefix-format "  %-2i  %?b")
                       (org-agenda-todo-keyword-format "")))
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done t)
                       (org-agenda-skip-timestamp-if-done t)
                       (org-agenda-skip-deadline-if-done t)
                       (org-agenda-start-day "+0d")
-                      (org-agenda-span 5)
-                      (org-agenda-overriding-header "⚡ SCHEDULE:\n")
+                      (org-agenda-span 4)
+                      (org-agenda-overriding-header "⚡ CALENDAR\n")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                      (org-agenda-prefix-format "  %i %?-2 t%s")
+                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-time)
-                      (org-agenda-current-time-string "⮜┈┈┈┈┈┈┈ now")
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("" ""))
+                      (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
          (todo "NEXT" (
-                      (org-agenda-overriding-header "⚡ THIS WEEK:\n")
+                      (org-agenda-overriding-header "⚡ THIS WEEK\n")
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "  %-2i  %b")
                       (org-agenda-todo-keyword-format "")))
@@ -515,13 +517,16 @@ This function makes sure that dates are aligned for easy reading."
           ("NEXT" . +org-todo-project)
           ("PROJ" . +org-todo-project)))
 
-
 (custom-theme-set-faces!
   'doom-solarized-light
-  '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75")
-  '((org-agenda-date-today) :foreground "#073642")
+  '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75"
+    :weight light :slant normal
+    :box (:line-width 7 :color "#fffbea" :style nil))
+  '((org-agenda-date-today) :foreground "#073642" :weight semibold :slant normal
+    :box (:line-width 7 :color "#fffbea" :style nil)
+    )
   '((org-scheduled org-scheduled-today)  :foreground "#556b72")
-  '((org-agenda-structure) :family "Iosevka Etoile" :height 240)
+  '((org-agenda-structure) :family "Iosevka Etoile" :height 200)
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
   '((org-level-2) :weight normal :foreground "#424242" :inherit outline-2)
