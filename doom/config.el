@@ -109,7 +109,7 @@
     (goto-char (point-min))
     (while (re-search-forward "⚡" nil t)
       (put-text-property (match-beginning 0) (match-end 0)
-                         'face '(:height 240 :foreground "gold2" :bold t))))
+                         'face '(:height 200 :foreground "gold2" :bold t))))
 
   ;; (save-excursion
   ;;   (goto-char (point-min))
@@ -150,7 +150,7 @@ This function makes sure that dates are aligned for easy reading."
          ((todo "TODO" (
                       (org-agenda-overriding-header "⚡ TODAY\n")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %-2i  %?b")
+                      (org-agenda-prefix-format "   %-2i  %?b")
                       (org-agenda-todo-keyword-format "")))
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done t)
@@ -161,7 +161,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-overriding-header "⚡ CALENDAR\n")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %i %?-2 t%s")
+                      (org-agenda-prefix-format "   %i %?-2 t%s")
                       ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       (org-agenda-todo-keyword-format " ☐ ")
@@ -174,7 +174,7 @@ This function makes sure that dates are aligned for easy reading."
          (todo "NEXT" (
                       (org-agenda-overriding-header "⚡ THIS WEEK\n")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "  %-2i  %b")
+                      (org-agenda-prefix-format "   %-2i  %b")
                       (org-agenda-todo-keyword-format "")))
           ))))
 
@@ -520,12 +520,13 @@ This function makes sure that dates are aligned for easy reading."
 (custom-theme-set-faces!
   'doom-solarized-light
   '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75"
-    :weight light :slant normal
+    :weight semibold :slant normal
     :box (:line-width 7 :color "#fffbea" :style nil))
   '((org-agenda-date-today) :foreground "#073642" :weight semibold :slant normal
     :box (:line-width 7 :color "#fffbea" :style nil)
     )
-  '((org-scheduled org-scheduled-today)  :foreground "#556b72")
+  '((org-agenda-calendar-event)  :weight light)
+  '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
   '((org-agenda-structure) :family "Iosevka Etoile" :height 200)
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
@@ -538,3 +539,5 @@ This function makes sure that dates are aligned for easy reading."
   '((org-table) :background "#f7edd0"))
 
 (map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
+
+(setq ispell-dictionary "en")
