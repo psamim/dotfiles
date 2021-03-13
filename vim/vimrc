@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'pacha/vem-tabline'
-Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
 " Plug 'francoiscabrol/ranger.vim'
@@ -68,7 +67,6 @@ Plug 'nelstrom/vim-visual-star-search'
 " Plug 'AndrewRadev/tagalong.vim'
 Plug 'tommcdo/vim-exchange'
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/lib.kom'
 " Plug 'romgrk/barbar.nvim'
 " Plug 'nanotech/jellybeans.vim'
@@ -77,7 +75,10 @@ Plug 'unblevable/quick-scope'
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 " Plug 'ttys3/nvim-blamer.lua'
 Plug 'APZelos/blamer.nvim'
-Plug 'machakann/vim-sandwich'
+" Plug 'machakann/vim-sandwich'
+Plug 'tpope/vim-surround'
+" Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Suda
@@ -186,6 +187,7 @@ set mouse=a
 " Maps
 let mapleader = " "
 nmap <S-w> :w<CR>
+nmap <leader>fs :w<CR>
 nmap <S-q> :w<CR>:bd<CR>
 nmap <leader>1 :on<CR>
 inoremap jj <Esc>
@@ -484,4 +486,4 @@ let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 
 let g:blamer_enabled = 1
 
-runtime macros/sandwich/keymap/surround.vim
+" runtime macros/sandwich/keymap/surround.vim
