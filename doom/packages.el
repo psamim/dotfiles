@@ -71,3 +71,4 @@
 (package! literate-calc-mode)
 ;; (package! org-mru-clock)
 (package! counsel-org-clock)
+(package! graphviz-dot-mode)

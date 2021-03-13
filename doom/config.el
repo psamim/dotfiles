@@ -35,8 +35,11 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq
   org-clock-persist 'history
+
+  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
   org-export-with-section-numbers nil
   org-icalendar-timezone "Asia/Tehran"
+  org-agenda-diary-file "~/Notes/diary.org"
   ;; org-caldav-url 'google
   ;; org-caldav-calendar-id "X"
   ;; org-caldav-files '("~/Notes/appointments.org")
@@ -49,7 +52,11 @@
   plstore-cache-passphrase-for-symmetric-encryption t
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org"))
+  org-agenda-files (quote ("~/Notes/todo.org"
+                           "~/Notes/someday.org"
+                           "~/Notes/calendar-inbox.org"
+                           "~/Notes/diary.org"
+                           "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
   org-directory "~/Notes")
@@ -67,9 +74,14 @@
 
 (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
 
-(customize-set-variable 'org-capture-templates
-      (quote (("t" "todo" entry (file+headline "~/Notes/todo.org" "Inbox")
-               "* %?\n%a\n" :clock-keep t))))
+(customize-set-variable
+ 'org-capture-templates
+ (quote (
+         ("t" "todo" entry
+          (file+headline "~/Notes/todo.org" "Inbox") "* %?\n%a\n" :clock-keep t)
+         ("s" "schedule" entry
+          (file+headline "~/Notes/todo.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+         )))
 
 (setq-hook! org-mode
   org-log-done t
@@ -148,23 +160,28 @@ This function makes sure that dates are aligned for easy reading."
 (setq org-agenda-custom-commands
       '(("a" "My Agenda"
          ((todo "TODO" (
-                      (org-agenda-overriding-header "⚡ TODAY\n")
+                      (org-agenda-overriding-header "⚡ TO DO")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "   %-2i  %?b")
+                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                      (org-agenda-todo-ignore-scheduled 'all)
+                      (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done t)
+                      (org-agenda-time-leading-zero nil)
+                      (org-agenda-timegrid-use-ampm nil)
                       (org-agenda-skip-timestamp-if-done t)
                       (org-agenda-skip-deadline-if-done t)
                       (org-agenda-start-day "+0d")
                       (org-agenda-span 4)
-                      (org-agenda-overriding-header "⚡ CALENDAR\n")
+                      (org-agenda-overriding-header "⚡ CALENDAR")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "   %i %?-2 t%s")
                       ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
-                      (org-agenda-todo-keyword-format " ☐ ")
+                      ;; (org-agenda-todo-keyword-format " ☐ ")
+                      (org-agenda-todo-keyword-format "")
                       (org-agenda-time)
                       (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
@@ -172,9 +189,18 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
          (todo "NEXT" (
-                      (org-agenda-overriding-header "⚡ THIS WEEK\n")
+                      (org-agenda-todo-ignore-scheduled 'all)
+                      (org-agenda-overriding-header "⚡ THIS WEEK")
                       (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "   %-2i  %b")
+                      (org-agenda-prefix-format "   %-2i %?b")
+                      (org-agenda-todo-keyword-format "")))
+
+         (tags "+project" (
+                      (org-agenda-overriding-header "⚡ PROJECTS")
+                      (org-agenda-remove-tags t)
+                      (org-tags-match-list-sublevels nil)
+                      (org-agenda-show-inherited-tags nil)
+                      (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
           ))))
 
@@ -208,9 +234,6 @@ This function makes sure that dates are aligned for easy reading."
   ;; Position point on the journal's top-level heading so that org-capture
   ;; will add the new entry as a child entry.
   (goto-char (point-min)))
-
-(setq org-capture-templates '(("j" "Journal entry" entry (function org-journal-find-location)
-                               "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
 
 
 ;; (set-email-account! "psamim@gmail.com"
@@ -489,7 +512,7 @@ This function makes sure that dates are aligned for easy reading."
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚑" "⬆" "⬇")))
 
-(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "◎" "○" "◎" "●"))
+(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘"))
 
 (setq org-todo-keywords
         '((sequence
@@ -527,11 +550,15 @@ This function makes sure that dates are aligned for easy reading."
     )
   '((org-agenda-calendar-event)  :weight light)
   '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
-  '((org-agenda-structure) :family "Iosevka Etoile" :height 200)
+  '((org-agenda-structure) :family "Iosevka" :height 200
+    :box (:line-width 12 :color "#fffbea" :style nil))
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
-  '((org-level-2) :weight normal :foreground "#424242" :inherit outline-2)
+  '((org-level-2) :weight normal :foreground "#211221" :inherit outline-2)
   '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
+  '((org-level-4) :weight normal :inherit outline-4 :foreground "#616161")
+  '((org-level-5) :weight normal :inherit outline-5 :foreground "#616161")
+  '((org-level-6) :weight normal :inherit outline-6 :foreground "#616161")
   '((org-link) :weight normal :inherit link)
   '(org-tag :foreground "#fbf5e3")
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
