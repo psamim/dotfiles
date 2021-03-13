@@ -10,9 +10,9 @@ thread_view.scroll_end=G
 
 # replying, composing, etc
 main_window.new_mail=c
-thread_index.reply=r
+thread_index.reply=p
 thread_index.reply_all=R
-thread_view.reply=r
+thread_view.reply=p
 thread_view.reply_all=R
 
 main_window.close_page=q

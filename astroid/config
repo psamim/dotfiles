@@ -41,7 +41,8 @@
             "Inbox": "tag:inbox",
             "Global": "tag:global and tag:inbox",
             "Quora": "tag:Quora",
-            "Recipe": "tag:Recipe"
+            "Recipe": "tag:Recipe",
+            "Spam": "tag:spam"
         }
     },
     "terminal": {
