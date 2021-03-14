@@ -106,13 +106,15 @@
 (customize-set-value
     'org-agenda-category-icon-alist
     `(
-      ("work" "~/.dotfiles/icons/money-bag.svg" nil nil :ascent center)
+      ("work" "~/.dotfiles/icons/briefcase.svg" nil nil :ascent center)
       ("chore" "~/.dotfiles/icons/loop.svg" nil nil :ascent center)
       ("events" "~/.dotfiles/icons/calendar.svg" nil nil :ascent center)
       ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center)
       ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center)
       ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center)
       ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center)
+      ("someday" "~/.dotfiles/icons/chromatic.svg" nil nil :ascent center)
+      ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
@@ -121,7 +123,7 @@
     (goto-char (point-min))
     (while (re-search-forward "⚡" nil t)
       (put-text-property (match-beginning 0) (match-end 0)
-                         'face '(:height 200 :foreground "gold2" :bold t))))
+                         'face '(:height 240 :foreground "gold2" :bold t))))
 
   ;; (save-excursion
   ;;   (goto-char (point-min))
@@ -159,13 +161,7 @@ This function makes sure that dates are aligned for easy reading."
 
 (setq org-agenda-custom-commands
       '(("a" "My Agenda"
-         ((todo "TODO" (
-                      (org-agenda-overriding-header "⚡ TO DO")
-                      (org-agenda-remove-tags t)
-                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                      (org-agenda-todo-ignore-scheduled 'all)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
+         (
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done t)
                       (org-agenda-time-leading-zero nil)
@@ -173,8 +169,8 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-skip-timestamp-if-done t)
                       (org-agenda-skip-deadline-if-done t)
                       (org-agenda-start-day "+0d")
-                      (org-agenda-span 4)
-                      (org-agenda-overriding-header "⚡ CALENDAR")
+                      (org-agenda-span 2)
+                      (org-agenda-overriding-header "⚡ Calendar")
                       (org-agenda-repeating-timestamp-show-all nil)
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "   %i %?-2 t%s")
@@ -188,15 +184,23 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-         (todo "NEXT" (
-                      (org-agenda-todo-ignore-scheduled 'all)
-                      (org-agenda-overriding-header "⚡ THIS WEEK")
+          (todo "TODO" (
+                      (org-agenda-overriding-header "⚡ To Do")
                       (org-agenda-remove-tags t)
+                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                      (org-agenda-todo-ignore-scheduled 'all)
                       (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
 
+         ;; (todo "NEXT" (
+         ;;              (org-agenda-todo-ignore-scheduled 'all)
+         ;;              (org-agenda-overriding-header "⚡ THIS WEEK")
+         ;;              (org-agenda-remove-tags t)
+         ;;              (org-agenda-prefix-format "   %-2i %?b")
+         ;;              (org-agenda-todo-keyword-format "")))
+
          (tags "+project" (
-                      (org-agenda-overriding-header "⚡ PROJECTS")
+                      (org-agenda-overriding-header "⚡ Projects and Areas")
                       (org-agenda-remove-tags t)
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-show-inherited-tags nil)
@@ -550,7 +554,7 @@ This function makes sure that dates are aligned for easy reading."
     )
   '((org-agenda-calendar-event)  :weight light)
   '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
-  '((org-agenda-structure) :family "Iosevka" :height 200
+  '((org-agenda-structure) :family "pacifico" :height 240
     :box (:line-width 12 :color "#fffbea" :style nil))
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)

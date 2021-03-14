@@ -46,12 +46,6 @@
  '(objed-cursor-color "#e45649")
  '(org-agenda-files
    '("~/Notes/todo.org" "~/Notes/someday.org" "~/Notes/calendar-inbox.org" "~/Notes/events.org" "/home/samim/Notes/journal/daily/20210306.gpg"))
- '(org-capture-templates
-   '(("t" "todo" entry
-      (file+headline "~/Notes/todo.org" "Inbox")
-      "* %?
-%a
-" :clock-keep t)))
  '(org-src-block-faces 'nil)
  '(package-selected-packages
    '(graphviz-dot-mode ox-clip zen-mode web-mode org-pretty-tags org-msg org-beautify-theme olivetti oauth2 oauth moe-theme modus-themes modus-operandi-theme lastfm emojify dired-quick-sort centered-window bbdb))
