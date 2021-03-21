@@ -68,7 +68,11 @@
 (package! unidecode)
 (package! org-msg)
 ;; (package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
+;;
+(package! nroam :recipe (:host github :branch "master" :repo "NicolasPetton/nroam"))
 (package! literate-calc-mode)
 ;; (package! org-mru-clock)
 (package! counsel-org-clock)
 (package! graphviz-dot-mode)
+;; (package! org-ql)
+(package! org-mind-map)

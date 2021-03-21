@@ -34,8 +34,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
-  org-clock-persist 'history
-
+  org-clock-persist t
   org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
   org-export-with-section-numbers nil
   org-icalendar-timezone "Asia/Tehran"
@@ -52,10 +51,9 @@
   plstore-cache-passphrase-for-symmetric-encryption t
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/todo.org"
-                           "~/Notes/someday.org"
+  org-agenda-files (quote ("~/Notes/projects.org"
+                           "~/Notes/areas.org"
                            "~/Notes/calendar-inbox.org"
-                           "~/Notes/diary.org"
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
@@ -78,9 +76,9 @@
  'org-capture-templates
  (quote (
          ("t" "todo" entry
-          (file+headline "~/Notes/todo.org" "Inbox") "* %?\n%a\n" :clock-keep t)
+          (file+headline "~/Notes/projects.org" "Inbox") "* %?\n%a\n" :clock-keep t)
          ("s" "schedule" entry
-          (file+headline "~/Notes/todo.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+          (file+headline "~/Notes/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
          )))
 
 (setq-hook! org-mode
@@ -123,7 +121,7 @@
     (goto-char (point-min))
     (while (re-search-forward "⚡" nil t)
       (put-text-property (match-beginning 0) (match-end 0)
-                         'face '(:height 240 :foreground "gold2" :bold t))))
+                         'face '(:height 220 :foreground "gold2" :bold t))))
 
   ;; (save-excursion
   ;;   (goto-char (point-min))
@@ -159,11 +157,13 @@ This function makes sure that dates are aligned for easy reading."
          (format " %-2s. %2d %s, %s"
             dayname day monthname persian)))
 
+(setq org-agenda-block-separator nil)
+
 (setq org-agenda-custom-commands
       '(("a" "My Agenda"
          (
           (agenda "" (
-                      (org-agenda-skip-scheduled-if-done t)
+                      (org-agenda-skip-scheduled-if-done nil)
                       (org-agenda-time-leading-zero nil)
                       (org-agenda-timegrid-use-ampm nil)
                       (org-agenda-skip-timestamp-if-done t)
@@ -185,7 +185,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (todo "TODO" (
-                      (org-agenda-overriding-header "⚡ To Do")
+                      (org-agenda-overriding-header "\n⚡ To Do")
                       (org-agenda-remove-tags t)
                       ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
                       (org-agenda-todo-ignore-scheduled 'all)
@@ -200,12 +200,19 @@ This function makes sure that dates are aligned for easy reading."
          ;;              (org-agenda-todo-keyword-format "")))
 
          (tags "+project" (
-                      (org-agenda-overriding-header "⚡ Projects and Areas")
+                      (org-agenda-overriding-header "\n⚡ Projects")
                       (org-agenda-remove-tags t)
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-show-inherited-tags nil)
                       (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
+
+         ;; (org-ql-block '(and
+         ;;                 (tags "project")
+         ;;                 )
+         ;;               (
+         ;;                (org-ql-block-header "⚡ Projects and Areas")
+         ;;                ))
           ))))
 
 (defun psamim-journal-prefix (time)
@@ -261,15 +268,10 @@ This function makes sure that dates are aligned for easy reading."
   (interactive)
   (org-clock-csv-to-file "~/clock.csv" "~/Notes/clock.org"))
 
-(map! :localleader
-      (:map org-mode-map
-        "c e" #'export-clock))
+(defun my-org-agenda ()
+  (interactive)
+    (org-agenda nil "a"))
 
-(map! :localleader
-      (:map ledger-mode-map
-        "c" #'ledger-mode-clean-buffer))
-
-(map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -327,7 +329,7 @@ This function makes sure that dates are aligned for easy reading."
   (set-face-attribute 'header-line nil :background "#00000000")
   (set-window-margins (frame-selected-window) 4))
 
-(setq org-journal-enable-agenda-integration t)
+;; (setq org-journal-enable-agenda-integration t)
 
 ;; (global-activity-watch-mode)
 
@@ -339,7 +341,6 @@ This function makes sure that dates are aligned for easy reading."
             (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(defun loadSecrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
 
 
 ;; (use-package! mu4e
@@ -489,6 +490,7 @@ This function makes sure that dates are aligned for easy reading."
               :circle "⚫"
               :shogi "⛊"
               :white_shogi "☖"
+              :black_shogi "☗"
               :two_lines "⚏"
               ))
   (set-ligatures! 'org-mode
@@ -505,11 +507,14 @@ This function makes sure that dates are aligned for easy reading."
     :src_block_end     ":END:"
     :src_block_end     "#+END"
     :two_lines   ":PROPERTIES:"
+    ;; :two_lines   "#+startup:"
+    ;; :two_lines   "#+STARTUP:"
     :shogi "#+title:"
     :shogi "#+TITLE:"
     :shogi "#+NAME:"
     :shogi "#+name:"
     :white_shogi "keywords:"
+    :black_shogi "#+roam_tags:"
     ))
 
 (use-package! org-fancy-priorities ; priority icons
@@ -553,9 +558,15 @@ This function makes sure that dates are aligned for easy reading."
     :box (:line-width 7 :color "#fffbea" :style nil)
     )
   '((org-agenda-calendar-event)  :weight light)
+
+  '((org-agenda-done)
+     :foreground "#91a6ad"
+     :weight light
+     :strike-through "dark gray")
+
   '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
-  '((org-agenda-structure) :family "pacifico" :height 240
-    :box (:line-width 12 :color "#fffbea" :style nil))
+  '((org-agenda-structure) :family "pacifico" :height 220
+    :box (:line-width 2 :color "#fffbea" :style nil))
   '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
   '((org-level-2) :weight normal :foreground "#211221" :inherit outline-2)
@@ -564,6 +575,7 @@ This function makes sure that dates are aligned for easy reading."
   '((org-level-5) :weight normal :inherit outline-5 :foreground "#616161")
   '((org-level-6) :weight normal :inherit outline-6 :foreground "#616161")
   '((org-link) :weight normal :inherit link)
+  '((org-document-title) :height 1.6)
   '(org-tag :foreground "#fbf5e3")
   '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
   '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
@@ -572,3 +584,61 @@ This function makes sure that dates are aligned for easy reading."
 (map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
 
 (setq ispell-dictionary "en")
+
+;; (use-package! nroam
+;;   :after org-roam
+;;   :config
+;;   (add-hook 'org-mode-hook #'nroam-setup-maybe))
+
+(setq +org-roam-open-buffer-on-find-file nil)
+
+(use-package! org-mind-map
+  :init
+  (require 'ox-org)
+  :ensure t
+  ;; Uncomment the below if 'ensure-system-packages` is installed
+  ;;:ensure-system-package (gvgen . graphviz)
+  :config
+  (setq org-mind-map-engine "dot")       ; Default. Directed Graph
+  ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
+  ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
+  ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+  ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
+  ;; (setq org-mind-map-engine "twopi")  ; Radial layouts
+  ;; (setq org-mind-map-engine "circo")  ; Circular Layout
+  )
+
+(defun load-secrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
+
+(defun sync-calendars ()
+  (interactive)
+  (progn
+    (load-secrets)
+    (org-gcal-fetch)))
+
+(run-with-timer 0 (* 3 60 60) 'sync-calendars)
+
+;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
+(defun my-auto-exclude-fn (tag)
+  (when (member tag '("work" "global"))
+    (concat "-" tag)))
+
+(setq org-agenda-auto-exclude-function #'my-auto-exclude-fn)
+
+(defun do-not-display-work ()
+  (interactive)
+  (org-agenda-filter-apply '("-work") 'tag))
+
+(map! :localleader
+      (:map org-mode-map
+        "c e" #'export-clock))
+
+(map! :localleader
+      (:map ledger-mode-map
+        "c" #'ledger-mode-clean-buffer))
+
+(map! :localleader (:map org-agenda-mode-map "f h" #'do-not-display-work))
+(map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
+(map! :leader :desc "Dired" :nvg "d" #'dired-jump)
+(map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
+(map! :leader :desc "sync-calendar" :nvg "r" 'sync-calendars)
