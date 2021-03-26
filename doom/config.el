@@ -83,7 +83,7 @@
 
 (setq-hook! org-mode
   org-log-done t
-  org-image-actual-width '(700)
+  org-image-actual-width nil
   org-clock-into-drawer t
   org-clock-persist t
   org-columns-default-format "%60ITEM(Task) %20TODO %10Effort(Effort){:} %10CLOCKSUM"
@@ -104,15 +104,15 @@
 (customize-set-value
     'org-agenda-category-icon-alist
     `(
-      ("work" "~/.dotfiles/icons/briefcase.svg" nil nil :ascent center)
-      ("chore" "~/.dotfiles/icons/loop.svg" nil nil :ascent center)
-      ("events" "~/.dotfiles/icons/calendar.svg" nil nil :ascent center)
-      ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center)
-      ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center)
-      ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center)
-      ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center)
-      ("someday" "~/.dotfiles/icons/chromatic.svg" nil nil :ascent center)
-      ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center)
+      ("work" "~/.dotfiles/icons/briefcase.svg" nil nil :ascent center :mask heuristic)
+      ("chore" "~/.dotfiles/icons/loop.svg" nil nil :ascent center :mask heuristic)
+      ("events" "~/.dotfiles/icons/calendar.svg" nil nil :ascent center :mask heuristic)
+      ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center :mask heuristic)
+      ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center :mask heuristic)
+      ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center :mask heuristic)
+      ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center :mask heuristic)
+      ("someday" "~/.dotfiles/icons/chromatic.svg" nil nil :ascent center :mask heuristic)
+      ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
@@ -616,7 +616,7 @@ This function makes sure that dates are aligned for easy reading."
     (load-secrets)
     (org-gcal-fetch)))
 
-(run-with-timer 0 (* 3 60 60) 'sync-calendars)
+(run-with-timer 0 (* 12 60 60) 'sync-calendars)
 
 ;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
 (defun my-auto-exclude-fn (tag)
@@ -637,7 +637,7 @@ This function makes sure that dates are aligned for easy reading."
       (:map ledger-mode-map
         "c" #'ledger-mode-clean-buffer))
 
-(map! :localleader (:map org-agenda-mode-map "f h" #'do-not-display-work))
+(map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 (map! :leader :desc "Dired" :nvg "d" #'dired-jump)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
