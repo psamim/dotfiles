@@ -1,2 +1,11 @@
 #!/bin/bash
-(setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ir || setxkbmap us
+# (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ir || setxkbmap us
+CURRENT_WIN=$(xdotool getactivewindow)
+EMACS=$(xdotool search --name 'Doom Emacs' | head -n 1)
+
+if [ "$CURRENT_WIN" = "$EMACS" ]; then
+  sleep 0.5
+  xdotool key ctrl+backslash
+else
+  xkb-switch -n
+fi

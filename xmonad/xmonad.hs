@@ -175,7 +175,7 @@ myKeys =
   , ((mod4Mask, xK_n)  , spawn "~/.emacs.d/bin/org-capture")
   -- , ((mod1Mask, xK_j)  , spawn "key-whatsapp down")
   -- , ((mod1Mask, xK_k)  , spawn "key-whatsapp up")
-  , ((mod4Mask, xK_slash)  , spawn "xkb-switch -n")
+  , ((mod4Mask, xK_slash)  , spawn "toggle-layout")
   , ((mod4Mask, xK_a ), windows copyToAll) -- @@ Make focused window always visible
   , ((mod4Mask .|. shiftMask, xK_a ),  killAllOtherCopies) -- @@ Toggle window state back
   ]
