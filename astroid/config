@@ -53,11 +53,11 @@
         "page_jump_rows": "6",
         "sort_order": "newest",
         "cell": {
-            "font_description": "Iosevka Etoile 12",
+            "font_description": "Iosevka 12",
             "line_spacing": "10",
-            "date_length": "8",
+            "date_length": "10",
             "message_count_length": "4",
-            "authors_length": "25",
+            "authors_length": "41",
             "subject_color": "#807d74",
             "subject_color_selected": "#000000",
             "background_color_selected": "#e2ddd0",
@@ -114,13 +114,13 @@
         "external_open_cmd": "xdg-open"
     },
     "thread_view": {
-        "open_html_part_external": "false",
+        "open_html_part_external": "true",
         "preferred_type": "html",
         "preferred_html_only": "false",
         "allow_remote_when_encrypted": "false",
         "open_external_link": "xdg-open",
         "default_save_directory": "~",
-        "indent_messages": "false",
+        "indent_messages": "true",
         "gravatar": {
             "enable": "true"
         },
