@@ -223,11 +223,6 @@ This function makes sure that dates are aligned for easy reading."
     (concat
      ;; (format-time-string "%B %e, %Y" time) "\n"
      ;; (format-time-string "%A" time)
-     "- امروز چی کارا کردی؟" "\n"
-     "- چیز خاصی ازشون یادگرفتی که بخوای یادت بمونه؟" "\n"
-     "- چه احساسی داری؟" "\n"
-     "- چیزی هست که خیلی داری بش فکر می‌کنی؟ زودتر حلش کن." "\n"
-     "- فردا چی کارا داری؟" "\n\n"
      "# " (calendar-persian-date-string now) "\n"
      "# " (calendar-bahai-date-string now) "\n\n")
     ))
