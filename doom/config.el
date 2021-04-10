@@ -51,7 +51,7 @@
   plstore-cache-passphrase-for-symmetric-encryption t
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/projects.org"
+  org-agenda-files (quote ("~/Notes/projects"
                            "~/Notes/areas.org"
                            "~/Notes/calendar-inbox.org"
                            "~/Notes/events.org"))
@@ -76,9 +76,9 @@
  'org-capture-templates
  (quote (
          ("t" "todo" entry
-          (file+headline "~/Notes/projects.org" "Inbox") "* %?\n%a\n" :clock-keep t)
+          (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\n%a\n" :clock-keep t)
          ("s" "schedule" entry
-          (file+headline "~/Notes/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+          (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
          )))
 
 (setq-hook! org-mode
@@ -104,15 +104,17 @@
 (customize-set-value
     'org-agenda-category-icon-alist
     `(
-      ("work" "~/.dotfiles/icons/briefcase.svg" nil nil :ascent center :mask heuristic)
+      ("work" "~/.dotfiles/icons/suitcase.svg" nil nil :ascent center :mask heuristic)
       ("chore" "~/.dotfiles/icons/loop.svg" nil nil :ascent center :mask heuristic)
       ("events" "~/.dotfiles/icons/calendar.svg" nil nil :ascent center :mask heuristic)
-      ("todo" "~/.dotfiles/icons/checklist.svg" nil nil :ascent center :mask heuristic)
+      ("inbox" "~/.dotfiles/icons/package.svg" nil nil :ascent center :mask heuristic)
       ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center :mask heuristic)
       ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center :mask heuristic)
       ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center :mask heuristic)
-      ("someday" "~/.dotfiles/icons/chromatic.svg" nil nil :ascent center :mask heuristic)
+      ("idea" "~/.dotfiles/icons/idea.svg" nil nil :ascent center :mask heuristic)
       ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
+      ("scheduled" "~/.dotfiles/icons/stopwatch.svg" nil nil :ascent center :mask heuristic)
+      ("class" "~/.dotfiles/icons/graduation-hat.svg" nil nil :ascent center :mask heuristic)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
@@ -237,7 +239,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
                       (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
-                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+                      (org-agenda-time-grid nil)))
 
           (todo "TODO" (
                       (org-agenda-overriding-header "\n⚡ To Do")
