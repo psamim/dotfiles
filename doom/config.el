@@ -186,6 +186,7 @@ This function makes sure that dates are aligned for easy reading."
 
           (todo "TODO" (
                       (org-agenda-overriding-header "\n⚡ To Do")
+                      (org-agenda-sorting-strategy '(priority-down))
                       (org-agenda-remove-tags t)
                       ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
                       (org-agenda-todo-ignore-scheduled 'all)
@@ -213,7 +214,41 @@ This function makes sure that dates are aligned for easy reading."
          ;;               (
          ;;                (org-ql-block-header "⚡ Projects and Areas")
          ;;                ))
-          ))))
+         ))
+("mo" "My Agenda"
+         (
+          (agenda "" (
+                      (org-agenda-skip-scheduled-if-done nil)
+                      (org-agenda-time-leading-zero nil)
+                      (org-agenda-timegrid-use-ampm nil)
+                      (org-agenda-skip-timestamp-if-done t)
+                      (org-agenda-skip-deadline-if-done t)
+                      (org-agenda-start-day "+0d")
+                      (org-agenda-span 3)
+                      (org-agenda-overriding-header "⚡ Calendar")
+                      (org-agenda-repeating-timestamp-show-all nil)
+                      (org-agenda-remove-tags t)
+                      (org-agenda-prefix-format "   %i %?-2 t%s")
+                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                       ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                      ;; (org-agenda-todo-keyword-format " ☐ ")
+                      (org-agenda-todo-keyword-format "")
+                      (org-agenda-time)
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                      (org-agenda-scheduled-leaders '("" ""))
+                      (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
+                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+
+          (todo "TODO" (
+                      (org-agenda-overriding-header "\n⚡ To Do")
+                      (org-agenda-sorting-strategy '(priority-down))
+                      (org-agenda-remove-tags t)
+                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                      (org-agenda-todo-ignore-scheduled 'all)
+                      (org-agenda-prefix-format "   %-2i %?b")
+                      (org-agenda-todo-keyword-format "")))
+
+         ))))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -611,7 +646,7 @@ This function makes sure that dates are aligned for easy reading."
     (load-secrets)
     (org-gcal-fetch)))
 
-(run-with-timer 0 (* 12 60 60) 'sync-calendars)
+(run-with-timer 0 (* 18 60 60) 'sync-calendars)
 
 ;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
 (defun my-auto-exclude-fn (tag)
@@ -623,6 +658,42 @@ This function makes sure that dates are aligned for easy reading."
 (defun do-not-display-work ()
   (interactive)
   (org-agenda-filter-apply '("-work") 'tag))
+
+
+(defun save-screenshot-svg ()
+  "Save a screenshot of the current frame as an SVG image.
+  Saves to a chosen file and puts the filename in the kill ring."
+  (interactive)
+  (let* ((file-name (concat
+                     (make-temp-name "Emacs-") ".svg"))
+         (path "~/Notes/agenda-html/")
+         (full-file-name (concat path file-name))
+         (data (x-export-frames nil 'svg))
+         (index-file-template "~/.dotfiles/doom/org-agenda.html.template")
+         (index-file (concat path "index.html")))
+    (dolist
+        (var (directory-files path t "Emacs.*svg"))
+      (delete-file var))
+    (with-temp-file full-file-name
+      (insert data))
+    (with-temp-file index-file
+      (progn
+        (insert-file-contents index-file-template)
+        (goto-char (point-min))
+        (while (search-forward "{{FILENAME}}" nil t)
+          (replace-match file-name t))))
+    (message (concat "Saved screenshot to " file-name))))
+
+(defun sync-agenda-svg ()
+  "Save a screenshot of the current frame as an SVG image.
+  Saves to a chosen file and puts the filename in the kill ring."
+  (interactive)
+  (progn
+    (org-agenda nil "mo")
+    (setq cursor-type nil)
+    (save-screenshot-svg)
+    (setq cursor-type 'box)))
+
 
 (map! :localleader
       (:map org-mode-map
@@ -636,4 +707,5 @@ This function makes sure that dates are aligned for easy reading."
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 (map! :leader :desc "Dired" :nvg "d" #'dired-jump)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
-(map! :leader :desc "sync-calendar" :nvg "r" 'sync-calendars)
+(map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
+(map! :leader :desc "sync-agenda-svg" :nvg "ra" 'sync-agenda-svg)

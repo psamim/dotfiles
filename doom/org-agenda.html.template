@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+      .agenda {
+        background-image: url("{{FILENAME}}");
+        height: 100vh;
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 730px;
+        background-position-y: -10px;
+        background-position-x: -22px;
+      }
+
+      .right,
+      .bottom {
+        position: absolute;
+      }
+
+      .right {
+        width: 34px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 251, 234, 0) 0%,
+          rgba(255, 251, 234, 1) 73%
+        );
+      }
+
+      .bottom {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 34px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 251, 234, 0) 0%,
+          rgba(255, 251, 234, 1) 73%
+        );
+      }
+
+      body {
+        margin: 0;
+        background-color: #fffbea;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  </head>
+  <body>
+    <div class="agenda"></div>
+    <div class="right"></div>
+    <div class="bottom"></div>
+  </body>
+</html>
