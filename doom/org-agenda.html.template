@@ -6,13 +6,17 @@
     <title>Index</title>
     <style>
       .agenda {
-        background-image: url("{{FILENAME}}");
         height: 100vh;
-        background-position: left;
-        background-repeat: no-repeat;
-        background-size: 730px;
-        background-position-y: -10px;
-        background-position-x: -22px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .agenda img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: scale(0.55);
+        transform-origin: 0 0;
       }
 
       .right,
@@ -53,7 +57,9 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   </head>
   <body>
-    <div class="agenda"></div>
+    <div class="agenda">
+      <img src="{{FILENAME}}" />
+    </div>
     <div class="right"></div>
     <div class="bottom"></div>
   </body>
