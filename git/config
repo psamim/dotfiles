@@ -26,3 +26,5 @@
 ;   diff = /usr/share/git/diff-highlight/diff-highlight | less
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main

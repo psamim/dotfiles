@@ -3,7 +3,7 @@ CURRENT_WIN=$(xdotool getactivewindow)
 EMACS=$(xdotool search --name 'Doom Emacs')
 
 if echo $EMACS|grep -q $CURRENT_WIN; then
-  xdotool key --delay 500 ctrl+backslash
+  xdotool key --delay 300 ctrl+backslash
 else
   xkb-switch -n
 fi
