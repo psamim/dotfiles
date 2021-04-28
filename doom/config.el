@@ -26,6 +26,9 @@
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
       )
 
+(set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
+(custom-set-variables '(emojify-display-style 'unicode))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -115,6 +118,10 @@
       ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
       ("scheduled" "~/.dotfiles/icons/stopwatch.svg" nil nil :ascent center :mask heuristic)
       ("class" "~/.dotfiles/icons/graduation-hat.svg" nil nil :ascent center :mask heuristic)
+      ("plant" "~/.dotfiles/icons/plant-pot.svg" nil nil :ascent center :mask heuristic)
+      ("check" "~/.dotfiles/icons/clipboard.svg" nil nil :ascent center :mask heuristic)
+      ("search" "~/.dotfiles/icons/search.svg" nil nil :ascent center :mask heuristic)
+      ("home" "~/.dotfiles/icons/home.svg" nil nil :ascent center :mask heuristic)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
