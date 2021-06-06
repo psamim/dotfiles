@@ -56,6 +56,8 @@ if ! zgen saved; then
     # zgen load marlonrichert/zsh-autocomplete 
     # zgen load chisui/zsh-nix-shell
     # zgen load spwhitt/nix-zsh-completions
+    zgen load Aloxaf/fzf-tab fzf-tab.zsh master
+    # zgen load olets/zsh-abbr zsh-abbr.zsh
 
     # theme
     zgen oh-my-zsh themes/agnoster
@@ -134,6 +136,9 @@ alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
 alias ledger="ledger --pedantic --explicit --strict"
 # alias hledger="~/.local/bin/hledger --strict"
 alias org-csv="emacs -batch -l ~/.emacs.d/core/core.el -l ~/.emacs.d/core/core-packages.el -l "~/.emacs.d/init.el" -f org-clock-csv-batch-and-exit ~/Notes/todo.org"
+alias nmup="nmcli con up"
+alias nmdown="nmcli con down"
+alias nord="sudo --user=nordvpnteams nordvpnteams"
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH
