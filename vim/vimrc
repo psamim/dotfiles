@@ -19,7 +19,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
 " Plug 'francoiscabrol/ranger.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 " Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
 " Plug 'rbgrouleff/bclose.vim'
@@ -79,6 +79,9 @@ Plug 'APZelos/blamer.nvim'
 Plug 'tpope/vim-surround'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'TimUntersberger/neogit'
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
 
 " Suda
@@ -377,7 +380,8 @@ set signcolumn=yes
 " coc-vim
 let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-eslint', 'coc-word'
       \, 'coc-sh', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-syntax', 'coc-yaml'
-      \, 'coc-angular', 'coc-spell-checker', 'coc-yaml'
+      \, 'coc-angular', 'coc-spell-checker', 'coc-yaml', 'coc-prettier', 'coc-marketplace'
+      \, 'coc-emmet', 'coc-fzf-preview', 'coc-json', 'coc-lists', 'coc-highlight', 'coc-pyright'
       \]
 
 function! s:show_documentation()
