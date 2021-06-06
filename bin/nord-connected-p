@@ -1,0 +1,30 @@
+#!/bin/bash
+sudo --user=nordvpnteams nordvpnteams status|grep -i vpn|grep -q Connected
+
+connected=$?
+
+if [ $connected -ne 0 ]; then
+    echo ""
+    exit
+fi
+
+SERVERS=$(cat <<'END_HEREDOC'
+{
+  "84.252.94.19": "G-GB",
+  "66.115.147.11": "G-CA",
+  "87.101.95.155": "US"
+}
+END_HEREDOC
+)
+
+IP=$(sudo --user=nordvpnteams nordvpnteams status | grep Address:)
+IP=${IP:9}
+
+FOUND=$(echo $SERVERS | jq -r '.["'$IP'"]')
+
+if [ "$FOUND" = "null" ]; then
+    echo " $IP"
+    exit
+  else
+    echo " $FOUND"
+fi

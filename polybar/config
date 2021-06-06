@@ -45,7 +45,7 @@ border-left-size = 0
 bottom = true
 #override-redirect = true
 
-font-0 = "Iosevka Etoile:style=regular:size=10;3"
+font-0 = "Iosevka:style=regular:size=10;3"
 font-1 = "Iosevka Nerd Font:style=regular:size=10;3"
 
 # fixed-center = true
@@ -57,7 +57,7 @@ module-margin-right = 0
 
 modules-left = ewmh line title
 modules-center = date clocking
-modules-right = netspeed memory cpu battery xkeyboard wlan vpn pulseaudio dunst wallpaper
+modules-right = netspeed memory cpu battery xkeyboard wlan pulseaudio pulseaudio-control dunst wallpaper
 overline-size = 6
 overline-color=${colors.xbs}
 underline-size = 3
@@ -260,11 +260,10 @@ exec-if = clocking
 
 [module/vpn]
 type = custom/script
-exec = nordvpnteams status|grep -i vpn|grep -q Connected && echo 
-exec-if = nordvpnteams status|grep -i vpn|grep -q Connected
+exec = nord-connected-p
 format = <label>
 format-padding = 1
-interval = 1
+interval = 3
 
 [module/dunst]
 type = custom/script
@@ -279,3 +278,19 @@ type = custom/text
 content = 
 click-left = systemctl --user restart feh-wallpaper.service
 content-padding = ${variables.mpadding}
+
+# [module/pulseaudio-control]
+# type = custom/script
+# tail = true
+# label-padding = 2
+
+# # Icons mixed from Font Awesome 5 and Material Icons
+# # You can copy-paste your options for each possible action, which is more
+# # trouble-free but repetitive, or apply only the relevant ones (for example
+# # --sink-blacklist is only needed for next-sink).
+# exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:  Speakers" --sink-nickname "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo:  Headphones" listen
+# click-right = exec pavucontrol &
+# click-left = pulseaudio-control togmute
+# click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+# scroll-up = pulseaudio-control --volume-max 130 up
+# scroll-down = pulseaudio-control --volume-max 130 down

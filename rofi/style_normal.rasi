@@ -40,7 +40,7 @@ configuration {
 
 * {
   background-color: rgba(0,0,0,0);
-  font: "Iosevka Etoile 12";
+  font: "Iosevka 12";
 }
 
 window {
