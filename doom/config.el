@@ -27,7 +27,7 @@
       )
 
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
-(custom-set-variables '(emojify-display-style 'unicode))
+(custom-set-variables '(emojify-display-style 'image))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -38,6 +38,8 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq
   org-clock-persist t
+  ;; org-duration-format 'h:mm
+  org-duration-format '((special . h:mm))
   org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
   org-export-with-section-numbers nil
   org-icalendar-timezone "Asia/Tehran"
@@ -57,6 +59,7 @@
   org-agenda-files (quote ("~/Notes/projects"
                            "~/Notes/areas.org"
                            "~/Notes/calendar-inbox.org"
+                           "~/Notes/roam/20210507181408-people.org"
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
@@ -96,7 +99,6 @@
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
   org-archive-location "~/Notes/archive/todo.org.gpg::"
-  org-duration-format '((special . h:mm))
   bidi-paragraph-direction t
   org-hide-emphasis-markers t
   org-fontify-done-headline t
@@ -122,6 +124,7 @@
       ("check" "~/.dotfiles/icons/clipboard.svg" nil nil :ascent center :mask heuristic)
       ("search" "~/.dotfiles/icons/search.svg" nil nil :ascent center :mask heuristic)
       ("home" "~/.dotfiles/icons/home.svg" nil nil :ascent center :mask heuristic)
+      ("book" "~/.dotfiles/icons/book.svg" nil nil :ascent center :mask heuristic)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
@@ -656,6 +659,7 @@ This function makes sure that dates are aligned for easy reading."
     (org-gcal-fetch)))
 
 (run-with-timer 0 (* 18 60 60) 'sync-calendars)
+(run-with-timer 0 (* 1 60 60) (lambda () (progn (sync-agenda-svg) (sleep-for 1) (my-org-agenda))))
 
 ;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
 (defun my-auto-exclude-fn (tag)
@@ -675,7 +679,7 @@ This function makes sure that dates are aligned for easy reading."
   (interactive)
   (let* ((file-name (concat
                      (make-temp-name "Emacs-") ".svg"))
-         (path "~/Notes/agenda-html/")
+         (path "~/Notes/html/agenda/")
          (full-file-name (concat path file-name))
          (data (x-export-frames nil 'svg))
          (index-file-template "~/.dotfiles/doom/org-agenda.html.template")
@@ -713,8 +717,59 @@ This function makes sure that dates are aligned for easy reading."
         "c" #'ledger-mode-clean-buffer))
 
 (map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
+(map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 (map! :leader :desc "Dired" :nvg "d" #'dired-jump)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'sync-agenda-svg)
+
+(defun org-agenda-highlight-todo (x)
+  (let ((org-done-keywords org-done-keywords-for-agenda)
+	(case-fold-search nil)
+	re)
+    (if (eq x 'line)
+	(save-excursion
+	  (beginning-of-line 1)
+	  (setq re (org-get-at-bol 'org-todo-regexp))
+	  (goto-char (or (text-property-any (point-at-bol) (point-at-eol) 'org-heading t) (point)))
+	  (when (looking-at (concat "[ \t]*\\.*\\(" re "\\) +"))
+	    (add-text-properties (match-beginning 0) (match-end 1)
+				 (list 'face (org-get-todo-face 1)))
+	    (let ((s (buffer-substring (match-beginning 1) (match-end 1))))
+	      (delete-region (match-beginning 1) (1- (match-end 0)))
+	      (goto-char (match-beginning 1))
+	      (insert (format org-agenda-todo-keyword-format s)))))
+      (let ((pl (text-property-any 0 (length x) 'org-heading t x)))
+	(setq re (get-text-property 0 'org-todo-regexp x))
+	(when (and re
+		   ;; Test `pl' because if there's no heading content,
+		   ;; there's no point matching to highlight.  Note
+		   ;; that if we didn't test `pl' first, and there
+		   ;; happened to be no keyword from `org-todo-regexp'
+		   ;; on this heading line, then the `equal' comparison
+		   ;; afterwards would spuriously succeed in the case
+		   ;; where `pl' is nil -- causing an args-out-of-range
+		   ;; error when we try to add text properties to text
+		   ;; that isn't there.
+		   pl
+		   (equal (string-match (concat "\\(\\.*\\)" re "\\( +\\)")
+					x pl)
+			  pl))
+	  (add-text-properties
+	   (or (match-end 1) (match-end 0)) (match-end 0)
+	   (list 'face (org-get-todo-face (match-string 2 x)))
+	   x)
+	  (when (match-end 1)
+	    (setq x
+		  (concat
+		   (substring x 0 (match-end 1))
+                   (when (not (eq org-agenda-todo-keyword-format ""))
+                     (format org-agenda-todo-keyword-format
+                             (match-string 2 x))
+                     ;; Remove `display' property as the icon could leak
+                     ;; on the white space.
+                     (org-add-props "" (org-plist-delete (text-properties-at 0 x)
+                                                         'display)))
+                   (substring x (match-end 3)))))))
+      x)))
