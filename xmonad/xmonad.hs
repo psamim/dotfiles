@@ -1,33 +1,33 @@
-import           Data.Char                      ( toLower )
-import           Data.List                      ( isInfixOf )
+import           Data.Char                        (toLower)
+import           Data.List                        (isInfixOf)
 import           XMonad
+import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.DynamicProjects
+import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.PerWorkspaceKeys
+import           XMonad.Actions.PhysicalScreens
 import           XMonad.Actions.WindowBringer
+import           XMonad.Config.Desktop
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.FadeInactive
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
+import           XMonad.Layout.BorderResize
+import           XMonad.Layout.DragPane
 import           XMonad.Layout.NoBorders
+import           XMonad.Layout.NoFrillsDecoration
+import           XMonad.Layout.SimplestFloat
 import           XMonad.Layout.Spacing
+import           XMonad.Layout.Tabbed
+import           XMonad.Layout.ThreeColumns
+import           XMonad.Layout.WindowArranger
 import           XMonad.Prompt
-import qualified XMonad.StackSet               as W
+import qualified XMonad.StackSet                  as W
 import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
-import           XMonad.Util.WorkspaceCompare   ( getSortByIndex )
-import           XMonad.Actions.GroupNavigation
-import           XMonad.Config.Desktop
-import           XMonad.Layout.NoFrillsDecoration
-import           XMonad.Layout.Tabbed
-import XMonad.Actions.CopyWindow
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.DragPane
-import XMonad.Layout.SimplestFloat
-import XMonad.Layout.BorderResize
-import XMonad.Layout.WindowArranger
-import XMonad.Actions.PhysicalScreens
+import           XMonad.Util.WorkspaceCompare     (getSortByIndex)
 
 main = xmonad myConfig
 
@@ -98,7 +98,7 @@ myLayouts =
     -- ||| tabbed shrinkText myTabTheme
     ||| Full
     ||| three
-    -- ||| dragPane Vertical 0.1 0.5 
+    -- ||| dragPane Vertical 0.1 0.5
     -- ||| simplestFloat
  where
   -- addTopBar = noFrillsDeco shrinkText topBarTheme
@@ -125,7 +125,7 @@ myConfig =
                         , layoutHook         = myLayouts
                         }
     `additionalKeys`  myKeys
-    `removeKeys` 
+    `removeKeys`
     [  (mod4Mask , xK_period)
     , (mod4Mask , xK_comma)
     , (mod4Mask .|. shiftMask, xK_w)
