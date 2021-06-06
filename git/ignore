@@ -21,7 +21,7 @@ __pycache__
 .tern-port
 
 .lvimrc
-.vim/*
+**/.vim/*
 .session.vim
 .undodir/
 .envrc
