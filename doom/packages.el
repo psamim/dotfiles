@@ -76,3 +76,5 @@
 (package! graphviz-dot-mode)
 ;; (package! org-ql)
 (package! org-mind-map)
+(package! solaire-mode :disable t)
+(package! org-roam-server)

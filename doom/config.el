@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-one-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -57,8 +57,8 @@
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
   org-agenda-files (quote ("~/Notes/projects"
-                           "~/Notes/areas.org"
                            "~/Notes/calendar-inbox.org"
+                           "~/Notes/roam/20210625224916-areas.org"
                            "~/Notes/roam/20210507181408-people.org"
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
@@ -89,6 +89,7 @@
 
 (setq-hook! org-mode
   org-log-done t
+  org-log-reschedule 'time
   org-image-actual-width nil
   org-clock-into-drawer t
   org-clock-persist t
@@ -115,7 +116,7 @@
       ("inbox" "~/.dotfiles/icons/inbox.svg" nil nil :ascent center :mask heuristic)
       ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center :mask heuristic)
       ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center :mask heuristic)
-      ("community" "~/.dotfiles/icons/molecule.svg" nil nil :ascent center :mask heuristic)
+      ("community" "~/.dotfiles/icons/community.svg" nil nil :ascent center :mask heuristic)
       ("idea" "~/.dotfiles/icons/idea.svg" nil nil :ascent center :mask heuristic)
       ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
       ("scheduled" "~/.dotfiles/icons/scheduled.svg" nil nil :ascent center :mask heuristic)
@@ -125,6 +126,9 @@
       ("search" "~/.dotfiles/icons/search.svg" nil nil :ascent center :mask heuristic)
       ("home" "~/.dotfiles/icons/home.svg" nil nil :ascent center :mask heuristic)
       ("book" "~/.dotfiles/icons/book.svg" nil nil :ascent center :mask heuristic)
+      ("cook" "~/.dotfiles/icons/cook.svg" nil nil :ascent center :mask heuristic)
+      ("buy" "~/.dotfiles/icons/buy.svg" nil nil :ascent center :mask heuristic)
+      ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
       ))
 
 (setq org-agenda-hidden-separator "‌‌ ")
@@ -194,7 +198,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
                       (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
-                      (org-agenda-time-grid (quote ((today require-timed remove-match) (0900 2100) "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+                      (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (todo "TODO" (
                       (org-agenda-overriding-header "\n⚡ To Do")
@@ -314,6 +318,9 @@ This function makes sure that dates are aligned for easy reading."
   (interactive)
     (org-agenda nil "a"))
 
+(defun my-org-index ()
+  (interactive)
+    (find-file "~/Notes/roam/20210625224818-index.org"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -527,13 +534,16 @@ This function makes sure that dates are aligned for easy reading."
 (doom-modeline-mode 0)
 
 (after! org
+;; ⧗             ―               ﮸          λ ◁ ▷ ✧ ✦
   (appendq! +ligatures-extra-symbols
-            `(:clock      "🕑"
+            `(:clock      "⧗ "
               :circle "⚫"
               :shogi "⛊"
               :white_shogi "☖"
               :black_shogi "☗"
               :two_lines "⚏"
+              :tags "    ‌"
+              :empty ""
               ))
   (set-ligatures! 'org-mode
     :merge t
@@ -549,13 +559,15 @@ This function makes sure that dates are aligned for easy reading."
     :src_block_end     ":END:"
     :src_block_end     "#+END"
     :two_lines   ":PROPERTIES:"
+    :black_shogi   "#+CATEGORY:"
+    :black_shogi   "#+category:"
     ;; :two_lines   "#+startup:"
     ;; :two_lines   "#+STARTUP:"
-    :shogi "#+title:"
-    :shogi "#+TITLE:"
+    :empty "#+title:"
+    :empty "#+TITLE:"
     :shogi "#+NAME:"
     :shogi "#+name:"
-    :white_shogi "keywords:"
+    :tags "keywords:"
     :black_shogi "#+roam_tags:"
     ))
 
@@ -721,6 +733,7 @@ This function makes sure that dates are aligned for easy reading."
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 (map! :leader :desc "Dired" :nvg "d" #'dired-jump)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
+(map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'sync-agenda-svg)
 
@@ -773,3 +786,83 @@ This function makes sure that dates are aligned for easy reading."
                                                          'display)))
                    (substring x (match-end 3)))))))
       x)))
+
+
+(custom-theme-set-faces!
+  'doom-one-light
+  '((org-agenda-date org-agenda-date-weekend)
+    ;; :foreground "#586e75"
+    :weight semibold
+    :slant normal
+    :box (:line-width 7 :color "#fafafa" :style nil))
+  '((org-agenda-date-today)
+    ;; :foreground "#073642"
+    :weight semibold
+    :slant normal
+    :box (:line-width 7 :color "#fafafa" :style nil))
+  '((org-agenda-calendar-event
+     org-scheduled
+     org-scheduled-today
+     org-agenda-calendar-sexp
+     org-scheduled-previously)  :weight light)
+  ;; '((org-agenda-done) :foreground "#91a6ad" :weight light :strike-through "dark gray")
+  '((org-agenda-structure) :family "pacifico" :height 220
+    :box (:line-width 2 :color "#fafafa" :style nil))
+  '((org-document-title) :family "pacifico")
+  '((org-ellipsis) :height 1.0)
+  '((org-level-1) :weight normal :height 1.3 :inherit outline-1)
+  '((org-level-2) :weight normal :foreground "#211221" :inherit outline-2)
+  '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
+  '((org-level-4) :weight normal :inherit outline-4 :foreground "#616161")
+  '((org-level-5) :weight normal :inherit outline-5 :foreground "#616161")
+  '((org-level-6) :weight normal :inherit outline-6 :foreground "#616161")
+  '((org-link) :weight normal :inherit link)
+  '((org-document-title) :height 1.6)
+  '(org-tag :foreground "#fafafa")
+  '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
+  '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
+  ;; '((org-table) :background "#f7edd0")
+  )
+
+(use-package! org-roam-server
+  :ensure t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8181
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
+
+(defun org--create-inline-image (file width)
+  "Create image located at FILE, or return nil.
+WIDTH is the width of the image.  The image may not be created
+according to the value of `org-display-remote-inline-images'."
+  (let* ((remote? (file-remote-p file))
+	 (file-or-data
+	  (pcase org-display-remote-inline-images
+	    ((guard (not remote?)) file)
+	    (`download (with-temp-buffer
+			 (set-buffer-multibyte nil)
+			 (insert-file-contents-literally file)
+			 (buffer-string)))
+	    (`cache (let ((revert-without-query '(".")))
+		      (with-current-buffer (find-file-noselect file)
+			(buffer-string))))
+	    (`skip nil)
+	    (other
+	     (message "Invalid value of `org-display-remote-inline-images': %S"
+		      other)
+	     nil))))
+    (when file-or-data
+      (create-image file-or-data
+		    (and (image-type-available-p 'imagemagick)
+			 width
+			 'imagemagick)
+		    remote?
+		    :width width :mask 'heuristic :ascent 'center))))
