@@ -519,5 +519,9 @@
     "613398": {
         "account": "Expenses:Groceries",
         "name": "Small Grocery Store"
+    },
+    "23791554": {
+        "account": "Expenses:Groceries",
+        "name": "Grocery Store Khaje Petros"
     }
 }
