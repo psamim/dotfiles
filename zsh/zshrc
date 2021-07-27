@@ -4,6 +4,8 @@
 # zstyle :omz:plugins:keychain options --quiet
 # zstyle :omz:plugins:keychain agents gpg,ssh
 
+export NVM_AUTO_USE=true
+
 source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
 # check if there's no init script
@@ -46,12 +48,12 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-completions src
     zgen load zsh-users/zsh-autosuggestions
     zgen load changyuheng/zsh-interactive-cd
-    zgen load marzocchi/zsh-notify
+    # zgen load marzocchi/zsh-notify
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
-    # zgen load lukechilds/zsh-nvm
+    zgen load lukechilds/zsh-nvm
     zgen load ~/.zgen/deno
     # zgen load marlonrichert/zsh-autocomplete 
     # zgen load chisui/zsh-nix-shell
@@ -159,15 +161,10 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
  export GPG_TTY=$(tty)
  gpg-connect-agent updatestartuptty /bye >/dev/null&
 
-# nvm
-# export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-# export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-# [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
-
 export TERM=xterm
 # source <(kubectl completion zsh)
 
-if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -178,3 +175,5 @@ export MANWIDTH=999
 function vpn {
   env ID="$1" bash -c 'nmcli con down id "$ID"; sleep 1; nmcli con up id "$ID"'
 }
+
+# source /usr/share/nvm/init-nvm.sh
