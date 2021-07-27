@@ -281,8 +281,9 @@ projects =
   [ Project
     { projectName      = "firefox"
     , projectDirectory = "~/"
-    , projectStartHook = Just $ do
-                           spawn "firefox"
+    , projectStartHook = Nothing
+    -- , projectStartHook = Just $ do
+    --                        spawn "firefox"
     }
   , Project
     { projectName      = "editor"
@@ -300,7 +301,7 @@ projects =
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
                            spawn "telegram-desktop"
-                           spawn "slack"
+                           -- spawn "slack"
                                            -- spawn "firefox --new-window https://web.whatsapp.com"
                                            -- spawn "xdotool search --sync --onlyvisible --name \"WhatsApp\" windowactivate key F11"
                                            -- spawn "skypeforlinux"
