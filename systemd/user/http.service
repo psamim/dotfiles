@@ -3,7 +3,7 @@ Description=http service
 
 [Service]
 Type=simple
-ExecStart=python -m http.server 8080 -d /home/samim/Notes/html
+ExecStart=/usr/bin/althttpd --root  /home/samim/Notes/html --port 8080
 
 [Install]
 WantedBy=default.target
