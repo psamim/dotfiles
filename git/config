@@ -4,7 +4,7 @@
   email = psamim@gmail.com
 [core]
   editor = nvr --remote-wait-silent
-  excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
   autocrlf = input
   ; pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 [interactive]
