@@ -42,6 +42,7 @@
             "Global": "tag:global and tag:inbox",
             "Quora": "tag:Quora",
             "Recipe": "tag:Recipe",
+            "Sentry": "tag:global/sentry",
             "Spam": "tag:spam"
         }
     },
