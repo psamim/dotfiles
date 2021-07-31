@@ -44,6 +44,7 @@
   org-export-with-section-numbers nil
   org-icalendar-timezone "Asia/Tehran"
   org-agenda-diary-file "~/Notes/diary.org"
+  org-roam-directory "~/Notes/roam"
   ;; org-caldav-url 'google
   ;; org-caldav-calendar-id "X"
   ;; org-caldav-files '("~/Notes/appointments.org")
@@ -567,7 +568,7 @@ This function makes sure that dates are aligned for easy reading."
     :empty "#+TITLE:"
     :shogi "#+NAME:"
     :shogi "#+name:"
-    :tags "keywords:"
+    ;; :tags "keywords:"
     :black_shogi "#+roam_tags:"
     ))
 
@@ -737,57 +738,6 @@ This function makes sure that dates are aligned for easy reading."
 (map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'sync-agenda-svg)
 
-(defun org-agenda-highlight-todo (x)
-  (let ((org-done-keywords org-done-keywords-for-agenda)
-	(case-fold-search nil)
-	re)
-    (if (eq x 'line)
-	(save-excursion
-	  (beginning-of-line 1)
-	  (setq re (org-get-at-bol 'org-todo-regexp))
-	  (goto-char (or (text-property-any (point-at-bol) (point-at-eol) 'org-heading t) (point)))
-	  (when (looking-at (concat "[ \t]*\\.*\\(" re "\\) +"))
-	    (add-text-properties (match-beginning 0) (match-end 1)
-				 (list 'face (org-get-todo-face 1)))
-	    (let ((s (buffer-substring (match-beginning 1) (match-end 1))))
-	      (delete-region (match-beginning 1) (1- (match-end 0)))
-	      (goto-char (match-beginning 1))
-	      (insert (format org-agenda-todo-keyword-format s)))))
-      (let ((pl (text-property-any 0 (length x) 'org-heading t x)))
-	(setq re (get-text-property 0 'org-todo-regexp x))
-	(when (and re
-		   ;; Test `pl' because if there's no heading content,
-		   ;; there's no point matching to highlight.  Note
-		   ;; that if we didn't test `pl' first, and there
-		   ;; happened to be no keyword from `org-todo-regexp'
-		   ;; on this heading line, then the `equal' comparison
-		   ;; afterwards would spuriously succeed in the case
-		   ;; where `pl' is nil -- causing an args-out-of-range
-		   ;; error when we try to add text properties to text
-		   ;; that isn't there.
-		   pl
-		   (equal (string-match (concat "\\(\\.*\\)" re "\\( +\\)")
-					x pl)
-			  pl))
-	  (add-text-properties
-	   (or (match-end 1) (match-end 0)) (match-end 0)
-	   (list 'face (org-get-todo-face (match-string 2 x)))
-	   x)
-	  (when (match-end 1)
-	    (setq x
-		  (concat
-		   (substring x 0 (match-end 1))
-                   (when (not (eq org-agenda-todo-keyword-format ""))
-                     (format org-agenda-todo-keyword-format
-                             (match-string 2 x))
-                     ;; Remove `display' property as the icon could leak
-                     ;; on the white space.
-                     (org-add-props "" (org-plist-delete (text-properties-at 0 x)
-                                                         'display)))
-                   (substring x (match-end 3)))))))
-      x)))
-
-
 (custom-theme-set-faces!
   'doom-one-light
   '((org-agenda-date org-agenda-date-weekend)
@@ -824,20 +774,20 @@ This function makes sure that dates are aligned for easy reading."
   ;; '((org-table) :background "#f7edd0")
   )
 
-(use-package! org-roam-server
-  :ensure t
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8181
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+;; (use-package! org-roam-server
+;;   :ensure t
+;;   :config
+;;   (setq org-roam-server-host "127.0.0.1"
+;;         org-roam-server-port 8181
+;;         org-roam-server-authenticate nil
+;;         org-roam-server-export-inline-images t
+;;         org-roam-server-serve-files nil
+;;         org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+;;         org-roam-server-network-poll t
+;;         org-roam-server-network-arrows nil
+;;         org-roam-server-network-label-truncate t
+;;         org-roam-server-network-label-truncate-length 60
+;;         org-roam-server-network-label-wrap-length 20))
 
 (defun org--create-inline-image (file width)
   "Create image located at FILE, or return nil.
@@ -866,3 +816,30 @@ according to the value of `org-display-remote-inline-images'."
 			 'imagemagick)
 		    remote?
 		    :width width :mask 'heuristic :ascent 'center))))
+
+(defun org-hide-properties ()
+  "Hide all org-mode headline property drawers in buffer. Could be slow if it has a lot of overlays."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward
+            "^ *:properties:\n\\( *:.+?:.*\n\\)+ *:end:\n" nil t)
+      (let ((ov_this (make-overlay (match-beginning 0) (match-end 0))))
+        (overlay-put ov_this 'display "")
+        (overlay-put ov_this 'hidden-prop-drawer t))))
+  (put 'org-toggle-properties-hide-state 'state 'hidden))
+
+(defun org-show-properties ()
+  "Show all org-mode property drawers hidden by org-hide-properties."
+  (interactive)
+  (remove-overlays (point-min) (point-max) 'hidden-prop-drawer t)
+  (put 'org-toggle-properties-hide-state 'state 'shown))
+
+(defun org-toggle-properties ()
+  "Toggle visibility of property drawers."
+  (interactive)
+  (if (eq (get 'org-toggle-properties-hide-state 'state) 'hidden)
+      (org-show-properties)
+    (org-hide-properties)))
+
+(setq ivy-use-selectable-prompt t)
