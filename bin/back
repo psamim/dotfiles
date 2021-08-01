@@ -12,11 +12,12 @@
 function info() { chalk -t "$(date -Iminutes) - {yellow $* }" }
 function error() { chalk -t "$(date -Iminutes) - {red $* }" }
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
+# set -x # Uncomment to debug
 
 function borg_backup() {
     local SOURCE=$1
     local NAME=$2
-    local OPTIONS=$3
+    local OPTIONS="$@[3,-1]"
     local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
     export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 
@@ -79,7 +80,7 @@ function borg_remote_backup() {
     local PREV=$PWD
     local SOURCE=/tmp/$RANDOM
     local NAME=$2
-    local OPTIONS=$@[3,-1]
+    local OPTIONS="$@[3,-1]"
     local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
 
     mkdir $SOURCE
@@ -181,8 +182,9 @@ function borg_hdd_backup {
     sudo cryptsetup open /dev/sdd1 backup
     sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
   fi
-  rsync -rzva central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive
-  rsync -rzva "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive
+  # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
+  rclone sync passport:/mnt/photoprism/originals "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
+  rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress
 }
 
 function main() {
@@ -205,7 +207,7 @@ function main() {
 
       borg_backup /home/samim/tombs/backups/ backups
       borg_backup /home/samim/Calibre calibre
-      borg_remote_backup central:/home/pirate/server-compose hass
+      borg_remote_backup central:/home/pirate/server-compose hass -e 'syncthing/Notes' -e 'photoprism-storage' -e 'hass/home-assistant_v2.db' -e 'pihole/pihole-FTL.db'
     fi
 
     send /home/samim/borg/repos borg-repos
