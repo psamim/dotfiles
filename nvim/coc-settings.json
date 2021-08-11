@@ -16,12 +16,26 @@
     "haskell": {
       "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
-      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
       "filetypes": ["haskell", "lhaskell"]
+    },
+    "lua": {
+      "command": "java",
+      "args": [
+        "-cp",
+        "/home/samim/Downloads/EmmyLua-LS-all.jar",
+        "com.tang.vscode.MainKt"
+      ],
+      "filetypes": ["lua"],
+      "rootPatterns": [".git/"]
     }
   },
-  "cSpell.userWords": [
-    "camelcase"
-  ],
+  "cSpell.userWords": ["camelcase"],
   "coc.preferences.extensionUpdateCheck": "daily"
 }

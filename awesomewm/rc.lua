@@ -18,6 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local sharedtags = require("sharedtags")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -107,6 +109,8 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+orgmode = awful.widget.watch('bash -c "/home/samim/.bin/clocking"', 15)
+
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -165,13 +169,23 @@ end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 -- screen.connect_signal("property::geometry", set_wallpaper)
+--
+
+local tags = sharedtags({
+    { name = "🔵", layout = awful.layout.layouts[2] },
+    { name = "🟣", layout = awful.layout.layouts[10] },
+    { name = "🟢", layout = awful.layout.layouts[1] },
+    { name = "⚫", layout = awful.layout.layouts[2] },
+    { name = "🟡", screen = 2, layout = awful.layout.layouts[2] },
+    { name = "🔴", screen = 2, layout = awful.layout.layouts[2] },
+})
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     -- set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "🔵", "🟣", "🟢", "⚫", "🟡", "🔴", "🟤" }, s, awful.layout.layouts[1])
+    -- awful.tag({ "🔵", "🟣", "🟢", "⚫", "🟡", "🔴", "🟤" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -219,6 +233,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            orgmode,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
@@ -348,15 +363,39 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"})
 )
 
+function get_tag_current_screen (target_tag) 
+  for s in screen do
+    for _, t in pairs(s.tags) do
+      if t.name == target_tag.name then
+        return s
+      end
+    end
+  end
+end
+
+local prev_screen = 1
+function set_prev_screen (s)
+  prev_screen = s
+  -- naughty.notify({preset=naughty.config.presets.normal, title=tostring(s.index), text="THE SAME"})
+end
+
 function bring_or_swap (i)
-  local screen = awful.screen.focused()
-  local tag = screen.tags[i]
-  local current = screen.selected_tag.index
-  -- naughty.notify({preset=naughty.config.presets.normal, title="current "..current.." tag "..i, text="THE SAME"})
-  if i == current then
-    awful.tag.history.restore()
-  elseif tag then
-    tag:view_only()
+  local target_tag = tags[i]
+  local target_screen = get_tag_current_screen(target_tag)
+  local current_screen = awful.screen.focused()
+  local current_tag = current_screen.selected_tag
+
+  if target_tag.name == current_tag.name then
+    if prev_screen.index ~= current_screen.index then
+      awful.screen.focus(prev_screen)
+      set_prev_screen(current_screen)
+    else
+      awful.tag.history.restore()
+    end
+  elseif target_tag and target_screen then
+    set_prev_screen(current_screen)
+    awful.screen.focus(target_screen)
+    sharedtags.viewonly(target_tag, target_screen)
   end
 end
 
@@ -373,7 +412,13 @@ clientkeys = gears.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey,           }, "o",      function (c)
+      local other_screen = awful.screen.focused().index == 1 and 2 or 1
+      local target_tag = c.first_tag
+      sharedtags.movetag(target_tag,screen[other_screen])   
+      awful.screen.focus(other_screen)
+      sharedtags.viewonly(target_tag)
+    end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
@@ -438,7 +483,7 @@ for i = 1, 9 do
                         local screen = awful.screen.focused()
                         local tag = screen.tags[i]
                         if tag then
-                           tag:view_only()
+                           sharedtags.viewonly(tag, screen)
                         end
                   end,
                   {description = "view tag #"..i, group = "tag"}),
@@ -448,7 +493,7 @@ for i = 1, 9 do
                       local screen = awful.screen.focused()
                       local tag = screen.tags[i]
                       if tag then
-                         awful.tag.viewtoggle(tag)
+                         sharedtags.viewtoggle(tag, screen)
                       end
                   end,
                   {description = "toggle tag #" .. i, group = "tag"}),
@@ -456,7 +501,7 @@ for i = 1, 9 do
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
-                          local tag = client.focus.screen.tags[i]
+                          local tag = tags[i]
                           if tag then
                               client.focus:move_to_tag(tag)
                           end
@@ -467,7 +512,7 @@ for i = 1, 9 do
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
-                          local tag = client.focus.screen.tags[i]
+                          local tag = tags[i]
                           if tag then
                               client.focus:toggle_tag(tag)
                           end
