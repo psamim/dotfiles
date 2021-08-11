@@ -2,6 +2,6 @@
 
 notify-send "Switched to docked mode"
 /home/samim/.bin/hdmi_sound_toggle.sh
-/home/samim/.bin/launch_polybar
+# /home/samim/.bin/launch_polybar
 /home/samim/.bin/keyboard_configure.sh
 

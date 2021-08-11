@@ -15,7 +15,7 @@ fi
 [ -f /etc/xprofile ] && source /etc/xprofile
 [ -f ~/.xprofile ] && source ~/.xprofile
 
-export DE=xfce
+# export DE=xfce
 export PATH="${PATH}:/home/samim/.bin"
 
 autorandr -c
@@ -32,11 +32,11 @@ syndaemon -t -k -i 1 &
 # Hide mouse when not used
 unclutter &
 
-dunst &
+# dunst &
 # i3-notifier
 
 # Picom window compositor
-/usr/bin/picom &
+# /usr/bin/picom &
 
 # screen powersave
 xset +dpms
@@ -52,7 +52,7 @@ xrdb -merge ~/.Xresources
 # trayer --edge top --align right --SetDockType true --SetPartialStrut true \
 #   --expand true --width 5 --transparent true --alpha 70 --tint 0x000000 --height 20 \
 #   --monitor 0 &
-launch_polybar
+# launch_polybar
 
 nm-applet &
 # blueman-applet &
@@ -64,5 +64,6 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
 # volctl &
 synclient TapButton1=1
 
-exec xmonad
+# exec xmonad
 # exec startxfce4
+exec awesome

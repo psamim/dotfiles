@@ -180,3 +180,6 @@ ln -sf $PWD/polybar $HOME/.config/polybar
 
 rm -rf "$HOME/.config/kmonad"
 ln -sf $PWD/kmonad $HOME/.config/kmonad
+
+mkdir -p "$HOME/.config/awesome"
+ln -sf $PWD/awesomewm/rc.lua $HOME/.config/awesome/rc.lua
