@@ -80,8 +80,8 @@
         "tagbar_move": "tag"
     },
     "editor": {
-        "cmd": "emacs --parent-id %3 %1",
-        "external_editor": "false",
+        "cmd": "emc %1",
+        "external_editor": "true",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "attachment_words": "attach",
