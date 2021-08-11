@@ -789,6 +789,15 @@ This function makes sure that dates are aligned for easy reading."
 ;;         org-roam-server-network-label-truncate-length 60
 ;;         org-roam-server-network-label-wrap-length 20))
 
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+    :hook (org-roam . org-roam-ui-mode)
+    :config
+)
+
 (defun org--create-inline-image (file width)
   "Create image located at FILE, or return nil.
 WIDTH is the width of the image.  The image may not be created

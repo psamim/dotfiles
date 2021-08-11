@@ -69,7 +69,7 @@
 (package! org-msg)
 ;; (package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
 ;;
-(package! nroam :recipe (:host github :branch "master" :repo "NicolasPetton/nroam"))
+;; (package! nroam :recipe (:host github :branch "master" :repo "NicolasPetton/nroam"))
 (package! literate-calc-mode)
 ;; (package! org-mru-clock)
 (package! counsel-org-clock)
@@ -77,4 +77,6 @@
 ;; (package! org-ql)
 (package! org-mind-map)
 (package! solaire-mode :disable t)
-(package! org-roam-server)
+;; (package! org-roam-server)
+(package! websocket)
+(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
