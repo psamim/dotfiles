@@ -41,7 +41,16 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'embear/vim-localvimrc'
 Plug 'rhysd/vim-grammarous'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'rktjmp/lush.nvim'
+" Plug 'ellisonleao/gruvbox.nvim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'glepnir/zephyr-nvim'
+Plug 'Th3Whit3Wolf/one-nvim'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'navarasu/onedark.nvim'
+Plug 'sainnhe/everforest'
+
 " Plug 'junegunn/limelight.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -86,6 +95,7 @@ Plug 'TimUntersberger/neogit'
 Plug 'Chiel92/vim-autoformat'
 Plug 'akinsho/nvim-bufferline.lua'
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 call plug#end()
 
 " Suda
@@ -142,7 +152,7 @@ augroup END
 " Other
 filetype plugin indent on
 set autowrite
-set spell
+" set spell
 
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
@@ -514,4 +524,39 @@ lua << EOF
  }
 EOF
 
-colorscheme gruvbox
+" lua << EOF
+" require("github-theme").setup({
+"   themeStyle = "dark",
+" })
+" EOF
+" colorscheme gruvbox
+" let g:sonokai_style = 'andromeda'
+" let g:sonokai_enable_italic = 1
+" let g:sonokai_disable_italic_comment = 1
+" colorscheme sonokai
+" colorscheme onedark
+" colorscheme everforest
+colorscheme gruvbox-material
+let g:airline_theme = 'gruvbox_material'
+
+
+
+" hi SpellBad   cterm=NONE gui=NONE guisp=#83a598
+" hi SpellCap   cterm=NONE gui=NONE guisp=#fb4934
+" hi SpellRare  cterm=NONE gui=NONE guisp=#d3869b
+" hi SpellLocal cterm=NONE gui=NONE guisp=#8ec07c
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+
