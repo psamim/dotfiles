@@ -1,0 +1,2 @@
+#!/bin/zsh
+emacsclient -e "(save-excursion (org-mycal-export))" && scp ~/org.ics central.psam.im:~/server-compose/hass/www
