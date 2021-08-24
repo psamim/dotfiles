@@ -1,120 +1,123 @@
 call plug#begin('~/.vim/plugged')
+" JS
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'jparise/vim-graphql'
+Plug 'digitaltoad/vim-pug'
+" Plug 'Quramy/vim-js-pretty-template'
 " Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
-Plug 'gcmt/wildfire.vim'
-Plug 'maxbrunsfeld/vim-yankstack'
 " Plug 'mxw/vim-jsx'
-Plug 'skywind3000/asyncrun.vim'
+
+" Fast select by ENTER
+Plug 'gcmt/wildfire.vim'
+
+" fzf
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 " Plug 'antoinemadec/coc-fzf'
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+
+" Other
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'RRethy/vim-illuminate'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
-Plug 'Raimondi/delimitMate'
-" Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'edkolev/tmuxline.vim'
-" Plug 'pacha/vem-tabline'
-Plug 'tpope/vim-fugitive'
-Plug 'shumphrey/fugitive-gitlab.vim'
-" Plug 'francoiscabrol/ranger.vim'
-" Plug 'preservim/nerdtree'
-" Plug 'tomasr/molokai'
-Plug 'iberianpig/tig-explorer.vim'
-" Plug 'rbgrouleff/bclose.vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'ledger/vim-ledger'
-" Plug 'machakann/vim-highlightedyank'
-Plug 'junegunn/vim-peekaboo'
-" Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'lambdalisue/suda.vim'
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'amiorin/ctrlp-z'
-" Plug 'tpope/vim-surround'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
-" Plug 'haya14busa/vim-keeppad'
-Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'embear/vim-localvimrc'
-Plug 'rhysd/vim-grammarous'
-" Plug 'morhetz/gruvbox'
-Plug 'rktjmp/lush.nvim'
-" Plug 'ellisonleao/gruvbox.nvim'
-Plug 'sainnhe/gruvbox-material'
-Plug 'glepnir/zephyr-nvim'
-Plug 'Th3Whit3Wolf/one-nvim'
-Plug 'projekt0n/github-nvim-theme'
-Plug 'navarasu/onedark.nvim'
-Plug 'sainnhe/everforest'
-
-" Plug 'junegunn/limelight.vim'
-Plug 'rhysd/git-messenger.vim'
-Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'janko/vim-test'
-Plug 'RRethy/vim-illuminate'
-" Plug 'junegunn/vim-slash'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-" Plug 'Quramy/vim-js-pretty-template'
-Plug 'jparise/vim-graphql'
-Plug 'digitaltoad/vim-pug'
-" Plug 'farmergreg/vim-lastplace'
-" Plug 'edvb/dmenu.vim'
+Plug 'tpope/vim-surround'
+Plug 'farmergreg/vim-lastplace'
 Plug 'LnL7/vim-nix'
+" cycle through lists of keywords such as true/false, yes/no
 Plug 'Konfekt/vim-CtrlXA'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'nelstrom/vim-visual-star-search'
+" Automatic closing of quotes, parenthesis, brackets, etc.,
+Plug 'Raimondi/delimitMate'
+Plug 'tommcdo/vim-exchange'
+Plug 'romgrk/lib.kom'
+" highlight for a unique character in every word on a line
+Plug 'unblevable/quick-scope'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" Plug 'Valloric/ListToggle'
+" Plug 'AndrewRadev/tagalong.vim'
+" Plug 'machakann/vim-sandwich'
+" Plug 'machakann/vim-highlightedyank'
+" Plug 'embear/vim-localvimrc'
+" Plug 'rhysd/vim-grammarous'
 " Plug 'AlphaMycelium/pathfinder.vim'
 " Plug 'ipod825/vim-netranger'
 " Plug 'ActivityWatch/aw-watcher-vim'
 " Plug 'diepm/vim-rest-console'
 " Plug 'Valloric/MatchTagAlways'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'nelstrom/vim-visual-star-search'
-" Plug 'Valloric/ListToggle'
-" Plug 'AndrewRadev/tagalong.vim'
-Plug 'tommcdo/vim-exchange'
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'romgrk/lib.kom'
-" Plug 'romgrk/barbar.nvim'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'romgrk/doom-one.vim'
-Plug 'unblevable/quick-scope'
-Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
-" Plug 'ttys3/nvim-blamer.lua'
-Plug 'APZelos/blamer.nvim'
-" Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-surround'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'ryanoasis/vim-devicons'
-Plug 'nvim-lua/plenary.nvim'
+
+" Status Line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'iberianpig/tig-explorer.vim'
 Plug 'TimUntersberger/neogit'
-Plug 'Chiel92/vim-autoformat'
+" Adds <leader>gm to display diff (d) and history
+Plug 'rhysd/git-messenger.vim'
+" Plug 'APZelos/blamer.nvim'
+" Plug 'ttys3/nvim-blamer.lua'
+" Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+
+" extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
+Plug 'junegunn/vim-peekaboo'
+
+" Adds <leader>-r and <leader>-R
+Plug 'maxbrunsfeld/vim-yankstack'
+
+" Themes 
+Plug 'sainnhe/gruvbox-material'
+" Plug 'shaunsingh/nord.nvim'
+" Plug 'projekt0n/github-nvim-theme'
+" Plug 'sainnhe/everforest'
+
+" Tab line
 Plug 'akinsho/nvim-bufferline.lua'
-" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" Plug 'pacha/vem-tabline'
+" Plug 'romgrk/barbar.nvim'
+
+" Snippets
+Plug 'honza/vim-snippets'
 call plug#end()
+
+set nonumber
+syntax enable
+set background=dark
+set termguicolors
 
 " Suda
 let g:suda_smart_edit = 1
 
-let g:grammarous#languagetool_cmd = 'languagetool'
-nmap <silent> gra <Plug>(grammarous-fixall)
+" let g:grammarous#languagetool_cmd = 'languagetool'
+" nmap <silent> gra <Plug>(grammarous-fixall)
 
 " " CtrlpZ, fasd intergration
 " let g:ctrlp_map = ''
 " let g:ctrlp_extensions = ['Z']
 
-let g:localvimrc_enable=1
+" let g:localvimrc_enable=1
 
 " vim-workspace
 let g:workspace_session_name = '.session.vim'
 let g:workspace_autosave = 0
-
-nnoremap <leader>n :NnnPicker '%:p:h'<CR>
 
 command! -nargs=* Z :call Z(<f-args>)
 function! Z(...)
@@ -128,18 +131,6 @@ function! Z(...)
     exec 'cd' fnameescape(path)
   endif
 endfunction
-
-" Relative line numbers
-set nonumber
-syntax enable
-set background=dark
-set termguicolors
-let g:solarized_termtrans=1
-" hi Normal guibg=NONE ctermbg=NONE
-set cursorline
-if exists('g:GuiLoaded')
-  Guifont! Iosevka:h13
-endif
 
 augroup TerminalStuff
     au!
@@ -186,9 +177,9 @@ set fileformats=unix,dos,mac
 
 " IndentLine
 let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 0
-let g:indentLine_char = '┆'
-let g:indentLine_faster = 1
+" let g:indentLine_concealcursor = 0
+" let g:indentLine_char = '┆'
+" let g:indentLine_faster = 1
 
 " Indent
 set tabstop=2
@@ -389,7 +380,7 @@ set updatetime=300
 set shortmess+=c
 
 " always show signcolumns
-set signcolumn=no
+set signcolumn=number
 
 " coc-vim
 let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-eslint', 'coc-word'
@@ -417,36 +408,16 @@ nmap <silent> gr <Plug>(coc-references)
 imap <C-l> <Plug>(coc-snippets-expand)
 nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
-" nnoremap <leader>b :DmenuBuf "e"<CR>
-" nnoremap <leader>p :DmenuFile "e"<CR>
 nmap <leader>f :CocCommand prettier.formatFile<CR>
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" RRethy/vim-illuminate
-hi illuminatedWord cterm=bold ctermfg=121 gui=bold guifg=#2aa198
+" map <F1> <Esc>
+" imap <F1> <Esc>
 
-" Quramy/vim-js-pretty-template
-" " Register tag name associated the filetype
-" call jspretmpl#register_tag('gql', 'graphql')
-
-" autocmd FileType typescript JsPreTmpl
-" autocmd FileType typescript.tsx JsPreTmpl
-" autocmd FileType typescript syn clear foldBraces
-
-map <F1> <Esc>
-imap <F1> <Esc>
-
-set lazyredraw
+" set lazyredraw
 
 let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
-
-let g:jellybeans_overrides = {
-\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-\}
-if has('termguicolors') && &termguicolors
-    let g:jellybeans_overrides['background']['guibg'] = 'none'
-endif
 
 " gutter is the same color as where your line numbers show up is the following:
 " https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
@@ -484,28 +455,10 @@ let g:gitgutter_sign_removed = '-'
 " hi default link BufferInactiveSign TabLine
 " exe 'hi default BufferInactiveTarget   guifg=red gui=bold guibg=' . bg_inactive
 
-
-" For the shadow in buffer-picking mode
-" hi default BufferShadow guifg=#000000 guibg=#000000
-
-" let bufferline.clickable = v:true
-
 set laststatus=0
-
-" let g:ctrlp_working_path_mode = 'r'
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
-"   \ 'file': '\v\.(exe|so|dll)$',
-"   \ 'link': '',
-"   \ }
-"
 
 let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 
-let g:blamer_enabled = 1
-
-" runtime macros/sandwich/keymap/surround.vim
-"
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.undodir', '.vim', '.log' ]
 let g:nvim_tree_follow = 1
 let g:nvim_tree_git_hl = 0
@@ -524,27 +477,14 @@ lua << EOF
  }
 EOF
 
-" lua << EOF
-" require("github-theme").setup({
-"   themeStyle = "dark",
-" })
-" EOF
-" colorscheme gruvbox
-" let g:sonokai_style = 'andromeda'
-" let g:sonokai_enable_italic = 1
-" let g:sonokai_disable_italic_comment = 1
-" colorscheme sonokai
-" colorscheme onedark
-" colorscheme everforest
+let g:solarized_termtrans=1
+" hi Normal guibg=NONE ctermbg=NONE
+set cursorline
+if exists('g:GuiLoaded')
+  Guifont! Iosevka:h13
+endif
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
-
-
-
-" hi SpellBad   cterm=NONE gui=NONE guisp=#83a598
-" hi SpellCap   cterm=NONE gui=NONE guisp=#fb4934
-" hi SpellRare  cterm=NONE gui=NONE guisp=#d3869b
-" hi SpellLocal cterm=NONE gui=NONE guisp=#8ec07c
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -558,5 +498,3 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-
-
