@@ -443,6 +443,7 @@ awful.screen.connect_for_each_screen(
                 wibox.widget {
                     widget = wibox.container.margin,
                     left = 16,
+                    right = 16,
                     {
                         orgmode,
                         layout = wibox.layout.fixed.horizontal

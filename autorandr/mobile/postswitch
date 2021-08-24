@@ -3,4 +3,5 @@
 notify-send "Switched to mobile mode"
 # /home/samim/.bin/launch_polybar
 /home/samim/.bin/keyboard_configure.sh
+echo 'awesome.restart()' | awesome-client
 
