@@ -387,30 +387,30 @@ awful.screen.connect_for_each_screen(
             --     shape_border_color = "#777777",
             --     shape = gears.shape.rounded_bar
             -- }
-              widget_template = {
-        {
-            {
-                -- {
-                    -- {
-                    --     id     = 'icon_role',
-                    --     widget = wibox.widget.imagebox,
-                    -- },
-                    -- margins = 2,
-                    -- widget  = wibox.container.margin,
-                -- },
+            widget_template = {
                 {
-                    id     = 'text_role',
-                    widget = wibox.widget.textbox,
+                    {
+                        -- {
+                        -- {
+                        --     id     = 'icon_role',
+                        --     widget = wibox.widget.imagebox,
+                        -- },
+                        -- margins = 2,
+                        -- widget  = wibox.container.margin,
+                        -- },
+                        {
+                            id = "text_role",
+                            widget = wibox.widget.textbox
+                        },
+                        layout = wibox.layout.fixed.horizontal
+                    },
+                    left = 10,
+                    right = 10,
+                    widget = wibox.container.margin
                 },
-                layout = wibox.layout.fixed.horizontal,
-            },
-            left  = 10,
-            right = 10,
-            widget = wibox.container.margin
-        },
-        id     = 'background_role',
-        widget = wibox.container.background,
-    },
+                id = "background_role",
+                widget = wibox.container.background
+            }
         }
 
         -- Create the wibox
@@ -749,6 +749,22 @@ globalkeys =
             menubar.show()
         end,
         {description = "show the menubar", group = "launcher"}
+    ),
+    awful.key(
+        {modkey},
+        "c",
+        function()
+            bring_or_swap(4)
+        end,
+        {description = "view tag terminal", group = "tag"}
+    ),
+    awful.key(
+        {modkey},
+        "m",
+        function()
+            bring_or_swap(5)
+        end,
+        {description = "view tag Emacs", group = "tag"}
     )
 )
 
@@ -773,32 +789,41 @@ function bring_or_swap(i)
     local target_screen = get_tag_current_screen(target_tag)
     local current_screen = awful.screen.focused()
     local current_tag = current_screen.selected_tag
-    local one_screen = #screen == 0
+    local one_screen = screen.count() == 1
+    local debug = 0
+
+    if current_tag and target_tag.name == current_tag.name then
+        if not one_screen and prev_screen and prev_screen.index ~= current_screen.index then
+            debug = 1
+            awful.screen.focus(prev_screen)
+            -- awful.screen.focus_relative(1)
+            set_prev_screen(current_screen)
+        else
+            debug = 2
+            awful.tag.history.restore()
+        end
+    elseif target_tag and target_screen and not one_screen then
+        debug = 3
+        awful.screen.focus(target_screen)
+        set_prev_screen(current_screen)
+        -- awful.screen.focus_relative(1)
+        sharedtags.viewonly(target_tag)
+    elseif one_screen then
+        debug = 4
+        awful.screen.focus(target_screen)
+        sharedtags.viewonly(target_tag)
+    end
 
     local text =
         "target_screen: " ..
         tostring(target_screen.index) ..
             ", target_tag: " ..
                 target_tag.name ..
-                    ", current_screen: " .. tostring(current_screen.index) .. ", current_tag: " .. current_tag.name
+                    ", current_screen: " ..
+                        tostring(current_screen.index) ..
+                            ", current_tag: " ..
+                                (current_tag and current_tag.name or "nil") .. ", debug: " .. tostring(debug)
     -- naughty.notify({preset = naughty.config.presets.normal, title = "BRING", text = text})
-
-    if target_tag.name == current_tag.name then
-        if not one_screen and prev_screen and prev_screen.index ~= current_screen.index then
-            awful.screen.focus(prev_screen)
-            -- awful.screen.focus_relative(1)
-            set_prev_screen(current_screen)
-        else
-            awful.tag.history.restore()
-        end
-    elseif target_tag and target_screen and not one_screen then
-        set_prev_screen(current_screen)
-        awful.screen.focus(target_screen)
-        -- awful.screen.focus_relative(1)
-        sharedtags.viewonly(target_tag)
-    elseif one_screen then
-        sharedtags.viewonly(target_tag)
-    end
 end
 
 clientkeys =
@@ -867,6 +892,15 @@ clientkeys =
     --         c:raise()
     --     end ,
     --     {description = "(un)maximize", group = "client"}),
+    -- awful.key(
+    --     {modkey, "Shift"},
+    --     "m",
+    --     function(c)
+    --         c.maximized_horizontal = not c.maximized_horizontal
+    --         c:raise()
+    --     end,
+    --     {description = "(un)maximize horizontally", group = "client"}
+    -- ),
     awful.key(
         {modkey, "Control"},
         "m",
@@ -875,31 +909,6 @@ clientkeys =
             c:raise()
         end,
         {description = "(un)maximize vertically", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Shift"},
-        "m",
-        function(c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end,
-        {description = "(un)maximize horizontally", group = "client"}
-    ),
-    awful.key(
-        {modkey},
-        "c",
-        function()
-            bring_or_swap(4)
-        end,
-        {description = "view tag terminal", group = "tag"}
-    ),
-    awful.key(
-        {modkey},
-        "m",
-        function()
-            bring_or_swap(5)
-        end,
-        {description = "view tag Emacs", group = "tag"}
     )
 )
 
@@ -931,11 +940,12 @@ for i = 1, 9 do
             {modkey},
             "#" .. i + 9,
             function()
-                local screen = awful.screen.focused()
-                local tag = screen.tags[i]
-                if tag then
-                    sharedtags.viewonly(tag, screen)
-                end
+                -- local screen = awful.screen.focused()
+                -- local tag = screen.tags[i]
+                -- if tag then
+                --     sharedtags.viewonly(tag, screen)
+                -- end
+                bring_or_swap(i)
             end,
             {description = "view tag #" .. i, group = "tag"}
         ),

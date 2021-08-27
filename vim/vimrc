@@ -69,6 +69,10 @@ Plug 'vim-airline/vim-airline-themes'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
+" Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
+Plug 'tommcdo/vim-fubitive'
+" Enables :GBrowse from fugitive.vim to open GitHub URLs
+Plug 'tpope/vim-rhubarb'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'TimUntersberger/neogit'
 " Adds <leader>gm to display diff (d) and history
@@ -462,6 +466,7 @@ let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.undodir', '.vim', '.log' ]
 let g:nvim_tree_follow = 1
 let g:nvim_tree_git_hl = 0
+let g:nvim_tree_disable_netrw = 0
 let g:nvim_tree_show_icons = {
     \ 'git': 0,
     \ 'folders': 1,
