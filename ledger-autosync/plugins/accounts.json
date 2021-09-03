@@ -3,6 +3,10 @@
         "account": "Expenses:Groceries",
         "name": "Super Jolfa"
     },
+    "21378891": {
+        "account": "Expenses:Groceries",
+        "name": "Nuts Store"
+    },
     "44880649": {
         "account": "Expenses:Groceries",
         "name": "Super Jolfa"
@@ -30,6 +34,14 @@
     "2102079": {
         "account": "Expenses:Food:Lunch",
         "name": "Agha Joon Kabab Shahin Shahr"
+    },
+    "4851518": {
+        "account": "Expenses:Food:Cafe",
+        "name": "Cafe"
+    },
+    "1999405": {
+        "account": "Expenses:Food:Cafe",
+        "name": "Arka Cafe"
     },
     "33223179": {
         "account": "Expenses:Food:Cafe",
@@ -74,6 +86,10 @@
     "679025": {
         "account": "Expenses:Groceries",
         "name": "Sotoodeh Shirmal"
+    },
+    "44875899": {
+        "account": "Expenses:Transportation:Fuel",
+        "name": "Vahid Gas Station"
     },
     "1819160": {
         "account": "Expenses:Transportation:Fuel",
