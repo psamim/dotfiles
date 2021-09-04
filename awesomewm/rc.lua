@@ -286,12 +286,12 @@ local tasklist_buttons =
 local tags =
     sharedtags(
     {
-        {name = "1", layout = awful.layout.layouts[1], icon = "/home/samim/connections.png"},
-        {name = "2", layout = awful.layout.layouts[1], icon = "/home/samim/home.png"},
-        {name = "3", layout = awful.layout.layouts[1], icon = "/home/samim/chat.png"},
-        {name = "4", layout = awful.layout.layouts[1], icon = "/home/samim/code.png"},
-        {name = "5", layout = awful.layout.layouts[1], icon = "/home/samim/cal.png"},
-        {name = "6", layout = awful.layout.layouts[1], icon = "/home/samim/puzzle.png"}
+        {name = "1", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/connections.png"},
+        {name = "2", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/home.png"},
+        {name = "3", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/chat.png"},
+        {name = "4", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/code.png"},
+        {name = "5", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/cal.png"},
+        {name = "6", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/puzzle.png"}
     }
 )
 
