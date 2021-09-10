@@ -742,14 +742,14 @@ globalkeys =
         {description = "lua execute prompt", group = "awesome"}
     ),
     -- Menubar
-    awful.key(
-        {modkey},
-        "p",
-        function()
-            menubar.show()
-        end,
-        {description = "show the menubar", group = "launcher"}
-    ),
+    -- awful.key(
+    --     {modkey},
+    --     "p",
+    --     function()
+    --         menubar.show()
+    --     end,
+    --     {description = "show the menubar", group = "launcher"}
+    -- ),
     awful.key(
         {modkey},
         "c",
@@ -1096,6 +1096,10 @@ awful.rules.rules = {
     {
         rule = {class = "Google-chrome", role = "browser"},
         properties = {tag = tags[2]}
+    },
+    {
+        rule = {class = "Google-chrome", role = "browser", name = "Work"},
+        properties = {tag = tags[1]}
     },
     {
         rule = {class = "Alacritty"},
