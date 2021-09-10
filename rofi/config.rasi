@@ -6,6 +6,7 @@ configuration {
   display-drun: " App:";
   display-window: " Window:";
   display-run: " Run:";
+  show-icons: true;
 }
 
 @theme "./style_normal.rasi"

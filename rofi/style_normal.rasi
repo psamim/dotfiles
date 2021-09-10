@@ -7,15 +7,15 @@
  *
  */
 
-configuration {
-  drun-display-format: "{icon} {name}";
-  show-icons: true;
-  icon-theme: "Papirus-Dark";
-  location: 2;
-  fake-transparency: false;
-  hide-scrollbar: true;
-  bw: 0;
-}
+/* configuration { */
+/*   drun-display-format: "{icon} {name}"; */
+/*   show-icons: true; */
+/*   icon-theme: "Papirus-Dark"; */
+/*   location: 2; */
+/*   fake-transparency: false; */
+/*   hide-scrollbar: true; */
+/*   bw: 0; */
+/* } */
 
 // black version
 * {
@@ -45,14 +45,13 @@ configuration {
 
 window {
   transparency: "real";
-  fullscreen: true;
+  height: 60%;
 }
 
 mainbox {
   children: [ inputbar, listview ];
-  margin: 25% 30% 25% 30%;
   background-color: @bg;
-  border-radius: 12;
+  /* border-radius: 12; */
   border: 2;
   border-color: #ffffff0A;
 }

@@ -1,6 +1,0 @@
-oc-cmd     "vim-open;name:vim;icon:vim"
-oc-cmd     "thunar;name:thunar;icon:thunar"
-oc-cmd     "vlc;name:vlc;icon:vlc"
-follow-symlinks
-depth      1
-show-hidden
