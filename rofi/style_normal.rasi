@@ -19,7 +19,7 @@
 
 // black version
 * {
-  bg: #222222B0;
+  bg: #222222EE;
   ac: #869fa214;
   ac-txt: #869fa2;
   item: #bdc3c3;

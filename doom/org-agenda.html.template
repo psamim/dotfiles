@@ -33,7 +33,7 @@
           90deg,
           rgba(255, 251, 234, 0) 0%,
           rgb(250 250 250) 73%
-        )
+        );
       }
 
       .bottom {
@@ -45,7 +45,7 @@
           180deg,
           rgba(255, 251, 234, 0) 0%,
           rgb(250 250 250) 73%
-        )
+        );
       }
 
       body {
@@ -55,10 +55,19 @@
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <script>
+      function onLoad() {
+        document.querySelector(".bottom").style.bottom =
+          window.innerHeight -
+          document.querySelector("img").height * 0.55 +
+          34 +
+          "px";
+      }
+    </script>
   </head>
   <body>
     <div class="agenda">
-      <img src="{{FILENAME}}" />
+      <img onload="onLoad()" src="{{FILENAME}}" />
       <div class="line"></div>
     </div>
     <div class="right"></div>

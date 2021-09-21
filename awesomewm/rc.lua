@@ -153,7 +153,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 orgmode = awful.widget.watch('bash -c "/home/samim/.bin/clocking"', 10)
 
-battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 -- cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
@@ -165,7 +164,7 @@ vicious.register(memwidget, vicious.widgets.mem, "Mem: $1%", 13)
 
 cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
-cpuwidget:set_background_color "#494B4F"
+cpuwidget:set_background_color "#494B4F44"
 cpuwidget:set_color {
     type = "linear",
     from = {0, 0},
@@ -295,6 +294,65 @@ local tags =
     }
 )
 
+decreased_padding_tag_names = {}
+
+function enable_paddings(m_screen)
+    local one_screen = screen.count() == 1
+    if m_screen.geometry.width > 1920 or one_screen then
+        local current_tag_name = m_screen.selected_tag.name
+        m_screen.padding = {right = 260, left = 260}
+        decreased_padding_tag_names[current_tag_name] = true
+    end
+end
+
+function disable_paddings(m_screen)
+    local one_screen = screen.count() == 1
+    if m_screen.geometry.width > 1920 or one_screen then
+        local current_tag_names = m_screen.selected_tag.name
+        m_screen.padding = {right = 0, left = 0}
+        decreased_padding_tag_names[current_tag_names] = false
+    end
+end
+
+function dump(o)
+    if type(o) == "table" then
+        local s = "{ "
+        for k, v in pairs(o) do
+            if type(k) ~= "number" then
+                k = '"' .. k .. '"'
+            end
+            s = s .. "[" .. k .. "] = " .. dump(v) .. ","
+        end
+        return s .. "} "
+    else
+        return tostring(o)
+    end
+end
+
+function toggle_paddings()
+    for s in screen do
+        toggle_paddings_for_screen(s)
+    end
+end
+
+function toggle_paddings_for_screen(s, inverse)
+    local selected_tag = s.selected_tag
+    inverse = inverse ~= nil
+    if selected_tag == nil then
+        return
+    end
+    local current_tag_name = selected_tag.name
+    local enabled = decreased_padding_tag_names[tostring(current_tag_name)] or false
+    if inverse then
+        enabled = not enabled
+    end
+    if enabled then
+        disable_paddings(s)
+    else
+        enable_paddings(s)
+    end
+end
+
 awful.screen.connect_for_each_screen(
     function(s)
         -- Wallpaper
@@ -302,6 +360,14 @@ awful.screen.connect_for_each_screen(
 
         -- Each screen has its own tag table.
         -- awful.tag({ "🔵", "🟣", "🟢", "⚫", "🟡", "🔴", "🟤" }, s, awful.layout.layouts[1])
+        --
+
+        s:connect_signal(
+            "tag::history::update",
+            function(s)
+                toggle_paddings_for_screen(s, true)
+            end
+        )
 
         -- Create a promptbox for each screen
         s.mypromptbox = awful.widget.prompt()
@@ -422,7 +488,17 @@ awful.screen.connect_for_each_screen(
         s.systray = wibox.widget.systray()
         s.systray.visible = true
 
-        s.mywibox = awful.wibar({position = "bottom", screen = s, height = 28, width = width, shape = custom_shape})
+        s.mywibox =
+            awful.wibar(
+            {
+                position = "bottom",
+                screen = s,
+                height = 28,
+                width = width,
+                shape = custom_shape,
+                bg = beautiful.bg_normal .. "CC"
+            }
+        )
 
         -- awful.wibar {
         --   position = 'bottom',
@@ -456,13 +532,13 @@ awful.screen.connect_for_each_screen(
                 -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 -- ram_widget({color_used = "#980000"}),
-                memwidget,
+                cpuwidget,
                 wibox.widget {
                     widget = wibox.container.margin,
                     left = 12,
                     right = 12,
                     {
-                        cpuwidget,
+                        memwidget,
                         layout = wibox.layout.fixed.horizontal
                     }
                 },
@@ -477,7 +553,6 @@ awful.screen.connect_for_each_screen(
                     }
                 },
                 net_speed_widget(),
-                battery_widget({margin_right = 4, margin_left = 4}),
                 s.systray,
                 mykeyboardlayout,
                 mytextclock,
@@ -518,6 +593,14 @@ globalkeys =
     gears.table.join(
     awful.key(
         {modkey},
+        "-",
+        function()
+            toggle_paddings()
+        end,
+        {description = "Toggle paddings", group = "custom"}
+    ),
+    awful.key(
+        {modkey},
         "=",
         function()
             awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
@@ -525,6 +608,51 @@ globalkeys =
         {description = "Toggle systray visibility", group = "custom"}
     ),
     awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
+    awful.key(
+        {},
+        "XF86AudioLowerVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 2%-", false)
+        end,
+        {description = "decrease volume", group = "sound"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioRaiseVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 2%+", false)
+        end,
+        {description = "raise volume", group = "sound"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioMute",
+        function()
+            awful.util.spawn("amixer -D pulse sset Master toggle", false)
+        end,
+        {description = "mute", group = "sound"}
+    ),
+    awful.key(
+        {},
+        "XF86AudioPlay",
+        function()
+            awful.util.spawn("playerctl play-pause", false)
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioNext",
+        function()
+            awful.util.spawn("playerctl next", false)
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioPrev",
+        function()
+            awful.util.spawn("playerctl previous", false)
+        end
+    ),
     awful.key({modkey}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({modkey}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
     awful.key({modkey}, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
@@ -878,7 +1006,7 @@ clientkeys =
             c.ontop = not c.ontop
         end,
         {description = "toggle keep on top", group = "client"}
-    ),
+    )
     -- awful.key({ modkey,           }, "n",
     --     function (c)
     --         -- The client currently has the input focus, so it cannot be
@@ -901,15 +1029,15 @@ clientkeys =
     --     end,
     --     {description = "(un)maximize horizontally", group = "client"}
     -- ),
-    awful.key(
-        {modkey, "Control"},
-        "m",
-        function(c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end,
-        {description = "(un)maximize vertically", group = "client"}
-    )
+    -- awful.key(
+    --     {modkey, "Control"},
+    --     "m",
+    --     function(c)
+    --         c.maximized_vertical = not c.maximized_vertical
+    --         c:raise()
+    --     end,
+    --     {description = "(un)maximize vertically", group = "client"}
+    -- )
 )
 
 for i = 1, 4 do
@@ -1102,6 +1230,10 @@ awful.rules.rules = {
         properties = {tag = tags[1]}
     },
     {
+        rule = {class = "Google-chrome", role = "browser", name = "work"},
+        properties = {tag = tags[1]}
+    },
+    {
         rule = {class = "Alacritty"},
         properties = {tag = tags[4]}
     },
@@ -1232,6 +1364,7 @@ client.connect_signal(
     "focus",
     function(c)
         draw_left_bar(c)
+        -- c.opacity = 1
     end
 )
 
@@ -1239,6 +1372,7 @@ client.connect_signal(
     "unfocus",
     function(c)
         draw_left_bar(c)
+        -- c.opacity = 0.7
     end
 )
 
@@ -1248,3 +1382,23 @@ client.connect_signal(
         draw_left_bar(c)
     end
 )
+
+do
+    local autostarts = {
+        "cbatticon",
+        "pasystray"
+        -- "flashfocus"
+        -- , "picom"
+    }
+
+    for _, i in pairs(autostarts) do
+        awful.spawn.easy_async_with_shell(
+            "ps -C " .. i .. " |wc -l",
+            function(stdout, stderr, reason, exit_code)
+                if (tonumber(stdout) or 0) < 2 then
+                    awful.spawn(i)
+                end
+            end
+        )
+    end
+end

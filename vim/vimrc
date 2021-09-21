@@ -22,6 +22,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate'
 Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'airblade/vim-gitgutter'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'skywind3000/asyncrun.vim'
@@ -483,13 +484,13 @@ lua << EOF
 EOF
 
 let g:solarized_termtrans=1
-" hi Normal guibg=NONE ctermbg=NONE
 set cursorline
 if exists('g:GuiLoaded')
   Guifont! Iosevka:h13
 endif
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
+hi Normal guibg=NONE ctermbg=NONE
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -501,5 +502,13 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
 }
 EOF
