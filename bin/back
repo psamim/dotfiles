@@ -178,13 +178,19 @@ function create_private_file() {
 
 function borg_hdd_backup {
   local MOUNT_HDD="/mnt/backup"
+  local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"
+  local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
+
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
-    sudo cryptsetup open /dev/sdd1 backup
+    echo "$LUKS_PASSPHRASE" | sudo cryptsetup open "$DEV_PATH" backup -
     sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
   fi
+
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   rclone sync passport:/mnt/photoprism/originals "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
-  rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress
+  rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
+  sudo umount /mnt/backup
+  sudo cryptsetup close backup
 }
 
 function main() {
