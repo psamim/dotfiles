@@ -181,7 +181,7 @@ This function makes sure that dates are aligned for easy reading."
          (
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done nil)
-                      (org-agenda-time-leading-zero nil)
+                      (org-agenda-time-leading-zero t)
                       (org-agenda-timegrid-use-ampm nil)
                       (org-agenda-skip-timestamp-if-done t)
                       (org-agenda-skip-deadline-if-done t)
@@ -198,7 +198,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time)
                       (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
+                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (todo "TODO" (
@@ -253,7 +253,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time)
                       (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
                       (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("Deadline: " "Deadline: "))
+                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid nil)))
 
           (todo "TODO" (
