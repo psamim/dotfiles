@@ -241,7 +241,7 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 " File manager
 " nnoremap <leader>d :Ranger<CR>
 " nnoremap <leader>d :NERDTreeFind<CR>
- nnoremap <leader>d :NvimTreeToggle<CR>
+ nnoremap <leader>d :NvimTreeFindFile<CR>
 " let g:ranger_replace_netrw = 1
 
 " Split
@@ -464,17 +464,6 @@ set laststatus=0
 
 let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.undodir', '.vim', '.log' ]
-let g:nvim_tree_follow = 1
-let g:nvim_tree_git_hl = 0
-let g:nvim_tree_disable_netrw = 0
-let g:nvim_tree_show_icons = {
-    \ 'git': 0,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 1,
-    \ }
-
 lua << EOF
  require("bufferline").setup {
    options = {
@@ -511,4 +500,21 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   }
 }
+EOF
+
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.undodir', '.vim', '.log' ]
+let g:nvim_tree_git_hl = 0
+let g:nvim_tree_show_icons = {
+    \ 'git': 0,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 1,
+    \ }
+
+
+lua <<EOF
+require'nvim-tree'.setup {
+    disable_netrw = false,
+    nvim_tree_follow = true
+  }
 EOF
