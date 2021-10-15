@@ -12,7 +12,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+-- local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -145,7 +145,7 @@ mylauncher =
 )
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -1386,9 +1386,10 @@ client.connect_signal(
 do
     local autostarts = {
         "cbatticon",
-        "pasystray"
-        -- "flashfocus"
-        -- , "picom"
+        "pasystray",
+        "flashfocus",
+        "picom",
+        "keyboard_configure.sh"
     }
 
     for _, i in pairs(autostarts) do
