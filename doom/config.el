@@ -88,13 +88,14 @@
           (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
          )))
 
+(setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
+
 (setq-hook! org-mode
   org-log-done t
   org-log-reschedule 'time
   org-image-actual-width nil
   org-clock-into-drawer t
   org-clock-persist t
-  org-columns-default-format "%60ITEM(Task) %20TODO %10Effort(Effort){:} %10CLOCKSUM"
   org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
                                 ("STYLE_ALL" . "habit")))
   ;; org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
@@ -131,7 +132,6 @@
       ("buy" "~/.dotfiles/icons/buy.svg" nil nil :ascent center :mask heuristic)
       ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
       ))
-
 (setq org-agenda-hidden-separator "‌‌ ")
 (defun agenda-color-char ()
   (save-excursion
@@ -176,8 +176,19 @@ This function makes sure that dates are aligned for easy reading."
 
 (setq org-agenda-block-separator nil)
 
+(defun org-agenda-get-progress ()
+  (interactive)
+  (let
+      ;; ((effort (and (not (string= txt "")) (get-text-property 1 'effort txt))))
+      ((effort (cdar (org-entry-properties nil "EFFORT"))))
+    (if effort
+    (concat "[" (org-duration-from-minutes (org-clock-sum-current-item)) "/" effort "] ")
+    "")
+    ))
+
 (setq org-agenda-custom-commands
-      '(("a" "My Agenda"
+      '(
+        ("a" "My Agenda"
          (
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done nil)
@@ -201,7 +212,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (todo "TODO" (
+          (tags-todo "-CATEGORY=\"work\"" (
                       (org-agenda-overriding-header "\n⚡ To Do")
                       (org-agenda-sorting-strategy '(priority-down))
                       (org-agenda-remove-tags t)
@@ -217,12 +228,12 @@ This function makes sure that dates are aligned for easy reading."
          ;;              (org-agenda-prefix-format "   %-2i %?b")
          ;;              (org-agenda-todo-keyword-format "")))
 
-         (tags "+project" (
+         (tags "+project-CATEGORY=\"work\"" (
                       (org-agenda-overriding-header "\n⚡ Projects")
                       (org-agenda-remove-tags t)
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-show-inherited-tags nil)
-                      (org-agenda-prefix-format "   %-2i %?b")
+                      (org-agenda-prefix-format "   %-2i %?b %(org-agenda-get-progress)")
                       (org-agenda-todo-keyword-format "")))
 
          ;; (org-ql-block '(and
@@ -232,6 +243,49 @@ This function makes sure that dates are aligned for easy reading."
          ;;                (org-ql-block-header "⚡ Projects and Areas")
          ;;                ))
          ))
+
+      ("w" "Work Agenda"
+         (
+          (agenda "" (
+                      (org-agenda-skip-scheduled-if-done nil)
+                      (org-agenda-time-leading-zero t)
+                      (org-agenda-timegrid-use-ampm nil)
+                      (org-agenda-skip-timestamp-if-done t)
+                      (org-agenda-skip-deadline-if-done t)
+                      (org-agenda-start-day "+0d")
+                      (org-agenda-span 2)
+                      (org-agenda-overriding-header "⚡ Calendar")
+                      (org-agenda-repeating-timestamp-show-all nil)
+                      (org-agenda-remove-tags t)
+                      (org-agenda-prefix-format "   %i %?-2 t%s")
+                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                       ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                      ;; (org-agenda-todo-keyword-format " ☐ ")
+                      (org-agenda-todo-keyword-format "")
+                      (org-agenda-time)
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                      (org-agenda-scheduled-leaders '("" ""))
+                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
+                      (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+
+          (tags-todo "+CATEGORY=\"work\"" (
+                      (org-agenda-overriding-header "\n⚡ To Do")
+                      (org-agenda-sorting-strategy '(priority-down))
+                      (org-agenda-remove-tags t)
+                      (org-agenda-todo-ignore-scheduled 'all)
+                      (org-agenda-prefix-format "   %-2i %?b")
+                      (org-agenda-todo-keyword-format "")))
+
+         (tags "+project+CATEGORY=\"work\"" (
+                      (org-agenda-overriding-header "\n⚡ Projects")
+                      (org-agenda-remove-tags t)
+                      (org-tags-match-list-sublevels nil)
+                      (org-agenda-show-inherited-tags nil)
+                      (org-agenda-prefix-format "   %-2i %?b %(org-agenda-get-progress)")
+                      (org-agenda-todo-keyword-format "")))
+         ))
+
+
 ("mo" "My Agenda"
          (
           (agenda "" (
@@ -265,7 +319,8 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
 
-         ))))
+          ))
+))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -683,8 +738,11 @@ This function makes sure that dates are aligned for easy reading."
 
 (defun do-not-display-work ()
   (interactive)
-  (org-agenda-filter-apply '("-work") 'tag))
+  (org-agenda-filter-apply '("-work") 'category))
 
+(defun only-display-work ()
+  (interactive)
+  (org-agenda-filter-apply '("+work") 'category))
 
 (defun save-screenshot-svg ()
   "Save a screenshot of the current frame as an SVG image.
@@ -731,8 +789,9 @@ This function makes sure that dates are aligned for easy reading."
 
 (map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
 (map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
+(map! :localleader (:map org-agenda-mode-map "c" #'org-agenda-columns))
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
-(map! :leader :desc "Dired" :nvg "d" #'dired-jump)
+(map! :leader :desc "Dired" :nvg "d" #'ranger)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
 (map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
