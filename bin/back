@@ -9,8 +9,8 @@
 # borg list path/to/borg/bakcup
 # borg export-tar /path/to/borg/backup::archive out.tar
 
-function info() { chalk -t "$(date -Iminutes) - {yellow $* }" }
-function error() { chalk -t "$(date -Iminutes) - {red $* }" }
+function info() { npx chalk-cli -t "$(date -Iminutes) - {yellow $* }" }
+function error() { npx chalk-cli -t "$(date -Iminutes) - {red $* }" }
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 # set -x # Uncomment to debug
 
