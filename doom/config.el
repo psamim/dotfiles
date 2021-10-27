@@ -180,10 +180,14 @@ This function makes sure that dates are aligned for easy reading."
   (interactive)
   (let
       ;; ((effort (and (not (string= txt "")) (get-text-property 1 'effort txt))))
-      ((effort (cdar (org-entry-properties nil "EFFORT"))))
+      (
+       (effort (cdar (org-entry-properties nil "EFFORT")))
+       (clocksum
+        (org-duration-from-minutes
+         (org-clock-sum-current-item (car (org-clock-special-range 'thisweek nil nil 0))))))
     (if effort
-    (concat "[" (org-duration-from-minutes (org-clock-sum-current-item)) "/" effort "] ")
-    "")
+    (concat "[" clocksum  "/" effort "] ")
+    (concat "[" clocksum "] "))
     ))
 
 (setq org-agenda-custom-commands
