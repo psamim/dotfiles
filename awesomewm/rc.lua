@@ -181,6 +181,43 @@ wifi = wibox.widget.textbox()
 vicious.cache(vicious.widgets.wifiiw)
 vicious.register(wifi, vicious.widgets.wifiiw, "${ssid}", 13, "wlp3s0")
 
+wifi = wibox.widget.textbox()
+
+notification_widget_box =
+    wibox.widget {
+    widget = wibox.widget.imagebox,
+    image = "/home/samim/.dotfiles/icons/notifications.svg",
+    resize = true,
+    buttons = gears.table.join(
+        awful.button(
+            {},
+            1,
+            function()
+                if naughty.is_suspended() then
+                    notification_widget_box:set_image("/home/samim/.dotfiles/icons/notifications.svg")
+                    naughty.resume()
+                else
+                    notification_widget_box:set_image("/home/samim/.dotfiles/icons/notifications_off.svg")
+                    naughty.suspend()
+                end
+            end
+        )
+    )
+}
+
+notification_widget =
+    wibox.widget {
+    widget = wibox.container.margin,
+    left = 6,
+    right = 6,
+    top = 6,
+    bottom = 6,
+    {
+        notification_widget_box,
+        layout = wibox.layout.fixed.horizontal
+    }
+}
+
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -554,6 +591,7 @@ awful.screen.connect_for_each_screen(
                 },
                 net_speed_widget(),
                 s.systray,
+                notification_widget,
                 mykeyboardlayout,
                 mytextclock,
                 -- s.mylayoutbox,
@@ -741,6 +779,14 @@ globalkeys =
             awful.spawn("rofi-pass")
         end,
         {description = "open passmenu", group = "launcher"}
+    ),
+    awful.key(
+        {"Mod1"},
+        "`",
+        function()
+            awful.spawn("find-cursor --size 150 --distance 40 --wait 1000  --line-width 5 --color '#E30037'")
+        end,
+        {description = "find cursor", group = "launcher"}
     ),
     awful.key(
         {},
@@ -1265,6 +1311,7 @@ client.connect_signal(
         end
 
         awful.titlebar.hide(c)
+        c.maximized = false
     end
 )
 
