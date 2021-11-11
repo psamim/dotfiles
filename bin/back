@@ -217,6 +217,7 @@ function main() {
         -e 'syncthing/Notes' \
         -e 'photoprism-storage' \
         -e 'hass/home-assistant_v2.db' \
+        -e 'hass/hass/home-assistant_v2.db-wal' \
         -e 'pihole/pihole-FTL.db' \
         -e 'pihole/gravity.db' \
         -e 'pihole/list.1.raw.githubusercontent.com.domains' \
