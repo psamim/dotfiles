@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # load zgen  -*- mode: sh; -*-
 
 # These lines needs to be before loading oh-my-zsh
@@ -17,11 +24,14 @@ if ! zgen saved; then
 
     # plugins
     zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/adb
+    zgen oh-my-zsh plugins/aws
+    zgen oh-my-zsh plugins/deno
+    zgen oh-my-zsh plugins/direnv
     zgen oh-my-zsh plugins/tig
-    zgen oh-my-zsh plugins/virtualenvwrapper
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/fzf
-    zgen oh-my-zsh plugins/gpg-agent
+#   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
     # zgen oh-my-zsh plugins/npx
     # zgen oh-my-zsh plugins/keychain
@@ -33,10 +43,11 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/gradle
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/docker
+    zgen oh-my-zsh plugins/docker-compose
     zgen oh-my-zsh plugins/fasd
     zgen oh-my-zsh plugins/nmap
     zgen oh-my-zsh plugins/last-working-dir
-    zgen oh-my-zsh plugins/themes
+    # zgen oh-my-zsh plugins/themes
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/cp
     zgen oh-my-zsh plugins/common-aliases
@@ -62,7 +73,8 @@ if ! zgen saved; then
     # zgen load olets/zsh-abbr zsh-abbr.zsh
 
     # theme
-    zgen oh-my-zsh themes/agnoster
+    # zgen oh-my-zsh themes/agnoster
+    zgen load romkatv/powerlevel10k powerlevel10k
 
     # save all to init script
     zgen save
@@ -150,16 +162,13 @@ export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PYENV_ROOT/bin:$PATH
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
-
-eval "$(direnv hook zsh)"
-
 export WORKON_HOME=~/.virtualenvs
 # source /usr/bin/virtualenvwrapper_lazy.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
  export GPG_TTY=$(tty)
- gpg-connect-agent updatestartuptty /bye >/dev/null&
+ # gpg-connect-agent updatestartuptty /bye >/dev/null&
 
 export TERM=xterm
 # source <(kubectl completion zsh)
@@ -176,4 +185,6 @@ function vpn {
   env ID="$1" bash -c 'nmcli con down id "$ID"; sleep 1; nmcli con up id "$ID"'
 }
 
-# source /usr/share/nvm/init-nvm.sh
+export POWERLEVEL9K_LEGACY_ICON_SPACING=true
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
