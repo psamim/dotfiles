@@ -241,7 +241,7 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 " File manager
 " nnoremap <leader>d :Ranger<CR>
 " nnoremap <leader>d :NERDTreeFind<CR>
- nnoremap <leader>d :NvimTreeFindFile<CR>
+ nnoremap <leader>d :NvimTreeFindFileToggle<CR>
 " let g:ranger_replace_netrw = 1
 
 " Split
@@ -502,7 +502,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.undodir', '.vim', '.log' ]
 let g:nvim_tree_git_hl = 0
 let g:nvim_tree_show_icons = {
     \ 'git': 0,
@@ -515,6 +514,9 @@ let g:nvim_tree_show_icons = {
 lua <<EOF
 require'nvim-tree'.setup {
     disable_netrw = false,
-    nvim_tree_follow = true
-  }
+    nvim_tree_follow = true,
+     filters = {
+       dotfiles = true
+      }
+    }
 EOF
