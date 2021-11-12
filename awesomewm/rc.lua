@@ -157,6 +157,7 @@ orgmode = awful.widget.watch('bash -c "/home/samim/.bin/clocking"', 10)
 logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+-- popup = require("notifs.notif-center.notif_popup")
 
 memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
@@ -180,8 +181,6 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 wifi = wibox.widget.textbox()
 vicious.cache(vicious.widgets.wifiiw)
 vicious.register(wifi, vicious.widgets.wifiiw, "${ssid}", 13, "wlp3s0")
-
-wifi = wibox.widget.textbox()
 
 notification_widget_box =
     wibox.widget {
@@ -319,17 +318,73 @@ local tasklist_buttons =
 -- screen.connect_signal("property::geometry", set_wallpaper)
 --
 
-local tags =
-    sharedtags(
+local current_activity = "me"
+local tags = {
+    me = sharedtags(
+        {
+            {name = "1", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/home.png"},
+            {name = "2", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/connections.png"},
+            {name = "3", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/chat.png"},
+            {name = "4", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/code.png"}
+        }
+    ),
+    work = sharedtags(
+        {
+            {name = "1", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/home.png"},
+            {name = "2", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/connections.png"},
+            {name = "3", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/chat.png"},
+            {name = "4", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/code.png"}
+        }
+    ),
+    shared = sharedtags(
+        {
+            {name = "5", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/cal.png"},
+            {name = "6", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/puzzle.png"}
+        }
+    )
+}
+
+activity_widget_box =
+    wibox.widget {
+    widget = wibox.widget.textbox,
+    markup = tostring(current_activity),
+    align = "center",
+    valign = "center",
+    buttons = gears.table.join(
+        awful.button(
+            {},
+            1,
+            function()
+                if current_activity == "me" then
+                    current_activity = "work"
+                else
+                    current_activity = "me"
+                end
+                activity_widget_box:set_markup(tostring(current_activity))
+            end
+        )
+    )
+}
+
+activity_widget =
+    wibox.widget {
+    widget = wibox.container.margin,
+    left = 6,
+    right = 6,
+    top = 6,
+    bottom = 6,
     {
-        {name = "1", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/connections.png"},
-        {name = "2", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/home.png"},
-        {name = "3", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/chat.png"},
-        {name = "4", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/code.png"},
-        {name = "5", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/cal.png"},
-        {name = "6", layout = awful.layout.layouts[1], icon = "/home/samim/.dotfiles/icons/puzzle.png"}
+        activity_widget_box,
+        layout = wibox.layout.fixed.horizontal
     }
-)
+}
+
+function getTag(index)
+    if index < 5 then
+        return tags[current_activity][index]
+    end
+    return tags["shared"][index - 4]
+end
 
 decreased_padding_tag_names = {}
 
@@ -447,7 +502,27 @@ awful.screen.connect_for_each_screen(
         s.mytaglist =
             awful.widget.taglist {
             screen = s,
-            filter = awful.widget.taglist.filter.noempty,
+            filter = function(t)
+                local is_in_activity = false
+                local is_in_shared = false
+                local noempty = awful.widget.taglist.filter.noempty(t)
+
+                for _, v in pairs(tags[current_activity]) do
+                    if v == t then
+                        is_in_activity = true
+                        break
+                    end
+                end
+
+                for _, v in pairs(tags["shared"]) do
+                    if v == t then
+                        is_in_shared = true
+                        break
+                    end
+                end
+
+                return noempty and (is_in_activity or is_in_shared)
+            end,
             buttons = taglist_buttons,
             layout = {
                 spacing = 12,
@@ -595,6 +670,7 @@ awful.screen.connect_for_each_screen(
                 mykeyboardlayout,
                 mytextclock,
                 -- s.mylayoutbox,
+                activity_widget,
                 wibox.widget {
                     widget = wibox.container.margin,
                     left = 6,
@@ -629,6 +705,15 @@ root.buttons(
 -- {{{ Key bindings
 globalkeys =
     gears.table.join(
+    -- personal widget notification center
+    -- awful.key(
+    --     {modkey},
+    --     "i",
+    --     function()
+    --         popup.visible = not popup.visible
+    --     end,
+    --     {description = "show notification center", group = "awesome"}
+    -- ),
     awful.key(
         {modkey},
         "-",
@@ -942,7 +1027,7 @@ globalkeys =
     )
 )
 
-function get_tag_current_screen(target_tag)
+function get_tag_screen(target_tag)
     for s in screen do
         for _, t in pairs(s.tags) do
             if t.name == target_tag.name then
@@ -958,33 +1043,43 @@ function set_prev_screen(s)
     -- naughty.notify({preset=naughty.config.presets.normal, title=tostring(s.index), text="THE SAME"})
 end
 
+local prev_tag = nil
+function set_prev_tag(t)
+    if (t ~= prev_tag) then
+        prev_tag = t
+    end
+end
+
 function bring_or_swap(i)
-    local target_tag = tags[i]
-    local target_screen = get_tag_current_screen(target_tag)
+    local target_tag = getTag(i)
+    local target_screen = get_tag_screen(target_tag)
     local current_screen = awful.screen.focused()
     local current_tag = current_screen.selected_tag
     local one_screen = screen.count() == 1
     local debug = 0
 
-    if current_tag and target_tag.name == current_tag.name then
-        if not one_screen and prev_screen and prev_screen.index ~= current_screen.index then
+    if current_tag and target_tag == current_tag then
+        if not one_screen and prev_screen and prev_screen.index ~= current_screen.index then -- Just go to other screen
             debug = 1
             awful.screen.focus(prev_screen)
             -- awful.screen.focus_relative(1)
             set_prev_screen(current_screen)
-        else
+        else -- Bring back
             debug = 2
-            awful.tag.history.restore()
+            sharedtags.viewonly(prev_tag)
+            set_prev_tag(current_tag)
         end
-    elseif target_tag and target_screen and not one_screen then
+    elseif target_tag and target_screen and not one_screen then -- Go to the target screen and tag
         debug = 3
         awful.screen.focus(target_screen)
         set_prev_screen(current_screen)
+        set_prev_tag(target_tag)
         -- awful.screen.focus_relative(1)
         sharedtags.viewonly(target_tag)
-    elseif one_screen then
+    elseif one_screen then -- Go to target tag
         debug = 4
         awful.screen.focus(target_screen)
+        set_prev_tag(current_tag)
         sharedtags.viewonly(target_tag)
     end
 
@@ -996,7 +1091,9 @@ function bring_or_swap(i)
                     ", current_screen: " ..
                         tostring(current_screen.index) ..
                             ", current_tag: " ..
-                                (current_tag and current_tag.name or "nil") .. ", debug: " .. tostring(debug)
+                                (current_tag and current_tag.name or "nil") ..
+                                    ", prev_tag: " ..
+                                        (prev_tag and prev_tag.name or "nil") .. ", debug: " .. tostring(debug)
     -- naughty.notify({preset = naughty.config.presets.normal, title = "BRING", text = text})
 end
 
@@ -1124,46 +1221,46 @@ for i = 1, 9 do
             {description = "view tag #" .. i, group = "tag"}
         ),
         -- Toggle tag display.
-        awful.key(
-            {modkey, "Control"},
-            "#" .. i + 9,
-            function()
-                local screen = awful.screen.focused()
-                local tag = screen.tags[i]
-                if tag then
-                    sharedtags.viewtoggle(tag, screen)
-                end
-            end,
-            {description = "toggle tag #" .. i, group = "tag"}
-        ),
+        -- awful.key(
+        --     {modkey, "Control"},
+        --     "#" .. i + 9,
+        --     function()
+        --         local screen = awful.screen.focused()
+        --         local tag = screen.tags[i]
+        --         if tag then
+        --             sharedtags.viewtoggle(tag, screen)
+        --         end
+        --     end,
+        --     {description = "toggle tag #" .. i, group = "tag"}
+        -- ),
         -- Move client to tag.
         awful.key(
             {modkey, "Shift"},
             "#" .. i + 9,
             function()
                 if client.focus then
-                    local tag = tags[i]
+                    local tag = getTag(i)
                     if tag then
                         client.focus:move_to_tag(tag)
                     end
                 end
             end,
             {description = "move focused client to tag #" .. i, group = "tag"}
-        ),
-        -- Toggle tag on focused client.
-        awful.key(
-            {modkey, "Control", "Shift"},
-            "#" .. i + 9,
-            function()
-                if client.focus then
-                    local tag = tags[i]
-                    if tag then
-                        client.focus:toggle_tag(tag)
-                    end
-                end
-            end,
-            {description = "toggle focused client on tag #" .. i, group = "tag"}
         )
+        -- Toggle tag on focused client.
+        -- awful.key(
+        --     {modkey, "Control", "Shift"},
+        --     "#" .. i + 9,
+        --     function()
+        --         if client.focus then
+        --             local tag = tags[i]
+        --             if tag then
+        --                 client.focus:toggle_tag(tag)
+        --             end
+        --         end
+        --     end,
+        --     {description = "toggle focused client on tag #" .. i, group = "tag"}
+        -- )
     )
 end
 
@@ -1202,6 +1299,21 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
+    {
+        rule = {
+            class = "jetbrains-.*",
+            instance = "sun-awt-X11-XWindowPeer",
+            name = "win.*"
+        },
+        properties = {
+            floating = true,
+            focus = true,
+            focusable = false,
+            ontop = true,
+            placement = awful.placement.restore,
+            buttons = {}
+        }
+    },
     {
         rule = {},
         properties = {
@@ -1263,32 +1375,32 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     {
         rule_any = {
-            class = {"Emacs", "Astroid", "qtwaw"}
+            class = {"Emacs", "Astroid"}
         },
-        properties = {tag = tags[5]}
-    },
-    {
-        rule = {class = "Google-chrome", role = "browser"},
-        properties = {tag = tags[2]}
-    },
-    {
-        rule = {class = "Google-chrome", role = "browser", name = "Work"},
-        properties = {tag = tags[1]}
-    },
-    {
-        rule = {class = "Google-chrome", role = "browser", name = "work"},
-        properties = {tag = tags[1]}
-    },
-    {
-        rule = {class = "Alacritty"},
-        properties = {tag = tags[4]}
-    },
-    {
-        rule_any = {
-            class = {"TelegramDesktop", "discord", "qtwaw"}
-        },
-        properties = {tag = tags[3]}
+        properties = {tag = getTag(5)}
     }
+    -- {
+    --     rule = {class = "Google-chrome", role = "browser"},
+    --     properties = {tag = tags[2]}
+    -- },
+    -- {
+    --     rule = {class = "Google-chrome", role = "browser", name = "Work"},
+    --     properties = {tag = tags[1]}
+    -- },
+    -- {
+    --     rule = {class = "Google-chrome", role = "browser", name = "work"},
+    --     properties = {tag = tags[1]}
+    -- },
+    -- {
+    --     rule = {class = "Alacritty"},
+    --     properties = {tag = tags[4]}
+    -- },
+    -- {
+    --     rule_any = {
+    --         class = {"TelegramDesktop", "discord", "qtwaw"}
+    --     },
+    --     properties = {tag = tags[3]}
+    -- }
 }
 -- }}}
 
