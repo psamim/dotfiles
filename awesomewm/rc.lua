@@ -153,30 +153,31 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 orgmode = awful.widget.watch('bash -c "/home/samim/.bin/clocking"', 10)
 
--- cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+-- ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 -- popup = require("notifs.notif-center.notif_popup")
+volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
 memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
 vicious.register(memwidget, vicious.widgets.mem, "Mem: $1%", 13)
 
-cpuwidget = awful.widget.graph()
-cpuwidget:set_width(50)
-cpuwidget:set_background_color "#494B4F44"
-cpuwidget:set_color {
-    type = "linear",
-    from = {0, 0},
-    to = {100, 100},
-    stops = {
-        {1, "#AECF96"},
-        {0.2, "#88A175"},
-        {0, "#FF5656"}
-    }
-}
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
+-- cpuwidget = awful.widget.graph()
+-- cpuwidget:set_width(50)
+-- cpuwidget:set_background_color "#494B4F44"
+-- cpuwidget:set_color {
+--   type = "linear",
+--   from = {0, 0},
+--   to = {100, 100},
+--   stops = {
+--     {1, "#AECF96"},
+--     {0.2, "#88A175"},
+--     {0, "#FF5656"}
+--   }
+-- }
+-- vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
 wifi = wibox.widget.textbox()
 vicious.cache(vicious.widgets.wifiiw)
@@ -648,7 +649,15 @@ awful.screen.connect_for_each_screen(
                 -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 -- ram_widget({color_used = "#980000"}),
-                cpuwidget,
+                -- cpuwidget,
+                cpu_widget(
+                    {
+                        width = 70,
+                        step_width = 2,
+                        step_spacing = 0
+                        -- color = '#434c5e'
+                    }
+                ),
                 wibox.widget {
                     widget = wibox.container.margin,
                     left = 12,
@@ -658,7 +667,6 @@ awful.screen.connect_for_each_screen(
                         layout = wibox.layout.fixed.horizontal
                     }
                 },
-                -- cpu_widget(),
                 wibox.widget {
                     widget = wibox.container.margin,
                     left = 6,
@@ -670,6 +678,9 @@ awful.screen.connect_for_each_screen(
                 },
                 net_speed_widget(),
                 s.systray,
+                volume_widget {
+                    widget_type = "icon"
+                },
                 notification_widget,
                 mykeyboardlayout,
                 mytextclock,
