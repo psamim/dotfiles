@@ -346,10 +346,13 @@ local tags = {
 
 activity_widget_box =
     wibox.widget {
-    widget = wibox.widget.textbox,
-    markup = tostring(current_activity),
-    align = "center",
-    valign = "center",
+    -- widget = wibox.widget.textbox,
+    -- markup = tostring(current_activity),
+    -- align = "center",
+    -- valign = "center",
+    widget = wibox.widget.imagebox,
+    image = "/home/samim/.dotfiles/icons/man.svg",
+    resize = true,
     buttons = gears.table.join(
         awful.button(
             {},
@@ -357,10 +360,11 @@ activity_widget_box =
             function()
                 if current_activity == "me" then
                     current_activity = "work"
+                    activity_widget_box:set_image("/home/samim/.dotfiles/icons/work.svg")
                 else
                     current_activity = "me"
+                    activity_widget_box:set_image("/home/samim/.dotfiles/icons/man.svg")
                 end
-                activity_widget_box:set_markup(tostring(current_activity))
             end
         )
     )
@@ -462,7 +466,7 @@ awful.screen.connect_for_each_screen(
         )
 
         -- Create a promptbox for each screen
-        s.mypromptbox = awful.widget.prompt()
+        -- s.mypromptbox = awful.widget.prompt()
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
         -- We need one layoutbox per screen.
         s.mylayoutbox = awful.widget.layoutbox(s)
@@ -1073,7 +1077,7 @@ function bring_or_swap(i)
         debug = 3
         awful.screen.focus(target_screen)
         set_prev_screen(current_screen)
-        set_prev_tag(target_tag)
+        set_prev_tag(current_tag)
         -- awful.screen.focus_relative(1)
         sharedtags.viewonly(target_tag)
     elseif one_screen then -- Go to target tag
@@ -1359,7 +1363,7 @@ awful.rules.rules = {
             role = {
                 "AlarmWindow", -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+                -- "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
                 "GtkFileChooserDialog"
             }
         },
