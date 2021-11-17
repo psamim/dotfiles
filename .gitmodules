@@ -14,3 +14,7 @@
 	path = awesomewm/sharedtags
 	url = https://github.com/Drauthius/awesome-sharedtags.git
 	branch = v4.0
+[submodule "awesomewm/awesome-wm-widgets"]
+	path = awesomewm/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets.git
+	branch = master
