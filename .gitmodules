@@ -10,3 +10,7 @@
 [submodule "tpm"]
 	path = tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "awesomewm/sharedtags"]
+	path = awesomewm/sharedtags
+	url = https://github.com/Drauthius/awesome-sharedtags.git
+	branch = v4.0
