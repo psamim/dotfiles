@@ -825,7 +825,7 @@ This function makes sure that dates are aligned for easy reading."
     :box (:line-width 2 :color "#fafafa" :style nil))
   '((org-document-title) :family "pacifico")
   '((org-ellipsis) :height 1.0)
-  '((org-level-1) :weight normal :height 1.3 :inherit outline-1)
+  '((org-level-1) :weight normal :height 1.1 :inherit outline-1)
   '((org-level-2) :weight normal :foreground "#211221" :inherit outline-2)
   '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
   '((org-level-4) :weight normal :inherit outline-4 :foreground "#616161")
