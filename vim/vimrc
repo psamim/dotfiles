@@ -101,12 +101,18 @@ Plug 'akinsho/nvim-bufferline.lua'
 
 " Snippets
 Plug 'honza/vim-snippets'
+Plug 'diepm/vim-rest-console'
 call plug#end()
 
 set nonumber
 syntax enable
 set background=dark
 set termguicolors
+
+" set titlestring=%{expand(\"%:p:h\")}
+set titlestring=%{split(getcwd(),'\/')[-1]}
+set title
+
 
 " Suda
 let g:suda_smart_edit = 1
@@ -201,6 +207,7 @@ let mapleader = " "
 nmap <S-w> :w<CR>
 nmap <leader>fs :w<CR>
 nmap <S-q> :w<CR>:bd<CR>
+nmap <leader>qs :w\|bd<cr>
 nmap <leader>1 :on<CR>
 inoremap jj <Esc>
 
@@ -519,4 +526,10 @@ require'nvim-tree'.setup {
        dotfiles = true
       }
     }
+EOF
+
+lua <<EOF
+local neogit = require("neogit")
+
+neogit.config.use_magit_keybindings()
 EOF
