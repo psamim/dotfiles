@@ -144,7 +144,7 @@ alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
 alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
-alias tmux='direnv exec / tmux'
+alias tmux='TERM=screen-256color-bce direnv exec / tmux'
 alias magit='emacsclient -nw -e \(magit-status\)'
 alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
 alias ledger="ledger --pedantic --explicit --strict"

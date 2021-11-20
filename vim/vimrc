@@ -51,6 +51,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'qpkorr/vim-bufkill'
 " Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 " Plug 'machakann/vim-sandwich'
@@ -95,7 +96,7 @@ Plug 'sainnhe/gruvbox-material'
 " Plug 'sainnhe/everforest'
 
 " Tab line
-Plug 'akinsho/nvim-bufferline.lua'
+Plug 'akinsho/bufferline.nvim'
 " Plug 'pacha/vem-tabline'
 " Plug 'romgrk/barbar.nvim'
 
@@ -265,8 +266,8 @@ nnoremap <A-j> <C-w>h
 nnoremap <A-k> <C-w>l
 " nnoremap <A-j> <C-w>j
 " nnoremap <A-k> <C-w>k
-inoremap <A-q> <Esc>:bdelete<CR>
-nnoremap <A-q> <Esc>:bdelete<CR>
+inoremap <A-q> <Esc>:BD<CR>
+nnoremap <A-q> <Esc>:BD<CR>
 nnoremap <leader><tab> :b#<cr>
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprev<CR>
