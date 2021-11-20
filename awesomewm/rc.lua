@@ -158,7 +158,7 @@ logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu"
 net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 -- ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 -- popup = require("notifs.notif-center.notif_popup")
-volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+-- volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
 memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
@@ -208,10 +208,10 @@ notification_widget_box =
 notification_widget =
     wibox.widget {
     widget = wibox.container.margin,
-    left = 6,
-    right = 6,
-    top = 6,
-    bottom = 6,
+    left = 2,
+    right = 2,
+    top = 3,
+    bottom = 3,
     {
         notification_widget_box,
         layout = wibox.layout.fixed.horizontal
@@ -677,11 +677,29 @@ awful.screen.connect_for_each_screen(
                     }
                 },
                 net_speed_widget(),
-                s.systray,
-                volume_widget {
-                    widget_type = "icon"
+                wibox.widget {
+                    {
+                        {
+                            {
+                                s.systray,
+                                -- volume_widget {
+                                --     widget_type = "icon"
+                                -- },
+                                notification_widget,
+                                layout = wibox.layout.fixed.horizontal
+                            },
+                            left = 8,
+                            right = 6,
+                            widget = wibox.container.margin
+                        },
+                        bg = "#222222",
+                        shape = gears.shape.rounded_rect,
+                        widget = wibox.container.background
+                    },
+                    top = 3,
+                    bottom = 3,
+                    widget = wibox.container.margin
                 },
-                notification_widget,
                 mykeyboardlayout,
                 mytextclock,
                 -- s.mylayoutbox,
