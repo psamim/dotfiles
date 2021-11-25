@@ -27,7 +27,7 @@
       )
 
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
-(custom-set-variables '(emojify-display-style 'image))
+(custom-set-variables '(emojify-display-style 'unicode))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -56,6 +56,7 @@
   ;; org-caldav-sync-changes-to-org 'all
   ;; org-caldav-sync-direction 'cal->org
   plstore-cache-passphrase-for-symmetric-encryption t
+  password-cache-expiry nil
   org-ellipsis "…"
    ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
   org-agenda-files (quote ("~/Notes/projects"
@@ -66,6 +67,8 @@
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
+  org-export-in-background t
+  org-catch-invisible-edits 'smart
   org-directory "~/Notes")
 
 (setq org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
@@ -393,6 +396,15 @@ This function makes sure that dates are aligned for easy reading."
 ;;   company-dabbrev-code-everywhere t
 ;;   company-dabbrev-code-other-buffers 'all))
 
+(set-company-backend!
+  '(text-mode
+    markdown-mode
+    gfm-mode)
+  '(:seperate
+    company-ispell
+    company-files
+    company-yasnippet))
+
 (add-hook 'text-mode-hook
           (lambda ()
             (set-farsi-font)
@@ -416,7 +428,8 @@ This function makes sure that dates are aligned for easy reading."
 ;; (add-hook! 'mu4e-view-mode-hook
 ;;            #'olivetti-mode)
 
-;; (global-org-pretty-table-mode)
+(use-package! org-pretty-table
+  :commands (org-pretty-table-mode global-org-pretty-table-mode))
 
 (defun set-window-clean ()
   (agenda-color-char)
@@ -699,7 +712,7 @@ This function makes sure that dates are aligned for easy reading."
 
 (map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
 
-(setq ispell-dictionary "en")
+(setq ispell-dictionary "en_US")
 
 ;; (use-package! nroam
 ;;   :after org-roam
@@ -1022,3 +1035,7 @@ according to the value of `org-display-remote-inline-images'."
         :ne "M-A" #'calibredb-set-metadata--authors
         :ne "M-T" #'calibredb-set-metadata--title
         :ne "M-c" #'calibredb-set-metadata--comments))
+
+(setq org-re-reveal-theme "white"
+      org-re-reveal-transition "slide"
+      org-re-reveal-plugins '(markdown notes math search zoom))

@@ -82,3 +82,5 @@
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 (disable-packages! diff-hl)
 (package! calibredb)
+(package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
+(package! org-appear :recipe (:host github :repo "awth13/org-appear"))
