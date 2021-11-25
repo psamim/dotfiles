@@ -218,6 +218,35 @@ notification_widget =
     }
 }
 
+background_widget_box =
+    wibox.widget {
+    widget = wibox.widget.imagebox,
+    image = "/home/samim/.dotfiles/icons/background.svg",
+    resize = true,
+    buttons = gears.table.join(
+        awful.button(
+            {},
+            1,
+            function()
+              awful.spawn("systemctl --user restart feh-wallpaper  ", false)
+            end
+        )
+    )
+}
+
+background_widget =
+    wibox.widget {
+    widget = wibox.container.margin,
+    left = 2,
+    right = 2,
+    top = 3,
+    bottom = 3,
+    {
+        background_widget_box,
+        layout = wibox.layout.fixed.horizontal
+    }
+}
+
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -466,6 +495,9 @@ awful.screen.connect_for_each_screen(
             end
         )
 
+        -- s:connect_signal("removed", awesome.restart)
+        -- s:connect_signal("added", awesome.restart)
+
         -- Create a promptbox for each screen
         -- s.mypromptbox = awful.widget.prompt()
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -686,6 +718,7 @@ awful.screen.connect_for_each_screen(
                                 --     widget_type = "icon"
                                 -- },
                                 notification_widget,
+                                background_widget,
                                 layout = wibox.layout.fixed.horizontal
                             },
                             left = 8,
