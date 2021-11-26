@@ -43,3 +43,6 @@ This scripts checks if HDMI is connected, if is connected it switches Pulseaudio
 
 ** [[file:bin/invert][invert]]
 This script inverts colors of the currently active window using picom and toggles it.
+
+** [[https://gist.github.com/rsvp/1209835][noise.sh]]
+Generates brown noise.
