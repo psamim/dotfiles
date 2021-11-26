@@ -1,22 +1,24 @@
 #! /bin/bash
 
-# This script inverts colors of the currently active window using compton
+# This script inverts colors of the currently active window using picom
 # and toggles it.
 
 if [[ -e ~/.inverted ]]
 then
-	echo "Already inverted"
-	rm -f ~/.inverted
-    pkill compton
-    compton --config ~/.compton &
+  echo "Already inverted"
+  rm -f ~/.inverted
+  pkill picom
+  sleep 1
+  picom &
 else
-	echo "Try to invert"
-	touch ~/.inverted
-    pkill compton
-    ID=$(xdotool getactivewindow)
-    CLASS=$(xprop -id "$ID"  | grep "WM_CLASS" | awk '{print $4}')
-    COND="class_g=${CLASS}"
-    compton --invert-color-include "$COND" --config ~/.compton &
+  echo "Try to invert"
+  touch ~/.inverted
+  pkill picom
+  sleep 1
+  ID=$(xdotool getactivewindow)
+  CLASS=$(xprop -id "$ID"  | grep "WM_CLASS" | awk '{print $4}')
+  COND="class_g=${CLASS}"
+  picom --invert-color-include "$COND" &
 fi
 exit
 

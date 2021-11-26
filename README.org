@@ -32,8 +32,6 @@ Script to check if kernel needs a reboot to upgrade. I use this in bars to displ
 ** [[file:bin/getquote][getquote]]
 This needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can update its price database using =--download= [[https://www.ledger-cli.org/3.0/doc/ledger3.html#:~:text=a%20script%20named-,getquote,-and%20expecting%20that][option]].
 
-**
-
 ** [[file:bin/emc][emc]] and [[file:bin/emct][emct]]
 Scripts to open =emacsclient= in terminal and in window mode. I use them alongside with a [[file:desktop-files/Emc.desktop][Emc.desktop]] file to make opening files in Emacs easier in file managers like Thunar or Dolphin; using "Open With..." menu.
 
@@ -42,3 +40,6 @@ It gets today's Bing wallpaper and also writes the image description on the imag
 
 ** [[file:bin/hdmi-sound-toggle][hdmi-sound-toggle]]
 This scripts checks if HDMI is connected, if is connected it switches Pulseaudio profile to HDMI; Otherwise switches to a default profile. I use this in [[https://github.com/phillipberndt/autorandr][autorandr]]'s [[file:autorandr/docked/postswitch][postswitch]] script to automatically switch to HDMI sound output.
+
+** [[file:bin/invert][invert]]
+This script inverts colors of the currently active window using picom and toggles it.
