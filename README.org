@@ -3,9 +3,9 @@
 These are my dotfiles for everything I currently use or used to use.
 
 * Screenshots and Posts
-- [[https://www.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/][My org-mode agenda, much better now with category icons! : emacs]]
-- [[https://www.reddit.com/r/unixporn/comments/jprtoj/xmonad_productivity_workflow_emacs_orgmode_agenda/][[xmonad] Productivity workflow (Emacs org-mode agenda, Astroid notmuch email client)]]
-- [[https://www.reddit.com/r/emacs/comments/moc6dw/my_orgagenda_on_my_phone/][My org-agenda on my phone : emacs]]
+- [[https://www.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/][My org-mode agenda, much better now with category icons!]]
+- [[https://www.reddit.com/r/unixporn/comments/jprtoj/xmonad_productivity_workflow_emacs_orgmode_agenda/][xmonad Productivity workflow (Emacs org-mode agenda, Astroid notmuch email client)]]
+- [[https://www.reddit.com/r/emacs/comments/moc6dw/my_orgagenda_on_my_phone/][My org-agenda on my phone]]
 
 * Useful Shell Scripts
 ** [[file:bin/arbtt-running][arbtt-running]]
