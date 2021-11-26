@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 # -*- mode: sh; -*-
+#
+# Usage:
+# back # to backup everything and send them
+# back --only-send # to just send the backups
+# back --hdd # to only transfer the backupts to encrypted HDD
+# back --create-private # to only create a bakcup of keys
 
 # To restore backup:
 # Have the keys in ~/$BORG_CONFIG_DIR/keys
@@ -9,16 +15,24 @@
 # borg list path/to/borg/bakcup
 # borg export-tar /path/to/borg/backup::archive out.tar
 
+# Helper functions to display log
 function info() { npx chalk-cli -t "$(date -Iminutes) - {yellow $* }" }
 function error() { npx chalk-cli -t "$(date -Iminutes) - {red $* }" }
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 # set -x # Uncomment to debug
 
+# Creates a backup using borg
+# It uses pass password manager to get passwords
+# --
+# First argument is the path to backup
+# Second argument is the borg backup name
+# Argmenuts after the second one are passed to borg
 function borg_backup() {
     local SOURCE=$1
     local NAME=$2
     local OPTIONS="$@[3,-1]"
     local BORG_REPO=$BORG_CONFIG_DIR/repos/$NAME
+    # Use pass to automatically read password for borg backup
     export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 
     if [ ! -d "$SOURCE" ]; then
@@ -75,6 +89,8 @@ function borg_backup() {
     export BORG_PASSPHRASE=""
 }
 
+# Creates a backup for a path accessible via SSH
+# It first mounts the path locally using SSHFS
 function borg_remote_backup() {
     local REMOTE=$1
     local PREV=$PWD
@@ -101,6 +117,10 @@ function borg_remote_backup() {
     rm -rf $SOURCE
 }
 
+# This creates a gpg encrypted tar using my private key
+# --
+# First argument is the path to create archive from
+# Second argument is the path to create the archive to
 function make_tar_gpg() {
     # Decrypt: 
     # gpg -d your_archive.tgz.gpg | tar xz
@@ -128,6 +148,10 @@ function make_tar_gpg() {
     cd $PREV_DIR
 }
 
+# This creates a gpg symmetric encrypted tar
+# --
+# First argument is the path to create archive from
+# Second argument is the path to create the archive to
 function make_tar_gpg_sym() {
     # https://askubuntu.com/questions/95920/encrypt-tar-gz-file-on-create
     # Decrypt: 
@@ -146,6 +170,10 @@ function make_tar_gpg_sym() {
     fi
 }
 
+# This sends the given directory to various destinations using rclone
+# --
+# First argument is the path to send
+# Second argument is path in the remote destination
 function send() {
     info "Sending '$1' to cloud as name '$2'"
     info "Sending to passport"
@@ -158,6 +186,10 @@ function send() {
     done
 }
 
+# This creates a backup of my SSH, GPG and Borg keys
+# in a symmetrically encrypted tar file
+# --
+# First argument is the path the backup is created at
 function create_private_file() {
     info "Creating private file"
     local TEMP_PRIVATE_DIR=/tmp/$RANDOM
@@ -176,6 +208,8 @@ function create_private_file() {
 }
 
 
+# This mounts my LUKS encrypted HDD
+# and transfers my backups to it using rsync and rclone
 function borg_hdd_backup {
   local MOUNT_HDD="/mnt/backup"
   local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"

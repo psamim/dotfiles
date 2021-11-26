@@ -8,9 +8,6 @@ These are my dotfiles for everything I currently use or used to use.
 - [[https://www.reddit.com/r/emacs/comments/moc6dw/my_orgagenda_on_my_phone/][My org-agenda on my phone]]
 
 * Useful Scripts
-** [[file:bin/arbtt-running][arbtt-running]]
-It displays [[https://arbtt.nomeata.de/#what][arbtt time tracker]]'s overall time spent today. Also if arbtt-capture is not running it displays a red alert showing OFF. It toggles arbtt-capture on or off on click (in i3blocks).
-
 ** [[file:bin/clocking][clocking]]
 :PROPERTIES:
 :ID:       8363c5ec-6c3b-4c5c-b3c6-94649af38ab3
@@ -18,7 +15,19 @@ It displays [[https://arbtt.nomeata.de/#what][arbtt time tracker]]'s overall tim
 Displays the title  of current active (clocked) heading in [[https://orgmode.org/][Org mode]] along with its Pomodoro counter and overall spent time. I use this in bars (polybar, awesomewm, i3blocks, etc).
 
 ** [[file:bin/clocking.py][clocking.py]]
-A more fancy version of [[id:8363c5ec-6c3b-4c5c-b3c6-94649af38ab3][clocking]] script in Python. It has functions like =clock_out= or =go_to_clock= to be used for click events in i3blocks.
+Displays the current clocked heading in org-mode. A more fancy version of =clocking= script in Python. It has functions like =clock_out= or =go_to_clock= to be used for click events in i3blocks.
+
+** [[file:bin/toggle-layout][toggle-layout]]
+This script toggles keyboard layout. It checks the current active window, if it is Emacs it sends =ctrl-\= to change input method in Emacs otherwise it calls =xkb-switch -n=. This lets me to toggle layout with a single key binding whether I am in Emacs or not.
+
+** [[file:bin/back][back]]
+I use this to backup everything. It uses  [[https://borgbackup.readthedocs.io/en/stable/][Borg]]  to backups and then uses [[https://rclone.org/][Rclone]] to send backups to various locations. I run it manually every month. It contains many utility functions to create asymmetric and symmetric encrypted files using GPG, to create and transfer backups and mount LUKS encrypted drives.
+
+** [[file:bin/arbtt-running][arbtt-running]]
+It displays [[https://arbtt.nomeata.de/#what][arbtt time tracker]]'s overall time spent today. Also if arbtt-capture is not running it displays a red alert showing OFF. It toggles arbtt-capture on or off on click (in i3blocks).
 
 ** [[file:bin/reboot-p][reboot-p]]
 Script to check if kernel needs a reboot to upgrade. I use this in bars to display REBOOT so that I know.
+
+** [[file:bin/getquote][getquote]]
+This needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can update its price database using =--download= [[https://www.ledger-cli.org/3.0/doc/ledger3.html#:~:text=a%20script%20named-,getquote,-and%20expecting%20that][option]].
