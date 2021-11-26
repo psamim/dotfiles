@@ -31,3 +31,6 @@ Script to check if kernel needs a reboot to upgrade. I use this in bars to displ
 
 ** [[file:bin/getquote][getquote]]
 This needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can update its price database using =--download= [[https://www.ledger-cli.org/3.0/doc/ledger3.html#:~:text=a%20script%20named-,getquote,-and%20expecting%20that][option]].
+
+** [[file:bin/emc][emc]] and [[file:bin/emct][emct]]
+Scripts to open =emacsclient= in terminal and in window mode. I use them alongside with a [[file:desktop-files/Emc.desktop][Emc.desktop]] file to make opening files in Emacs easier in file managers like Thunar or Dolphin; using "Open With..." menu.
