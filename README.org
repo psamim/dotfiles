@@ -34,3 +34,6 @@ This needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can
 
 ** [[file:bin/emc][emc]] and [[file:bin/emct][emct]]
 Scripts to open =emacsclient= in terminal and in window mode. I use them alongside with a [[file:desktop-files/Emc.desktop][Emc.desktop]] file to make opening files in Emacs easier in file managers like Thunar or Dolphin; using "Open With..." menu.
+
+** [[file:bin/get-bing-wallpaper][get-bing-wallpaper]]
+It gets today's Bing wallpaper and also writes the image description on the image. There are systemd user services to run this script once daily ,here is the user [[file:systemd/user/get-bing-wallpaper.service][service]] and its [[file:systemd/user/get-bing-wallpaper.timer][timer]]. Also there is a separate [[file:systemd/user/feh-wallpaper.service][service]] and [[file:systemd/user/feh-wallpaper.timer][timer]] to change the desktop wallpaper periodically.
