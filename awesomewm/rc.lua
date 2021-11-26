@@ -1614,7 +1614,7 @@ do
         "pasystray",
         "flashfocus",
         "picom",
-        "keyboard_configure.sh"
+        "keyboard-configure"
     }
 
     for _, i in pairs(autostarts) do

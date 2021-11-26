@@ -20,7 +20,7 @@ export PATH="${PATH}:/home/samim/.bin"
 
 autorandr -c
 
-/home/samim/.bin/keyboard_configure.sh
+/home/samim/.bin/keyboard-configure
 perWindowLayoutD
 
 # Disable touchpad taps while typing
