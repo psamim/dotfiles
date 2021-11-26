@@ -1,9 +1,13 @@
 #!/bin/bash
 
-USER_NAME=$(who | awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
+# This scripts checks if HDMI is connected, if is connected it switches pulseaudio profile to HDMI
+# Otherwise switches to a default profile
+
+# USER_NAME=$(who | awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
+USER_NAME=$(whoami)
 USER_ID=$(id -u "$USER_NAME")
 CARD_PATH="/sys/class/drm/card0/"
-AUDIO_OUTPUT="analog-surround-40"
+AUDIO_OUTPUT="analog-stereo"
 PULSE_SERVER="unix:/run/user/"$USER_ID"/pulse/native"
 
 for OUTPUT in $(cd "$CARD_PATH" && echo card*); do
