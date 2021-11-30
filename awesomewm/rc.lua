@@ -21,6 +21,7 @@ require("awful.hotkeys_popup.keys")
 local sharedtags = require("sharedtags")
 
 local vicious = require("vicious")
+local revelation = require("revelation")
 
 -- package.loaded["naughty.dbus"] = {}
 naughty.config.defaults.icon_size = 32
@@ -105,6 +106,8 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
+
+revelation.init()
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -228,7 +231,7 @@ background_widget_box =
             {},
             1,
             function()
-              awful.spawn("systemctl --user restart feh-wallpaper  ", false)
+                awful.spawn("systemctl --user restart feh-wallpaper  ", false)
             end
         )
     )
@@ -771,6 +774,7 @@ root.buttons(
 -- {{{ Key bindings
 globalkeys =
     gears.table.join(
+    awful.key({modkey}, "e", revelation),
     -- personal widget notification center
     -- awful.key(
     --     {modkey},
@@ -1053,19 +1057,19 @@ globalkeys =
     -- awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
     --           {description = "run prompt", group = "launcher"}),
 
-    awful.key(
-        {modkey},
-        "x",
-        function()
-            awful.prompt.run {
-                prompt = "Run Lua code: ",
-                textbox = awful.screen.focused().mypromptbox.widget,
-                exe_callback = awful.util.eval,
-                history_path = awful.util.get_cache_dir() .. "/history_eval"
-            }
-        end,
-        {description = "lua execute prompt", group = "awesome"}
-    ),
+    -- awful.key(
+    --     {modkey},
+    --     "x",
+    --     function()
+    --         awful.prompt.run {
+    --             prompt = "Run Lua code: ",
+    --             textbox = awful.screen.focused().mypromptbox.widget,
+    --             exe_callback = awful.util.eval,
+    --             history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --         }
+    --     end,
+    --     {description = "lua execute prompt", group = "awesome"}
+    -- ),
     -- Menubar
     -- awful.key(
     --     {modkey},
@@ -1406,6 +1410,7 @@ awful.rules.rules = {
                 "pinentry"
             },
             class = {
+                "zoom",
                 "Arandr",
                 "Blueman-manager",
                 "Gpick",

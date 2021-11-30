@@ -18,3 +18,7 @@
 	path = awesomewm/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets.git
 	branch = master
+[submodule "awesomewm/revelation"]
+	path = awesomewm/revelation
+	url = https://github.com/guotsuan/awesome-revelation.git
+	branch = master
