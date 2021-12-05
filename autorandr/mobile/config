@@ -1,6 +1,9 @@
-output HDMI-1
+output HDMI1
 off
-output eDP-1
+output VIRTUAL1
+off
+output eDP1
+crtc 0
 mode 1920x1080
 pos 0x0
 primary
