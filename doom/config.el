@@ -64,10 +64,11 @@
                            "~/Notes/roam/20210625224916-areas.org"
                            "~/Notes/roam/20210507181408-people.org"
                            "~/Notes/roam/20211106000942-learn.org"
+                           "~/Notes/study.org"
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
   org-agenda-breadcrumbs-separator " ❱ "
-  org-export-in-background t
+  org-export-in-background nil
   org-catch-invisible-edits 'smart
   org-directory "~/Notes")
 
