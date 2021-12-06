@@ -13,13 +13,13 @@ These are my dotfiles for everything I currently use or used to use. I use [[fil
 :PROPERTIES:
 :ID:       8363c5ec-6c3b-4c5c-b3c6-94649af38ab3
 :END:
-A shell script that displays the title  of current active (clocked) heading in [[https://orgmode.org/][Org mode]] along with its Pomodoro counter and overall spent time. I use this in bars (polybar, awesomewm, i3blocks, etc).
+A shell script that displays the title of current active (clocked) heading in [[https://orgmode.org/][Org mode]] along with its Pomodoro counter and overall spent time. I use this in bars (polybar, awesomewm, i3blocks, etc).
 
 *** [[file:bin/clocking.py][clocking.py]]
 A python script that displays the current clocked heading in org-mode. A more fancy version of =clocking= script. It has functions like =clock_out= or =go_to_clock= to be used for click events in i3blocks.
 
 *** [[file:bin/toggle-layout][toggle-layout]]
-This shell script toggles keyboard layout. It checks the current active window, if it is Emacs it sends =ctrl-\= to change input method in Emacs otherwise it calls =xkb-switch -n=. This lets me to toggle layout with a single key binding whether I am in Emacs or not.
+This shell script toggles the keyboard layout. It checks the current active window, if it is Emacs it sends =ctrl-\= to change the input method in Emacs otherwise it calls =xkb-switch -n=. This lets me toggle layout with a single key binding whether I am in Emacs or not.
 
 *** [[file:bin/sync-cal][sync-cal]]
 I use this shell script to export my org-mode agenda to an ICS file and upload it to a place where Google Calendar or other calendars can access. This way I have my scheduled items in Google Calendar and can share it with others. The actual function to export to ICS is defined [[https://github.com/psamim/dotfiles/blob/master/doom/config.el#L965][here]].
@@ -56,7 +56,7 @@ This shell script gets today's Bing wallpaper and also writes the image descript
 This shell script inverts colors of the currently active window using picom and toggles it.
 
 *** [[file:systemd/user/xcape.service][xcape]]
-Small systemd user service to start [[https://github.com/alols/xcape][xcape]] to turn caps lock into escape, when pressed and released on its own. I also turn caps lock to control key in the [[file:bin/keyboard-configure][keyboard-configure]] script. So my caps lock both work as escape key and control key.
+Small systemd user service to start [[https://github.com/alols/xcape][xcape]] to turn caps lock into escape, when pressed and released on its own. I also turn caps lock to control key in the [[file:bin/keyboard-configure][keyboard-configure]] script. So my caps lock both works as an escape key and control key.
 
 *** [[https://gist.github.com/rsvp/1209835][noise.sh]]
 Shell script to generate brown noise.
