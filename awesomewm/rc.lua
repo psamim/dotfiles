@@ -12,11 +12,13 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 -- local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
+-- local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 
 local sharedtags = require("sharedtags")
 
@@ -25,6 +27,7 @@ local revelation = require("revelation")
 
 -- package.loaded["naughty.dbus"] = {}
 naughty.config.defaults.icon_size = 32
+naughty.config.defaults.margin = dpi(10)
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -112,12 +115,12 @@ revelation.init()
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-    {
-        "hotkeys",
-        function()
-            hotkeys_popup.show_help(nil, awful.screen.focused())
-        end
-    },
+    -- {
+    --     "hotkeys",
+    --     function()
+    --         hotkeys_popup.show_help(nil, awful.screen.focused())
+    --     end
+    -- },
     {"manual", terminal .. " -e man awesome"},
     {"edit config", editor_cmd .. " " .. awesome.conffile},
     {"restart", awesome.restart},
@@ -764,9 +767,9 @@ root.buttons(
             function()
                 mymainmenu:toggle()
             end
-        ),
-        awful.button({}, 4, awful.tag.viewnext),
-        awful.button({}, 5, awful.tag.viewprev)
+        )
+        -- awful.button({}, 4, awful.tag.viewnext),
+        -- awful.button({}, 5, awful.tag.viewprev)
     )
 )
 -- }}}
@@ -800,7 +803,7 @@ globalkeys =
         end,
         {description = "Toggle systray visibility", group = "custom"}
     ),
-    awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
+    -- awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
     awful.key(
         {},
         "XF86AudioLowerVolume",
@@ -845,6 +848,23 @@ globalkeys =
         function()
             awful.util.spawn("playerctl previous", false)
         end
+    ),
+    -- Brightness
+    awful.key(
+        {},
+        "XF86MonBrightnessUp",
+        function()
+            os.execute("xbacklight -inc 10")
+        end,
+        {description = "+10%", group = "hotkeys"}
+    ),
+    awful.key(
+        {},
+        "XF86MonBrightnessDown",
+        function()
+            os.execute("xbacklight -dec 10")
+        end,
+        {description = "-10%", group = "hotkeys"}
     ),
     awful.key({modkey}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({modkey}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
@@ -1094,6 +1114,14 @@ globalkeys =
             bring_or_swap(5)
         end,
         {description = "view tag Emacs", group = "tag"}
+    ),
+    awful.key(
+        {modkey},
+        "n",
+        function()
+            naughty.destroy_all_notifications(nil, naughty.notificationClosedReason.dismissedByUser)
+        end,
+        {description = "Destroy notifications", group = "client"}
     )
 )
 
@@ -1170,8 +1198,8 @@ end
 clientkeys =
     gears.table.join(
     awful.key(
-        {modkey},
-        "f",
+        {},
+        "F11",
         function(c)
             c.fullscreen = not c.fullscreen
             c:raise()
@@ -1186,12 +1214,7 @@ clientkeys =
         end,
         {description = "close", group = "client"}
     ),
-    awful.key(
-        {modkey, "Control"},
-        "space",
-        awful.client.floating.toggle,
-        {description = "toggle floating", group = "client"}
-    ),
+    awful.key({modkey}, "f", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
     awful.key(
         {modkey},
         "Return",
@@ -1219,6 +1242,14 @@ clientkeys =
             c.ontop = not c.ontop
         end,
         {description = "toggle keep on top", group = "client"}
+    ),
+    awful.key(
+        {modkey},
+        "s",
+        function(c)
+            c.sticky = not c.sticky
+        end,
+        {description = "toggle sticky", group = "client"}
     )
     -- awful.key({ modkey,           }, "n",
     --     function (c)
@@ -1407,7 +1438,8 @@ awful.rules.rules = {
             instance = {
                 "DTA", -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
-                "pinentry"
+                "pinentry",
+                "SimpleScreenRecorder"
             },
             class = {
                 "zoom",
@@ -1420,7 +1452,8 @@ awful.rules.rules = {
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
                 "veromix",
-                "xtightvncviewer"
+                "xtightvncviewer",
+                "SimpleScreenRecorder"
             },
             -- Note that the name property shown in xprop might be set slightly after creation of the client
             -- and the name shown there might not match defined rules here.
@@ -1555,12 +1588,12 @@ client.connect_signal(
 )
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal(
-    "mouse::enter",
-    function(c)
-        c:emit_signal("request::activate", "mouse_enter", {raise = false})
-    end
-)
+-- client.connect_signal(
+--     "mouse::enter",
+--     function(c)
+--         c:emit_signal("request::activate", "mouse_enter", {raise = false})
+--     end
+-- )
 
 function draw_left_bar(c)
     local tag = c.first_tag
@@ -1617,7 +1650,8 @@ do
     local autostarts = {
         "cbatticon",
         "pasystray",
-        "flashfocus",
+        -- "flashfocus",
+        "mullvad-vpn",
         "picom",
         "keyboard-configure"
     }

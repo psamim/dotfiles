@@ -7,6 +7,7 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
+local gears = require("gears")
 local themes_path = gfs.get_themes_dir()
 
 local theme = {}
@@ -24,7 +25,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(6)
 theme.gap_single_client = true
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
@@ -65,10 +66,22 @@ theme.border_marked = "#CC9393"
 theme.taglist_spacing = 0
 
 -- Variables set for theming notifications:
+-- 
 -- notification_font
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
+theme.notification_max_width = 500
+theme.notification_max_height = 200
+theme.notification_border_width = dpi(1.5)
+theme.notification_border_radius = dpi(8)
+theme.notification_border_color = "#444444"
+theme.opacity = 1
+theme.notification_shape = function(cr,w,h)
+  gears.shape.rounded_rect(
+    cr, w, h, theme.notification_border_radius
+  )
+end
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
