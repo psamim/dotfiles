@@ -8,6 +8,7 @@ These are my dotfiles for everything I currently use or used to use. I use [[fil
 - [[https://www.reddit.com/r/emacs/comments/moc6dw/my_orgagenda_on_my_phone/][My org-agenda on my phone]]
 
 * Description
+** Related to Emacs, Org-mode or ledger-cli
 *** [[file:bin/clocking][clocking]]
 :PROPERTIES:
 :ID:       8363c5ec-6c3b-4c5c-b3c6-94649af38ab3
@@ -17,12 +18,24 @@ A shell script that displays the title  of current active (clocked) heading in [
 *** [[file:bin/clocking.py][clocking.py]]
 A python script that displays the current clocked heading in org-mode. A more fancy version of =clocking= script. It has functions like =clock_out= or =go_to_clock= to be used for click events in i3blocks.
 
-*** [[file:bin/sync-cal][sync-cal]]
-I use this shell script to export my org-mode agenda to an ICS file and upload it to a place where Google Calendar or other calendars can access. This way I have my scheduled items in Google Calendar and can share it with others. The actual function to export to ICS is defined [[https://github.com/psamim/dotfiles/blob/master/doom/config.el#L965][here]].
-
 *** [[file:bin/toggle-layout][toggle-layout]]
 This shell script toggles keyboard layout. It checks the current active window, if it is Emacs it sends =ctrl-\= to change input method in Emacs otherwise it calls =xkb-switch -n=. This lets me to toggle layout with a single key binding whether I am in Emacs or not.
 
+*** [[file:bin/sync-cal][sync-cal]]
+I use this shell script to export my org-mode agenda to an ICS file and upload it to a place where Google Calendar or other calendars can access. This way I have my scheduled items in Google Calendar and can share it with others. The actual function to export to ICS is defined [[https://github.com/psamim/dotfiles/blob/master/doom/config.el#L965][here]].
+
+*** [[file:bin/emc][emc]] and [[file:bin/emct][emct]]
+Shell scripts to open =emacsclient= in terminal and in window mode. I use them alongside with a [[file:desktop-files/Emc.desktop][Emc.desktop]] file to make opening files in Emacs easier in file managers like Thunar or Dolphin; using "Open With..." menu.
+
+*** [[file:ledger-autosync/plugins/][ledger-sync plugins]]
+I use [[https://github.com/egh/ledger-autosync][ledger-autosync]] to import CSV files from my bank into my ledger files. These are the plugins I use for the banks I use.
+
+*** [[file:bin/getquote][getquote]]
+This small shell script needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can update its price database using =--download= [[https://www.ledger-cli.org/3.0/doc/ledger3.html#:~:text=a%20script%20named-,getquote,-and%20expecting%20that][option]].
+
+*** [[file:doom/][Emacs doom configuration]]
+
+** Other
 *** [[file:bin/back][back]]
 I use this shell script to backup everything. It uses  [[https://borgbackup.readthedocs.io/en/stable/][Borg]]  to backup and then uses [[https://rclone.org/][Rclone]] to send backups to various locations. I run it manually every month. It contains many utility functions to create asymmetric and symmetric encrypted files using GPG, to create and transfer backups and mount LUKS encrypted drives.
 
@@ -35,8 +48,6 @@ This shell script checks if HDMI is connected, if is connected it switches Pulse
 *** [[file:bin/arbtt-running][arbtt-running]]
 This shell script displays [[https://arbtt.nomeata.de/#what][arbtt time tracker]]'s overall time spent today. Also if arbtt-capture is not running it displays a red alert showing OFF. It toggles arbtt-capture on or off on click (in i3blocks).
 
-*** [[file:bin/getquote][getquote]]
-This small shell script needs to be in PATH so that [[https://www.ledger-cli.org/][ledger-cli]] can update its price database using =--download= [[https://www.ledger-cli.org/3.0/doc/ledger3.html#:~:text=a%20script%20named-,getquote,-and%20expecting%20that][option]].
 
 *** [[file:bin/get-bing-wallpaper][get-bing-wallpaper]]
 This shell script gets today's Bing wallpaper and also writes the image description on the image. There are systemd user services to run this script once daily ,here is the user [[file:systemd/user/get-bing-wallpaper.service][service]] and its [[file:systemd/user/get-bing-wallpaper.timer][timer]]. Also there is a separate [[file:systemd/user/feh-wallpaper.service][service]] and [[file:systemd/user/feh-wallpaper.timer][timer]] to change the desktop wallpaper periodically.
@@ -44,18 +55,11 @@ This shell script gets today's Bing wallpaper and also writes the image descript
 *** [[file:bin/invert][invert]]
 This shell script inverts colors of the currently active window using picom and toggles it.
 
-*** [[file:bin/emc][emc]] and [[file:bin/emct][emct]]
-Shell scripts to open =emacsclient= in terminal and in window mode. I use them alongside with a [[file:desktop-files/Emc.desktop][Emc.desktop]] file to make opening files in Emacs easier in file managers like Thunar or Dolphin; using "Open With..." menu.
-
 *** [[file:systemd/user/xcape.service][xcape]]
 Small systemd user service to start [[https://github.com/alols/xcape][xcape]] to turn caps lock into escape, when pressed and released on its own. I also turn caps lock to control key in the [[file:bin/keyboard-configure][keyboard-configure]] script. So my caps lock both work as escape key and control key.
-
-*** [[file:ledger-autosync/plugins/][ledger-sync plugins]]
-I use [[https://github.com/egh/ledger-autosync][ledger-autosync]] to import CSV files from my bank into my ledger files. These are the plugins I use for the banks I use.
 
 *** [[https://gist.github.com/rsvp/1209835][noise.sh]]
 Shell script to generate brown noise.
 
-*** [[file:doom/][Emacs doom configuration]]
 *** [[file:zsh/zshrc][zshrc]]
 *** [[file:vim/vimrc][vimrc]]
