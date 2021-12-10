@@ -186,3 +186,6 @@ ln -sf $PWD/awesomewm/rc.lua $HOME/.config/awesome/rc.lua
 
 rm -rf "$HOME/.config/awesome"
 ln -sf "$PWD/awesomewm" "$HOME/.config/awesome"
+
+rm -rf "$HOME/.config/paru"
+ln -sf "$PWD/paru" "$HOME/.config/paru"
