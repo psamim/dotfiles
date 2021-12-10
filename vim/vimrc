@@ -83,6 +83,8 @@ Plug 'rhysd/git-messenger.vim'
 " Plug 'APZelos/blamer.nvim'
 " Plug 'ttys3/nvim-blamer.lua'
 " Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+Plug 'junegunn/vim-emoji'
+
 
 " extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
 Plug 'junegunn/vim-peekaboo'
@@ -536,3 +538,21 @@ let g:gitgutter_sign_modified_removed = emoji#for('collision')
 " hi default link BufferInactiveMod  TabLine
 " hi default link BufferInactiveSign TabLine
 " exe 'hi default BufferInactiveTarget   guifg=red gui=bold guibg=' . bg_inactive
+"
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+nnoremap <S-h> :call ToggleHiddenAll()<CR>

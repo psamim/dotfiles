@@ -137,6 +137,7 @@
       ("cook" "~/.dotfiles/icons/cook.svg" nil nil :ascent center :mask heuristic)
       ("buy" "~/.dotfiles/icons/buy.svg" nil nil :ascent center :mask heuristic)
       ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
+      ("archive" "~/.dotfiles/icons/archive.svg" nil nil :ascent center :mask heuristic)
       ))
 (setq org-agenda-hidden-separator "‌‌ ")
 (defun agenda-color-char ()
