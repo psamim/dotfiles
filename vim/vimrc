@@ -53,6 +53,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'qpkorr/vim-bufkill'
+Plug 'karb94/neoscroll.nvim'
+Plug 'wfxr/minimap.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-frecency.nvim'
+Plug 'tami5/sqlite.lua'
 " Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 " Plug 'machakann/vim-sandwich'
@@ -78,11 +84,12 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'TimUntersberger/neogit'
+Plug 'kdheepak/lazygit.nvim'
+
 " Adds <leader>gm to display diff (d) and history
 Plug 'rhysd/git-messenger.vim'
 " Plug 'APZelos/blamer.nvim'
 " Plug 'ttys3/nvim-blamer.lua'
-" Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 Plug 'junegunn/vim-emoji'
 
 
@@ -97,6 +104,7 @@ Plug 'sainnhe/gruvbox-material'
 " Plug 'shaunsingh/nord.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 " Plug 'sainnhe/everforest'
+Plug 'xiyaowong/nvim-transparent'
 
 " Tab line
 Plug 'akinsho/bufferline.nvim'
@@ -217,15 +225,17 @@ inoremap jj <Esc>
 
 " fzf
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>bb :Telescope buffers<CR>
+nnoremap <silent> <leader>bp :BufferLinePick<CR>
 " nmap <leader>o :History<CR>
-nmap <leader>o :CocCommand fzf-preview.MruFiles<CR>
+nmap <leader>o :Telescope oldfiles<CR>
 " nmap <leader>p :GFiles<CR>
-nmap <leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+nmap <leader>p :Telescope find_files prompt_prefix=🔍<CR>
 let g:fzf_preview_use_dev_icons = 1
 nmap <C-p> :GFiles<CR>
-nmap <leader>/ :Rg<CR>
-nmap <leader><leader> :Commands<CR>
+nmap <leader>/ :Telescope live_grep<CR>
+nmap <leader>* :Telescope grep_string<CR>
+nmap <leader><leader> :Telescope commands<CR>
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
@@ -272,8 +282,10 @@ nnoremap <A-k> <C-w>l
 inoremap <A-q> <Esc>:BD<CR>
 nnoremap <A-q> <Esc>:BD<CR>
 nnoremap <leader><tab> :b#<cr>
-nnoremap <A-l> :bnext<CR>
-nnoremap <A-h> :bprev<CR>
+" nnoremap <A-l> :bnext<CR>
+" nnoremap <A-h> :bprev<CR>
+nnoremap <A-l> :BufferLineCycleNext<CR>
+nnoremap <A-h> :BufferLineCyclePrev<CR>
 
 " Tig
 nnoremap <leader>gs :Neogit<cr>
@@ -437,11 +449,33 @@ set laststatus=0
 let g:fugitive_gitlab_domains = ['https://global.gitlab.com']
 
 lua << EOF
- require("bufferline").setup {
-   options = {
-     offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }}
-   }
- }
+require("bufferline").setup {
+  options = {
+    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }},
+    diagnostics = "coc",
+    separator_style = "slant",
+    always_show_bufferline = false,
+  enforce_regular_tabs = true,
+      show_close_icon = false
+  },
+highlights = {
+  fill = {
+    guibg = "#141414"
+    },
+  buffer_selected = {
+    guifg = "#FFFFFF"
+    },
+  separator_selected = {
+    guifg = "#141414"
+    },
+  separator_visible = {
+    guifg = "#141414"
+    },
+  separator = {
+    guifg = "#141414"
+    }
+  }
+}
 EOF
 
 let g:solarized_termtrans=1
@@ -451,7 +485,8 @@ if exists('g:GuiLoaded')
 endif
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
+" hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -499,14 +534,16 @@ local neogit = require("neogit")
 neogit.config.use_magit_keybindings()
 EOF
 
+let g:transparent_enabled = v:true
+
 " gutter is the same color as where your line numbers show up is the following:
 " https://stackoverflow.com/questions/15277241/changing-vim-gutter-color
-highlight SignColumn guibg=NONE
-highlight GitGutterAdd    guifg=#98971a ctermfg=2 guibg=NONE 
-highlight GitGutterChange guifg=#d79921 ctermfg=3 guibg=NONE
-highlight GitGutterDelete guifg=#cc241d ctermfg=1 guibg=NONE
-highlight CocErrorSign guifg=#cc241d ctermfg=1 guibg=NONE
-highlight CocInfoSign guifg=#cc241d ctermfg=1 guibg=NONE
+" highlight SignColumn guibg=NONE
+" highlight GitGutterAdd    guifg=#98971a ctermfg=2 guibg=NONE 
+" highlight GitGutterChange guifg=#d79921 ctermfg=3 guibg=NONE
+" highlight GitGutterDelete guifg=#cc241d ctermfg=1 guibg=NONE
+" highlight CocErrorSign guifg=#cc241d ctermfg=1 guibg=NONE
+" highlight CocInfoSign guifg=#cc241d ctermfg=1 guibg=NONE
 
 " highlight GruvboxRedSign guibg=NONE
 let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
@@ -556,3 +593,39 @@ function! ToggleHiddenAll()
     endif
 endfunction
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
+lua <<EOF
+require('neoscroll').setup({
+    -- All these keys will be mapped to their corresponding default scrolling animation
+    mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+    hide_cursor = true,          -- Hide cursor while scrolling
+    stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+    use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+    respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+    cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+    easing_function = nil,        -- Default easing function
+    pre_hook = nil,              -- Function to run before the scrolling animation starts
+    post_hook = nil,              -- Function to run after the scrolling animation ends
+})
+EOF
+
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+
+lua <<EOF
+require"telescope".load_extension("frecency")
+
+require('telescope').setup{
+extensions = {
+  frecency = {
+    default_workspace = 'CWD',
+    ignore_patterns = {"*.git/*", "*node_modules/*"},
+    show_unindexed = true
+    }
+  }
+}
+EOF
+
+let g:lazygit_use_neovim_remote = 0
