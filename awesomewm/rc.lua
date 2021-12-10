@@ -1667,3 +1667,12 @@ do
         )
     end
 end
+
+require("wallpaper").start(
+    {
+        path = "~/Pictures/Wallpaper",
+        show_notify = false,
+        timeout = 300,
+        change_on_click = true
+    }
+)
