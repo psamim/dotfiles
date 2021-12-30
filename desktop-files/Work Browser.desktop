@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Work Browser
+Name=Global Browser
 StartupWMClass=work-Google-chrome
 Exec=/home/samim/.bin/work-browser %U
 StartupNotify=true

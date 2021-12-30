@@ -724,7 +724,7 @@ awful.screen.connect_for_each_screen(
                                 --     widget_type = "icon"
                                 -- },
                                 notification_widget,
-                                background_widget,
+                                -- background_widget,
                                 layout = wibox.layout.fixed.horizontal
                             },
                             left = 8,

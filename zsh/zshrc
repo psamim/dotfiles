@@ -119,7 +119,7 @@ export JAVA_HOME=/usr/lib/jvm/default
 export DEFAULT_USER="samim"
 export GOPATH="$HOME/.go"
 export ANDROID_HOME="/home/samim/Android/Sdk"
-export EDITOR=nvr
+export EDITOR=nvim
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export PYENV_ROOT="$HOME/.pyenv"

@@ -5,5 +5,5 @@ notify-send "Switched to mobile mode"
 # /home/samim/.bin/launch_polybar
 /home/samim/.bin/keyboard-configure
 echo 'awesome.restart()' | awesome-client
-systemctl --user restart feh-wallpaper
+# systemctl --user restart feh-wallpaper
 
