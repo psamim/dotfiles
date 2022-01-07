@@ -3,6 +3,10 @@
     "account": "Expenses:Groceries",
     "name": "Super Jolfa"
   },
+  "12211971": {
+    "account": "Expenses:Groceries",
+    "name": "Labaniati Nazar"
+  },
   "21378891": {
     "account": "Expenses:Groceries",
     "name": "Nuts Store"
@@ -524,6 +528,10 @@
     "name": "Morgh Hannaneh Nazar Gharbi"
   },
   "714033": {
+    "account": "Expenses:Internet:Server",
+    "name": "Pasprack"
+  },
+  "12180000": {
     "account": "Expenses:Internet:Server",
     "name": "Pasprack"
   },

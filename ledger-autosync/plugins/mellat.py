@@ -8,7 +8,8 @@ import os
 
 t = {
     'mande': 'مانده',
-    'mablagh': 'مبلغ گردش',
+    'mablagh': 'مبلغ گردش بدهکار',
+    'variz': 'مبلغ گردش بستانکار',
     'sharh': 'شرح',
     'zinaf': 'واریز کننده/ ذیتفع',
     'time': 'زمان',
@@ -32,7 +33,9 @@ class Mellat(CsvConverter):
             'Desc.': persian.convert_fa_numbers(row[t['sharh']]),
         }
         amount = int(row[t['mablagh']])
+        variz = int(row[t['variz']])
         amount = amount / 10000
+        variz = variz / 10000
 
         name = persian.convert_fa_numbers(row[t['zinaf']])
         matchNumber = re.findall('(\d+)', name)
@@ -52,12 +55,12 @@ class Mellat(CsvConverter):
         if accountNumber != '':
             payee = "(" + accountNumber + ") " + payee
 
-        if amount < 0:
+        if amount > 0:
             reverse = True
             amount = abs(amount)
         else:
             reverse = False
-            amount = abs(amount)
+            amount = abs(variz)
             fromAccount = 'Income:Salary'
 
         jdatestring = row[t['date']]

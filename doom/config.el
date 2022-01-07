@@ -37,9 +37,11 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
+  org-crypt-key "psamim@gmail.com"
   org-clock-persist t
-  org-tags-exclude-from-inheritance '("project")
+  org-tags-exclude-from-inheritance '("project" "crypt")
   ;; org-duration-format 'h:mm
+  org-tag-alist '(("crypt" . ?c))
   org-duration-format '((special . h:mm))
   org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
   org-export-with-section-numbers nil
@@ -72,8 +74,10 @@
   org-catch-invisible-edits 'smart
   org-directory "~/Notes")
 
-(setq org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
-      org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
+(setq
+ org-gcal-auto-archive nil
+ org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
+ org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
 
  (setq mixed-pitch-fixed-pitch-faces
    (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
@@ -89,7 +93,7 @@
  'org-capture-templates
  (quote (
          ("t" "todo" entry
-          (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\n%a\n" :clock-keep t)
+          (file+headline "~/Notes/projects/projects.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
          ("s" "schedule" entry
           (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
          )))
@@ -334,6 +338,7 @@ This function makes sure that dates are aligned for easy reading."
 ;; (customize-set-variable 'org-journal-file-type "daily")
 (setq!
  org-journal-dir "~/Notes/journal/daily"
+ org-journal-enable-cache t
  org-journal-encrypt-journal t
  org-journal-file-header 'psamim-journal-prefix)
 

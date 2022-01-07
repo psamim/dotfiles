@@ -220,6 +220,11 @@ function borg_hdd_backup {
     sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
   fi
 
+  if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
+    error "Could not mount!"
+    exit
+  fi
+
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   rclone sync passport:/mnt/photoprism/originals "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2

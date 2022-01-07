@@ -35,11 +35,11 @@ class Eghtesad(CsvConverter):
         fromAccount = self.unknownaccount
         foundAccount = self.accounts.get(str(accountNumber), None)
         payee = 'Unknown'
-        if accountNumber is not '' and foundAccount:
+        if accountNumber != '' and foundAccount:
             fromAccount = foundAccount['account']
             payee = foundAccount['name']
 
-        if accountNumber is not '':
+        if accountNumber != '':
             payee = "(" + str(accountNumber) + ") " + payee
 
         if outputAmount > 0:

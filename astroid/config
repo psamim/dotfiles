@@ -39,7 +39,9 @@
     "startup": {
         "queries": {
             "Inbox": "tag:inbox",
+            "Personal": "tag:inbox and not tag:global",
             "Global": "tag:global and tag:inbox",
+            "Music": "tag:music",
             "Quora": "tag:Quora",
             "Recipe": "tag:Recipe",
             "Sentry": "tag:global/sentry",
