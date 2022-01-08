@@ -224,23 +224,36 @@ notification_widget =
     }
 }
 
-background_widget_box =
+mic_widget_box =
     wibox.widget {
     widget = wibox.widget.imagebox,
-    image = "/home/samim/.dotfiles/icons/background.svg",
+    image = "/home/samim/.dotfiles/icons/microphone.svg",
     resize = true,
     buttons = gears.table.join(
         awful.button(
             {},
             1,
             function()
-                awful.spawn("systemctl --user restart feh-wallpaper  ", false)
+                toggleMute()
             end
         )
     )
 }
 
-background_widget =
+function toggleMute()
+    awful.spawn.easy_async(
+        "toggle-mute",
+        function(stdout)
+            if string.find(stdout, "ON") then
+                mic_widget_box:set_image("/home/samim/.dotfiles/icons/microphone.svg")
+            else
+                mic_widget_box:set_image("/home/samim/.dotfiles/icons/microphone-off.svg")
+            end
+        end
+    )
+end
+
+mic_widget =
     wibox.widget {
     widget = wibox.container.margin,
     left = 2,
@@ -248,10 +261,39 @@ background_widget =
     top = 3,
     bottom = 3,
     {
-        background_widget_box,
+        mic_widget_box,
         layout = wibox.layout.fixed.horizontal
     }
 }
+
+-- background_widget_box =
+--     wibox.widget {
+--     widget = wibox.widget.imagebox,
+--     image = "/home/samim/.dotfiles/icons/background.svg",
+--     resize = true,
+--     buttons = gears.table.join(
+--         awful.button(
+--             {},
+--             1,
+--             function()
+--                 awful.spawn("systemctl --user restart feh-wallpaper  ", false)
+--             end
+--         )
+--     )
+-- }
+
+-- background_widget =
+--     wibox.widget {
+--     widget = wibox.container.margin,
+--     left = 2,
+--     right = 2,
+--     top = 3,
+--     bottom = 3,
+--     {
+--         background_widget_box,
+--         layout = wibox.layout.fixed.horizontal
+--     }
+-- }
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -724,6 +766,7 @@ awful.screen.connect_for_each_screen(
                                 --     widget_type = "icon"
                                 -- },
                                 notification_widget,
+                                mic_widget,
                                 -- background_widget,
                                 layout = wibox.layout.fixed.horizontal
                             },
@@ -787,6 +830,7 @@ globalkeys =
     --     end,
     --     {description = "show notification center", group = "awesome"}
     -- ),
+    awful.key({}, "F8", toggleMute),
     awful.key(
         {modkey},
         "-",

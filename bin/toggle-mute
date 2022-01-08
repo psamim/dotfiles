@@ -1,0 +1,11 @@
+#!/bin/bash
+amixer -D pulse sset Capture toggle > /dev/null
+amixer get Capture | grep '\[off\]' > /dev/null
+
+if [ "$?" -eq "0" ]; then
+  echo -n OFF
+  notify-send 'Mic turned off!'
+else
+  echo -n ON
+  notify-send 'Mic turned on!'
+fi
