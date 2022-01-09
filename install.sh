@@ -78,6 +78,7 @@ ln -sf $PWD/picom/picom.conf $HOME/.config/picom/picom.conf
 # X
 ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
 ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
+ln -sf "$PWD/X/Xmodmap" "$HOME/.Xmodmap"
 
 # dunst
 rm -rf "$HOME/.config/dunst"

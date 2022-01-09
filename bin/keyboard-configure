@@ -8,3 +8,4 @@ export DISPLAY=:0
 export XAUTHORITY=/home/samim/.Xauthority 
 setxkbmap -layout us,ir -option ''
 setxkbmap -option caps:ctrl_modifier
+xmodmap ~/.Xmodmap
