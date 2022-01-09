@@ -65,7 +65,6 @@
                            "~/Notes/calendar-inbox.org"
                            "~/Notes/roam/20210625224916-areas.org"
                            "~/Notes/roam/20210507181408-people.org"
-                           "~/Notes/roam/20211106000942-learn.org"
                            "~/Notes/study.org"
                            "~/Notes/events.org"))
   org-deadline-warning-days 7
@@ -752,8 +751,8 @@ This function makes sure that dates are aligned for easy reading."
     (load-secrets)
     (org-gcal-fetch)))
 
-(run-with-timer 0 (* 18 60 60) 'sync-calendars)
-(run-with-timer 0 (* 1 60 60) (lambda () (progn (sync-agenda-svg) (sleep-for 1) (my-org-agenda))))
+;; (run-with-timer 0 (* 18 60 60) 'sync-calendars)
+;; (run-with-timer 0 (* 1 60 60) (lambda () (progn (sync-agenda-svg) (sleep-for 1) (my-org-agenda))))
 
 ;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
 (defun my-auto-exclude-fn (tag)
@@ -790,7 +789,7 @@ This function makes sure that dates are aligned for easy reading."
       (progn
         (insert-file-contents index-file-template)
         (goto-char (point-min))
-        (while (search-forward "{{FILENAME}}" nil t)
+        (while (search-forward "{{ FILENAME }}" nil t)
           (replace-match file-name t))))
     (message (concat "Saved screenshot to " file-name))))
 
