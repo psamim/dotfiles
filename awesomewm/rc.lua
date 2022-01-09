@@ -24,6 +24,7 @@ local sharedtags = require("sharedtags")
 
 local vicious = require("vicious")
 local revelation = require("revelation")
+local wallpapers = require("wallpaper")
 
 -- package.loaded["naughty.dbus"] = {}
 naughty.config.defaults.icon_size = 32
@@ -1209,6 +1210,7 @@ function bring_or_swap(i)
         else -- Bring back
             debug = 2
             sharedtags.viewonly(prev_tag)
+            wallpapers.setWallpaperFor(prev_tag, current_screen, current_activity)
             set_prev_tag(current_tag)
         end
     elseif target_tag and target_screen and not one_screen then -- Go to the target screen and tag
@@ -1218,11 +1220,13 @@ function bring_or_swap(i)
         set_prev_tag(current_tag)
         -- awful.screen.focus_relative(1)
         sharedtags.viewonly(target_tag)
+        wallpapers.setWallpaperFor(target_tag, target_screen, current_activity)
     elseif one_screen then -- Go to target tag
         debug = 4
         awful.screen.focus(target_screen)
         set_prev_tag(current_tag)
         sharedtags.viewonly(target_tag)
+        wallpapers.setWallpaperFor(target_tag, target_screen, current_activity)
     end
 
     local text =
@@ -1712,11 +1716,11 @@ do
     end
 end
 
-require("wallpaper").start(
+wallpapers.start(
     {
         path = "~/Pictures/Wallpaper",
         show_notify = false,
-        timeout = 300,
+        timeout = 0,
         change_on_click = true
     }
 )
