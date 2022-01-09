@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync agenda svg
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c /home/samim/.bin/sync-agenda-svg
