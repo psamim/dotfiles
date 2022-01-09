@@ -21,7 +21,7 @@ A python script that displays the current clocked heading in org-mode. A more fa
 *** [[file:bin/toggle-layout][toggle-layout]]
 This shell script toggles the keyboard layout. It checks the current active window, if it is Emacs it sends =ctrl-\= to change the input method in Emacs otherwise it calls =xkb-switch -n=. This lets me toggle layout with a single key binding whether I am in Emacs or not.
 
-*** [[file:bin/sync-svg-agenda][sync-svg-agenda]]
+*** [[file:bin/sync-agenda-svg][sync-agenda-svg]]
 This script generates and SVG version of my org-agenda. Then I use the SVG file on my phone and also as my browser homepage. There is an screenshot of this in [[https://www.reddit.com/r/emacs/comments/moc6dw/my_orgagenda_on_my_phone/][My org-agenda on my phone]].
 
 *** [[file:bin/sync-cal][sync-cal]]
