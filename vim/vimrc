@@ -59,6 +59,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'tami5/sqlite.lua'
+Plug 'isobit/vim-caddyfile'
 " Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 " Plug 'machakann/vim-sandwich'
@@ -105,6 +106,7 @@ Plug 'sainnhe/gruvbox-material'
 " Plug 'projekt0n/github-nvim-theme'
 " Plug 'sainnhe/everforest'
 Plug 'xiyaowong/nvim-transparent'
+Plug 'ful1e5/onedark.nvim'
 
 " Tab line
 Plug 'akinsho/bufferline.nvim'
@@ -483,6 +485,15 @@ set cursorline
 if exists('g:GuiLoaded')
   Guifont! Iosevka:h13
 endif
+
+" lua <<EOF
+" require("onedark").setup({
+"   transparent=false,
+"   hide_inactive_statusline = true,
+"   highlight_linenumber = true
+" })
+" EOF
+
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
 " hi Normal guibg=NONE ctermbg=NONE
@@ -530,8 +541,6 @@ EOF
 
 lua <<EOF
 local neogit = require("neogit")
-
-neogit.config.use_magit_keybindings()
 EOF
 
 let g:transparent_enabled = v:true
