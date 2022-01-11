@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 
 local config = {}
+local tags = {}
 local timer = nil
 
 local index = 65535
@@ -110,7 +111,8 @@ local function startTimer()
     }
 end
 
-local function start(cfg)
+local function start(cfg, tagz)
+    tags = tagz
     config =
         mergeTables(
         {
@@ -136,8 +138,9 @@ local prev_mode = ""
 
 local function setWallpaperFor(tag, screen, current_activity)
     local mode = ""
+    local calTag = tags["shared"][1]
 
-    if current_activity == "work" and tag.index ~= 9 then
+    if current_activity == "work" and tag ~= calTag then
         mode = "work"
         if prev_mode ~= mode then
             setWallpaper("/home/samim/Pictures/Wallpaper/work.png")
@@ -146,7 +149,7 @@ local function setWallpaperFor(tag, screen, current_activity)
         return
     end
 
-    if tag.index == 9 then
+    if tag == calTag then
         mode = "productivity"
         if prev_mode ~= mode then
             setWallpaper("/home/samim/Pictures/Paper/current.jpg")

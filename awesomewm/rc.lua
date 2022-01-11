@@ -1722,5 +1722,6 @@ wallpapers.start(
         show_notify = false,
         timeout = 0,
         change_on_click = true
-    }
+    },
+    tags
 )
