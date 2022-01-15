@@ -1,2 +1,3 @@
 #!/bin/bash
-xvfb-run --server-args="-screen 0 1024x768x24"  emacs --eval '(progn (run-at-time "22 sec" nil '\''sync-agenda-svg) (run-at-time "25 sec" nil '\''sync-calendars) (run-at-time "35 sec" nil '\''kill-emacs))' -fs
+xvfb-run --server-args="-screen 0 768x1260x24" emacs --eval \
+  '(progn (global-hl-line-mode -1) (run-at-time "22 sec" nil '\''sync-agenda-svg) (run-at-time "25 sec" nil '\''sync-calendars) (run-at-time "35 sec" nil '\''kill-emacs))' -fs

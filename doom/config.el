@@ -34,9 +34,13 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one-light)
 
+(setq org-agenda-clock-report-header "Report\n")
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
+ org-agenda-clockreport-parameter-plist
+   '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
   org-crypt-key "psamim@gmail.com"
   org-clock-persist t
   org-tags-exclude-from-inheritance '("project" "crypt")
@@ -233,7 +237,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-remove-tags t)
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-show-inherited-tags nil)
-                      (org-agenda-prefix-format "   %-2i %?b %(org-agenda-get-progress)")
+                      (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
 
          ;; (org-ql-block '(and
@@ -281,7 +285,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-remove-tags t)
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-show-inherited-tags nil)
-                      (org-agenda-prefix-format "   %-2i %?b %(org-agenda-get-progress)")
+                      (org-agenda-prefix-format "   %-2i %?b")
                       (org-agenda-todo-keyword-format "")))
          ))
 
@@ -457,21 +461,21 @@ This function makes sure that dates are aligned for easy reading."
             (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(add-hook
- 'org-agenda-mode-hook
- (lambda ()
-   (defun org-agenda-get-progress ()
-     (interactive)
-     (let
-         ;; ((effort (and (not (string= txt "")) (get-text-property 1 'effort txt))))
-         (
-          (effort (cdar (org-entry-properties nil "EFFORT")))
-          (clocksum
-           (org-duration-from-minutes
-            (org-clock-sum-current-item (car (org-clock-special-range 'thisweek nil nil 0))))))
-       (if effort
-           (concat "[" clocksum  "/" effort "] ")
-         (concat "[" clocksum "] "))))))
+;; (add-hook
+;;  'org-agenda-mode-hook
+;;  (lambda ()
+;;    (defun org-agenda-get-progress ()
+;;      (interactive)
+;;      (let
+;;          ;; ((effort (and (not (string= txt "")) (get-text-property 1 'effort txt))))
+;;          (
+;;           (effort (cdar (org-entry-properties nil "EFFORT")))
+;;           (clocksum
+;;            (org-duration-from-minutes
+;;             (org-clock-sum-current-item (car (org-clock-special-range 'thisweek nil nil 0))))))
+;;        (if effort
+;;            (concat "[" clocksum  "/" effort "] ")
+;;          (concat "[" clocksum "] "))))))
 
 ;; (use-package! mu4e
 ;;   :config
@@ -802,7 +806,6 @@ This function makes sure that dates are aligned for easy reading."
     (setq cursor-type nil)
     (save-screenshot-svg)
     (setq cursor-type 'box)))
-
 
 (map! :localleader
       (:map org-mode-map
