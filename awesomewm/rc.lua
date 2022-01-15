@@ -1721,7 +1721,7 @@ wallpapers.start(
         path = "~/Pictures/Wallpaper",
         show_notify = false,
         timeout = 0,
-        change_on_click = true
+        change_on_click = false
     },
     tags
 )

@@ -160,7 +160,7 @@ local function setWallpaperFor(tag, screen, current_activity)
 
     mode = "normal"
     if prev_mode ~= mode then
-        onClick()
+        setWallpaper("/home/samim/Pictures/Wallpaper/lowpoly_mountains_landscape-wallpaper-2560x1080.jpg")
         prev_mode = mode
     end
 
