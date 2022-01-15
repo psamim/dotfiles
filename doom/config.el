@@ -40,50 +40,50 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq
  org-agenda-clockreport-parameter-plist
-   '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
-  org-crypt-key "psamim@gmail.com"
-  org-clock-persist t
-  org-tags-exclude-from-inheritance '("project" "crypt")
-  ;; org-duration-format 'h:mm
-  org-tag-alist '(("crypt" . ?c))
-  org-duration-format '((special . h:mm))
-  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
-  org-export-with-section-numbers nil
-  org-icalendar-timezone "Asia/Tehran"
-  org-agenda-diary-file "~/Notes/diary.org"
-  org-roam-directory "~/Notes/roam"
-  ;; org-caldav-url 'google
-  ;; org-caldav-calendar-id "X"
-  ;; org-caldav-files '("~/Notes/appointments.org")
-  ;; org-caldav-oauth2-client-id "X"
-  ;; org-caldav-oauth2-client-secret "X"
-  ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
-  ;; org-caldav-delete-org-entries 'always
-  ;; org-caldav-sync-changes-to-org 'all
-  ;; org-caldav-sync-direction 'cal->org
-  plstore-cache-passphrase-for-symmetric-encryption t
-  password-cache-expiry nil
-  org-ellipsis "…"
-   ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
-  org-agenda-files (quote ("~/Notes/projects"
-                           "~/Notes/calendar-inbox.org"
-                           "~/Notes/roam/20210625224916-areas.org"
-                           "~/Notes/roam/20210507181408-people.org"
-                           "~/Notes/study.org"
-                           "~/Notes/events.org"))
-  org-deadline-warning-days 7
-  org-agenda-breadcrumbs-separator " ❱ "
-  org-export-in-background nil
-  org-catch-invisible-edits 'smart
-  org-directory "~/Notes")
+ '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
+ org-crypt-key "psamim@gmail.com"
+ org-clock-persist t
+ org-tags-exclude-from-inheritance '("project" "crypt")
+ ;; org-duration-format 'h:mm
+ org-tag-alist '(("crypt" . ?c))
+ org-duration-format '((special . h:mm))
+ org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
+ org-export-with-section-numbers nil
+ org-icalendar-timezone "Asia/Tehran"
+ org-agenda-diary-file "~/Notes/diary.org"
+ org-roam-directory "~/Notes/roam"
+ ;; org-caldav-url 'google
+ ;; org-caldav-calendar-id "X"
+ ;; org-caldav-files '("~/Notes/appointments.org")
+ ;; org-caldav-oauth2-client-id "X"
+ ;; org-caldav-oauth2-client-secret "X"
+ ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
+ ;; org-caldav-delete-org-entries 'always
+ ;; org-caldav-sync-changes-to-org 'all
+ ;; org-caldav-sync-direction 'cal->org
+ plstore-cache-passphrase-for-symmetric-encryption t
+ password-cache-expiry nil
+ org-ellipsis "…"
+ ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
+ org-agenda-files (quote ("~/Notes/projects"
+                          "~/Notes/calendar-inbox.org"
+                          "~/Notes/roam/20210625224916-areas.org"
+                          "~/Notes/roam/20210507181408-people.org"
+                          "~/Notes/study.org"
+                          "~/Notes/events.org"))
+ org-deadline-warning-days 7
+ org-agenda-breadcrumbs-separator " ❱ "
+ org-export-in-background nil
+ org-catch-invisible-edits 'smart
+ org-directory "~/Notes")
 
 (setq
  org-gcal-auto-archive nil
  org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
  org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
 
- (setq mixed-pitch-fixed-pitch-faces
-   (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
+(setq mixed-pitch-fixed-pitch-faces
+      (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
 
 (defun add-property-with-date-captured ()
   "Add DATE_CAPTURED property to the current item."
@@ -123,29 +123,29 @@
   )
 
 (customize-set-value
-    'org-agenda-category-icon-alist
-    `(
-      ("work" "~/.dotfiles/icons/work.svg" nil nil :ascent center :mask heuristic)
-      ("chore" "~/.dotfiles/icons/chore.svg" nil nil :ascent center :mask heuristic)
-      ("events" "~/.dotfiles/icons/events.svg" nil nil :ascent center :mask heuristic)
-      ("inbox" "~/.dotfiles/icons/inbox.svg" nil nil :ascent center :mask heuristic)
-      ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center :mask heuristic)
-      ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center :mask heuristic)
-      ("community" "~/.dotfiles/icons/community.svg" nil nil :ascent center :mask heuristic)
-      ("idea" "~/.dotfiles/icons/idea.svg" nil nil :ascent center :mask heuristic)
-      ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
-      ("scheduled" "~/.dotfiles/icons/scheduled.svg" nil nil :ascent center :mask heuristic)
-      ("class" "~/.dotfiles/icons/class.svg" nil nil :ascent center :mask heuristic)
-      ("plant" "~/.dotfiles/icons/plant.svg" nil nil :ascent center :mask heuristic)
-      ("check" "~/.dotfiles/icons/check.svg" nil nil :ascent center :mask heuristic)
-      ("search" "~/.dotfiles/icons/search.svg" nil nil :ascent center :mask heuristic)
-      ("home" "~/.dotfiles/icons/home.svg" nil nil :ascent center :mask heuristic)
-      ("book" "~/.dotfiles/icons/book.svg" nil nil :ascent center :mask heuristic)
-      ("cook" "~/.dotfiles/icons/cook.svg" nil nil :ascent center :mask heuristic)
-      ("buy" "~/.dotfiles/icons/buy.svg" nil nil :ascent center :mask heuristic)
-      ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
-      ("archive" "~/.dotfiles/icons/archive.svg" nil nil :ascent center :mask heuristic)
-      ))
+ 'org-agenda-category-icon-alist
+ `(
+   ("work" "~/.dotfiles/icons/work.svg" nil nil :ascent center :mask heuristic)
+   ("chore" "~/.dotfiles/icons/chore.svg" nil nil :ascent center :mask heuristic)
+   ("events" "~/.dotfiles/icons/events.svg" nil nil :ascent center :mask heuristic)
+   ("inbox" "~/.dotfiles/icons/inbox.svg" nil nil :ascent center :mask heuristic)
+   ("walk" "~/.dotfiles/icons/walk.svg" nil nil :ascent center :mask heuristic)
+   ("solution" "~/.dotfiles/icons/solution.svg" nil nil :ascent center :mask heuristic)
+   ("community" "~/.dotfiles/icons/community.svg" nil nil :ascent center :mask heuristic)
+   ("idea" "~/.dotfiles/icons/idea.svg" nil nil :ascent center :mask heuristic)
+   ("man" "~/.dotfiles/icons/man.svg" nil nil :ascent center :mask heuristic)
+   ("scheduled" "~/.dotfiles/icons/scheduled.svg" nil nil :ascent center :mask heuristic)
+   ("class" "~/.dotfiles/icons/class.svg" nil nil :ascent center :mask heuristic)
+   ("plant" "~/.dotfiles/icons/plant.svg" nil nil :ascent center :mask heuristic)
+   ("check" "~/.dotfiles/icons/check.svg" nil nil :ascent center :mask heuristic)
+   ("search" "~/.dotfiles/icons/search.svg" nil nil :ascent center :mask heuristic)
+   ("home" "~/.dotfiles/icons/home.svg" nil nil :ascent center :mask heuristic)
+   ("book" "~/.dotfiles/icons/book.svg" nil nil :ascent center :mask heuristic)
+   ("cook" "~/.dotfiles/icons/cook.svg" nil nil :ascent center :mask heuristic)
+   ("buy" "~/.dotfiles/icons/buy.svg" nil nil :ascent center :mask heuristic)
+   ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
+   ("archive" "~/.dotfiles/icons/archive.svg" nil nil :ascent center :mask heuristic)
+   ))
 (setq org-agenda-hidden-separator "‌‌ ")
 (defun agenda-color-char ()
   (save-excursion
@@ -185,7 +185,7 @@ This function makes sure that dates are aligned for easy reading."
          (weekstring (if (= day-of-week 1)
                          (format " W%02d" iso-week)
                        "")))
-         (format " %-2s. %2d %s, %s"
+    (format " %-2s. %2d %s, %s"
             dayname day monthname persian)))
 
 (setq org-agenda-block-separator nil)
@@ -207,7 +207,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "   %i %?-2 t%s")
                       ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                       ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       ;; (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-todo-keyword-format "")
                       (org-agenda-time)
@@ -217,38 +217,38 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (tags-todo "-CATEGORY=\"work\"" (
-                      (org-agenda-overriding-header "\n⚡ To Do")
-                      (org-agenda-sorting-strategy '(priority-down))
-                      (org-agenda-remove-tags t)
-                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                      (org-agenda-todo-ignore-scheduled 'all)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
+                                           (org-agenda-overriding-header "\n⚡ To Do")
+                                           (org-agenda-sorting-strategy '(priority-down))
+                                           (org-agenda-remove-tags t)
+                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                           (org-agenda-todo-ignore-scheduled 'all)
+                                           (org-agenda-prefix-format "   %-2i %?b")
+                                           (org-agenda-todo-keyword-format "")))
 
-         ;; (todo "NEXT" (
-         ;;              (org-agenda-todo-ignore-scheduled 'all)
-         ;;              (org-agenda-overriding-header "⚡ THIS WEEK")
-         ;;              (org-agenda-remove-tags t)
-         ;;              (org-agenda-prefix-format "   %-2i %?b")
-         ;;              (org-agenda-todo-keyword-format "")))
+          ;; (todo "NEXT" (
+          ;;              (org-agenda-todo-ignore-scheduled 'all)
+          ;;              (org-agenda-overriding-header "⚡ THIS WEEK")
+          ;;              (org-agenda-remove-tags t)
+          ;;              (org-agenda-prefix-format "   %-2i %?b")
+          ;;              (org-agenda-todo-keyword-format "")))
 
-         (tags "+project-CATEGORY=\"work\"" (
-                      (org-agenda-overriding-header "\n⚡ Projects")
-                      (org-agenda-remove-tags t)
-                      (org-tags-match-list-sublevels nil)
-                      (org-agenda-show-inherited-tags nil)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
+          (tags "+project-CATEGORY=\"work\"" (
+                                              (org-agenda-overriding-header "\n⚡ Projects")
+                                              (org-agenda-remove-tags t)
+                                              (org-tags-match-list-sublevels nil)
+                                              (org-agenda-show-inherited-tags nil)
+                                              (org-agenda-prefix-format "   %-2i %?b")
+                                              (org-agenda-todo-keyword-format "")))
 
-         ;; (org-ql-block '(and
-         ;;                 (tags "project")
-         ;;                 )
-         ;;               (
-         ;;                (org-ql-block-header "⚡ Projects and Areas")
-         ;;                ))
-         ))
+          ;; (org-ql-block '(and
+          ;;                 (tags "project")
+          ;;                 )
+          ;;               (
+          ;;                (org-ql-block-header "⚡ Projects and Areas")
+          ;;                ))
+          ))
 
-      ("w" "Work Agenda"
+        ("w" "Work Agenda"
          (
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done nil)
@@ -263,7 +263,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "   %i %?-2 t%s")
                       ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                       ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       ;; (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-todo-keyword-format "")
                       (org-agenda-time)
@@ -273,24 +273,24 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (tags-todo "+CATEGORY=\"work\"" (
-                      (org-agenda-overriding-header "\n⚡ To Do")
-                      (org-agenda-sorting-strategy '(priority-down))
-                      (org-agenda-remove-tags t)
-                      (org-agenda-todo-ignore-scheduled 'all)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
+                                           (org-agenda-overriding-header "\n⚡ To Do")
+                                           (org-agenda-sorting-strategy '(priority-down))
+                                           (org-agenda-remove-tags t)
+                                           (org-agenda-todo-ignore-scheduled 'all)
+                                           (org-agenda-prefix-format "   %-2i %?b")
+                                           (org-agenda-todo-keyword-format "")))
 
-         (tags "+project+CATEGORY=\"work\"" (
-                      (org-agenda-overriding-header "\n⚡ Projects")
-                      (org-agenda-remove-tags t)
-                      (org-tags-match-list-sublevels nil)
-                      (org-agenda-show-inherited-tags nil)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
-         ))
+          (tags "+project+CATEGORY=\"work\"" (
+                                              (org-agenda-overriding-header "\n⚡ Projects")
+                                              (org-agenda-remove-tags t)
+                                              (org-tags-match-list-sublevels nil)
+                                              (org-agenda-show-inherited-tags nil)
+                                              (org-agenda-prefix-format "   %-2i %?b")
+                                              (org-agenda-todo-keyword-format "")))
+          ))
 
 
-("mo" "My Agenda"
+        ("mo" "My Agenda"
          (
           (agenda "" (
                       (org-agenda-skip-scheduled-if-done nil)
@@ -305,7 +305,7 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-remove-tags t)
                       (org-agenda-prefix-format "   %i %?-2 t%s")
                       ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                       ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
                       ;; (org-agenda-todo-keyword-format " ☐ ")
                       (org-agenda-todo-keyword-format "")
                       (org-agenda-time)
@@ -315,16 +315,16 @@ This function makes sure that dates are aligned for easy reading."
                       (org-agenda-time-grid nil)))
 
           (todo "TODO" (
-                      (org-agenda-overriding-header "\n⚡ To Do")
-                      (org-agenda-sorting-strategy '(priority-down))
-                      (org-agenda-remove-tags t)
-                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                      (org-agenda-todo-ignore-scheduled 'all)
-                      (org-agenda-prefix-format "   %-2i %?b")
-                      (org-agenda-todo-keyword-format "")))
+                        (org-agenda-overriding-header "\n⚡ To Do")
+                        (org-agenda-sorting-strategy '(priority-down))
+                        (org-agenda-remove-tags t)
+                        ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                        (org-agenda-todo-ignore-scheduled 'all)
+                        (org-agenda-prefix-format "   %-2i %?b")
+                        (org-agenda-todo-keyword-format "")))
 
           ))
-))
+        ))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -377,11 +377,11 @@ This function makes sure that dates are aligned for easy reading."
 
 (defun my-org-agenda ()
   (interactive)
-    (org-agenda nil "a"))
+  (org-agenda nil "a"))
 
 (defun my-org-index ()
   (interactive)
-    (find-file "~/Notes/roam/20210625224818-index.org"))
+  (find-file "~/Notes/roam/20210625224818-index.org"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -456,9 +456,9 @@ This function makes sure that dates are aligned for easy reading."
 (defun string-to-int (s) (string-to-number s))
 
 (defun what-face (pos)
-    (interactive "d")
-        (let ((face (or (get-char-property (point) 'read-face-name)
-            (get-char-property (point) 'face))))
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 ;; (add-hook
@@ -507,7 +507,7 @@ This function makes sure that dates are aligned for easy reading."
 
 ;; Add to `doom-modeline-mode-hook` or other hooks
 (defun setup-custom-doom-modeline ()
-   (doom-modeline-set-modeline 'my-simple-line 'default))
+  (doom-modeline-set-modeline 'my-simple-line 'default))
 (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
 
 
@@ -546,11 +546,11 @@ This function makes sure that dates are aligned for easy reading."
 
 (require 'org-msg)
 (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-	org-msg-startup "hidestars indent inlineimages"
-	;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
-	org-msg-greeting-name-limit 3
-	org-msg-text-plain-alternative t
-	org-msg-signature "
+      org-msg-startup "hidestars indent inlineimages"
+      ;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
+      org-msg-greeting-name-limit 3
+      org-msg-text-plain-alternative t
+      org-msg-signature "
 
  Regards,
 
@@ -619,7 +619,7 @@ This function makes sure that dates are aligned for easy reading."
 (doom-modeline-mode 0)
 
 (after! org
-;; ⧗             ―               ﮸          λ ◁ ▷ ✧ ✦
+  ;; ⧗             ―               ﮸          λ ◁ ▷ ✧ ✦
   (appendq! +ligatures-extra-symbols
             `(:clock      "⧗ "
               :circle "⚫"
@@ -663,30 +663,30 @@ This function makes sure that dates are aligned for easy reading."
 (setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘"))
 
 (setq org-todo-keywords
-        '((sequence
-           "TODO(t)"  ; A task that needs doing & is ready to do
-           "PROJ(p)"  ; A project, which usually contains other tasks
-           "STRT(s)"  ; A task that is in progress
-           "WAIT(w)"  ; Something external is holding up this task
-           "HOLD(h)"  ; This task is paused/on hold because of me
-           "NEXT(n)"  ; This task going to be done thiw iteration (week)
-           "|"
-           "DONE(d)"  ; Task successfully completed
-           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-          (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[-](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
-           "|"
-           "[X](D)")) ; Task was completed
-        org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
-          ("STRT" . +org-todo-active)
-          ("[?]"  . +org-todo-onhold)
-          ("WAIT" . +org-todo-onhold)
-          ("HOLD" . +org-todo-onhold)
-          ("NEXT" . +org-todo-project)
-          ("PROJ" . +org-todo-project)))
+      '((sequence
+         "TODO(t)"  ; A task that needs doing & is ready to do
+         "PROJ(p)"  ; A project, which usually contains other tasks
+         "STRT(s)"  ; A task that is in progress
+         "WAIT(w)"  ; Something external is holding up this task
+         "HOLD(h)"  ; This task is paused/on hold because of me
+         "NEXT(n)"  ; This task going to be done thiw iteration (week)
+         "|"
+         "DONE(d)"  ; Task successfully completed
+         "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+        (sequence
+         "[ ](T)"   ; A task that needs doing
+         "[-](S)"   ; Task is in progress
+         "[?](W)"   ; Task is being held up or paused
+         "|"
+         "[X](D)")) ; Task was completed
+      org-todo-keyword-faces
+      '(("[-]"  . +org-todo-active)
+        ("STRT" . +org-todo-active)
+        ("[?]"  . +org-todo-onhold)
+        ("WAIT" . +org-todo-onhold)
+        ("HOLD" . +org-todo-onhold)
+        ("NEXT" . +org-todo-project)
+        ("PROJ" . +org-todo-project)))
 
 (custom-theme-set-faces!
   'doom-solarized-light
@@ -699,9 +699,9 @@ This function makes sure that dates are aligned for easy reading."
   '((org-agenda-calendar-event)  :weight light)
 
   '((org-agenda-done)
-     :foreground "#91a6ad"
-     :weight light
-     :strike-through "dark gray")
+    :foreground "#91a6ad"
+    :weight light
+    :strike-through "dark gray")
 
   '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
   '((org-agenda-structure) :family "pacifico" :height 220
@@ -809,11 +809,11 @@ This function makes sure that dates are aligned for easy reading."
 
 (map! :localleader
       (:map org-mode-map
-        "c e" #'export-clock))
+       "c e" #'export-clock))
 
 (map! :localleader
       (:map ledger-mode-map
-        "c" #'ledger-mode-clean-buffer))
+       "c" #'ledger-mode-clean-buffer))
 
 (map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
 (map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
@@ -877,13 +877,13 @@ This function makes sure that dates are aligned for easy reading."
 ;;         org-roam-server-network-label-wrap-length 20))
 
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-    :hook (org-roam . org-roam-ui-mode)
-    :config
-)
+  :after org-roam ;; or :after org
+  :hook (org-roam . org-roam-ui-mode)
+  :config
+  )
 
 (defun org--create-inline-image (file width)
   "Create image located at FILE, or return nil.
@@ -955,19 +955,19 @@ according to the value of `org-display-remote-inline-images'."
 \)>")
   (setq org-tstr-regexp (concat org-tst-regexp "--?-?" org-tst-regexp))
   (save-excursion
-    ; get categories
+                                        ; get categories
     (setq mycategory (org-get-category))
-    ; get start and end of tree
+                                        ; get start and end of tree
     (org-back-to-heading t)
     (setq mystart    (point))
     (org-end-of-subtree)
     (setq myend      (point))
     (goto-char mystart)
-    ; search for timerange
+                                        ; search for timerange
     (setq myresult (re-search-forward org-tstr-regexp myend t))
-    ; search for categories to exclude
+                                        ; search for categories to exclude
     (setq mycatp (member mycategory org-export-exclude-category))
-    ; return t if ok, nil when not ok
+                                        ; return t if ok, nil when not ok
     (if (and myresult (not mycatp)) t nil)))
 
 ;;; activate filter and call export function
@@ -983,7 +983,7 @@ according to the value of `org-display-remote-inline-images'."
   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
   (setq calibredb-library-alist '(("~/Calibre/calibre-web/")
                                   ("~/Calibre/fidibo")))
- (map! :map calibredb-show-mode-map
+  (map! :map calibredb-show-mode-map
         :ne "?" #'calibredb-entry-dispatch
         :ne "o" #'calibredb-find-file
         :ne "O" #'calibredb-find-file-other-frame
