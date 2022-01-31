@@ -45,7 +45,7 @@
  org-clock-persist t
  org-tags-exclude-from-inheritance '("project" "crypt")
  ;; org-duration-format 'h:mm
- org-tag-alist '(("crypt" . ?c))
+ org-tag-alist '(("crypt" . ?c) ("project" . ?p))
  org-duration-format '((special . h:mm))
  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
  org-export-with-section-numbers nil
@@ -92,8 +92,8 @@
 
 (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
 
-(customize-set-variable
- 'org-capture-templates
+(setq
+ org-capture-templates
  (quote (
          ("t" "todo" entry
           (file+headline "~/Notes/projects/projects.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
@@ -126,6 +126,7 @@
  'org-agenda-category-icon-alist
  `(
    ("work" "~/.dotfiles/icons/work.svg" nil nil :ascent center :mask heuristic)
+   ("music" "~/.dotfiles/icons/music.svg" nil nil :ascent center :mask heuristic)
    ("chore" "~/.dotfiles/icons/chore.svg" nil nil :ascent center :mask heuristic)
    ("events" "~/.dotfiles/icons/events.svg" nil nil :ascent center :mask heuristic)
    ("inbox" "~/.dotfiles/icons/inbox.svg" nil nil :ascent center :mask heuristic)
