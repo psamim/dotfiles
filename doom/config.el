@@ -191,9 +191,8 @@ This function makes sure that dates are aligned for easy reading."
 
 (setq org-agenda-block-separator nil)
 (setq org-habit-today-glyph ?◌)
-(setq org-habit-completed-glyph ?✓)
 (setq org-habit-graph-column 40)
-(setq org-habit-following-days 0)
+(setq org-habit-following-days 1)
 (setq org-habit-show-habits t)
 (setq org-habit-completed-glyph ?●)
 (setq org-habit-preceding-days 10)
