@@ -11,3 +11,6 @@
 - چه احساسی داری؟
 - چیزی هست که خیلی داری بش فکر می‌کنی؟ زودتر حلش کن.
 - این هفته چی کارا داری؟
+
+#+BEGIN: clocktable :maxlevel 2 :scope agenda-with-archives :block thisweek-1 :fileskip0 t :hidefiles t :wstart 6
+#+END

@@ -67,8 +67,6 @@
 ;; (package! web-mode)
 (package! unidecode)
 (package! org-msg)
-;; (package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
-;;
 ;; (package! nroam :recipe (:host github :branch "master" :repo "NicolasPetton/nroam"))
 (package! literate-calc-mode)
 ;; (package! org-mru-clock)
@@ -83,5 +81,4 @@
 (disable-packages! diff-hl)
 (package! calibredb)
 (package! org-analyzer)
-(package! org-pretty-table :recipe (:host github :repo "Fuco1/org-pretty-table"))
 (package! org-appear :recipe (:host github :repo "awth13/org-appear"))
