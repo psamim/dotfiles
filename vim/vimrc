@@ -290,7 +290,7 @@ nnoremap <A-l> :BufferLineCycleNext<CR>
 nnoremap <A-h> :BufferLineCyclePrev<CR>
 
 " Tig
-nnoremap <leader>gs :Neogit<cr>
+nnoremap <leader>gs :LazyGit<cr>
 
 " Nvim specific
 if has('nvim')
@@ -414,6 +414,9 @@ let g:coc_global_extensions = ['coc-snippets', 'coc-yank', 'coc-eslint', 'coc-wo
       \, 'coc-angular', 'coc-spell-checker', 'coc-yaml', 'coc-prettier', 'coc-marketplace'
       \, 'coc-emmet', 'coc-fzf-preview', 'coc-json', 'coc-lists', 'coc-highlight', 'coc-pyright'
       \]
+
+" use coc-css for scss file
+autocmd FileType scss setl iskeyword+=@-@
 
 function! s:show_documentation()
   if &filetype == 'vim'
