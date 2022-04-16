@@ -1,0 +1,16 @@
+output VIRTUAL1
+off
+output eDP1
+off
+output HDMI1
+crtc 0
+mode 2560x1440
+pos 0x0
+primary
+rate 59.95
+x-prop-aspect_ratio Automatic
+x-prop-audio auto
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
+x-prop-non_desktop 0
