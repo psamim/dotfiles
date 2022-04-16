@@ -20,7 +20,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 12)
+(setq doom-font (font-spec :family "Iosevka" :size 18)
       doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
       doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
@@ -39,6 +39,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
+ org-startup-with-inline-images t
  org-agenda-clockreport-parameter-plist
  '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
  org-crypt-key "psamim@gmail.com"
@@ -71,6 +72,13 @@
                           "~/Notes/roam/20210507181408-people.org"
                           "~/Notes/study.org"
                           "~/Notes/events.org"))
+ org-file-apps
+   '((remote . emacs)
+     (auto-mode . emacs)
+     (directory . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "xournalpp %s"))
  org-deadline-warning-days 7
  org-agenda-breadcrumbs-separator " ❱ "
  org-export-in-background nil
@@ -96,9 +104,9 @@
  org-capture-templates
  (quote (
          ("t" "todo" entry
-          (file+headline "~/Notes/projects/projects.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
+          (file+headline "~/Notes/projects/misc.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
          ("s" "schedule" entry
-          (file+headline "~/Notes/projects/projects.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+          (file+headline "~/Notes/projects/misc.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
          )))
 
 (setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
@@ -307,6 +315,59 @@ current time."
 
 (after! org
   (add-to-list 'org-modules 'org-habit))
+
+;; (defun org-agenda-highlight-todo (x)
+;;   (let ((org-done-keywords org-done-keywords-for-agenda)
+;; 	(case-fold-search nil)
+;; 	re)
+;;     (if (eq x 'line)
+;; 	(save-excursion
+;; 	  (beginning-of-line 1)
+;; 	  (setq re (org-get-at-bol 'org-todo-regexp))
+;; 	  (goto-char (or (text-property-any (point-at-bol) (point-at-eol) 'org-heading t) (point)))
+;; 	  (when (looking-at (concat "[ \t]*\\.*\\(" re "\\) +"))
+;; 	    (add-text-properties (match-beginning 0) (match-end 1)
+;; 				 (list 'face (org-get-todo-face 1)))
+;; 	    (let ((s (buffer-substring (match-beginning 1) (match-end 1))))
+;; 	      (delete-region (match-beginning 1) (1- (match-end 0)))
+;; 	      (goto-char (match-beginning 1))
+;;                    (unless (string= org-agenda-todo-keyword-format "")
+;; 	      (insert (format org-agenda-todo-keyword-format s)))
+;;               )))
+;;       (let ((pl (text-property-any 0 (length x) 'org-heading t x)))
+;; 	(setq re (get-text-property 0 'org-todo-regexp x))
+;; 	(when (and re
+;; 		   ;; Test `pl' because if there's no heading content,
+;; 		   ;; there's no point matching to highlight.  Note
+;; 		   ;; that if we didn't test `pl' first, and there
+;; 		   ;; happened to be no keyword from `org-todo-regexp'
+;; 		   ;; on this heading line, then the `equal' comparison
+;; 		   ;; afterwards would spuriously succeed in the case
+;; 		   ;; where `pl' is nil -- causing an args-out-of-range
+;; 		   ;; error when we try to add text properties to text
+;; 		   ;; that isn't there.
+;; 		   pl
+;; 		   (equal (string-match (concat "\\(\\.*\\)" re "\\( +\\)")
+;; 					x pl)
+;; 			  pl))
+;; 	  (add-text-properties
+;; 	   (or (match-end 1) (match-end 0)) (match-end 0)
+;; 	   (list 'face (org-get-todo-face (match-string 2 x)))
+;; 	   x)
+;; 	  (when (match-end 1)
+;; 	    (setq x
+;; 		  (concat
+;; 		   (substring x 0 (match-end 1))
+;;                    (unless (string= org-agenda-todo-keyword-format "")
+;; 		     (format org-agenda-todo-keyword-format
+;; 			     (match-string 2 x)
+;;                    ;; Remove `display' property as the icon could leak
+;; 		   ;; on the white space.
+;; 		   (org-add-props " " (org-plist-delete (text-properties-at 0 x)
+;;                                                         'display)))
+;;                              )
+;;                    (substring x (match-end 3)))))))
+;;       x)))
 
 (setq org-agenda-custom-commands
       '(
@@ -1180,3 +1241,7 @@ according to the value of `org-display-remote-inline-images'."
 (setq org-re-reveal-theme "white"
       org-re-reveal-transition "slide"
       org-re-reveal-plugins '(markdown notes math search zoom))
+
+;; (use-package! org-xournalpp
+;;   :config
+;;   (add-hook 'org-mode-hook 'org-xournalpp-mode))

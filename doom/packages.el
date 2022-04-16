@@ -81,4 +81,14 @@
 (disable-packages! diff-hl)
 (package! calibredb)
 (package! org-analyzer)
+(package! org-inline-pdf)
 (package! org-appear :recipe (:host github :repo "awth13/org-appear"))
+(package! org-modern :recipe (:host github :repo "minad/org-modern"))
+(package! org-xournalpp
+  :recipe (:host gitlab
+           :repo "vherrmann/org-xournalpp"
+           :files ("resources" "*.el")))
+(package! org-krita
+  :recipe (:host github
+           :repo "lepisma/org-krita"
+           :files ("resources" "resources" "*.el" "*.el")))
