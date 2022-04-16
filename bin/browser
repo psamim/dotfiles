@@ -1,2 +1,2 @@
 #!/bin/bash
-google-chrome-stable --profile-directory="Profile 3" $@
+google-chrome-stable --profile-directory="Profile 3" "$@"

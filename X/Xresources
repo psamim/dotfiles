@@ -49,7 +49,9 @@ URxvt*.color14: #93a1a1
 URxvt*.color7: #eee8d5
 URxvt*.color15: #fdf6e3
 
+/* Xft.dpi:					162 */
 Xft.dpi:					96
+/* Xft.dpi:					91.79 */
 Xft.autohint:				0
 Xft.antialias:				1
 Xft.hinting:				1
