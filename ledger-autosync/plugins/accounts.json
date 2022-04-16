@@ -3,6 +3,10 @@
     "account": "Expenses:Groceries",
     "name": "Super Jolfa"
   },
+  "5382861": {
+    "account": "Expenses:Groceries",
+    "name": "Andelos"
+  },
   "12211971": {
     "account": "Expenses:Groceries",
     "name": "Labaniati Nazar"
@@ -554,5 +558,9 @@
   "23791554": {
     "account": "Expenses:Groceries",
     "name": "Grocery Store Khaje Petros"
+  },
+  "5047061038460628": {
+    "account": "Expenses:Entertainment:Music",
+    "name": "Mesbah for Violin"
   }
 }
