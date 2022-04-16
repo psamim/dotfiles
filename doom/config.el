@@ -100,14 +100,14 @@
 
 (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
 
-(setq
- org-capture-templates
- (quote (
-         ("t" "todo" entry
-          (file+headline "~/Notes/projects/misc.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
-         ("s" "schedule" entry
-          (file+headline "~/Notes/projects/misc.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
-         )))
+(custom-set-variables
+ '(org-capture-templates
+   (quote (
+           ("t" "todo" entry
+            (file+headline "~/Notes/projects/misc.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
+           ("s" "schedule" entry
+            (file+headline "~/Notes/projects/misc.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+           ))))
 
 (setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
 
