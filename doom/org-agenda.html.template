@@ -15,7 +15,7 @@
         position: absolute;
         left: -27px;
         top: -15px;
-        transform: scale(0.47);
+        transform: scale(0.57);
         transform-origin: 0 0;
       }
 
@@ -51,6 +51,7 @@
       body {
         margin: 0;
         background-color: #fafafa;
+        overflow: hidden;
       }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
