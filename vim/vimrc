@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 " JS
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'digitaltoad/vim-pug'
 " Plug 'Quramy/vim-js-pretty-template'
@@ -21,8 +21,10 @@ Plug 'junegunn/fzf.vim'
 " Other
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate'
-Plug 'tpope/vim-commentary'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'numToStr/Comment.nvim'
+" Plug "tomtom/tcomment_vim"
+" Plug 'tpope/vim-commentary'
+" Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'airblade/vim-gitgutter'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'skywind3000/asyncrun.vim'
@@ -30,6 +32,7 @@ Plug 'ledger/vim-ledger'
 Plug 'lambdalisue/suda.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thaerkh/vim-workspace'
+Plug 'yaegassy/coc-tailwindcss3', {'do': 'yarn install --frozen-lockfile'}
 Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-surround'
@@ -54,10 +57,11 @@ Plug 'sbdchd/neoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'qpkorr/vim-bufkill'
 Plug 'karb94/neoscroll.nvim'
-Plug 'wfxr/minimap.vim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'severin-lemaignan/vim-minimap'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-frecency.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'tami5/sqlite.lua'
 Plug 'isobit/vim-caddyfile'
 " Plug 'Valloric/ListToggle'
@@ -515,31 +519,29 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  context_commentstring = {
-    enable = true
-  }
-}
-EOF
-
-let g:nvim_tree_git_hl = 0
-let g:nvim_tree_show_icons = {
-    \ 'git': 0,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 1,
-    \ }
-
+lua require('Comment').setup()
 
 lua <<EOF
 require'nvim-tree'.setup {
-    disable_netrw = false,
-    nvim_tree_follow = true,
-     filters = {
-       dotfiles = true
+  disable_netrw = false,
+  renderer = {
+    highlight_git = false,
+    icons = {
+      show = {
+        git= false,
+        folder= true,
+        file= true,
+        folder_arrow= true,
+        }
       }
+    },
+  update_focused_file = {
+    enable = true,
+  },
+  filters = {
+    dotfiles = true
     }
+  }
 EOF
 
 lua <<EOF
@@ -622,10 +624,6 @@ require('neoscroll').setup({
 })
 EOF
 
-let g:minimap_width = 10
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-
 lua <<EOF
 require"telescope".load_extension("frecency")
 
@@ -641,3 +639,4 @@ extensions = {
 EOF
 
 let g:lazygit_use_neovim_remote = 0
+
