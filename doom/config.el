@@ -36,6 +36,13 @@
 
 (setq org-agenda-clock-report-header "Report\n")
 
+;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+(setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+                                            priority-down category-keep)
+                                    (todo priority-down category-keep)
+                                    (tags priority-down category-keep)
+                                    (search category-keep)))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
@@ -87,6 +94,7 @@
 
 (setq
  org-gcal-auto-archive nil
+ org-gcal-remove-api-cancelled-events t
  org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
  org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
 
@@ -430,6 +438,13 @@ current time."
         ("w" "Work Agenda"
          (
           (agenda "" (
+;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+                      (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+                                                             priority-down category-keep)
+                                                     (todo priority-down category-keep)
+                                                     (tags priority-down category-keep)
+                                                     (search category-keep)))
+
                       (org-agenda-skip-scheduled-if-done nil)
                       (org-agenda-time-leading-zero t)
                       (org-agenda-timegrid-use-ampm nil)
@@ -932,6 +947,7 @@ current time."
   (interactive)
   (progn
     (load-secrets)
+    (org-gcal-sync-tokens-clear)
     (org-gcal-fetch)))
 
 ;; (run-with-timer 0 (* 18 60 60) 'sync-calendars)
