@@ -250,9 +250,10 @@ function main() {
       send $TEMP_PASS_BACKUP ""
       rm $TEMP_PASS_BACKUP
 
-      borg_backup /home/samim/tombs/backups/ backups
+      borg_backup /home/samim/tombs/backups/ backups \
+        -e 'mail/account.gmail/.notmuch' 
       borg_backup /home/samim/Calibre calibre
-      borg_remote_backup central:/home/pirate/server-compose hass \
+      borg_remote_backup central:/home/central/server-compose hass \
         -e 'syncthing/Notes' \
         -e 'photoprism-storage' \
         -e 'hass/home-assistant_v2.db' \
