@@ -61,14 +61,6 @@
             "date_length": "10",
             "message_count_length": "4",
             "authors_length": "41",
-            "subject_color": "#807d74",
-            "subject_color_selected": "#000000",
-            "background_color_selected": "#e2ddd0",
-            "background_color_marked": "#fff584",
-            "background_color_marked_selected": "#bcb559",
-            "tags_length": "80",
-            "tags_upper_color": "#e5e5e5",
-            "tags_lower_color": "#333333",
             "tags_alpha": "1",
             "hidden_tags": "attachment,flagged,unread,inbox,new"
         }
