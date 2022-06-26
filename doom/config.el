@@ -406,7 +406,7 @@ current time."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (tags-todo "-CATEGORY=\"work\"" (
+          (tags "-CATEGORY=\"work\"+TODO=\"TODO\"" (
                                            (org-agenda-overriding-header "\n⚡ To Do")
                                            (org-agenda-sorting-strategy '(priority-down))
                                            (org-agenda-remove-tags t)
@@ -415,12 +415,15 @@ current time."
                                            (org-agenda-prefix-format "   %-2i %?b")
                                            (org-agenda-todo-keyword-format "")))
 
-          ;; (todo "NEXT" (
-          ;;              (org-agenda-todo-ignore-scheduled 'all)
-          ;;              (org-agenda-overriding-header "⚡ THIS WEEK")
-          ;;              (org-agenda-remove-tags t)
-          ;;              (org-agenda-prefix-format "   %-2i %?b")
-          ;;              (org-agenda-todo-keyword-format "")))
+          (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
+                                           (org-agenda-overriding-header "\n⚡ Next")
+                                           (org-agenda-sorting-strategy '(priority-down))
+                                           (org-agenda-remove-tags t)
+                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                           (org-agenda-todo-ignore-scheduled 'all)
+                                           (org-agenda-prefix-format "   %-2i %?b")
+                                           (org-agenda-todo-keyword-format "")))
+
 
           (tags "+project-CATEGORY=\"work\"" (
                                               (org-agenda-overriding-header "\n⚡ Projects")
@@ -429,13 +432,6 @@ current time."
                                               (org-agenda-show-inherited-tags nil)
                                               (org-agenda-prefix-format "   %-2i %?b")
                                               (org-agenda-todo-keyword-format "")))
-
-          ;; (org-ql-block '(and
-          ;;                 (tags "project")
-          ;;                 )
-          ;;               (
-          ;;                (org-ql-block-header "⚡ Projects and Areas")
-          ;;                ))
           ))
 
         ("w" "Work Agenda"
@@ -469,8 +465,17 @@ current time."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (tags-todo "+CATEGORY=\"work\"" (
+          (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
                                            (org-agenda-overriding-header "\n⚡ To Do")
+                                           (org-agenda-sorting-strategy '(priority-down))
+                                           (org-agenda-remove-tags t)
+                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                           (org-agenda-todo-ignore-scheduled 'all)
+                                           (org-agenda-prefix-format "   %-2i %?b")
+                                           (org-agenda-todo-keyword-format "")))
+
+          (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
+                                           (org-agenda-overriding-header "\n⚡ Next")
                                            (org-agenda-sorting-strategy '(priority-down))
                                            (org-agenda-remove-tags t)
                                            (org-agenda-todo-ignore-scheduled 'all)
