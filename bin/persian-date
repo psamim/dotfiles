@@ -1,0 +1,6 @@
+#!/bin/env node
+
+let o = new Intl.DateTimeFormat("fa", {
+  dateStyle: "short",
+});
+console.log(o.format(Date.now()));
