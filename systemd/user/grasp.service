@@ -1,0 +1,11 @@
+
+[Unit]
+Description=Grasp extension server conterpart
+
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecStart=/home/samim/src/grasp/server/grasp_server.py --port 12212 --path /home/samim/Notes/grasp.org --template '* %%U %%:description %%:tags\n%%:link\n%%:initial\n'
+Type=simple
+Restart=always
