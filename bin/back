@@ -176,8 +176,10 @@ function make_tar_gpg_sym() {
 # Second argument is path in the remote destination
 function send() {
     info "Sending '$1' to cloud as name '$2'"
-    info "Sending to passport"
-    rclone sync --sftp-disable-hashcheck=true --transfers=1 --ignore-size --progress --quiet $1 passport:/mnt/mybook/$2
+    if [ -z "$ONLY_SEND" ]; then
+      info "Sending to passport"
+      rclone sync --sftp-disable-hashcheck=true --transfers=1 --ignore-size --progress --quiet $1 passport:/mnt/mybook/$2
+    fi
     echo # New Line
     for remote in dropbox drive; do
         info "Sending to remote '$remote'"
@@ -244,25 +246,29 @@ function main() {
         exit
     fi
 
-    if [ "$1" != "--only-send" ]; then
+    if [ "$1" != "--only-send" ]
+    then
       local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
       make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
       send $TEMP_PASS_BACKUP ""
       rm $TEMP_PASS_BACKUP
-
       borg_backup /home/samim/tombs/backups/ backups \
         -e 'mail/account.gmail/.notmuch' 
-      borg_backup /home/samim/Calibre calibre
-      borg_remote_backup central:/home/central/server-compose hass \
-        -e 'syncthing/Notes' \
-        -e 'photoprism-storage' \
-        -e 'hass/home-assistant_v2.db' \
-        -e 'hass/hass/home-assistant_v2.db-wal' \
-        -e 'pihole/pihole-FTL.db' \
-        -e 'pihole/gravity.db' \
-        -e 'pihole/list.1.raw.githubusercontent.com.domains' \
-        -e 'hass/home-assistant.log' \
-        -e 'syncthing/index-v0.14.0.db'
+              borg_backup /home/samim/Calibre calibre
+              borg_remote_backup central:/home/central/server-compose hass \
+                -e 'syncthing/Samim-Notes' \
+                -e 'syncthing/index-v0.14.0.db' \
+                -e 'photoprism-storage' \
+                -e 'hass/home-assistant_v2.db' \
+                -e 'hass/hass/home-assistant_v2.db-wal' \
+                -e 'hass/home-assistant.log' \
+                -e 'webui-aria2' \
+                -e 'pihole/pihole-FTL.db' \
+                -e 'pihole/gravity.db' \
+                -e 'pihole/list.1.raw.githubusercontent.com.domains'
+    else
+      info "Only sending to remotes..."
+      export ONLY_SEND=yes
     fi
 
     send /home/samim/borg/repos borg-repos
