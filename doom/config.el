@@ -138,6 +138,9 @@
   org-fontify-quote-and-verse-blocks t
   )
 
+(+bidi-global-mode 1)
+
+
 (customize-set-value
  'org-agenda-category-icon-alist
  `(
@@ -532,6 +535,22 @@ current time."
      "# " (calendar-bahai-date-string now) "\n\n")
     ))
 
+(defun psamim-insert-persian-time ()
+  (interactive)
+  ;; (let*
+  ;;     (
+  ;;      (time (current-time))
+  ;;      (decodedTime (decode-time time))
+  ;;      (now (list (nth 4 decodedTime) (nth 3 decodedTime) (nth 5 decodedTime))))
+  ;;   (concat
+  ;;    ;; (format-time-string "%B %e, %Y" time) "\n"
+  ;;    ;; (format-time-string "%A" time)
+  ;;    (calendar-persian-date-string now))
+  ;;    ;; # " (calendar-bahai-date-string now) "\n\n"))
+  ;;   )
+  (shell-command-to-string "~/.bin/persian-date")
+  )
+
 ;; (customize-set-variable 'org-journal-file-type "daily")
 (setq!
  org-journal-dir "~/Notes/journal/daily"
@@ -588,7 +607,7 @@ current time."
    (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
    ;; "Vazir Code-13")
    ;; "Tanha-16"))
-   "Mikhak-16"))
+   "Mikhak-18"))
 
 ;; (after! org-mode
 ;;   (set-company-backend! 'company-dabbrev)
@@ -637,6 +656,7 @@ current time."
 
 (defun set-window-clean ()
   (agenda-color-char)
+  (+bidi-mode -1)
   (setq mode-line-format nil)
   (set-frame-parameter nil 'font "Iosevka-18")
   (setq header-line-format " ")

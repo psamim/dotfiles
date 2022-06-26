@@ -15,6 +15,7 @@
 ;;      directory (for easy access to its source code).
 
 (doom! :input
+       bidi
        ;;chinese
        ;;japanese
 

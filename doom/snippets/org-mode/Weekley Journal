@@ -12,5 +12,14 @@
 - چیزی هست که خیلی داری بش فکر می‌کنی؟ زودتر حلش کن.
 - این هفته چی کارا داری؟
 
+زنگ به کسی
+تولد
+خرید برا خونه
+دکتر
+دارو
+
+
+
+
 #+BEGIN: clocktable :maxlevel 2 :scope agenda-with-archives :block thisweek-1 :fileskip0 t :hidefiles t :wstart 6
 #+END
