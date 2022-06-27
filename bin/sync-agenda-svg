@@ -1,3 +1,10 @@
 #!/bin/bash
-xvfb-run --server-args="-screen 0 840x2600x24" emacs --eval \
-  '(progn (global-hl-line-mode -1) (run-at-time "22 sec" nil '\''sync-agenda-svg) (run-at-time "25 sec" nil '\''sync-calendars) (run-at-time "35 sec" nil '\''kill-emacs))' -fs
+xvfb-run --server-args="-screen 0 840x2600x24" emacs --eval -fs \
+  '(progn
+     (global-hl-line-mode -1)
+     (run-at-time "22 sec" nil '\''sync-agenda-svg)
+     (run-at-time "25 sec" nil '\''sync-calendars)
+     (run-at-time "35 sec" nil '\''org-mycal-export)
+     (run-at-time "80 sec" nil '\''kill-emacs))' \
+       && scp ~/org.ics central.psam.im:~/server-compose/hass/www
+

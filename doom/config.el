@@ -1206,8 +1206,10 @@ according to the value of `org-display-remote-inline-images'."
 
 ;;; activate filter and call export function
 (defun org-mycal-export ()
-  (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-    (org-icalendar-combine-agenda-files)))
+  (interactive)
+  (save-excursion
+    (let ((org-icalendar-verify-function 'org-mycal-export-limit))
+      (org-icalendar-combine-agenda-files))))
 
 (use-package! calibredb
   :defer t

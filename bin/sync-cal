@@ -1,3 +1,0 @@
-#!/bin/zsh
-xvfb-run --server-args="-screen 0 840x2600x24" emacsclient -e "(save-excursion (org-mycal-export))" \
-  && scp ~/org.ics central.psam.im:~/server-compose/hass/www
