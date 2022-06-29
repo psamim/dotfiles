@@ -1211,75 +1211,75 @@ according to the value of `org-display-remote-inline-images'."
     (let ((org-icalendar-verify-function 'org-mycal-export-limit))
       (org-icalendar-combine-agenda-files))))
 
-(use-package! calibredb
-  :defer t
-  :config
-  (setq calibredb-format-all-the-icons t)
-  (setq calibredb-root-dir "~/Calibre/calibre-web/")
-  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-  (setq calibredb-library-alist '(("~/Calibre/calibre-web/")
-                                  ("~/Calibre/fidibo")))
-  (map! :map calibredb-show-mode-map
-        :ne "?" #'calibredb-entry-dispatch
-        :ne "o" #'calibredb-find-file
-        :ne "O" #'calibredb-find-file-other-frame
-        :ne "V" #'calibredb-open-file-with-default-tool
-        :ne "s" #'calibredb-set-metadata-dispatch
-        :ne "e" #'calibredb-export-dispatch
-        :ne "q" #'calibredb-entry-quit
-        :ne "." #'calibredb-open-dired
-        :ne [tab] #'calibredb-toggle-view-at-point
-        :ne "M-t" #'calibredb-set-metadata--tags
-        :ne "M-a" #'calibredb-set-metadata--author_sort
-        :ne "M-A" #'calibredb-set-metadata--authors
-        :ne "M-T" #'calibredb-set-metadata--title
-        :ne "M-c" #'calibredb-set-metadata--comments)
-  (map! :map calibredb-search-mode-map
-        :ne [mouse-3] #'calibredb-search-mouse
-        :ne "RET" #'calibredb-find-file
-        :ne "?" #'calibredb-dispatch
-        :ne "a" #'calibredb-add
-        :ne "A" #'calibredb-add-dir
-        :ne "c" #'calibredb-clone
-        :ne "d" #'calibredb-remove
-        :ne "D" #'calibredb-remove-marked-items
-        :ne "j" #'calibredb-next-entry
-        :ne "k" #'calibredb-previous-entry
-        :ne "l" #'calibredb-virtual-library-list
-        :ne "L" #'calibredb-library-list
-        :ne "n" #'calibredb-virtual-library-next
-        :ne "N" #'calibredb-library-next
-        :ne "p" #'calibredb-virtual-library-previous
-        :ne "P" #'calibredb-library-previous
-        :ne "s" #'calibredb-set-metadata-dispatch
-        :ne "S" #'calibredb-switch-library
-        :ne "o" #'calibredb-find-file
-        :ne "O" #'calibredb-find-file-other-frame
-        :ne "v" #'calibredb-view
-        :ne "V" #'calibredb-open-file-with-default-tool
-        :ne "." #'calibredb-open-dired
-        :ne "b" #'calibredb-catalog-bib-dispatch
-        :ne "e" #'calibredb-export-dispatch
-        :ne "r" #'calibredb-search-refresh-and-clear-filter
-        :ne "R" #'calibredb-search-clear-filter
-        :ne "q" #'calibredb-search-quit
-        :ne "m" #'calibredb-mark-and-forward
-        :ne "f" #'calibredb-toggle-favorite-at-point
-        :ne "x" #'calibredb-toggle-archive-at-point
-        :ne "h" #'calibredb-toggle-highlight-at-point
-        :ne "u" #'calibredb-unmark-and-forward
-        :ne "i" #'calibredb-edit-annotation
-        :ne "DEL" #'calibredb-unmark-and-backward
-        :ne [backtab] #'calibredb-toggle-view
-        :ne [tab] #'calibredb-toggle-view-at-point
-        :ne "M-n" #'calibredb-show-next-entry
-        :ne "M-p" #'calibredb-show-previous-entry
-        :ne "/" #'calibredb-search-live-filter
-        :ne "M-t" #'calibredb-set-metadata--tags
-        :ne "M-a" #'calibredb-set-metadata--author_sort
-        :ne "M-A" #'calibredb-set-metadata--authors
-        :ne "M-T" #'calibredb-set-metadata--title
-        :ne "M-c" #'calibredb-set-metadata--comments))
+;; (use-package! calibredb
+;;   :defer t
+;;   :config
+;;   (setq calibredb-format-all-the-icons t)
+;;   (setq calibredb-root-dir "~/Calibre/calibre-web/")
+;;   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+;;   (setq calibredb-library-alist '(("~/Calibre/calibre-web/")
+;;                                   ("~/Calibre/fidibo")))
+;;   (map! :map calibredb-show-mode-map
+;;         :ne "?" #'calibredb-entry-dispatch
+;;         :ne "o" #'calibredb-find-file
+;;         :ne "O" #'calibredb-find-file-other-frame
+;;         :ne "V" #'calibredb-open-file-with-default-tool
+;;         :ne "s" #'calibredb-set-metadata-dispatch
+;;         :ne "e" #'calibredb-export-dispatch
+;;         :ne "q" #'calibredb-entry-quit
+;;         :ne "." #'calibredb-open-dired
+;;         :ne [tab] #'calibredb-toggle-view-at-point
+;;         :ne "M-t" #'calibredb-set-metadata--tags
+;;         :ne "M-a" #'calibredb-set-metadata--author_sort
+;;         :ne "M-A" #'calibredb-set-metadata--authors
+;;         :ne "M-T" #'calibredb-set-metadata--title
+;;         :ne "M-c" #'calibredb-set-metadata--comments)
+;;   (map! :map calibredb-search-mode-map
+;;         :ne [mouse-3] #'calibredb-search-mouse
+;;         :ne "RET" #'calibredb-find-file
+;;         :ne "?" #'calibredb-dispatch
+;;         :ne "a" #'calibredb-add
+;;         :ne "A" #'calibredb-add-dir
+;;         :ne "c" #'calibredb-clone
+;;         :ne "d" #'calibredb-remove
+;;         :ne "D" #'calibredb-remove-marked-items
+;;         :ne "j" #'calibredb-next-entry
+;;         :ne "k" #'calibredb-previous-entry
+;;         :ne "l" #'calibredb-virtual-library-list
+;;         :ne "L" #'calibredb-library-list
+;;         :ne "n" #'calibredb-virtual-library-next
+;;         :ne "N" #'calibredb-library-next
+;;         :ne "p" #'calibredb-virtual-library-previous
+;;         :ne "P" #'calibredb-library-previous
+;;         :ne "s" #'calibredb-set-metadata-dispatch
+;;         :ne "S" #'calibredb-switch-library
+;;         :ne "o" #'calibredb-find-file
+;;         :ne "O" #'calibredb-find-file-other-frame
+;;         :ne "v" #'calibredb-view
+;;         :ne "V" #'calibredb-open-file-with-default-tool
+;;         :ne "." #'calibredb-open-dired
+;;         :ne "b" #'calibredb-catalog-bib-dispatch
+;;         :ne "e" #'calibredb-export-dispatch
+;;         :ne "r" #'calibredb-search-refresh-and-clear-filter
+;;         :ne "R" #'calibredb-search-clear-filter
+;;         :ne "q" #'calibredb-search-quit
+;;         :ne "m" #'calibredb-mark-and-forward
+;;         :ne "f" #'calibredb-toggle-favorite-at-point
+;;         :ne "x" #'calibredb-toggle-archive-at-point
+;;         :ne "h" #'calibredb-toggle-highlight-at-point
+;;         :ne "u" #'calibredb-unmark-and-forward
+;;         :ne "i" #'calibredb-edit-annotation
+;;         :ne "DEL" #'calibredb-unmark-and-backward
+;;         :ne [backtab] #'calibredb-toggle-view
+;;         :ne [tab] #'calibredb-toggle-view-at-point
+;;         :ne "M-n" #'calibredb-show-next-entry
+;;         :ne "M-p" #'calibredb-show-previous-entry
+;;         :ne "/" #'calibredb-search-live-filter
+;;         :ne "M-t" #'calibredb-set-metadata--tags
+;;         :ne "M-a" #'calibredb-set-metadata--author_sort
+;;         :ne "M-A" #'calibredb-set-metadata--authors
+;;         :ne "M-T" #'calibredb-set-metadata--title
+;;         :ne "M-c" #'calibredb-set-metadata--comments))
 
 (setq org-re-reveal-theme "white"
       org-re-reveal-transition "slide"
