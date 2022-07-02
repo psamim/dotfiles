@@ -20,7 +20,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 18)
+(setq doom-font (font-spec :family "Iosevka" :size 20)
       doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
       doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
@@ -57,18 +57,8 @@
  org-duration-format '((special . h:mm))
  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
  org-export-with-section-numbers nil
- org-icalendar-timezone "Asia/Tehran"
  org-agenda-diary-file "~/Notes/diary.org"
  org-roam-directory "~/Notes/roam"
- ;; org-caldav-url 'google
- ;; org-caldav-calendar-id "X"
- ;; org-caldav-files '("~/Notes/appointments.org")
- ;; org-caldav-oauth2-client-id "X"
- ;; org-caldav-oauth2-client-secret "X"
- ;; org-caldav-inbox "~/Notes/calendar-inbox.org"
- ;; org-caldav-delete-org-entries 'always
- ;; org-caldav-sync-changes-to-org 'all
- ;; org-caldav-sync-direction 'cal->org
  plstore-cache-passphrase-for-symmetric-encryption t
  password-cache-expiry nil
  org-ellipsis "…"
@@ -89,7 +79,7 @@
  org-deadline-warning-days 7
  org-agenda-breadcrumbs-separator " ❱ "
  org-export-in-background nil
- org-catch-invisible-edits 'smart
+ org-fold-catch-invisible-edits 'smart
  org-directory "~/Notes")
 
 (setq
@@ -112,7 +102,7 @@
  '(org-capture-templates
    (quote (
            ("t" "todo" entry
-            (file+headline "~/Notes/projects/misc.org" "Inbox") "* TODO %?\n%a\n" :clock-keep t)
+            (file "~/Notes/projects/misc.org") "* TODO %?\n%a\n" :clock-keep t)
            ("s" "schedule" entry
             (file+headline "~/Notes/projects/misc.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
            ))))
@@ -663,7 +653,7 @@ current time."
   (agenda-color-char)
   (+bidi-mode -1)
   (setq mode-line-format nil)
-  (set-frame-parameter nil 'font "Iosevka-18")
+  ;; (set-frame-parameter nil 'font "Iosevka-18")
   (setq header-line-format " ")
   (set-face-attribute 'header-line nil :background "#00000000")
   (set-window-margins (frame-selected-window) 4))
@@ -1174,6 +1164,16 @@ according to the value of `org-display-remote-inline-images'."
 
 (setq ivy-use-selectable-prompt t)
 
+(setq
+ org-icalendar-combined-agenda-file (or (getenv "ICALENDAR_FILE") "~/org.ics")
+ org-icalendar-honor-noexport-tag t
+ org-icalendar-timezone "Asia/Tehran"
+ org-icalendar-include-todo nil
+ org-icalendar-include-sexps t
+ org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
+ org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
+ org-icalendar-with-timestamps 'active)
+
 ;;; define categories that should be excluded
 (setq org-export-exclude-category (list "sample"))
 
@@ -1183,33 +1183,34 @@ according to the value of `org-display-remote-inline-images'."
 ;;; checks if the category of the entry is in an exclude list and
 ;;; returns either t or nil to skip or include the entry.
 
-(defun org-mycal-export-limit ()
-  "Limit the export to items that have a date, time and a range. Also exclude certain categories."
-  (setq org-tst-regexp "<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ... [0-9]\\{2\\}:[0-9]\\{2\\}[^\r\n>]*?\
-\)>")
-  (setq org-tstr-regexp (concat org-tst-regexp "--?-?" org-tst-regexp))
-  (save-excursion
-                                        ; get categories
-    (setq mycategory (org-get-category))
-                                        ; get start and end of tree
-    (org-back-to-heading t)
-    (setq mystart    (point))
-    (org-end-of-subtree)
-    (setq myend      (point))
-    (goto-char mystart)
-                                        ; search for timerange
-    (setq myresult (re-search-forward org-tstr-regexp myend t))
-                                        ; search for categories to exclude
-    (setq mycatp (member mycategory org-export-exclude-category))
-                                        ; return t if ok, nil when not ok
-    (if (and myresult (not mycatp)) t nil)))
+;; (defun org-mycal-export-limit ()
+;;   "Limit the export to items that have a date, time and a range. Also exclude certain categories."
+;;   (setq org-tst-regexp "<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ... [0-9]\\{2\\}:[0-9]\\{2\\}[^\r\n>]*?\
+;; \)>")
+;;   (setq org-tstr-regexp (concat org-tst-regexp "--?-?" org-tst-regexp))
+;;   (save-excursion
+;;                                         ; get categories
+;;     (setq mycategory (org-get-category))
+;;                                         ; get start and end of tree
+;;     (org-back-to-heading t)
+;;     (setq mystart    (point))
+;;     (org-end-of-subtree)
+;;     (setq myend      (point))
+;;     (goto-char mystart)
+;;                                         ; search for timerange
+;;     (setq myresult (re-search-forward org-tstr-regexp myend t))
+;;                                         ; search for categories to exclude
+;;     (setq mycatp (member mycategory org-export-exclude-category))
+;;                                         ; return t if ok, nil when not ok
+;;     (if (and myresult (not mycatp)) t nil)))
 
 ;;; activate filter and call export function
 (defun org-mycal-export ()
   (interactive)
   (save-excursion
-    (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-      (org-icalendar-combine-agenda-files))))
+    (org-icalendar-combine-agenda-files)))
+    ;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
+    ;;   (org-icalendar-combine-agenda-files))))
 
 ;; (use-package! calibredb
 ;;   :defer t
@@ -1284,6 +1285,22 @@ according to the value of `org-display-remote-inline-images'."
 (setq org-re-reveal-theme "white"
       org-re-reveal-transition "slide"
       org-re-reveal-plugins '(markdown notes math search zoom))
+
+;; (setq org-caldav-url 'google
+;;       org-caldav-calendar-id "5un62u0m77fin1bqq375klf568@group.calendar.google.com"
+;;       org-caldav-files (quote ("~/Notes/projects"
+;;                                "~/Notes/calendar-inbox.org"
+;;                                "~/Notes/roam/20210625224916-areas.org"
+;;                                "~/Notes/roam/20210507181408-people.org"
+;;                                "~/Notes/study.org"
+;;                                "~/Notes/events.org"))
+;;       org-caldav-sync-direction 'org->cal
+;;       org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
+;;       org-caldav-oauth2-client-secret "tGlcde8zVpUiXFPuLOMb-DCB"
+;;       org-caldav-inbox "~/Notes/calendar-inbox.org"
+;;       ;; org-caldav-delete-org-entries 'always
+;;       ;; org-caldav-sync-changes-to-org 'all
+;;       )
 
 ;; (use-package! org-xournalpp
 ;;   :config
