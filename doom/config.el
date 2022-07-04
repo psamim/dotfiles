@@ -45,6 +45,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+;;
 (setq
  org-startup-with-inline-images t
  org-agenda-clockreport-parameter-plist
@@ -103,8 +104,10 @@
    (quote (
            ("t" "todo" entry
             (file "~/Notes/projects/misc.org") "* TODO %?\n%a\n" :clock-keep t)
+           ("e" "event" entry
+            (file+headline "~/Notes/events.org" "Inbox") "* %?\n" :clock-keep t)
            ("s" "schedule" entry
-            (file+headline "~/Notes/projects/misc.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+            (file+headline "~/Notes/events.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
            ))))
 
 (setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
@@ -129,7 +132,6 @@
   )
 
 (+bidi-global-mode 1)
-
 
 (customize-set-value
  'org-agenda-category-icon-alist
@@ -396,14 +398,15 @@ current time."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (tags "-CATEGORY=\"work\"+TODO=\"TODO\"" (
-                                           (org-agenda-overriding-header "\n⚡ To Do")
+          (tags "-CATEGORY=\"work\"+TODO=\"TODO\"|-CATEGORY=\"work\"+TODO=\"DONE\"" (
+                                           (org-agenda-overriding-header "\n⚡ Today")
                                            (org-agenda-sorting-strategy '(priority-down))
                                            (org-agenda-remove-tags t)
-                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                           (org-agenda-todo-ignore-scheduled 'all)
+                                           (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
+                                           ;; (org-agenda-todo-ignore-scheduled 'all)
                                            (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                           ;; (org-agenda-todo-keyword-format "")
+                                           ))
 
           (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
                                            (org-agenda-overriding-header "\n⚡ Next")
@@ -958,15 +961,12 @@ current time."
 
 (defun load-secrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
 
-(defun sync-calendars ()
+(defun psamim-sync-calendars ()
   (interactive)
   (progn
     (load-secrets)
     (org-gcal-sync-tokens-clear)
     (org-gcal-fetch)))
-
-;; (run-with-timer 0 (* 18 60 60) 'sync-calendars)
-;; (run-with-timer 0 (* 1 60 60) (lambda () (progn (sync-agenda-svg) (sleep-for 1) (my-org-agenda))))
 
 ;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
 (defun my-auto-exclude-fn (tag)
@@ -1007,7 +1007,7 @@ current time."
           (replace-match file-name t))))
     (message (concat "Saved screenshot to " file-name))))
 
-(defun sync-agenda-svg ()
+(defun psamim-sync-agenda-svg ()
   "Save a screenshot of the current frame as an SVG image.
   Saves to a chosen file and puts the filename in the kill ring."
   (interactive)
@@ -1019,6 +1019,18 @@ current time."
     (setq cursor-type nil)
     (save-screenshot-svg)
     (setq cursor-type 'box)))
+
+(defun psamim-sync ()
+  (progn
+    (global-hl-line-mode -1)
+    (run-at-time
+     "10 sec"
+     nil
+     '(lambda () (progn
+              (psamim-sync-agenda-svg)
+              (psamim-sync-calendars)
+              (psamim-org-ical-export)
+              (kill-emacs))))))
 
 (map! :localleader
       (:map org-mode-map
@@ -1035,8 +1047,8 @@ current time."
 (map! :leader :desc "Dired" :nvg "d" #'ranger)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
 (map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
-(map! :leader :desc "sync-calendar" :nvg "rc" 'sync-calendars)
-(map! :leader :desc "sync-agenda-svg" :nvg "ra" 'sync-agenda-svg)
+(map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
+(map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 
 (custom-theme-set-faces!
   'doom-one-light
@@ -1066,7 +1078,7 @@ current time."
      org-scheduled-today
      org-agenda-calendar-sexp
      org-scheduled-previously)  :weight light)
-  ;; '((org-agenda-done) :foreground "#91a6ad" :weight light :strike-through "dark gray")
+  '((org-agenda-done) :foreground "#91a6ad" :weight light :strike-through "dark gray")
   '((org-agenda-structure) :family "pacifico" :height 220
     :box (:line-width 2 :color "#fafafa" :style nil))
   '((org-document-title) :family "pacifico")
@@ -1175,7 +1187,7 @@ according to the value of `org-display-remote-inline-images'."
  org-icalendar-with-timestamps 'active)
 
 ;;; define categories that should be excluded
-(setq org-export-exclude-category (list "sample"))
+;; (setq org-export-exclude-category (list "sample"))
 
 ;;; define filter. The filter is called on each entry in the agenda.
 ;;; It defines a regexp to search for two timestamps, gets the start
@@ -1205,7 +1217,7 @@ according to the value of `org-display-remote-inline-images'."
 ;;     (if (and myresult (not mycatp)) t nil)))
 
 ;;; activate filter and call export function
-(defun org-mycal-export ()
+(defun psamim-org-ical-export ()
   (interactive)
   (save-excursion
     (org-icalendar-combine-agenda-files)))
