@@ -190,3 +190,6 @@ ln -sf "$PWD/awesomewm" "$HOME/.config/awesome"
 
 rm -rf "$HOME/.config/paru"
 ln -sf "$PWD/paru" "$HOME/.config/paru"
+
+rm -rf "$HOME/.config/pacmanfile"
+ln -sf "$PWD/pacmanfile" "$HOME/.config/pacmanfile"
