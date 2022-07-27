@@ -13,7 +13,7 @@
 
       .agenda img {
         position: absolute;
-        left: -27px;
+        left: -20px;
         top: -15px;
         transform: scale(0.57);
         transform-origin: 0 0;
