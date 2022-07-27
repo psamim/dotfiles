@@ -20,7 +20,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 20)
+(setq doom-font (font-spec :family "Iosevka" :size 22)
       doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
       doom-unicode-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
@@ -130,8 +130,6 @@
   org-fontify-whole-heading-line t
   org-fontify-quote-and-verse-blocks t
   )
-
-(+bidi-global-mode 1)
 
 (customize-set-value
  'org-agenda-category-icon-alist
@@ -598,14 +596,21 @@ current time."
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-(defun set-farsi-font ()
-  (interactive)
-  (set-fontset-font
-   "fontset-default"
-   (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
-   ;; "Vazir Code-13")
-   ;; "Tanha-16"))
-   "Mikhak-18"))
+;; (defun set-farsi-font ()
+;;   (interactive)
+;;   (progn
+;;     (set-fontset-font
+;;      "fontset-default"
+;;      'arabic
+;;      ;; (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
+;;      ;; "Vazir Code-13")
+;;      ;; "Tanha-16"))
+;;      ;; "Mikhak-15"
+;;       )
+
+(+bidi-global-mode 1)
+(setq +bidi-want-smart-fontify nil)
+(setq +bidi-arabic-font (font-spec :family "Mikhak"))
 
 ;; (after! org-mode
 ;;   (set-company-backend! 'company-dabbrev)
@@ -628,7 +633,7 @@ current time."
 
 (add-hook 'text-mode-hook
           (lambda ()
-            (set-farsi-font)
+            ;; (set-farsi-font)
             (setq olivetti-body-width 0.91)
             (olivetti-mode)
             (setq header-line-format " ")
@@ -653,9 +658,11 @@ current time."
   :commands (org-pretty-table-mode global-org-pretty-table-mode))
 
 (defun set-window-clean ()
+  (setq line-spacing 2)
   (agenda-color-char)
   (+bidi-mode -1)
   (setq mode-line-format nil)
+  ;; (mixed-pitch-mode 1)
   ;; (set-frame-parameter nil 'font "Iosevka-18")
   (setq header-line-format " ")
   (set-face-attribute 'header-line nil :background "#00000000")
@@ -666,12 +673,6 @@ current time."
 ;; (global-activity-watch-mode)
 
 (defun string-to-int (s) (string-to-number s))
-
-(defun what-face (pos)
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 ;; (add-hook
 ;;  'org-agenda-mode-hook
@@ -1317,3 +1318,17 @@ according to the value of `org-display-remote-inline-images'."
 ;; (use-package! org-xournalpp
 ;;   :config
 ;;   (add-hook 'org-mode-hook 'org-xournalpp-mode))
+
+(after! citar
+  (setq! citar-bibliography '("/home/samim/workspace/thesis/References.bib"))
+  (map! :localleader
+        :map LaTeX-mode-map
+        :desc "Insert cite"  "t" #'citar-insert-citation)
+  (map! :localleader
+        :map latex-mode-map
+        :desc "Insert cite"  "t" #'citar-insert-citation)
+  (setq citar-symbols
+        `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+          (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+          (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+  (setq citar-symbol-separator "  "))
