@@ -40,16 +40,11 @@ breeze-icons
 browserpass-chrome
 browserpass-firefox
 bzip2
-cadaver
-caddy
-calcurse
 calibre
 cdrdao
-clash
 clash-for-windows-bin
 code
 coreutils
-corkscrew
 cow-proxy
 cowsay
 cryptsetup
@@ -135,10 +130,8 @@ ispell
 itstool
 iw
 jcal-git
-jdk8-openjdk
 jfsutils
 jq
-jre-openjdk
 kcolorchooser
 kdeconnect
 kde-system-meta
@@ -174,7 +167,6 @@ logrotate
 lua52-dbi
 lua52-sec
 lua53-penlight
-lua-lsp-git
 luarocks
 luit
 lvm2
@@ -452,3 +444,7 @@ texlive-science
 texlive-langextra
 texlive-bibtexextra
 biber
+
+# Java
+jre-openjdk
+# jdk8-openjdk
