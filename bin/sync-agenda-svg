@@ -1,5 +1,4 @@
 #!/bin/bash
 export ICALENDAR_FILE=/tmp/org.ics
 xvfb-run --server-args="-screen 0 840x2600x24" emacs --eval -fs '(psamim-sync)' \
-  && scp "$ICALENDAR_FILE" central.psam.im:~/server-compose/hass/www
-
+  && rclone copy "$ICALENDAR_FILE" webdav:
