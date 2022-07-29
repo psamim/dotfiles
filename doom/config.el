@@ -1332,3 +1332,11 @@ according to the value of `org-display-remote-inline-images'."
           (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
           (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
   (setq citar-symbol-separator "  "))
+
+;; https://www.reddit.com/r/orgmode/comments/ub1fuk/new_workflow_for_reading_epubs_and_taking_notes/
+(org-link-set-parameters
+ "calibre"
+ :follow 'my/calibre-follow)
+
+(defun my/calibre-follow (path)
+  (call-process "xdg-open" nil 0 nil (concat "calibre:" path)))
