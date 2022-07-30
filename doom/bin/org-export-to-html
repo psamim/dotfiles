@@ -1,0 +1,9 @@
+#!/usr/bin/env doomscript
+
+(defcli! export-notes (&args files)
+  (require 'core-start)          ; load your user config
+  (dolist (file files)           ; supports multiple files, if you want
+    (find-file file)             ; open an org file
+    (org-html-export-to-html)))  ; and export it
+
+(run! "export-notes" (cdr (member "--" argv)))
