@@ -12,8 +12,8 @@
 # export NAME=backups
 # export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 # list backups
-# borg list path/to/borg/bakcup
-# borg export-tar /path/to/borg/backup::archive out.tar
+# borg list borg/repost/backup
+# borg export-tar /borg/repos/backup::archive out.tar
 
 # Helper functions to display log
 function info() { npx chalk-cli -t "$(date -Iminutes) - {yellow $* }" }
@@ -114,7 +114,7 @@ function borg_remote_backup() {
     borg_backup . $NAME $OPTIONS
     cd
     sudo umount -f $SOURCE
-    rm -rf $SOURCE
+    # rm -rf $SOURCE
 }
 
 # This creates a gpg encrypted tar using my private key
@@ -254,18 +254,18 @@ function main() {
       rm $TEMP_PASS_BACKUP
       borg_backup /home/samim/tombs/backups/ backups \
         -e 'mail/account.gmail/.notmuch' 
-              borg_backup /home/samim/Calibre calibre
-              borg_remote_backup central:/home/central/server-compose hass \
-                -e 'syncthing/Samim-Notes' \
-                -e 'syncthing/index-v0.14.0.db' \
-                -e 'photoprism-storage' \
-                -e 'hass/home-assistant_v2.db' \
-                -e 'hass/hass/home-assistant_v2.db-wal' \
-                -e 'hass/home-assistant.log' \
-                -e 'webui-aria2' \
-                -e 'pihole/pihole-FTL.db' \
-                -e 'pihole/gravity.db' \
-                -e 'pihole/list.1.raw.githubusercontent.com.domains'
+      borg_backup /home/samim/Calibre calibre
+      borg_remote_backup central:/home/central/server-compose hass \
+        -e 'syncthing/Samim-Notes' \
+        -e 'syncthing/index-v0.14.0.db' \
+        -e 'photoprism-storage' \
+        -e 'hass/home-assistant_v2.db' \
+        -e 'hass/hass/home-assistant_v2.db-wal' \
+        -e 'hass/home-assistant.log' \
+        -e 'webui-aria2' \
+        -e 'pihole/pihole-FTL.db' \
+        -e 'pihole/gravity.db' \
+        -e 'pihole/list.1.raw.githubusercontent.com.domains'
     else
       info "Only sending to remotes..."
       export ONLY_SEND=yes
