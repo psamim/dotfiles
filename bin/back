@@ -16,8 +16,12 @@
 # borg export-tar /borg/repos/backup::archive out.tar
 
 # Helper functions to display log
-function info() { npx chalk-cli -t "$(date -Iminutes) - {yellow $* }" }
-function error() { npx chalk-cli -t "$(date -Iminutes) - {red $* }" }
+function info() { 
+  echo '{{ Color "99" "0" " '''$(date -Iminutes)''' " }} {{  "'''$*'''" }} ' | gum format -t template 
+}
+function error() { 
+  echo '{{ Color "196" "0" " '''$(date -Iminutes)''' " }} {{  Color "196" "'''$*'''" }} ' | gum format -t template 
+}
 trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 # set -x # Uncomment to debug
 
@@ -218,6 +222,7 @@ function borg_hdd_backup {
   local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
+    info "Mounting"
     echo "$LUKS_PASSPHRASE" | sudo cryptsetup open "$DEV_PATH" backup -
     sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
   fi
@@ -228,6 +233,8 @@ function borg_hdd_backup {
   fi
 
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
+  info "Starting backup"
+  info "Make sure you are on your home network."
   rclone sync passport:/mnt/photoprism/originals "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
   sudo umount /mnt/backup
