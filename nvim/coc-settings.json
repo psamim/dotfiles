@@ -1,4 +1,5 @@
 {
+  "suggest.noselect": true,
   "python.formatting.provider": "autopep8",
   "tabnine.enable": false,
   "tsserver.enable": true,
@@ -36,6 +37,16 @@
       "rootPatterns": [".git/"]
     }
   },
-  "cSpell.userWords": ["camelcase"],
+  "cSpell.userWords": [
+    "Instalments",
+    "Licences",
+    "Subroute",
+    "Subroutes",
+    "Swiper",
+    "Twilio",
+    "camelcase",
+    "cloudinary",
+    "rudderanalytics"
+  ],
   "coc.preferences.extensionUpdateCheck": "daily"
 }

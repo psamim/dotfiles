@@ -13,6 +13,7 @@
   st = status
 [push]
   default = simple
+	autoSetupRemote = true
 # [http]
 # 	proxy = http://127.0.0.1:7777
 # [https]

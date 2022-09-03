@@ -63,7 +63,8 @@ function borg_backup() {
 
     # Create the backup
     info "Starting backup from '$SOURCE' to repo '$NAME'"
-    eval borg create $OPTIONS -C lzma,4 --stats --list $BORG_REPO::{now} $SOURCE
+    eval borg create --exclude-if-present '.borgignore' \
+      $OPTIONS -C lzma,4 --stats --list $BORG_REPO::{now} $SOURCE
 
     backup_exit=$?
 
@@ -201,7 +202,7 @@ function create_private_file() {
     local TEMP_PRIVATE_DIR=/tmp/$RANDOM
     local PRIVATE_FILE=$1
     mkdir -p $TEMP_PRIVATE_DIR
-    rsync -rvzl ~/.gnupg/ $TEMP_PRIVATE_DIR/gnugp
+    rsync -rvzl ~/.gnupg/ $TEMP_PRIVATE_DIR/gnupg
     rsync -rvzl ~/.ssh/ $TEMP_PRIVATE_DIR/ssh
     rsync -rvzl  --exclude "repos" --exclude "cache" ~/borg $TEMP_PRIVATE_DIR
     make_tar_gpg_sym $TEMP_PRIVATE_DIR $PRIVATE_FILE
@@ -263,6 +264,8 @@ function main() {
         -e 'mail/account.gmail/.notmuch' 
       borg_backup /home/samim/Calibre calibre
       borg_remote_backup central:/home/central/server-compose hass \
+        -e 'adguard/work/data/querylog.json' \
+        -e 'adguard/work/data/filters' \
         -e 'syncthing/Samim-Notes' \
         -e 'syncthing/index-v0.14.0.db' \
         -e 'photoprism-storage' \

@@ -92,11 +92,6 @@ group by commands.argv order by count(*) desc limit 1"
     suggestion=$(_histdb_query "$query")
 }
 
-tmb() {
-    local WHERE=$TOMBS/$1
-    tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
-}
-
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
 # Zaw
@@ -183,8 +178,26 @@ export MANWIDTH=999
 
 # eval "$(pyenv init -)"
 
+tmb() {
+    local WHERE=$TOMBS/$1
+    tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
+}
+
 function vpn {
   env ID="$1" bash -c 'nmcli con down id "$ID"; sleep 1; nmcli con up id "$ID"'
+}
+
+function cpr() {
+  rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+
+function connect() {
+  systemctl --user stop gpg-agent.service gpg-agent.socket gpg-agent-extra.socket gpg-agent-browser.socket gpg-agent-ssh.socket
+  sleep 4 
+  sudo swapoff -a
+  tmb pass && tmb mozilla && tmb backups && tmb other
+  systemctl --user start http.service
+  systemctl --user stop sync-agenda-svg.service && systemctl --user start sync-agenda-svg.timer
 }
 
 export POWERLEVEL9K_LEGACY_ICON_SPACING=true

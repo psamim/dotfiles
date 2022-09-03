@@ -67,7 +67,7 @@
  org-agenda-files (quote ("~/Notes/projects"
                           "~/Notes/calendar-inbox.org"
                           "~/Notes/roam/20210625224916-areas.org"
-                          "~/Notes/roam/20210507181408-people.org"
+                          "~/Notes/roam/20210507181408-people.gpg.org"
                           "~/Notes/study.org"
                           "~/Notes/events.org"))
  org-file-apps
@@ -402,7 +402,7 @@ current time."
                                            (org-agenda-remove-tags t)
                                            (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
                                            ;; (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
+                                           (org-agenda-prefix-format "   %-2i ")
                                            ;; (org-agenda-todo-keyword-format "")
                                            ))
 
@@ -533,35 +533,17 @@ current time."
 
 (defun psamim-insert-persian-time ()
   (interactive)
-  ;; (let*
-  ;;     (
-  ;;      (time (current-time))
-  ;;      (decodedTime (decode-time time))
-  ;;      (now (list (nth 4 decodedTime) (nth 3 decodedTime) (nth 5 decodedTime))))
-  ;;   (concat
-  ;;    ;; (format-time-string "%B %e, %Y" time) "\n"
-  ;;    ;; (format-time-string "%A" time)
-  ;;    (calendar-persian-date-string now))
-  ;;    ;; # " (calendar-bahai-date-string now) "\n\n"))
-  ;;   )
   (shell-command-to-string "~/.bin/persian-date")
   )
 
-;; (customize-set-variable 'org-journal-file-type "daily")
+(setq org-journal-enable-agenda-integration t)
+(customize-set-variable 'org-journal-file-type 'weekly)
 (setq!
- org-journal-dir "~/Notes/journal/daily"
+ org-journal-dir "~/Notes/journal/weekly"
+ org-journal-start-on-weekday 6 ; Saturday
  org-journal-enable-cache t
  org-journal-encrypt-journal t
  org-journal-file-header 'psamim-journal-prefix)
-
-(defun org-journal-find-location ()
-  ;; Open today's journal, but specify a non-nil prefix argument in order to
-  ;; inhibit inserting the heading; org-capture will insert the heading.
-  (org-journal-new-entry t)
-  ;; Position point on the journal's top-level heading so that org-capture
-  ;; will add the new entry as a child entry.
-  (goto-char (point-min)))
-
 
 ;; (set-email-account! "psamim@gmail.com"
 ;;   '((mu4e-sent-folder       . "/[Gmail].Sent Mail")
@@ -668,7 +650,6 @@ current time."
   (set-face-attribute 'header-line nil :background "#00000000")
   (set-window-margins (frame-selected-window) 4))
 
-;; (setq org-journal-enable-agenda-integration t)
 
 ;; (global-activity-watch-mode)
 
@@ -1050,6 +1031,7 @@ current time."
 (map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
+(map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
 
 (custom-theme-set-faces!
   'doom-one-light
@@ -1340,3 +1322,10 @@ according to the value of `org-display-remote-inline-images'."
 
 (defun my/calibre-follow (path)
   (call-process "xdg-open" nil 0 nil (concat "calibre:" path)))
+
+;; Open phone numbers with kde-connect
+(defun org-tel-open (number _)
+  (start-process "Phone Call"
+                 "*call*"
+                 "kdeconnect-handler"
+                 (concat "tel:" number)))

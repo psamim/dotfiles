@@ -16,7 +16,6 @@ arch-hs
 arch-wiki-docs
 arc-icon-theme
 aria2
-aspell-en
 astroid-git
 autoconf
 autoconf-archive
@@ -188,7 +187,6 @@ mpv-mpris
 mtools
 mtr
 mullvad-vpn-bin
-musescore
 namcap
 nano
 ncdu
@@ -381,7 +379,6 @@ which
 wipe
 wireguard-tools
 wireless_tools
-wireproxy
 woeusb-ng
 x86_energy_perf_policy
 xcape
@@ -438,13 +435,17 @@ zoom
 zsh
 
 # Latex
-texlive-core
-texlive-latexextra
-texlive-science
-texlive-langextra
-texlive-bibtexextra
-biber
+# texlive-core
+# texlive-latexextra
+# texlive-science
+# texlive-langextra
+# texlive-bibtexextra
+# biber
 
 # Java
 jre-openjdk
 # jdk8-openjdk
+
+# Tools
+gum-bin
+hunspell-fa
