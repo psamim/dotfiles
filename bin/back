@@ -236,7 +236,8 @@ function borg_hdd_backup {
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   info "Starting backup"
   info "Make sure you are on your home network."
-  rclone sync passport:/mnt/photoprism/originals "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 24 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 24 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
   sudo umount /mnt/backup
   sudo cryptsetup close backup
@@ -261,7 +262,8 @@ function main() {
       send $TEMP_PASS_BACKUP ""
       rm $TEMP_PASS_BACKUP
       borg_backup /home/samim/tombs/backups/ backups \
-        -e 'mail/account.gmail/.notmuch' 
+        -e 'mail/account.gmail/.notmuch' \
+        -e 'mail' 
       borg_backup /home/samim/Calibre calibre
       borg_remote_backup central:/home/central/server-compose hass \
         -e 'adguard/work/data/querylog.json' \
