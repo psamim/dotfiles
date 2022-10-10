@@ -54,6 +54,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/history-substring-search
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/python
+    # zgen oh-my-zsh plugins/poetry
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
     zgen load zsh-users/zsh-completions src
@@ -125,6 +126,7 @@ export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
 export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
 export BORG_CONFIG_DIR="/home/samim/borg"
 export BORG_CACHE_DIR="/home/samim/borg/cache"
+export PIPENV_VENV_IN_PROJECT=1
 # export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500' "
 # export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 alias e=$EDITOR
