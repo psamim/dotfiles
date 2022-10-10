@@ -43,6 +43,41 @@
                                     (tags priority-down category-keep)
                                     (search category-keep)))
 
+;; https://github.com/d12frosted/d12frosted.io/issues/15#issuecomment-908260553
+(require 'cl-lib)
+(defvar org-agenda--todo-keyword-regex
+  (cl-reduce (lambda (cur acc)
+            (concat acc "\\|" cur))
+          (mapcar (lambda (entry) (concat "\\* " entry))
+                  '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
+  "Regex which filters all TODO keywords")
+
+(defvar org-agenda--last-months-regex
+  (cl-reduce (lambda (cur acc)
+            (concat acc "\\|" cur))
+          '("2021-06" "2021-07" "2021-08" "2021-09")))
+
+(defun org-agenda--calculate-files-for-regex (regex)
+  "Yields a fresh array with all files containing todos which match REGEX.
+
+Uses grep to discover all files containing anything stored in
+org-agenda--todo-keyword-regex."
+  (let ((files
+         (cl-remove-if #'file-directory-p
+                    (split-string
+                     (shell-command-to-string
+                      (concat "grep --include=\"*.org\" --exclude-dir=\"archive\" -rl -e '" regex "' ~/Notes/roam"))
+                     "\n"))))
+    (cl-concatenate
+     'list
+     files
+     '("~/Notes/calendar-inbox.org"
+       "~/Notes/roam/20210507181408-people.gpg.org"
+       "~/Notes/study.org"
+       "~/Notes/events.org"
+       "~/Notes/projects"))))
+
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 ;;
@@ -64,12 +99,14 @@
  password-cache-expiry nil
  org-ellipsis "…"
  ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
- org-agenda-files (quote ("~/Notes/projects"
-                          "~/Notes/calendar-inbox.org"
-                          "~/Notes/roam/20210625224916-areas.org"
-                          "~/Notes/roam/20210507181408-people.gpg.org"
-                          "~/Notes/study.org"
-                          "~/Notes/events.org"))
+ ;; org-agenda-files (quote ("~/Notes/projects"
+ ;;                          "~/Notes/roam"
+ ;;                          "~/Notes/calendar-inbox.org"
+ ;;                          "~/Notes/roam/20210625224916-areas.org"
+ ;;                          "~/Notes/roam/20210507181408-people.gpg.org"
+ ;;                          "~/Notes/study.org"
+ ;;                          "~/Notes/events.org"))
+ org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
  org-file-apps
    '((remote . emacs)
      (auto-mode . emacs)
@@ -528,7 +565,9 @@ current time."
      ;; (format-time-string "%B %e, %Y" time) "\n"
      ;; (format-time-string "%A" time)
      "# " (calendar-persian-date-string now) "\n"
-     "# " (calendar-bahai-date-string now) "\n\n")
+     "# " (calendar-bahai-date-string now) "\n\n"
+     "#+CATEGORY: check"
+     )
     ))
 
 (defun psamim-insert-persian-time ()
