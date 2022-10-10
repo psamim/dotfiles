@@ -449,3 +449,4 @@ jre-openjdk
 # Tools
 gum-bin
 hunspell-fa
+hurl-bin
