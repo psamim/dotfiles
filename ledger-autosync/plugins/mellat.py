@@ -23,7 +23,10 @@ class Mellat(CsvConverter):
 
     def __init__(self, *args, **kwargs):
         super(Mellat, self).__init__(*args, **kwargs)
-        self.name = 'Assets:Bank:Mellat'
+        try:
+            self.name = os.environ['LEDGER_ACCOUNT']
+        except:
+            self.name = 'Assets:Bank:Mellat'
         dirname = os.path.dirname(os.path.abspath(__file__))
         with open(os.path.join(dirname, 'accounts.json')) as f:
             self.accounts = json.load(f)
