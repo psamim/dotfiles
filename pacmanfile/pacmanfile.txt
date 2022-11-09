@@ -41,7 +41,6 @@ browserpass-firefox
 bzip2
 calibre
 cdrdao
-clash-for-windows-bin
 code
 coreutils
 cow-proxy
@@ -58,7 +57,6 @@ dino
 direnv
 ditaa
 dnsmasq
-dnsproxy-adguard
 e2fsprogs
 earlyoom
 easyeffects
@@ -186,7 +184,6 @@ mpv
 mpv-mpris
 mtools
 mtr
-mullvad-vpn-bin
 namcap
 nano
 ncdu
@@ -265,7 +262,6 @@ pulseaudio-control
 pv
 pyenv
 pyside2
-python2-gobject
 python-axolotl
 python-brotli
 python-click
@@ -277,7 +273,6 @@ python-llfuse
 python-lsp-server
 python-m2crypto
 python-pip
-python-plotly
 python-pychromecast
 python-pyflakes
 python-pynvim
@@ -296,8 +291,6 @@ reflector
 reiserfsprogs
 remmina
 ripgrep
-rofi-greenclip
-rofimoji
 rofi-pass
 rsync
 rtorrent
@@ -322,7 +315,7 @@ sshuttle
 stress
 stylish-haskell
 sudo
-syncthing-bin
+syncthing
 sysfsutils
 systemd-sysvcompat
 tanha-fonts
@@ -354,7 +347,6 @@ ttf-font-awesome
 ttf-iosevka-nerd
 ttf-liberation
 ttf-material-design-icons
-ttf-mononoki-git
 ttf-roboto
 ttf-roboto-mono
 ttf-ubuntu-font-family
@@ -422,7 +414,6 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xprintidle
-xray
 xsel
 xss-lock
 xterm
@@ -434,7 +425,10 @@ zip
 zoom
 zsh
 
-# Latex
+# VPN
+xray-bin
+
+## Latex
 # texlive-core
 # texlive-latexextra
 # texlive-science
@@ -447,6 +441,6 @@ jre-openjdk
 # jdk8-openjdk
 
 # Tools
-gum-bin
+gum-git
 hunspell-fa
 hurl-bin
