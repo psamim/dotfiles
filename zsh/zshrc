@@ -166,9 +166,6 @@ export WORKON_HOME=~/.virtualenvs
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
- export GPG_TTY=$(tty)
- # gpg-connect-agent updatestartuptty /bye >/dev/null&
-
 export TERM=xterm
 # source <(kubectl completion zsh)
 
@@ -198,9 +195,18 @@ function connect() {
   sleep 4 
   sudo swapoff -a
   tmb pass && tmb mozilla && tmb backups && tmb other
+  sleep 2
   systemctl --user start http.service
   systemctl --user stop sync-agenda-svg.service && systemctl --user start sync-agenda-svg.timer
 }
+
+# GPG Agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null&
 
 export POWERLEVEL9K_LEGACY_ICON_SPACING=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
