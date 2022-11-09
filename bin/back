@@ -3,7 +3,7 @@
 #
 # Usage:
 # back # to backup everything and send them
-# back --only-send # to just send the backups
+# back --only-send # to just send the backups to cloud
 # back --hdd # to only transfer the backupts to encrypted HDD
 # back --create-private # to only create a bakcup of keys
 
@@ -179,18 +179,22 @@ function make_tar_gpg_sym() {
 # --
 # First argument is the path to send
 # Second argument is path in the remote destination
-function send() {
+function send_cloud() {
     info "Sending '$1' to cloud as name '$2'"
-    if [ -z "$ONLY_SEND" ]; then
-      info "Sending to passport"
-      rclone sync --sftp-disable-hashcheck=true --transfers=1 --ignore-size --progress --quiet $1 passport:/mnt/mybook/$2
-    fi
-    echo # New Line
     for remote in dropbox drive; do
         info "Sending to remote '$remote'"
         rclone sync --progress --quiet --transfers=1 $1 $remote:$2
         echo # New Line
     done
+}
+
+# This sends the given directory to various destinations using rclone
+# --
+# First argument is the path to send
+# Second argument is path in the remote destination
+function send_local() {
+    info "Sending '$1' to local server as name '$2'"
+    rclone sync --sftp-disable-hashcheck=true --transfers=1 --ignore-size --progress --quiet $1 passport:/mnt/mybook/$2
 }
 
 # This creates a backup of my SSH, GPG and Borg keys
@@ -257,33 +261,27 @@ function main() {
 
     if [ "$1" != "--only-send" ]
     then
+      # Backup passwords
       local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
       make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-      send $TEMP_PASS_BACKUP ""
+      send_local $TEMP_PASS_BACKUP ""
+      send_cloud $TEMP_PASS_BACKUP ""
       rm $TEMP_PASS_BACKUP
-      borg_backup /home/samim/tombs/backups/ backups \
-        -e 'mail/account.gmail/.notmuch' \
-        -e 'mail' 
+
+      # Backup others
+      borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
       borg_backup /home/samim/Calibre calibre
-      borg_remote_backup central:/home/central/server-compose hass \
-        -e 'adguard/work/data/querylog.json' \
-        -e 'adguard/work/data/filters' \
-        -e 'syncthing/Samim-Notes' \
-        -e 'syncthing/index-v0.14.0.db' \
-        -e 'photoprism-storage' \
-        -e 'hass/home-assistant_v2.db' \
-        -e 'hass/hass/home-assistant_v2.db-wal' \
-        -e 'hass/home-assistant.log' \
-        -e 'webui-aria2' \
-        -e 'pihole/pihole-FTL.db' \
-        -e 'pihole/gravity.db' \
-        -e 'pihole/list.1.raw.githubusercontent.com.domains'
+      borg_remote_backup central:/home/central/server-compose hass
+
+      send_local /home/samim/borg/repos/backups borg-repos/backups
+      send_local /home/samim/borg/repos/calibre borg-repos/calibre
+      send_local /home/samim/borg/repos/hass borg-repos/hass
     else
       info "Only sending to remotes..."
-      export ONLY_SEND=yes
+      send_cloud /home/samim/borg/repos/backups borg-repos/backups
+      send_cloud /home/samim/borg/repos/calibre borg-repos/calibre
     fi
 
-    send /home/samim/borg/repos borg-repos
 }
 
 main $@
