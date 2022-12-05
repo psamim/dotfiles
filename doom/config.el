@@ -2,6 +2,7 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
+(setq helm-ag-show-status-function nil)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -1049,7 +1050,7 @@ current time."
      nil
      '(lambda () (progn
               (psamim-sync-agenda-svg)
-              (psamim-sync-calendars)
+              ;; (psamim-sync-calendars)
               (psamim-org-ical-export)
               (kill-emacs))))))
 

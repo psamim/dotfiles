@@ -150,6 +150,8 @@ alias org-csv="emacs -batch -l ~/.emacs.d/core/core.el -l ~/.emacs.d/core/core-p
 alias nmup="nmcli con up"
 alias nmdown="nmcli con down"
 alias nord="sudo --user=nordvpnteams nordvpnteams"
+alias ledger-import-main='env LEDGER_ACCOUNT="Assets:Bank:Mellat" ledger-autosync /home/samim/mellat.csv -a assets:bank --unknown-account Expenses:Adjustment -L >> Notes/accounting/ledger.ledger'
+alias ledger-import-shared='env LEDGER_ACCOUNT="Assets:Bank:Shared" ledger-autosync /home/samim/mellat.csv -a assets:bank --unknown-account Expenses:Adjustment -L >> Notes/accounting/ledger.ledger'
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH

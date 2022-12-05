@@ -444,3 +444,10 @@ jre-openjdk
 gum-git
 hunspell-fa
 hurl-bin
+robo3t-bin
+dnscrypt-proxy
+
+# It seems it is needed for paru
+openssl-1.1
+openssl-1.0
+
