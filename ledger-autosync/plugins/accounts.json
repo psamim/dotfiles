@@ -435,6 +435,10 @@
     "account": "Expenses:Transportation:Taxi",
     "name": "Snap"
   },
+  "6118696": {
+    "account": "Expenses:Transportation:Taxi",
+    "name": "Tapsi"
+  },
   "21243633": {
     "account": "Expenses:Groceries",
     "name": "Andelos"
