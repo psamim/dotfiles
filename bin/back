@@ -6,14 +6,14 @@
 # back --only-send # to just send the backups to cloud
 # back --hdd # to only transfer the backupts to encrypted HDD
 # back --create-private # to only create a bakcup of keys
-
+#
 # To restore backup:
 # Have the keys in ~/$BORG_CONFIG_DIR/keys
 # export NAME=backups
 # export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 # list backups
-# borg list borg/repost/backup
-# borg export-tar /borg/repos/backup::archive out.tar
+# borg list borg/repost/$NAME
+# borg export-tar /borg/repos/$NAME::archive out.tar
 
 # Helper functions to display log
 function info() { 
@@ -241,6 +241,7 @@ function borg_hdd_backup {
   info "Starting backup"
   info "Make sure you are on your home network."
   rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 1 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/paperless-media "$MOUNT_HDD/paperless-media" -P --transfers 1 --size-only # --ignore-checksum
   rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 1 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
   sudo umount /mnt/backup
@@ -268,18 +269,20 @@ function main() {
       send_cloud $TEMP_PASS_BACKUP ""
       rm $TEMP_PASS_BACKUP
 
-      # Backup others
       borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
       borg_backup /home/samim/Calibre calibre
       borg_remote_backup central:/home/central/server-compose hass
+      borg_remote_backup central:/mnt/data/all/paperless-media docs
 
       send_local /home/samim/borg/repos/backups borg-repos/backups
       send_local /home/samim/borg/repos/calibre borg-repos/calibre
       send_local /home/samim/borg/repos/hass borg-repos/hass
+      send_local /home/samim/borg/repos/hass borg-repos/docs
     else
       info "Only sending to remotes..."
       send_cloud /home/samim/borg/repos/backups borg-repos/backups
       send_cloud /home/samim/borg/repos/calibre borg-repos/calibre
+      send_cloud /home/samim/borg/repos/docs borg-repos/docs
     fi
 
 }
