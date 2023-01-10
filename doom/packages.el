@@ -92,3 +92,7 @@
 ;    :recipe (:host github
 ;            :repo "lepisma/org-krita"
 ;            :files ("resources" "resources" "*.el" "*.el")))
+
+(package! ob-ledger
+  :recipe (:host github :repo "overtone/emacs-live"
+           :files ("packs/stable/org-pack/lib/org-mode/lisp/ob-ledger.el")))
