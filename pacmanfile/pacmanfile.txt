@@ -48,8 +48,6 @@ cowsay
 cryptsetup
 csound
 ctags
-dbeaver
-deno
 device-mapper
 dhcpcd
 diffutils
@@ -109,7 +107,6 @@ gvfs
 gvfs-smb
 gwenview
 gzip
-handbrake
 haskell-base-prelude
 hdparm
 helvum
@@ -273,7 +270,6 @@ python-llfuse
 python-lsp-server
 python-m2crypto
 python-pip
-python-pychromecast
 python-pyflakes
 python-pynvim
 python-pyperclip
@@ -444,10 +440,18 @@ jre-openjdk
 gum-git
 hunspell-fa
 hurl-bin
-robo3t-bin
-dnscrypt-proxy
+torbrowser-launcher
+nekoray
+curl-impersonate-bin
+# robo3t-bin
+# dnscrypt-proxy
+# docker
+# docker-compose
+# dbeaver
+# handbrake
+# deno
 
 # It seems it is needed for paru
 openssl-1.1
-openssl-1.0
+# openssl-1.0
 
