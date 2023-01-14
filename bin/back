@@ -12,7 +12,7 @@
 # export NAME=backups
 # export BORG_PASSPHRASE=`pass show borg-$NAME | head -n1`
 # list backups
-# borg list borg/repost/$NAME
+# borg list ~/borg/repost/$NAME
 # borg export-tar /borg/repos/$NAME::archive out.tar
 
 # Helper functions to display log
@@ -47,7 +47,7 @@ function borg_backup() {
 
     if [ ! -d "/home/samim/borg/keys/" ]; then
         # Control will enter here if $DIRECTORY doesn't exist.
-        error "$SOURCE does not exist"
+        error "Keys do not exist at $BORG_CONFIG_DIR/keys"
         exit 1
     fi
 
@@ -181,7 +181,7 @@ function make_tar_gpg_sym() {
 # Second argument is path in the remote destination
 function send_cloud() {
     info "Sending '$1' to cloud as name '$2'"
-    for remote in dropbox drive; do
+    for remote in dropbox drive storj; do
         info "Sending to remote '$remote'"
         rclone sync --progress --quiet --transfers=1 $1 $remote:$2
         echo # New Line
@@ -203,6 +203,18 @@ function send_local() {
 # First argument is the path the backup is created at
 function create_private_file() {
     info "Creating private file"
+
+    if [ ! -d "/home/samim/borg/keys/" ]; then
+        # Control will enter here if $DIRECTORY doesn't exist.
+        error "Keys do not exist at $BORG_CONFIG_DIR/keys"
+        exit 1
+    fi
+
+    if [ -z "$(ls -A $BORG_CONFIG_DIR/keys)" ]; then
+        error "Keys do not exist at $BORG_CONFIG_DIR/keys"
+        exit 1
+    fi
+
     local TEMP_PRIVATE_DIR=/tmp/$RANDOM
     local PRIVATE_FILE=$1
     mkdir -p $TEMP_PRIVATE_DIR

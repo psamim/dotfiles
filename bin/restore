@@ -1,17 +1,19 @@
 #!/bin/bash
 
+mkdir restore && cd restore
 echo "secret" | gpg --batch --passphrase-fd 0 --output out.tar --decrypt a.txt.gpg
 tar -xvzf out.tar
-rm -rf .gnugpg
-mv gnupg .gnupg
+rm -rf ~/.gnugpg
+mv gnupg ~/.gnupg
 
 gpg --pinentry-mode loopback -d pass.tgz.gpg > d.tgz
-mkdir .password-store
-tar -xvzf d.tgz -C .password-store
+mkdir ~/.password-store
+tar -xvzf d.tgz -C ~/.password-store
 
+export NAME="backups"
 export BORG_CONFIG_DIR=/home/samim/borg
 export BORG_CACHE_DIR=/home/samim/borg/cache
-export BORG_PASSPHRASE=`pass show borg-backups | head -n 1`
-chown -R $USER:$USER borg/repos
-borg list borg/repos/backup
-mkdir mnt && borg mount borg/repo/backup mnt
+export BORG_PASSPHRASE=`pass show borg-$NAME | head -n 1`
+chown -R $USER:$USER ~/borg/repos
+borg list ~/borg/repos/$NAME
+mkdir mnt && borg mount ~/borg/repo/$NAME mnt
