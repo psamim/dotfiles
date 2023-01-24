@@ -626,19 +626,5 @@ require('neoscroll').setup({
 })
 EOF
 
-lua <<EOF
-require"telescope".load_extension("frecency")
-
-require('telescope').setup{
-extensions = {
-  frecency = {
-    default_workspace = 'CWD',
-    ignore_patterns = {"*.git/*", "*node_modules/*"},
-    show_unindexed = true
-    }
-  }
-}
-EOF
 
 let g:lazygit_use_neovim_remote = 0
-

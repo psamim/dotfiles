@@ -45,6 +45,11 @@ function borg_backup() {
         exit 1
     fi
 
+    if [ ! -d "$BORG_REPO" ] || [ -z "$(ls -A $BORG_REPO)" ]; then
+        info "Creating borg repo at $BORG_REPO"
+        borg init -e keyfile --make-parent-dirs "$BORG_REPO"
+    fi
+
     if [ ! -d "/home/samim/borg/keys/" ]; then
         # Control will enter here if $DIRECTORY doesn't exist.
         error "Keys do not exist at $BORG_CONFIG_DIR/keys"
@@ -54,11 +59,6 @@ function borg_backup() {
     if [ -z "$(ls -A $BORG_CONFIG_DIR/keys)" ]; then
         error "Keys do not exist at $BORG_CONFIG_DIR/keys"
         exit 1
-    fi
-
-    if [ ! -d "$BORG_REPO" ] || [ -z "$(ls -A $BORG_REPO)" ]; then
-        info "Creating borg repo at $BORG_REPO"
-        borg init -e keyfile "$BORG_REPO"
     fi
 
     # Create the backup
@@ -181,7 +181,7 @@ function make_tar_gpg_sym() {
 # Second argument is path in the remote destination
 function send_cloud() {
     info "Sending '$1' to cloud as name '$2'"
-    for remote in dropbox drive storj; do
+    for remote in drive storj; do
         info "Sending to remote '$remote'"
         rclone sync --progress --quiet --transfers=1 $1 $remote:$2
         echo # New Line
@@ -253,17 +253,29 @@ function borg_hdd_backup {
   info "Starting backup"
   info "Make sure you are on your home network."
   rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 1 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/paperless-media "$MOUNT_HDD/paperless-media" -P --transfers 1 --size-only # --ignore-checksum
   rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 1 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" -P --transfers 1 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
   sudo umount /mnt/backup
   sudo cryptsetup close backup
 }
 
+function storj_backup {
+  info "Starting backup to storj"
+  rclone sync /home/samim/borg/repos/ storj:borg-repos/ -P --transfers 3
+  rclone sync mobin-passport:/mnt/data/all/MRIs "storj:backup/MRIs/" -P --transfers 3
+  rclone sync mobin-passport:/mnt/data/all/raffi-tg.tar.xz "storj:backup/tg/" -P --transfers 3
+  rclone sync mobin-passport:/mnt/data/all/photoprism/originals/ "storj:backup/photophrism-originals" -P --transfers 3
+} 
+
 function main() {
-    # Create private file
     if [ "$1" = "--create-private" ]; then
         create_private_file "$HOME/Engineering.pdf"
+        exit
+    fi
+
+    if [ "$1" = "--storj" ]; then
+        storj_backup
         exit
     fi
 
@@ -278,18 +290,18 @@ function main() {
       local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
       make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
       send_local $TEMP_PASS_BACKUP ""
-      send_cloud $TEMP_PASS_BACKUP ""
+      send_cloud $TEMP_PASS_BACKUP pass
       rm $TEMP_PASS_BACKUP
 
+      borg_remote_backup central:/mnt/data/all/paperless-media/documents/originals docs
+      borg_remote_backup central:/home/central/server-compose hass
       borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
       borg_backup /home/samim/Calibre calibre
-      borg_remote_backup central:/home/central/server-compose hass
-      borg_remote_backup central:/mnt/data/all/paperless-media docs
 
       send_local /home/samim/borg/repos/backups borg-repos/backups
       send_local /home/samim/borg/repos/calibre borg-repos/calibre
       send_local /home/samim/borg/repos/hass borg-repos/hass
-      send_local /home/samim/borg/repos/hass borg-repos/docs
+      send_local /home/samim/borg/repos/docs borg-repos/docs
     else
       info "Only sending to remotes..."
       send_cloud /home/samim/borg/repos/backups borg-repos/backups
