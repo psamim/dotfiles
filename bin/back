@@ -22,7 +22,12 @@ function info() {
 function error() { 
   echo '{{ Color "196" "0" " '''$(date -Iminutes)''' " }} {{  Color "196" "'''$*'''" }} ' | gum format -t template 
 }
-trap 'echo; error "Backup interrupted"; exit 2' INT TERM
+function clean_up() {
+  info Unmounting /mnt/backup
+  sudo umount /mnt/backup
+  sudo cryptsetup close backup
+}
+trap 'echo; error "Backup interrupted"; clean_up; exit 2' INT TERM
 # set -x # Uncomment to debug
 
 # Creates a backup using borg
@@ -235,16 +240,19 @@ function create_private_file() {
 # and transfers my backups to it using rsync and rclone
 function borg_hdd_backup {
   local MOUNT_HDD="/mnt/backup"
-  local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"
+  # local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"
+  local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
   local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
     info "Mounting"
     echo "$LUKS_PASSPHRASE" | sudo cryptsetup open "$DEV_PATH" backup -
     sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
+    sudo chown $USERNAME $MOUNT_HDD
   fi
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
+    clean_up
     error "Could not mount!"
     exit
   fi
@@ -252,10 +260,10 @@ function borg_hdd_backup {
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   info "Starting backup"
   info "Make sure you are on your home network."
-  rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 1 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 1 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" -P --transfers 1 --size-only # --ignore-checksum
   rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
+  rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 5 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 5 --size-only # --ignore-checksum
+  rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" -P --transfers 5 --size-only # --ignore-checksum
   sudo umount /mnt/backup
   sudo cryptsetup close backup
 }
