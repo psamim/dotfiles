@@ -3,8 +3,9 @@
 #
 # Usage:
 # back # to backup everything and send them
-# back --only-send # to just send the backups to cloud
+# back --cloud # to just send the backups to cloud
 # back --hdd # to only transfer the backupts to encrypted HDD
+# back --storj # to only transfer the backupts to storj
 # back --create-private # to only create a bakcup of keys
 #
 # To restore backup:
@@ -27,7 +28,7 @@ function clean_up() {
   sudo umount /mnt/backup
   sudo cryptsetup close backup
 }
-trap 'echo; error "Backup interrupted"; clean_up; exit 2' INT TERM
+trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 # set -x # Uncomment to debug
 
 # Creates a backup using borg
@@ -240,8 +241,8 @@ function create_private_file() {
 # and transfers my backups to it using rsync and rclone
 function borg_hdd_backup {
   local MOUNT_HDD="/mnt/backup"
-  # local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"
-  local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
+  local DEV_PATH="/dev/disk/by-uuid/a61d02eb-d569-448d-9e92-3f77a7c585f6"
+  # local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
   local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
@@ -292,31 +293,36 @@ function main() {
         exit
     fi
 
-    if [ "$1" != "--only-send" ]
-    then
-      # Backup passwords
-      local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
-      make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-      send_local $TEMP_PASS_BACKUP ""
-      send_cloud $TEMP_PASS_BACKUP pass
-      rm $TEMP_PASS_BACKUP
-
-      borg_remote_backup central:/mnt/data/all/paperless-media/documents/originals docs
-      borg_remote_backup central:/home/central/server-compose hass
-      borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
-      borg_backup /home/samim/Calibre calibre
-
-      send_local /home/samim/borg/repos/backups borg-repos/backups
-      send_local /home/samim/borg/repos/calibre borg-repos/calibre
-      send_local /home/samim/borg/repos/hass borg-repos/hass
-      send_local /home/samim/borg/repos/docs borg-repos/docs
-    else
-      info "Only sending to remotes..."
+    if [ "$1" = "--cloud" ]; then
+      info "Only sending to cloud..."
       send_cloud /home/samim/borg/repos/backups borg-repos/backups
       send_cloud /home/samim/borg/repos/calibre borg-repos/calibre
       send_cloud /home/samim/borg/repos/docs borg-repos/docs
+      exit
     fi
 
+    if [ "$1" = "--backup-local" ]; then
+      borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
+      borg_backup /home/samim/Calibre calibre
+      exit
+    fi
+
+    # Backup passwords
+    local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+    make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+    send_local $TEMP_PASS_BACKUP ""
+    send_cloud $TEMP_PASS_BACKUP pass
+    rm $TEMP_PASS_BACKUP
+
+    borg_remote_backup central:/mnt/data/all/paperless-media/documents/originals docs
+    borg_remote_backup central:/home/central/server-compose hass
+    borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
+    borg_backup /home/samim/Calibre calibre
+
+    send_local /home/samim/borg/repos/backups borg-repos/backups
+    send_local /home/samim/borg/repos/calibre borg-repos/calibre
+    send_local /home/samim/borg/repos/hass borg-repos/hass
+    send_local /home/samim/borg/repos/docs borg-repos/docs
 }
 
 main $@

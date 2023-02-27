@@ -1043,7 +1043,9 @@ current time."
     (setq cursor-type 'box)))
 
 (defun psamim-sync ()
+  (interactive)
   (progn
+    (load-theme 'doom-one-light)
     (global-hl-line-mode -1)
     (run-at-time
      "10 sec"
@@ -1202,7 +1204,7 @@ according to the value of `org-display-remote-inline-images'."
 (setq
  org-icalendar-combined-agenda-file (or (getenv "ICALENDAR_FILE") "~/org.ics")
  org-icalendar-honor-noexport-tag t
- org-icalendar-timezone "Asia/Tehran"
+ org-icalendar-timezone "Europe/Amsterdam"
  org-icalendar-include-todo nil
  org-icalendar-include-sexps t
  org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
