@@ -4,6 +4,7 @@
 # Usage:
 # back # to backup everything and send them
 # back --cloud # to just send the backups to cloud
+# back --backup-local # to only backup locally
 # back --hdd # to only transfer the backupts to encrypted HDD
 # back --storj # to only transfer the backupts to storj
 # back --create-private # to only create a bakcup of keys
@@ -272,9 +273,9 @@ function borg_hdd_backup {
 function storj_backup {
   info "Starting backup to storj"
   rclone sync /home/samim/borg/repos/ storj:borg-repos/ -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/MRIs "storj:backup/MRIs/" -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/raffi-tg.tar.xz "storj:backup/tg/" -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/photoprism/originals/ "storj:backup/photophrism-originals" -P --transfers 3
+  rclone sync passport:/mnt/data/all/MRIs "storj:backup/MRIs/" -P --transfers 3
+  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "storj:backup/tg/" -P --transfers 3
+  rclone sync passport:/mnt/data/all/photoprism/originals/ "storj:backup/photophrism-originals" -P --transfers 3
 } 
 
 function main() {

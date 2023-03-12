@@ -1,0 +1,25 @@
+skip 0
+separator TAB
+fields account_no, currency, date, balance_before, balance, another_date, amount, description
+status *
+date-format %Y%m%d
+account1 Assets:Bank:ABNShared
+
+if,account2
+ovpay,Expenses:Transportation:Bus
+ov-chipkaart,Expenses:Transportation:Bus
+GVB,Expenses:Transportation:Bus
+leliegrach,Expenses:Rent
+Social Hub,Expenses:Food:Cafe
+mcdonald,Expenses:Food:Dinner
+Peperwortel,Expenses:Food:Lunch
+Restaurant,Expenses:Food:Lunch
+KPN Mobiel,Expenses:Utilities:Mobile
+PATHE THEATERS,Expenses:Entertainment:Cinema
+Concertgebouw,Expenses:Entertainment:Concert
+The Sandwich Bar,Expenses:Food:Lunch
+Personio,Income:Salary
+albert heijn,Expenses:Groceries
+Foodlovers West,Expenses:Groceries
+ABN AMRO SCHADEV NV,Expenses:Insurance
+
