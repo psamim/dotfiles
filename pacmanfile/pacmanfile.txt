@@ -441,10 +441,12 @@ gum-git
 hunspell-fa
 hurl-bin
 torbrowser-launcher
-nekoray
+# nekoray
 curl-impersonate-bin
+dnscrypt-proxy
+python-twisted
+tailscale
 # robo3t-bin
-# dnscrypt-proxy
 # docker
 # docker-compose
 # dbeaver
