@@ -11,15 +11,21 @@ ov-chipkaart,Expenses:Transportation:Bus
 GVB,Expenses:Transportation:Bus
 leliegrach,Expenses:Rent
 Social Hub,Expenses:Food:Cafe
+HALTE 3 GRAND CAFE,Expenses:Food:Cafe
+Croque Madame,Expenses:Food:Cafe
 mcdonald,Expenses:Food:Dinner
 Peperwortel,Expenses:Food:Lunch
+Koffie- en Lunchcaf,Expenses:Food:Lunch
 Restaurant,Expenses:Food:Lunch
+Amigo Rozengracht,Expenses:Food:Lunch
 KPN Mobiel,Expenses:Utilities:Mobile
 PATHE THEATERS,Expenses:Entertainment:Cinema
 Concertgebouw,Expenses:Entertainment:Concert
 The Sandwich Bar,Expenses:Food:Lunch
 Personio,Income:Salary
 albert heijn,Expenses:Groceries
+jumbo,Expenses:Groceries
+etos,Expenses:Groceries
 Foodlovers West,Expenses:Groceries
 ROOS MARKET,Expenses:Groceries
 ABN AMRO SCHADEV NV,Expenses:Insurance
@@ -27,12 +33,16 @@ Pietersma Snacks,Expenses:Food:Lunch
 NS Internationaal,Expenses:Travel
 FlixbusCom,Expenses:Travel
 IKEA,Expenses:Furniture:Other
+Amazon Payments Europe,Expenses:Furniture:Other
+Media Markt,Expenses:Furniture:Electronics
 Action 1260,Expenses:Furniture:Plastic
 Praxis 1260,Expenses:Furniture:Other
 Mavi's Nieuwendijk,Expenses:Food:Lunch
 TicketSwap,Expenses:Entertainment:Concert
 TicketMaster,Expenses:Entertainment:Concert
+EventBrite,Expenses:Entertainment:Concert
 Rest. De Italiaan,Expenses:Food:Dinner
+Dominos Pizza,Expenses:Food:Dinner
 KPN - Mobiel,Expenses:Utilities:Mobile
 Health Corner,Expenses:Food:Dinner
 aldi,Expenses:Groceries
@@ -41,3 +51,12 @@ Hultink Horeca,Expenses:Groceries
 Kapsalon,Expenses:Medical:Beauty:Haircut
 BURGERFABRIEK EXPR,Expenses:Food:Dinner
 Bruno s Amster,Expenses:Food:Cafe
+prik,Expenses:Food:Cafe
+subway,Expenses:Food:Lunch
+Brakke Grond Horeca,Expenses:Food:Lunch
+uber,Expenses:Food:Dinner
+Lucca Due,Expenses:Food:Dinner
+ABN AMRO Bank,Expenses:Bank
+Omschrijving  Eigen risico,Expenses:Medical:Drugs
+ASR IKZ ZORG,Expenses:Insurance
+NS Groep N.V.,Expenses:Transportation:Bus
