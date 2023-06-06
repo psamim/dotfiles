@@ -13,23 +13,24 @@ leliegrach,Expenses:Rent
 Social Hub,Expenses:Food:Cafe
 HALTE 3 GRAND CAFE,Expenses:Food:Cafe
 Croque Madame,Expenses:Food:Cafe
-mcdonald,Expenses:Food:Dinner
-Peperwortel,Expenses:Food:Lunch
-Koffie- en Lunchcaf,Expenses:Food:Lunch
-Restaurant,Expenses:Food:Lunch
-Amigo Rozengracht,Expenses:Food:Lunch
+mcdonald,Expenses:Food:TakeAway
+Peperwortel,Expenses:Food:DineIn
+Koffie- en Lunchcaf,Expenses:Food:DineIn
+Restaurant,Expenses:Food:DineIn
+Amigo Rozengracht,Expenses:Food:DineIn
 KPN Mobiel,Expenses:Utilities:Mobile
-PATHE THEATERS,Expenses:Entertainment:Cinema
+PATHE,Expenses:Entertainment:Cinema
 Concertgebouw,Expenses:Entertainment:Concert
-The Sandwich Bar,Expenses:Food:Lunch
+The Sandwich Bar,Expenses:Food:DineIn
 Personio,Income:Salary
 albert heijn,Expenses:Groceries
+Marqt Haarlemmerstr,Expenses:Groceries
 jumbo,Expenses:Groceries
 etos,Expenses:Groceries
 Foodlovers West,Expenses:Groceries
 ROOS MARKET,Expenses:Groceries
 ABN AMRO SCHADEV NV,Expenses:Insurance
-Pietersma Snacks,Expenses:Food:Lunch
+Pietersma Snacks,Expenses:Food:DineIn
 NS Internationaal,Expenses:Travel
 FlixbusCom,Expenses:Travel
 IKEA,Expenses:Furniture:Other
@@ -37,26 +38,37 @@ Amazon Payments Europe,Expenses:Furniture:Other
 Media Markt,Expenses:Furniture:Electronics
 Action 1260,Expenses:Furniture:Plastic
 Praxis 1260,Expenses:Furniture:Other
-Mavi's Nieuwendijk,Expenses:Food:Lunch
+Mavi's Nieuwendijk,Expenses:Food:DineIn
 TicketSwap,Expenses:Entertainment:Concert
 TicketMaster,Expenses:Entertainment:Concert
 EventBrite,Expenses:Entertainment:Concert
-Rest. De Italiaan,Expenses:Food:Dinner
-Dominos Pizza,Expenses:Food:Dinner
+Rest. De Italiaan,Expenses:Food:DineIn
+Dominos Pizza,Expenses:Food:TakeAway
 KPN - Mobiel,Expenses:Utilities:Mobile
-Health Corner,Expenses:Food:Dinner
+Health Corner,Expenses:Food:TakeAway
 aldi,Expenses:Groceries
 DITZO ZORGVERZEKERING,Expenses:Insurance
 Hultink Horeca,Expenses:Groceries
 Kapsalon,Expenses:Medical:Beauty:Haircut
-BURGERFABRIEK EXPR,Expenses:Food:Dinner
+BURGERFABRIEK EXPR,Expenses:Food:DineIn
 Bruno s Amster,Expenses:Food:Cafe
-prik,Expenses:Food:Cafe
-subway,Expenses:Food:Lunch
-Brakke Grond Horeca,Expenses:Food:Lunch
-uber,Expenses:Food:Dinner
-Lucca Due,Expenses:Food:Dinner
+prik,Expenses:Food:Bar
+subway,Expenses:Food:DineIn
+Brakke Grond Horeca,Expenses:Food:DineIn
+uber,Expenses:Food:TakeAway
+Lucca Due,Expenses:Food:DineIn
 ABN AMRO Bank,Expenses:Bank
 Omschrijving  Eigen risico,Expenses:Medical:Drugs
 ASR IKZ ZORG,Expenses:Insurance
 NS Groep N.V.,Expenses:Transportation:Bus
+foodhallen,Expenses:Food:DineIn
+Taqueria Lima West,Expenses:Food:DineIn
+bar,Expenses:Food:Bar
+candy,Expenses:Groceries
+nyp,Expenses:Food:DineIn
+new york pizza,Expenses:Food:DineIn
+NEWYORKER,Expenses:Clothes
+febo,Expenses:Food:TakeAway
+Decathlon,Expenses:Furniture:Other
+blokker,Expenses:Furniture:Electronics
+Cafetaria Superstar,Expenses:Food:DineIn
