@@ -446,6 +446,7 @@ curl-impersonate-bin
 dnscrypt-proxy
 python-twisted
 tailscale
+python-plotly
 # robo3t-bin
 # docker
 # docker-compose

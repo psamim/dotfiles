@@ -71,7 +71,7 @@ function borg_backup() {
     # Create the backup
     info "Starting backup from '$SOURCE' to repo '$NAME'"
     eval borg create --exclude-if-present '.borgignore' \
-      $OPTIONS -C lzma,4 --stats --list $BORG_REPO::{now} $SOURCE
+      $OPTIONS -C lzma,4 --stats $BORG_REPO::{now} $SOURCE
 
     backup_exit=$?
 
