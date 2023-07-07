@@ -88,7 +88,7 @@ Plug 'tommcdo/vim-fubitive'
 " Enables :GBrowse from fugitive.vim to open GitHub URLs
 Plug 'tpope/vim-rhubarb'
 Plug 'iberianpig/tig-explorer.vim'
-Plug 'TimUntersberger/neogit'
+" Plug 'NeogitOrg/neogit'
 Plug 'kdheepak/lazygit.nvim'
 
 " Adds <leader>gm to display diff (d) and history
@@ -544,10 +544,6 @@ require'nvim-tree'.setup {
     dotfiles = true
     }
   }
-EOF
-
-lua <<EOF
-local neogit = require("neogit")
 EOF
 
 let g:transparent_enabled = v:true
