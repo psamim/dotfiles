@@ -16,13 +16,14 @@ Social Hub,Expenses:Food:Cafe
 starbucks,Expenses:Food:Cafe
 HALTE 3 GRAND CAFE,Expenses:Food:Cafe
 Croque Madame,Expenses:Food:Cafe
-mcdonald,Expenses:Food:TakeAway
+mcdonald,Expenses:Food:DineIn
 Peperwortel,Expenses:Food:DineIn
 Koffie- en Lunchcaf,Expenses:Food:DineIn
 Restaurant,Expenses:Food:DineIn
 Amigo Rozengracht,Expenses:Food:DineIn
 KPN Mobiel,Expenses:Utilities:Mobile
 PATHE,Expenses:Entertainment:Cinema
+Filmhallen,Expenses:Entertainment:Cinema
 Concertgebouw,Expenses:Entertainment:Concert
 The Sandwich Bar,Expenses:Food:DineIn
 Personio,Income:Salary
@@ -56,10 +57,18 @@ Kapsalon,Expenses:Medical:Beauty:Haircut
 BURGERFABRIEK EXPR,Expenses:Food:DineIn
 Bruno s Amster,Expenses:Food:Cafe
 coffee,Expenses:Food:Cafe
+cafe,Expenses:Food:Cafe
+Buon Giorno,Expenses:Food:Cafe
 prik,Expenses:Food:Bar
+soho,Expenses:Food:Bar
 subway,Expenses:Food:DineIn
+b&b,Expenses:Food:DineIn
+Shirkhan,Expenses:Food:DineIn
+Eethuis de Jordaan,Expenses:Food:DineIn
 Brakke Grond Horeca,Expenses:Food:DineIn
 uber,Expenses:Food:TakeAway
+Kiosk by Eline,Expenses:Food:TakeAway
+HNK A'dam Houthavens,Expenses:Food:TakeAway
 Lucca Due,Expenses:Food:DineIn
 ABN AMRO Bank,Expenses:Bank
 Omschrijving  Eigen risico,Expenses:Medical:Drugs
@@ -68,7 +77,9 @@ NS Groep N.V.,Expenses:Transportation:Bus
 foodhallen,Expenses:Food:DineIn
 Taqueria Lima West,Expenses:Food:DineIn
 bar,Expenses:Food:Bar
+Stichting Cafe,Expenses:Food:Bar
 Ziggo Dome,Expenses:Food:Bar
+Stadion Amsterdam,Expenses:Food:Bar
 candy,Expenses:Groceries
 TMF LOUMAN,Expenses:Groceries
 nyp,Expenses:Food:DineIn
