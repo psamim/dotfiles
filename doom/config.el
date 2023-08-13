@@ -94,6 +94,7 @@ org-agenda--todo-keyword-regex."
  org-duration-format '((special . h:mm))
  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
  org-export-with-section-numbers nil
+ org-export-with-broken-links 't
  org-agenda-diary-file "~/Notes/diary.org"
  org-roam-directory "~/Notes/roam"
  plstore-cache-passphrase-for-symmetric-encryption t
@@ -120,12 +121,6 @@ org-agenda--todo-keyword-regex."
  org-export-in-background nil
  org-fold-catch-invisible-edits 'smart
  org-directory "~/Notes")
-
-(setq
- org-gcal-auto-archive nil
- org-gcal-remove-api-cancelled-events t
- org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
- org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
 
 (setq mixed-pitch-fixed-pitch-faces
       (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
@@ -434,7 +429,7 @@ current time."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (tags "-CATEGORY=\"work\"+TODO=\"TODO\"|-CATEGORY=\"work\"+TODO=\"DONE\"" (
+          (tags "+TODO=\"TODO\"" (
                                            (org-agenda-overriding-header "\n⚡ Today")
                                            (org-agenda-sorting-strategy '(priority-down))
                                            (org-agenda-remove-tags t)
@@ -577,11 +572,11 @@ current time."
   )
 
 (setq org-journal-enable-agenda-integration t)
-(customize-set-variable 'org-journal-file-type 'weekly)
+(customize-set-variable 'org-journal-file-type 'yearly)
 (setq!
- org-journal-dir "~/Notes/journal/weekly"
+ org-journal-dir "~/Notes/journal/yearly"
  org-journal-start-on-weekday 6 ; Saturday
- org-journal-enable-cache t
+ ;; org-journal-enable-cache t
  org-journal-encrypt-journal t
  org-journal-file-header 'psamim-journal-prefix)
 
@@ -1053,7 +1048,8 @@ current time."
      '(lambda () (progn
               (psamim-sync-agenda-svg)
               ;; (psamim-sync-calendars)
-              (psamim-org-ical-export)
+              ;; (psamim-org-ical-export)
+              (org-caldav-sync)
               (kill-emacs))))))
 
 (map! :localleader
@@ -1323,21 +1319,29 @@ according to the value of `org-display-remote-inline-images'."
       org-re-reveal-transition "slide"
       org-re-reveal-plugins '(markdown notes math search zoom))
 
-;; (setq org-caldav-url 'google
-;;       org-caldav-calendar-id "5un62u0m77fin1bqq375klf568@group.calendar.google.com"
-;;       org-caldav-files (quote ("~/Notes/projects"
-;;                                "~/Notes/calendar-inbox.org"
-;;                                "~/Notes/roam/20210625224916-areas.org"
-;;                                "~/Notes/roam/20210507181408-people.org"
-;;                                "~/Notes/study.org"
-;;                                "~/Notes/events.org"))
-;;       org-caldav-sync-direction 'org->cal
-;;       org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
-;;       org-caldav-oauth2-client-secret "tGlcde8zVpUiXFPuLOMb-DCB"
-;;       org-caldav-inbox "~/Notes/calendar-inbox.org"
-;;       ;; org-caldav-delete-org-entries 'always
-;;       ;; org-caldav-sync-changes-to-org 'all
-;;       )
+(setq org-caldav-url "https://next.psam.im/remote.php/dav/calendars/psamim"
+      org-caldav-sync-direction 'twoway
+      ;; org-caldav-delete-org-entries 'always
+      ;; org-caldav-sync-changes-to-org 'all
+      )
+
+(setq org-caldav-calendars
+      '(
+        (:calendar-id "org-2"
+         ;; :sync-direction ('org->cal)
+         :files ("~/Notes/projects/projects.org"
+                 "~/Notes/projects/misc.org"
+                 "~/Notes/events.org")
+         :inbox "~/Notes/calendar-org-inbox.org")
+        (:calendar-id "people"
+         ;; :sync-direction ('org->cal)
+         :files ("~/Notes/roam/20210507181408-people.gpg.org")
+         :inbox "~/Notes/calendar-people-inbox.org")
+        (:calendar-id "personal-1_shared_by_raffi"
+         ;; :sync-direction 'cal->org
+         :files ("~/Notes/org-inbox.org")
+         :inbox "~/Notes/calendar-inbox.org")))
+
 
 ;; (use-package! org-xournalpp
 ;;   :config
