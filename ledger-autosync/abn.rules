@@ -28,6 +28,7 @@ Concertgebouw,Expenses:Entertainment:Concert
 The Sandwich Bar,Expenses:Food:DineIn
 Personio,Income:Salary
 albert heijn,Expenses:Groceries
+Foodlovers,Expenses:Groceries
 Marqt Haarlemmerstr,Expenses:Groceries
 jumbo,Expenses:Groceries
 etos,Expenses:Groceries
@@ -58,11 +59,15 @@ BURGERFABRIEK EXPR,Expenses:Food:DineIn
 Bruno s Amster,Expenses:Food:Cafe
 coffee,Expenses:Food:Cafe
 cafe,Expenses:Food:Cafe
+tHuis aan de Amstel,Expenses:Food:Cafe
+Infomedics,Expenses:Medical:Dental
 Koffie,Expenses:Food:Cafe
+LIBERAPAY,Expenses:Charity
 Buon Giorno,Expenses:Food:Cafe
 prik,Expenses:Food:Bar
 soho,Expenses:Food:Bar
 subway,Expenses:Food:DineIn
+Bagels en Beans,Expenses:Food:DineIn
 b&b,Expenses:Food:DineIn
 Shirkhan,Expenses:Food:DineIn
 Eethuis de Jordaan,Expenses:Food:DineIn
