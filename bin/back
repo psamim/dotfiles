@@ -126,7 +126,7 @@ function borg_remote_backup() {
 
     borg_backup . $NAME $OPTIONS
     cd
-    sudo umount -f $SOURCE
+    umount -f $SOURCE
     # rm -rf $SOURCE
 }
 
@@ -242,16 +242,24 @@ function create_private_file() {
 # This mounts my LUKS encrypted HDD
 # and transfers my backups to it using rsync and rclone
 function borg_hdd_backup {
+  if [ "$EUID" -ne 0 ]
+  then error "Please run as root"
+    exit
+  fi
+
+  local _USERNAME=samim
   local MOUNT_HDD="/mnt/backup"
   local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
   # local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
-  local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
+  local LUKS_PASSPHRASE=`sudo -u$_USERNAME pass show backup-hdd-luks | head -n1`
+  echo $LUKS_PASSPHRASE
+  exit
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
     info "Mounting"
-    echo "$LUKS_PASSPHRASE" | sudo cryptsetup open "$DEV_PATH" backup -
-    sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
-    sudo chown $USERNAME $MOUNT_HDD
+    echo "$LUKS_PASSPHRASE" | cryptsetup open "$DEV_PATH" backup -
+    mount -t ext4 /dev/mapper/backup $MOUNT_HDD
+    chown $_USERNAME $MOUNT_HDD
   fi
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
@@ -263,12 +271,16 @@ function borg_hdd_backup {
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   info "Starting backup"
   info "Make sure you are on your home network."
-  rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
-  rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 5 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 5 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" -P --transfers 5 --size-only # --ignore-checksum
-  sudo umount /mnt/backup
-  sudo cryptsetup close backup
+  sudo -u$_USERNAME rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" \
+    --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  umount /mnt/backup
+  cryptsetup close backup
 }
 
 function storj_backup {
