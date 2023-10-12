@@ -39,7 +39,7 @@
 
 ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
 (setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                            priority-down category-keep)
+                                     priority-down category-keep)
                                     (todo priority-down category-keep)
                                     (tags priority-down category-keep)
                                     (search category-keep)))
@@ -48,15 +48,15 @@
 (require 'cl-lib)
 (defvar org-agenda--todo-keyword-regex
   (cl-reduce (lambda (cur acc)
-            (concat acc "\\|" cur))
-          (mapcar (lambda (entry) (concat "\\* " entry))
-                  '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
+               (concat acc "\\|" cur))
+             (mapcar (lambda (entry) (concat "\\* " entry))
+                     '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
   "Regex which filters all TODO keywords")
 
 (defvar org-agenda--last-months-regex
   (cl-reduce (lambda (cur acc)
-            (concat acc "\\|" cur))
-          '("2021-06" "2021-07" "2021-08" "2021-09")))
+               (concat acc "\\|" cur))
+             '("2021-06" "2021-07" "2021-08" "2021-09")))
 
 (defun org-agenda--calculate-files-for-regex (regex)
   "Yields a fresh array with all files containing todos which match REGEX.
@@ -65,10 +65,10 @@ Uses grep to discover all files containing anything stored in
 org-agenda--todo-keyword-regex."
   (let ((files
          (cl-remove-if #'file-directory-p
-                    (split-string
-                     (shell-command-to-string
-                      (concat "grep --include=\"*.org\" --exclude-dir=\"archive\" -rl -e '" regex "' ~/Notes/roam"))
-                     "\n"))))
+                       (split-string
+                        (shell-command-to-string
+                         (concat "grep --include=\"*.org\" --exclude-dir=\"archive\" -rl -e '" regex "' ~/Notes/roam"))
+                        "\n"))))
     (cl-concatenate
      'list
      files
@@ -110,12 +110,12 @@ org-agenda--todo-keyword-regex."
  ;;                          "~/Notes/events.org"))
  org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
  org-file-apps
-   '((remote . emacs)
-     (auto-mode . emacs)
-     (directory . emacs)
-     ("\\.mm\\'" . default)
-     ("\\.x?html?\\'" . default)
-     ("\\.pdf\\'" . "xournalpp %s"))
+ '((remote . emacs)
+   (auto-mode . emacs)
+   (directory . emacs)
+   ("\\.mm\\'" . default)
+   ("\\.x?html?\\'" . default)
+   ("\\.pdf\\'" . "xournalpp %s"))
  org-deadline-warning-days 7
  org-agenda-breadcrumbs-separator " ❱ "
  org-export-in-background nil
@@ -430,23 +430,23 @@ current time."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (tags "+TODO=\"TODO\"" (
-                                           (org-agenda-overriding-header "\n⚡ Today")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
-                                           ;; (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i ")
-                                           ;; (org-agenda-todo-keyword-format "")
-                                           ))
+                                  (org-agenda-overriding-header "\n⚡ Today")
+                                  (org-agenda-sorting-strategy '(priority-down))
+                                  (org-agenda-remove-tags t)
+                                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
+                                  ;; (org-agenda-todo-ignore-scheduled 'all)
+                                  (org-agenda-prefix-format "   %-2i ")
+                                  ;; (org-agenda-todo-keyword-format "")
+                                  ))
 
           (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                           (org-agenda-overriding-header "\n⚡ Next")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ Next")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
 
           (tags "+project-CATEGORY=\"work\"" (
@@ -461,9 +461,9 @@ current time."
         ("w" "Work Agenda"
          (
           (agenda "" (
-;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+                      ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
                       (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                                             priority-down category-keep)
+                                                      priority-down category-keep)
                                                      (todo priority-down category-keep)
                                                      (tags priority-down category-keep)
                                                      (search category-keep)))
@@ -490,21 +490,21 @@ current time."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
-                                           (org-agenda-overriding-header "\n⚡ To Do")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ To Do")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
           (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                           (org-agenda-overriding-header "\n⚡ Next")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ Next")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
           (tags "+project+CATEGORY=\"work\"" (
                                               (org-agenda-overriding-header "\n⚡ Projects")
@@ -1046,19 +1046,19 @@ current time."
      "10 sec"
      nil
      '(lambda () (progn
-              (psamim-sync-agenda-svg)
-              ;; (psamim-sync-calendars)
-              ;; (psamim-org-ical-export)
-              (org-caldav-sync)
-              (kill-emacs))))))
+                   (psamim-sync-agenda-svg)
+                   ;; (psamim-sync-calendars)
+                   ;; (psamim-org-ical-export)
+                   (org-caldav-sync)
+                   (kill-emacs))))))
 
 (map! :localleader
       (:map org-mode-map
-       "c e" #'export-clock))
+            "c e" #'export-clock))
 
 (map! :localleader
       (:map ledger-mode-map
-       "c" #'ledger-mode-clean-buffer))
+            "c" #'ledger-mode-clean-buffer))
 
 (map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
 (map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
@@ -1242,8 +1242,8 @@ according to the value of `org-display-remote-inline-images'."
   (interactive)
   (save-excursion
     (org-icalendar-combine-agenda-files)))
-    ;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-    ;;   (org-icalendar-combine-agenda-files))))
+;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
+;;   (org-icalendar-combine-agenda-files))))
 
 ;; (use-package! calibredb
 ;;   :defer t
@@ -1321,7 +1321,8 @@ according to the value of `org-display-remote-inline-images'."
 
 (setq org-caldav-url "https://next.psam.im/remote.php/dav/calendars/psamim"
       org-caldav-sync-direction 'twoway
-      ;; org-caldav-delete-org-entries 'always
+      org-caldav-delete-org-entries 'always
+      org-caldav-delete-calendar-entries 'always
       ;; org-caldav-sync-changes-to-org 'all
       )
 
