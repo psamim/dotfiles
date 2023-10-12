@@ -164,7 +164,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.doom.d/bin
 export WORKON_HOME=~/.virtualenvs
-# source /usr/bin/virtualenvwrapper_lazy.sh
+source /usr/bin/virtualenvwrapper_lazy.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
