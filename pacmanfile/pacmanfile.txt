@@ -21,7 +21,6 @@ autoconf
 autoconf-archive
 automake
 autorandr
-aws-cli-v2-bin
 base
 bash
 bat
@@ -422,7 +421,7 @@ zoom
 zsh
 
 # VPN
-xray-bin
+# xray-bin
 
 ## Latex
 # texlive-core
@@ -437,16 +436,19 @@ jre-openjdk
 # jdk8-openjdk
 
 # Tools
-gum-git
+# gum-git
+quarto-cli-bin
 hunspell-fa
-hurl-bin
+cloudflare-warp-bin
 torbrowser-launcher
+hurl-bin
+# torbrowser-launcher
 # nekoray
 curl-impersonate-bin
 dnscrypt-proxy
 python-twisted
-tailscale
-python-plotly
+# tailscale
+# python-plotly
 # robo3t-bin
 # docker
 # docker-compose
