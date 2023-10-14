@@ -1376,3 +1376,12 @@ according to the value of `org-display-remote-inline-images'."
                  "*call*"
                  "kdeconnect-handler"
                  (concat "tel:" number)))
+
+;; https://github.com/doomemacs/doomemacs/issues/6478
+;; Configuration A
+(setq org-fold-core-style 'overlays)
+(evil-select-search-module 'evil-search-module 'evil-search)
+
+;; Configuration B
+;; (setq org-fold-core-style 'text-properties)
+;; (evil-select-search-module 'evil-search-module 'isearch)
