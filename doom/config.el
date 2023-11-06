@@ -657,8 +657,8 @@ current time."
             (mixed-pitch-mode 1)))
 
 ;; Transparency
-;; (set-frame-parameter (selected-frame) 'alpha '(92 92))
-;; (add-to-list 'default-frame-alist '(alpha . (92 . 92)))
+(set-frame-parameter nil 'alpha-background 94)
+(add-to-list 'default-frame-alist '(alpha-background . 94))
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
@@ -1040,13 +1040,13 @@ current time."
 (defun psamim-sync ()
   (interactive)
   (progn
-    (load-theme 'doom-one-light)
-    (global-hl-line-mode -1)
+    ;; (load-theme 'doom-one-light)
+    ;; (global-hl-line-mode -1)
     (run-at-time
-     "10 sec"
+     "5 sec"
      nil
      '(lambda () (progn
-                   (psamim-sync-agenda-svg)
+                   ;; (psamim-sync-agenda-svg)
                    ;; (psamim-sync-calendars)
                    ;; (psamim-org-ical-export)
                    (org-caldav-sync)
@@ -1385,3 +1385,4 @@ according to the value of `org-display-remote-inline-images'."
 ;; Configuration B
 ;; (setq org-fold-core-style 'text-properties)
 ;; (evil-select-search-module 'evil-search-module 'isearch)
+

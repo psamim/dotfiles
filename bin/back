@@ -202,7 +202,7 @@ function send_cloud() {
 # Second argument is path in the remote destination
 function send_local() {
     info "Sending '$1' to local server as name '$2'"
-    rclone sync --progress --quiet $0 passport:/mnt/mybook/$2
+    rclone sync --progress --quiet $1 passport:/mnt/mybook/$2
 }
 
 # This creates a backup of my SSH, GPG and Borg keys
