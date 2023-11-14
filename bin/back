@@ -3,9 +3,12 @@
 #
 # Usage:
 # back # to backup everything and send them
-# back --only-send # to just send the backups to cloud
+# back --cloud # to just send the backups to cloud
+# back --backup-local # to only backup locally
 # back --hdd # to only transfer the backupts to encrypted HDD
+# back --storj # to only transfer the backupts to storj
 # back --create-private # to only create a bakcup of keys
+# back --send-local # to only send
 #
 # To restore backup:
 # Have the keys in ~/$BORG_CONFIG_DIR/keys
@@ -27,7 +30,7 @@ function clean_up() {
   sudo umount /mnt/backup
   sudo cryptsetup close backup
 }
-trap 'echo; error "Backup interrupted"; clean_up; exit 2' INT TERM
+trap 'echo; error "Backup interrupted"; exit 2' INT TERM
 # set -x # Uncomment to debug
 
 # Creates a backup using borg
@@ -69,7 +72,7 @@ function borg_backup() {
     # Create the backup
     info "Starting backup from '$SOURCE' to repo '$NAME'"
     eval borg create --exclude-if-present '.borgignore' \
-      $OPTIONS -C lzma,4 --stats --list $BORG_REPO::{now} $SOURCE
+      $OPTIONS -C lzma,4 --stats $BORG_REPO::{now} $SOURCE
 
     backup_exit=$?
 
@@ -123,7 +126,7 @@ function borg_remote_backup() {
 
     borg_backup . $NAME $OPTIONS
     cd
-    sudo umount -f $SOURCE
+    umount -f $SOURCE
     # rm -rf $SOURCE
 }
 
@@ -188,7 +191,7 @@ function send_cloud() {
     info "Sending '$1' to cloud as name '$2'"
     for remote in drive storj; do
         info "Sending to remote '$remote'"
-        rclone sync --progress --quiet --transfers=1 $1 $remote:$2
+        rclone sync --progress --quiet  $1 $remote:$2
         echo # New Line
     done
 }
@@ -199,7 +202,7 @@ function send_cloud() {
 # Second argument is path in the remote destination
 function send_local() {
     info "Sending '$1' to local server as name '$2'"
-    rclone sync --sftp-disable-hashcheck=true --transfers=1 --ignore-size --progress --quiet $1 passport:/mnt/mybook/$2
+    rclone sync --progress --quiet $1 passport:/mnt/mybook/$2
 }
 
 # This creates a backup of my SSH, GPG and Borg keys
@@ -239,16 +242,24 @@ function create_private_file() {
 # This mounts my LUKS encrypted HDD
 # and transfers my backups to it using rsync and rclone
 function borg_hdd_backup {
+  if [ "$EUID" -ne 0 ]
+  then error "Please run as root"
+    exit
+  fi
+
+  local _USERNAME=samim
   local MOUNT_HDD="/mnt/backup"
-  # local DEV_PATH="/dev/disk/by-uuid/3b56f940-32e6-41f8-aeb8-f01f4783dadd"
   local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
-  local LUKS_PASSPHRASE=`pass show backup-hdd-luks | head -n1`
+  # local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
+  local LUKS_PASSPHRASE=`sudo -u$_USERNAME pass show backup-hdd-luks | head -n1`
+  echo $LUKS_PASSPHRASE
+  exit
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
     info "Mounting"
-    echo "$LUKS_PASSPHRASE" | sudo cryptsetup open "$DEV_PATH" backup -
-    sudo mount -t ext4 /dev/mapper/backup $MOUNT_HDD
-    sudo chown $USERNAME $MOUNT_HDD
+    echo "$LUKS_PASSPHRASE" | cryptsetup open "$DEV_PATH" backup -
+    mount -t ext4 /dev/mapper/backup $MOUNT_HDD
+    chown $_USERNAME $MOUNT_HDD
   fi
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
@@ -260,26 +271,67 @@ function borg_hdd_backup {
   # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   info "Starting backup"
   info "Make sure you are on your home network."
-  rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
-  rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" -P --transfers 5 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" -P --transfers 5 --size-only # --ignore-checksum
-  rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" -P --transfers 5 --size-only # --ignore-checksum
-  sudo umount /mnt/backup
-  sudo cryptsetup close backup
+  sudo -u$_USERNAME rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" \
+    --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  sudo -u$_USERNAME rclone sync passport:/mnt/data/all/MRIs "$MOUNT_HDD/MRIs/" \
+    -P --transfers 5 --size-only # --ignore-checksum
+  umount /mnt/backup
+  cryptsetup close backup
 }
 
 function storj_backup {
   info "Starting backup to storj"
   rclone sync /home/samim/borg/repos/ storj:borg-repos/ -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/MRIs "storj:backup/MRIs/" -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/raffi-tg.tar.xz "storj:backup/tg/" -P --transfers 3
-  rclone sync mobin-passport:/mnt/data/all/photoprism/originals/ "storj:backup/photophrism-originals" -P --transfers 3
+  rclone sync passport:/mnt/data/all/MRIs "storj:backup/MRIs/" -P --transfers 3
+  rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "storj:backup/tg/" -P --transfers 3
+  rclone sync passport:/mnt/data/all/photoprism/originals/ "storj:backup/photophrism-originals" -P --transfers 3
 } 
+
+function send_local_to_cloud {
+  send_cloud /home/samim/borg/repos/backups borg-repos/backups
+  send_cloud /home/samim/borg/repos/calibre borg-repos/calibre
+  send_cloud /home/samim/borg/repos/docs borg-repos/docs
+}
+
+function send_local_to_central() {
+  send_local /home/samim/borg/repos/backups borg-repos/backups
+  send_local /home/samim/borg/repos/calibre borg-repos/calibre
+  send_local /home/samim/borg/repos/hass borg-repos/hass
+  send_local /home/samim/borg/repos/docs borg-repos/docs
+}
+
+function backup_local {
+  borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
+  borg_backup /home/samim/Calibre calibre
+}
+
+function backup_central {
+  borg_remote_backup central:/mnt/data/all/paperless-media/documents/originals docs
+  borg_remote_backup central:/home/central/server-compose hass
+}
+
+function backup_passwords {
+  local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
+  make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
+  send_local $TEMP_PASS_BACKUP ""
+  send_cloud $TEMP_PASS_BACKUP pass
+  rm $TEMP_PASS_BACKUP
+}
 
 function main() {
     if [ "$1" = "--create-private" ]; then
         create_private_file "$HOME/Engineering.pdf"
         exit
+    fi
+
+    if [ "$1" = "--send-local" ]; then
+      info "Only sending to local..."
+      send_local_to_central
+      exit
     fi
 
     if [ "$1" = "--storj" ]; then
@@ -292,31 +344,22 @@ function main() {
         exit
     fi
 
-    if [ "$1" != "--only-send" ]
-    then
-      # Backup passwords
-      local TEMP_PASS_BACKUP="/home/samim/pass.tgz.gpg"
-      make_tar_gpg ~/.password-store/ "$TEMP_PASS_BACKUP"
-      send_local $TEMP_PASS_BACKUP ""
-      send_cloud $TEMP_PASS_BACKUP pass
-      rm $TEMP_PASS_BACKUP
-
-      borg_remote_backup central:/mnt/data/all/paperless-media/documents/originals docs
-      borg_remote_backup central:/home/central/server-compose hass
-      borg_backup /home/samim/tombs/backups/ backups # -e 'mail/'
-      borg_backup /home/samim/Calibre calibre
-
-      send_local /home/samim/borg/repos/backups borg-repos/backups
-      send_local /home/samim/borg/repos/calibre borg-repos/calibre
-      send_local /home/samim/borg/repos/hass borg-repos/hass
-      send_local /home/samim/borg/repos/docs borg-repos/docs
-    else
-      info "Only sending to remotes..."
-      send_cloud /home/samim/borg/repos/backups borg-repos/backups
-      send_cloud /home/samim/borg/repos/calibre borg-repos/calibre
-      send_cloud /home/samim/borg/repos/docs borg-repos/docs
+    if [ "$1" = "--cloud" ]; then
+      info "Only sending to cloud..."
+      send_local_to_cloud
+      exit
     fi
 
+    if [ "$1" = "--backup-local" ]; then
+      backup_local
+      exit
+    fi
+
+    backup_passwords
+    backup_central
+    backup_local
+    send_local_to_central
+    send_local_to_cloud
 }
 
 main $@

@@ -39,7 +39,7 @@
 
 ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
 (setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                            priority-down category-keep)
+                                     priority-down category-keep)
                                     (todo priority-down category-keep)
                                     (tags priority-down category-keep)
                                     (search category-keep)))
@@ -48,15 +48,15 @@
 (require 'cl-lib)
 (defvar org-agenda--todo-keyword-regex
   (cl-reduce (lambda (cur acc)
-            (concat acc "\\|" cur))
-          (mapcar (lambda (entry) (concat "\\* " entry))
-                  '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
+               (concat acc "\\|" cur))
+             (mapcar (lambda (entry) (concat "\\* " entry))
+                     '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
   "Regex which filters all TODO keywords")
 
 (defvar org-agenda--last-months-regex
   (cl-reduce (lambda (cur acc)
-            (concat acc "\\|" cur))
-          '("2021-06" "2021-07" "2021-08" "2021-09")))
+               (concat acc "\\|" cur))
+             '("2021-06" "2021-07" "2021-08" "2021-09")))
 
 (defun org-agenda--calculate-files-for-regex (regex)
   "Yields a fresh array with all files containing todos which match REGEX.
@@ -65,10 +65,10 @@ Uses grep to discover all files containing anything stored in
 org-agenda--todo-keyword-regex."
   (let ((files
          (cl-remove-if #'file-directory-p
-                    (split-string
-                     (shell-command-to-string
-                      (concat "grep --include=\"*.org\" --exclude-dir=\"archive\" -rl -e '" regex "' ~/Notes/roam"))
-                     "\n"))))
+                       (split-string
+                        (shell-command-to-string
+                         (concat "grep --include=\"*.org\" --exclude-dir=\"archive\" -rl -e '" regex "' ~/Notes/roam"))
+                        "\n"))))
     (cl-concatenate
      'list
      files
@@ -94,6 +94,7 @@ org-agenda--todo-keyword-regex."
  org-duration-format '((special . h:mm))
  org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
  org-export-with-section-numbers nil
+ org-export-with-broken-links 't
  org-agenda-diary-file "~/Notes/diary.org"
  org-roam-directory "~/Notes/roam"
  plstore-cache-passphrase-for-symmetric-encryption t
@@ -109,23 +110,17 @@ org-agenda--todo-keyword-regex."
  ;;                          "~/Notes/events.org"))
  org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
  org-file-apps
-   '((remote . emacs)
-     (auto-mode . emacs)
-     (directory . emacs)
-     ("\\.mm\\'" . default)
-     ("\\.x?html?\\'" . default)
-     ("\\.pdf\\'" . "xournalpp %s"))
+ '((remote . emacs)
+   (auto-mode . emacs)
+   (directory . emacs)
+   ("\\.mm\\'" . default)
+   ("\\.x?html?\\'" . default)
+   ("\\.pdf\\'" . "xournalpp %s"))
  org-deadline-warning-days 7
  org-agenda-breadcrumbs-separator " ❱ "
  org-export-in-background nil
  org-fold-catch-invisible-edits 'smart
  org-directory "~/Notes")
-
-(setq
- org-gcal-auto-archive nil
- org-gcal-remove-api-cancelled-events t
- org-gcal-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
- org-gcal-file-alist '(("samim@globalworkandtravel.com" .  "~/Notes/calendar-inbox.org")))
 
 (setq mixed-pitch-fixed-pitch-faces
       (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
@@ -434,24 +429,24 @@ current time."
                       (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-          (tags "-CATEGORY=\"work\"+TODO=\"TODO\"|-CATEGORY=\"work\"+TODO=\"DONE\"" (
-                                           (org-agenda-overriding-header "\n⚡ Today")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
-                                           ;; (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i ")
-                                           ;; (org-agenda-todo-keyword-format "")
-                                           ))
+          (tags "+TODO=\"TODO\"" (
+                                  (org-agenda-overriding-header "\n⚡ Today")
+                                  (org-agenda-sorting-strategy '(priority-down))
+                                  (org-agenda-remove-tags t)
+                                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
+                                  ;; (org-agenda-todo-ignore-scheduled 'all)
+                                  (org-agenda-prefix-format "   %-2i ")
+                                  ;; (org-agenda-todo-keyword-format "")
+                                  ))
 
           (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                           (org-agenda-overriding-header "\n⚡ Next")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ Next")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
 
           (tags "+project-CATEGORY=\"work\"" (
@@ -466,9 +461,9 @@ current time."
         ("w" "Work Agenda"
          (
           (agenda "" (
-;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+                      ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
                       (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                                             priority-down category-keep)
+                                                      priority-down category-keep)
                                                      (todo priority-down category-keep)
                                                      (tags priority-down category-keep)
                                                      (search category-keep)))
@@ -495,21 +490,21 @@ current time."
                       (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
           (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
-                                           (org-agenda-overriding-header "\n⚡ To Do")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ To Do")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
           (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                           (org-agenda-overriding-header "\n⚡ Next")
-                                           (org-agenda-sorting-strategy '(priority-down))
-                                           (org-agenda-remove-tags t)
-                                           (org-agenda-todo-ignore-scheduled 'all)
-                                           (org-agenda-prefix-format "   %-2i %?b")
-                                           (org-agenda-todo-keyword-format "")))
+                                                    (org-agenda-overriding-header "\n⚡ Next")
+                                                    (org-agenda-sorting-strategy '(priority-down))
+                                                    (org-agenda-remove-tags t)
+                                                    (org-agenda-todo-ignore-scheduled 'all)
+                                                    (org-agenda-prefix-format "   %-2i %?b")
+                                                    (org-agenda-todo-keyword-format "")))
 
           (tags "+project+CATEGORY=\"work\"" (
                                               (org-agenda-overriding-header "\n⚡ Projects")
@@ -577,11 +572,11 @@ current time."
   )
 
 (setq org-journal-enable-agenda-integration t)
-(customize-set-variable 'org-journal-file-type 'weekly)
+(customize-set-variable 'org-journal-file-type 'yearly)
 (setq!
- org-journal-dir "~/Notes/journal/weekly"
+ org-journal-dir "~/Notes/journal/yearly"
  org-journal-start-on-weekday 6 ; Saturday
- org-journal-enable-cache t
+ ;; org-journal-enable-cache t
  org-journal-encrypt-journal t
  org-journal-file-header 'psamim-journal-prefix)
 
@@ -662,8 +657,8 @@ current time."
             (mixed-pitch-mode 1)))
 
 ;; Transparency
-;; (set-frame-parameter (selected-frame) 'alpha '(92 92))
-;; (add-to-list 'default-frame-alist '(alpha . (92 . 92)))
+(set-frame-parameter nil 'alpha-background 94)
+(add-to-list 'default-frame-alist '(alpha-background . 94))
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
@@ -1043,24 +1038,27 @@ current time."
     (setq cursor-type 'box)))
 
 (defun psamim-sync ()
+  (interactive)
   (progn
-    (global-hl-line-mode -1)
+    ;; (load-theme 'doom-one-light)
+    ;; (global-hl-line-mode -1)
     (run-at-time
-     "10 sec"
+     "5 sec"
      nil
      '(lambda () (progn
-              (psamim-sync-agenda-svg)
-              ;; (psamim-sync-calendars)
-              (psamim-org-ical-export)
-              (kill-emacs))))))
+                   ;; (psamim-sync-agenda-svg)
+                   ;; (psamim-sync-calendars)
+                   ;; (psamim-org-ical-export)
+                   (org-caldav-sync)
+                   (kill-emacs))))))
 
 (map! :localleader
       (:map org-mode-map
-       "c e" #'export-clock))
+            "c e" #'export-clock))
 
 (map! :localleader
       (:map ledger-mode-map
-       "c" #'ledger-mode-clean-buffer))
+            "c" #'ledger-mode-clean-buffer))
 
 (map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
 (map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
@@ -1202,7 +1200,7 @@ according to the value of `org-display-remote-inline-images'."
 (setq
  org-icalendar-combined-agenda-file (or (getenv "ICALENDAR_FILE") "~/org.ics")
  org-icalendar-honor-noexport-tag t
- org-icalendar-timezone "Asia/Tehran"
+ org-icalendar-timezone "Europe/Amsterdam"
  org-icalendar-include-todo nil
  org-icalendar-include-sexps t
  org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
@@ -1244,8 +1242,8 @@ according to the value of `org-display-remote-inline-images'."
   (interactive)
   (save-excursion
     (org-icalendar-combine-agenda-files)))
-    ;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-    ;;   (org-icalendar-combine-agenda-files))))
+;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
+;;   (org-icalendar-combine-agenda-files))))
 
 ;; (use-package! calibredb
 ;;   :defer t
@@ -1321,21 +1319,30 @@ according to the value of `org-display-remote-inline-images'."
       org-re-reveal-transition "slide"
       org-re-reveal-plugins '(markdown notes math search zoom))
 
-;; (setq org-caldav-url 'google
-;;       org-caldav-calendar-id "5un62u0m77fin1bqq375klf568@group.calendar.google.com"
-;;       org-caldav-files (quote ("~/Notes/projects"
-;;                                "~/Notes/calendar-inbox.org"
-;;                                "~/Notes/roam/20210625224916-areas.org"
-;;                                "~/Notes/roam/20210507181408-people.org"
-;;                                "~/Notes/study.org"
-;;                                "~/Notes/events.org"))
-;;       org-caldav-sync-direction 'org->cal
-;;       org-caldav-oauth2-client-id "279358326453-ar2bfnerndjnnie90e59i9otuif9ut84.apps.googleusercontent.com"
-;;       org-caldav-oauth2-client-secret "tGlcde8zVpUiXFPuLOMb-DCB"
-;;       org-caldav-inbox "~/Notes/calendar-inbox.org"
-;;       ;; org-caldav-delete-org-entries 'always
-;;       ;; org-caldav-sync-changes-to-org 'all
-;;       )
+(setq org-caldav-url "https://next.psam.im/remote.php/dav/calendars/psamim"
+      org-caldav-sync-direction 'twoway
+      org-caldav-delete-org-entries 'always
+      org-caldav-delete-calendar-entries 'always
+      ;; org-caldav-sync-changes-to-org 'all
+      )
+
+(setq org-caldav-calendars
+      '(
+        (:calendar-id "org-2"
+         ;; :sync-direction ('org->cal)
+         :files ("~/Notes/projects/projects.org"
+                 "~/Notes/projects/misc.org"
+                 "~/Notes/events.org")
+         :inbox "~/Notes/calendar-org-inbox.org")
+        (:calendar-id "people"
+         ;; :sync-direction ('org->cal)
+         :files ("~/Notes/roam/20210507181408-people.gpg.org")
+         :inbox "~/Notes/calendar-people-inbox.org")
+        (:calendar-id "personal-1_shared_by_raffi"
+         ;; :sync-direction 'cal->org
+         :files ("~/Notes/org-inbox.org")
+         :inbox "~/Notes/calendar-inbox.org")))
+
 
 ;; (use-package! org-xournalpp
 ;;   :config
@@ -1369,3 +1376,13 @@ according to the value of `org-display-remote-inline-images'."
                  "*call*"
                  "kdeconnect-handler"
                  (concat "tel:" number)))
+
+;; https://github.com/doomemacs/doomemacs/issues/6478
+;; Configuration A
+(setq org-fold-core-style 'overlays)
+(evil-select-search-module 'evil-search-module 'evil-search)
+
+;; Configuration B
+;; (setq org-fold-core-style 'text-properties)
+;; (evil-select-search-module 'evil-search-module 'isearch)
+
