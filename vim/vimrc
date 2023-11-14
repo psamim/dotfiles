@@ -96,6 +96,7 @@ Plug 'rhysd/git-messenger.vim'
 " Plug 'APZelos/blamer.nvim'
 " Plug 'ttys3/nvim-blamer.lua'
 Plug 'junegunn/vim-emoji'
+Plug 'Equilibris/nx.nvim'
 
 
 " extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
@@ -468,25 +469,7 @@ require("bufferline").setup {
     always_show_bufferline = false,
   enforce_regular_tabs = true,
       show_close_icon = false
-  },
-highlights = {
-  fill = {
-    guibg = "#141414"
-    },
-  buffer_selected = {
-    guifg = "#FFFFFF"
-    },
-  separator_selected = {
-    guifg = "#141414"
-    },
-  separator_visible = {
-    guifg = "#141414"
-    },
-  separator = {
-    guifg = "#141414"
-    }
-  }
-}
+  }}
 EOF
 
 let g:solarized_termtrans=1
@@ -605,6 +588,12 @@ function! ToggleHiddenAll()
     endif
 endfunction
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
+lua <<EOF
+require("nx").setup{
+      nx_cmd_root = 'pnpm nx'
+  }
+EOF
 
 lua <<EOF
 require('neoscroll').setup({
