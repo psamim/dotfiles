@@ -106,6 +106,7 @@ bindkey -M filterselect '^E' accept-search
 bindkey '^P' zaw-process
 bindkey '^F' zaw-open-file
 bindkey '^[^M' autosuggest-execute
+bindkey '^[begin' autosuggest-execute
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
@@ -202,14 +203,63 @@ function connect() {
   systemctl --user stop sync-agenda-svg.service && systemctl --user start sync-agenda-svg.timer
 }
 
-# GPG Agent
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null&
-
 export POWERLEVEL9K_LEGACY_ICON_SPACING=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+function os {
+  case "$(uname -s)" in
+   Darwin)
+     echo 'OSX'
+     ;;
+
+   Linux)
+     echo 'Linux'
+     ;;
+
+   CYGWIN*|MINGW32*|MSYS*|MINGW*)
+     echo 'MS Windows'
+     ;;
+
+   *)
+     echo 'Other OS'
+     ;;
+ esac
+}
+
+verify_os () {
+  myos=$(os)
+  if [[ $myos == "OSX" ]]
+  then
+    tmux set -g @thumbs-command "echo {} | tr -d '[:cntrl:]' | pbcopy"
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    export GPG_TTY=`tty`
+    export GPG_TTY=`tty`
+
+    # tabtab source for packages
+    # uninstall by removing these lines
+    [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+  elif [[ $myos == "Linux" ]]
+    # GPG Agent
+    # unset SSH_AGENT_PID
+    # if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    #   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    # fi
+    # export GPG_TTY=$(tty)
+    # gpg-connect-agent updatestartuptty /bye >/dev/null&
+  fi
+}
+
+verify_os
+
+alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected --target=type-check && pnpm exec nx affected --target=test'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
