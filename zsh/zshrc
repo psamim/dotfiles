@@ -31,6 +31,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/tig
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/fzf
+    zgen oh-my-zsh plugins/asdf
 #   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
     # zgen oh-my-zsh plugins/npx
@@ -166,7 +167,7 @@ export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.doom.d/bin
 export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper_lazy.sh
-
+export PATH="/opt/brew/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export TERM=xterm
@@ -240,7 +241,7 @@ verify_os () {
     # tabtab source for packages
     # uninstall by removing these lines
     [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-  elif [[ $myos == "Linux" ]]
+  elif [[ $myos == "Linux" ]] then
     # GPG Agent
     # unset SSH_AGENT_PID
     # if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -263,3 +264,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
