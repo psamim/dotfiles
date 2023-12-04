@@ -11,8 +11,6 @@ fi
 # zstyle :omz:plugins:keychain options --quiet
 # zstyle :omz:plugins:keychain agents gpg,ssh
 
-export NVM_AUTO_USE=true
-
 source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
 # check if there's no init script
@@ -33,6 +31,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/fzf
 #   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
+    zgen oh-my-zsh plugins/asdf
     # zgen oh-my-zsh plugins/npx
     # zgen oh-my-zsh plugins/keychain
     zgen oh-my-zsh plugins/pass
@@ -65,7 +64,7 @@ if ! zgen saved; then
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
-    zgen load lukechilds/zsh-nvm
+    # zgen load lukechilds/zsh-nvm
     zgen load ~/.zgen/deno
     # zgen load marlonrichert/zsh-autocomplete 
     # zgen load chisui/zsh-nix-shell
@@ -240,7 +239,7 @@ verify_os () {
     # tabtab source for packages
     # uninstall by removing these lines
     [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-  elif [[ $myos == "Linux" ]]
+  elif [[ $myos == "Linux" ]] then
     # GPG Agent
     # unset SSH_AGENT_PID
     # if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -258,8 +257,4 @@ alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected -
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
