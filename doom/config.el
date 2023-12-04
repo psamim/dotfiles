@@ -1329,7 +1329,7 @@ according to the value of `org-display-remote-inline-images'."
 (setq org-caldav-calendars
       '(
         (:calendar-id "org-2"
-         :sync-direction 'org->cal
+         ;; :sync-direction 'org->cal
          :files ("~/Notes/projects/projects.org"
                  "~/Notes/projects/misc.org"
                  "~/Notes/events.org")
@@ -1339,7 +1339,7 @@ according to the value of `org-display-remote-inline-images'."
          :files ("~/Notes/roam/20210507181408-people.gpg.org")
          :inbox "~/Notes/calendar-people-inbox.org")
         (:calendar-id "personal-1_shared_by_raffi"
-         :sync-direction 'cal->org
+         ;; :sync-direction 'cal->org
          :files ("~/Notes/org-inbox.org")
          :inbox "~/Notes/calendar-inbox.org")
         ))
