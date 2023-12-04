@@ -769,6 +769,8 @@ current time."
 
 (require 'notmuch)
 (add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
+;; (require 'notmuch)
+;; (add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
 
 (setq sendmail-program "gmi")
 (setq message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.mail/account.gmail"))
