@@ -29,6 +29,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/tig
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/fzf
+    zgen oh-my-zsh plugins/asdf
 #   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
     zgen oh-my-zsh plugins/asdf
@@ -165,7 +166,7 @@ export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.doom.d/bin
 export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper_lazy.sh
-
+export PATH="/opt/brew/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export TERM=xterm
