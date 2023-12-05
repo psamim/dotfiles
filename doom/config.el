@@ -659,6 +659,8 @@ current time."
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 94)
 (add-to-list 'default-frame-alist '(alpha-background . 94))
+(add-to-list 'default-frame-alist '(undecorated-round . t))
+
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
@@ -767,28 +769,26 @@ current time."
    :states '(normal visual)
    "gt" 'evil-unidecode))
 
-(require 'notmuch)
-(add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
 ;; (require 'notmuch)
 ;; (add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
 
 (setq sendmail-program "gmi")
 (setq message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.mail/account.gmail"))
 
-(require 'org-msg)
-(setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-      org-msg-startup "hidestars indent inlineimages"
-      ;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
-      org-msg-greeting-name-limit 3
-      org-msg-text-plain-alternative t
-      org-msg-signature "
-
- Regards,
-
- #+begin_signature
- -- *Samim Pezeshki* \\\\
- #+end_signature")
-(org-msg-mode)
+;; (require 'org-msg)
+;; (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+;;       org-msg-startup "hidestars indent inlineimages"
+;;       ;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
+;;       org-msg-greeting-name-limit 3
+;;       org-msg-text-plain-alternative t
+;;       org-msg-signature "
+;;
+;;  Regards,
+;;
+;;  #+begin_signature
+;;  -- *Samim Pezeshki* \\\\
+;;  #+end_signature")
+;; (org-msg-mode)
 
 ;; (after! evil-org (progn
 ;;                    (map! :map evil-org-mode-map :n "M-l" #'centaur-tabs-forward)
@@ -1366,12 +1366,12 @@ according to the value of `org-display-remote-inline-images'."
   (setq citar-symbol-separator "  "))
 
 ;; https://www.reddit.com/r/orgmode/comments/ub1fuk/new_workflow_for_reading_epubs_and_taking_notes/
-(org-link-set-parameters
- "calibre"
- :follow 'my/calibre-follow)
+;; (org-link-set-parameters
+;;  "calibre"
+;;  :follow 'my/calibre-follow)
 
-(defun my/calibre-follow (path)
-  (call-process "xdg-open" nil 0 nil (concat "calibre:" path)))
+;; (defun my/calibre-follow (path)
+;;   (call-process "xdg-open" nil 0 nil (concat "calibre:" path)))
 
 ;; Open phone numbers with kde-connect
 (defun org-tel-open (number _)

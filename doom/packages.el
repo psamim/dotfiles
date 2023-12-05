@@ -50,7 +50,7 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! org-clock-csv)
+;; (package! org-clock-csv)
 ;; (package! org-ql)
 ;; (package! poet-theme)
 ;; (package! leuven-theme)
@@ -60,17 +60,17 @@
 ;; (package! tea-time :recipe (:host github :repo "dakra/tea-timer.el"))
 ;; (package! tea-time :recipe (:host github :repo "konzeptual/tea-time"))
 (package! org-caldav)
-(package! org-gcal)
+;; (package! org-gcal)
 (package! oauth2)
 ;; (package! mu4e-alert)
 ;; (package! modus-themes)
 ;; (package! web-mode)
 (package! unidecode)
-(package! org-msg)
+;; (package! org-msg)
 ;; (package! nroam :recipe (:host github :branch "master" :repo "NicolasPetton/nroam"))
 (package! literate-calc-mode)
 ;; (package! org-mru-clock)
-(package! counsel-org-clock)
+;; (package! counsel-org-clock)
 (package! graphviz-dot-mode)
 ;; (package! org-ql)
 ; (package! org-super-agenda)
@@ -93,6 +93,6 @@
 ;            :repo "lepisma/org-krita"
 ;            :files ("resources" "resources" "*.el" "*.el")))
 
-(package! ob-ledger
-  :recipe (:host github :repo "overtone/emacs-live"
-           :files ("packs/stable/org-pack/lib/org-mode/lisp/ob-ledger.el")))
+;; (package! ob-ledger
+;;   :recipe (:host github :repo "overtone/emacs-live"
+;;            :files ("packs/stable/org-pack/lib/org-mode/lisp/ob-ledger.el")))
