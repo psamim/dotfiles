@@ -165,7 +165,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.doom.d/bin
 export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper_lazy.sh
 export PATH="/opt/brew/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -248,6 +247,7 @@ verify_os () {
     fi
     export GPG_TTY=$(tty)
     # gpg-connect-agent updatestartuptty /bye >/dev/null&
+    source /usr/bin/virtualenvwrapper_lazy.sh
   fi
 }
 
