@@ -1,0 +1,32 @@
+{
+  "title": "VS Code",
+  "rules": [
+    {
+      "description": "VS Code Ctrl_r",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "modifiers": {
+              "mandatory": ["left_command"]
+            },
+            "key_code": "r"
+          },
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "description": "com.microsoft.VSCode"
+            }
+          ],
+          "to": [
+            {
+              "repeat": false,
+              "key_code": "r",
+              "modifiers": ["left_control"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

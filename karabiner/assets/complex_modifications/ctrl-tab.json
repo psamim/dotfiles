@@ -1,0 +1,43 @@
+{
+  "title": "complex_modifications",
+  "rules": [
+    {
+      "manipulators": [
+        {
+          "description": "Ctrl+Tab to Cmd+Tab",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "description": "Cmd+Tab to Ctrl+Tab",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": ["left_command"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
