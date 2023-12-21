@@ -18,6 +18,27 @@
                 },
                 "rules": [
                     {
+                        "description": "Open Emacs",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript /Users/samim/.dotfiles/bin/mac-open-emacs.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "ctrl to cmd",
                         "manipulators": [
                             {
