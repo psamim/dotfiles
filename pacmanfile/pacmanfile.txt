@@ -2,7 +2,6 @@ acpi
 acpid
 adobe-base-14-fonts
 adobe-source-code-pro-fonts
-afew
 aic94xx-firmware
 alsa-utils
 althttpd-fossil
@@ -16,7 +15,6 @@ arch-hs
 arch-wiki-docs
 arc-icon-theme
 aria2
-astroid-git
 autoconf
 autoconf-archive
 automake
@@ -40,7 +38,6 @@ browserpass-firefox
 bzip2
 calibre
 cdrdao
-code
 coreutils
 cow-proxy
 cowsay
@@ -110,7 +107,6 @@ haskell-base-prelude
 hdparm
 helvum
 highlight
-hledger
 htop
 imlib2
 inetutils
@@ -131,7 +127,6 @@ kde-system-meta
 kde-utilities-meta
 kernel-modules-hook
 khotkeys
-kimageformats
 kindle2anki-git
 kscreen
 kwin-bismuth
@@ -190,15 +185,12 @@ net-tools
 networkmanager
 network-manager-applet
 networkmanager-openvpn
-networkmanager-qt
 networkmanager-strongswan
 nfs-utils
 nftables
 nmap
 nodejs
 nodejs-lua-fmt
-notifymuch-git
-notmuch
 npm
 nsnake
 ntfs-3g
@@ -275,7 +267,6 @@ python-pyperclip
 python-pyqt5
 python-pytz
 python-rope
-python-spotdl
 python-sqlparse
 python-virtualenvwrapper
 qpdf
@@ -315,7 +306,6 @@ sysfsutils
 systemd-sysvcompat
 tanha-fonts
 tar
-telegram-desktop
 texinfo
 thermald
 the_silver_searcher
@@ -330,7 +320,6 @@ tor
 torsocks
 traceroute
 trash-cli
-trebleshot
 tsocks
 ttc-iosevka-etoile
 ttfautohint
@@ -455,6 +444,13 @@ python-twisted
 # dbeaver
 # handbrake
 # deno
+visual-studio-code-bin
+telegram-desktop
+webkit2gtk
+bruno-bin
+firefox-extension-passff
+hledger
+asdf-vm
 
 # It seems it is needed for paru
 openssl-1.1
