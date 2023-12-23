@@ -673,8 +673,8 @@ current time."
 ;; (add-hook! 'mu4e-view-mode-hook
 ;;            #'olivetti-mode)
 
-(use-package! org-pretty-table
-  :commands (org-pretty-table-mode global-org-pretty-table-mode))
+;; (use-package! org-pretty-table
+;;   :commands (org-pretty-table-mode global-org-pretty-table-mode))
 
 (defun set-window-clean ()
   (setq line-spacing 2)
@@ -962,21 +962,21 @@ current time."
 
 (setq +org-roam-open-buffer-on-find-file nil)
 
-(use-package! org-mind-map
-  :init
-  (require 'ox-org)
-  :ensure t
-  ;; Uncomment the below if 'ensure-system-packages` is installed
-  ;;:ensure-system-package (gvgen . graphviz)
-  :config
-  (setq org-mind-map-engine "dot")       ; Default. Directed Graph
-  ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
-  ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
-  ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
-  ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
-  ;; (setq org-mind-map-engine "twopi")  ; Radial layouts
-  ;; (setq org-mind-map-engine "circo")  ; Circular Layout
-  )
+;; (use-package! org-mind-map
+;;   :init
+;;   (require 'ox-org)
+;;   :ensure t
+;;   ;; Uncomment the below if 'ensure-system-packages` is installed
+;;   ;;:ensure-system-package (gvgen . graphviz)
+;;   :config
+;;   (setq org-mind-map-engine "dot")       ; Default. Directed Graph
+;;   ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
+;;   ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
+;;   ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+;;   ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
+;;   ;; (setq org-mind-map-engine "twopi")  ; Radial layouts
+;;   ;; (setq org-mind-map-engine "circo")  ; Circular Layout
+;;   )
 
 (defun load-secrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
 
@@ -1240,10 +1240,10 @@ according to the value of `org-display-remote-inline-images'."
 ;;     (if (and myresult (not mycatp)) t nil)))
 
 ;;; activate filter and call export function
-(defun psamim-org-ical-export ()
-  (interactive)
-  (save-excursion
-    (org-icalendar-combine-agenda-files)))
+;; (defun psamim-org-ical-export ()
+;;   (interactive)
+;;   (save-excursion
+;;     (org-icalendar-combine-agenda-files)))
 ;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
 ;;   (org-icalendar-combine-agenda-files))))
 
@@ -1351,19 +1351,19 @@ according to the value of `org-display-remote-inline-images'."
 ;;   :config
 ;;   (add-hook 'org-mode-hook 'org-xournalpp-mode))
 
-(after! citar
-  (setq! citar-bibliography '("/home/samim/workspace/thesis/References.bib"))
-  (map! :localleader
-        :map LaTeX-mode-map
-        :desc "Insert cite"  "t" #'citar-insert-citation)
-  (map! :localleader
-        :map latex-mode-map
-        :desc "Insert cite"  "t" #'citar-insert-citation)
-  (setq citar-symbols
-        `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
-          (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
-          (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
-  (setq citar-symbol-separator "  "))
+;; (after! citar
+;;   (setq! citar-bibliography '("/home/samim/workspace/thesis/References.bib"))
+;;   (map! :localleader
+;;         :map LaTeX-mode-map
+;;         :desc "Insert cite"  "t" #'citar-insert-citation)
+;;   (map! :localleader
+;;         :map latex-mode-map
+;;         :desc "Insert cite"  "t" #'citar-insert-citation)
+;;   (setq citar-symbols
+;;         `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+;;           (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+;;           (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+;;   (setq citar-symbol-separator "  "))
 
 ;; https://www.reddit.com/r/orgmode/comments/ub1fuk/new_workflow_for_reading_epubs_and_taking_notes/
 ;; (org-link-set-parameters

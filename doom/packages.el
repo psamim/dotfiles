@@ -80,8 +80,8 @@
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 (disable-packages! diff-hl)
 ;; (package! calibredb)
-(package! org-analyzer)
-(package! org-inline-pdf)
+;; (package! org-analyzer)
+;; (package! org-inline-pdf)
 (package! org-appear :recipe (:host github :repo "awth13/org-appear"))
 ; (package! org-modern :recipe (:host github :repo "minad/org-modern"))
 ; (package! org-xournalpp
