@@ -7,7 +7,6 @@ alsa-utils
 althttpd-fossil
 android-file-transfer
 android-studio
-anki-official-binary-bundle
 anydesk-bin
 appmenu-gtk-module
 arandr
@@ -86,9 +85,7 @@ gcc-libs
 gettext
 git
 glibc
-gmailieer
 gnu-netcat
-google-chrome
 gparted
 graphviz
 grep
@@ -112,7 +109,6 @@ imlib2
 inetutils
 intel-gpu-tools
 intel-ucode
-iproute2
 iputils
 iran-nastaliq-fonts
 ispell
@@ -127,7 +123,6 @@ kde-system-meta
 kde-utilities-meta
 kernel-modules-hook
 khotkeys
-kindle2anki-git
 kscreen
 kwin-bismuth
 landrop
@@ -253,10 +248,8 @@ pyside2
 python-axolotl
 python-brotli
 python-click
-python-epc
 python-gobject
 python-icsv2ledger-git
-python-importmagic
 python-llfuse
 python-lsp-server
 python-m2crypto
@@ -297,7 +290,6 @@ sox
 spotify
 sqlitebrowser
 sshfs
-sshuttle
 stress
 stylish-haskell
 sudo
@@ -330,7 +322,6 @@ ttf-fira-sans
 ttf-font-awesome
 ttf-iosevka-nerd
 ttf-liberation
-ttf-material-design-icons
 ttf-roboto
 ttf-roboto-mono
 ttf-ubuntu-font-family
@@ -406,8 +397,9 @@ yapf
 youtube-dl
 zbar
 zip
-zoom
 zsh
+iproute2
+iptables-nft
 
 # VPN
 # xray-bin
@@ -451,6 +443,8 @@ bruno-bin
 firefox-extension-passff
 hledger
 asdf-vm
+anki-bin
+google-chrome
 
 # It seems it is needed for paru
 openssl-1.1
