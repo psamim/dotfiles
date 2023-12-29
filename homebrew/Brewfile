@@ -1,0 +1,60 @@
+
+# tap repositories and their packages
+
+tap homebrew/core
+brew aria2
+brew asdf
+brew aspell
+brew awk
+brew awscli
+brew bat
+brew direnv
+brew fasd
+brew ffmpeg
+brew fzf
+brew gcc
+brew gnupg
+brew imagemagick
+brew jcal
+brew jq
+brew lazygit
+brew make
+brew neovim
+brew php@8.0
+brew pinentry
+brew pinentry-mac
+brew ripgrep
+brew the_silver_searcher
+brew tmux
+brew trash-cli
+brew tree-sitter
+brew watch
+brew wget
+
+tap homebrew/cask
+cask flameshot
+cask karabiner-elements
+cask libreoffice
+cask macfuse
+cask middleclick
+cask whatsapp
+
+tap homebrew/cask-drivers
+
+tap homebrew/cask-fonts
+cask font-iosevka
+cask font-iosevka-etoile
+cask font-vazirmatn
+
+tap homebrew/services
+
+tap d12frosted/emacs-plus
+brew emacs-plus@29 --with-native-comp --with-imagemagick --with-savchenkovaleriy-big-sur-icon
+
+tap dx/tap
+brew data-access
+brew hammock-district
+brew perctl
+
+tap rcmdnk/file
+brew brew-file
