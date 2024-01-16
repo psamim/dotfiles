@@ -921,23 +921,23 @@ current time."
 
 (custom-theme-set-faces!
   'doom-solarized-light
-  '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75"
-    :weight semibold :slant normal
-    :box (:line-width 7 :color "#fffbea" :style nil))
-  '((org-agenda-date-today) :foreground "#073642" :weight semibold :slant normal
-    :box (:line-width 7 :color "#fffbea" :style nil)
-    )
-  '((org-agenda-calendar-event)  :weight light)
+  ;; '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75"
+  ;;   :weight semibold :slant normal
+  ;;   :box (:line-width 7 :color "#fffbea" :style nil))
+  ;; '((org-agenda-date-today) :foreground "#073642" :weight semibold :slant normal
+  ;;   :box (:line-width 7 :color "#fffbea" :style nil)
+  ;;   )
+  ;; '((org-agenda-calendar-event)  :weight light)
 
-  '((org-agenda-done)
-    :foreground "#91a6ad"
-    :weight light
-    :strike-through "dark gray")
+  ;; '((org-agenda-done)
+  ;;   :foreground "#91a6ad"
+  ;;   :weight light
+  ;;   :strike-through "dark gray")
 
-  '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
+  ;; '((org-scheduled org-scheduled-today)  :foreground "#556b72" :weight light)
   '((org-agenda-structure) :family "pacifico" :height 220
-    :box (:line-width 2 :color "#fffbea" :style nil))
-  '((org-ellipsis) :height 1.0)
+    :box (:line-width 2 :color "#FDF6E3" :style nil))
+  ;; '((org-ellipsis) :height 1.0)
   '((org-level-1) :foreground "#bf360c" :weight normal :height 1.3 :inherit outline-1)
   '((org-level-2) :weight normal :foreground "#211221" :inherit outline-2)
   '((org-level-3) :weight normal :inherit outline-3 :foreground "#424242")
@@ -946,10 +946,11 @@ current time."
   '((org-level-6) :weight normal :inherit outline-6 :foreground "#616161")
   '((org-link) :weight normal :inherit link)
   '((org-document-title) :height 1.6)
-  '(org-tag :foreground "#fbf5e3")
-  '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
-  '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
-  '((org-table) :background "#f7edd0"))
+  ;; '(org-tag :foreground "#fbf5e3")
+  ;; '((org-drawer org-meta-line org-headline-done) :foreground "dark gray")
+  ;; '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
+  ;; '((org-table) :background "#f7edd0")
+  )
 
 (map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
 
