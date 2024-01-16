@@ -228,6 +228,7 @@ cask karabiner-elements
 cask libreoffice
 cask macfuse
 cask middleclick
+cask syncthing
 cask whatsapp
 
 tap homebrew/cask-drivers
@@ -235,6 +236,8 @@ tap homebrew/cask-drivers
 tap homebrew/cask-fonts
 cask font-iosevka
 cask font-iosevka-etoile
+cask font-noto-color-emoji
+cask font-pacifico
 cask font-vazirmatn
 
 tap homebrew/services
