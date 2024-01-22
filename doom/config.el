@@ -1389,3 +1389,5 @@ according to the value of `org-display-remote-inline-images'."
 ;; (setq org-fold-core-style 'text-properties)
 ;; (evil-select-search-module 'evil-search-module 'isearch)
 
+
+(pixel-scroll-precision-mode)
