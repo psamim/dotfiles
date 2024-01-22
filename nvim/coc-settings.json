@@ -1,13 +1,12 @@
 {
   "suggest.noselect": true,
   "python.formatting.provider": "autopep8",
-  "tabnine.enable": false,
   "tsserver.enable": true,
-  "coc.preferences.formatOnSaveFiletypes": ["js", "py", "python"],
   "snippets.extends": {
     "javascript.jsx": ["javascript"],
     "javascriptreact": ["javascript"]
   },
+  "coc.preferences.formatOnSave": true,
   "eslint.autoFixOnSave": false,
   "eslint.nodePath": "./node_modules",
   "diagnostic.errorSign": "•",

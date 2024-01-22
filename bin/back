@@ -250,10 +250,7 @@ function borg_hdd_backup {
   local _USERNAME=samim
   local MOUNT_HDD="/mnt/backup"
   local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
-  # local DEV_PATH="/dev/disk/by-uuid/cf3b648c-a125-4feb-8110-852353cba08c"
   local LUKS_PASSPHRASE=`sudo -u$_USERNAME pass show backup-hdd-luks | head -n1`
-  echo $LUKS_PASSPHRASE
-  exit
 
   if [ ! -d "$MOUNT_HDD" ] || [ -z "$(ls -A $MOUNT_HDD)" ]; then
     info "Mounting"
@@ -268,11 +265,10 @@ function borg_hdd_backup {
     exit
   fi
 
-  # rsync -a central:/mnt/photoprism/originals "$MOUNT_HDD/photophrism" --info=progress2 --no-inc-recursive --inplace -W --no-compress
   info "Starting backup"
   info "Make sure you are on your home network."
-  sudo -u$_USERNAME rsync -a "$BORG_CONFIG_DIR/repos" "$MOUNT_HDD/borg" \
-    --info=progress2 --no-inc-recursive --inplace -W --no-compress --info=progress2
+  sudo -u$_USERNAME rclone sync /home/samim/borg/repos "$MOUNT_HDD/borg/repos" \
+    -P --transfers 5 --size-only # --ignore-checksum
   sudo -u$_USERNAME rclone sync passport:/mnt/data/all/photoprism/originals/ "$MOUNT_HDD/photophrism-originals" \
     -P --transfers 5 --size-only # --ignore-checksum
   sudo -u$_USERNAME rclone sync passport:/mnt/data/all/raffi-tg.tar.xz "$MOUNT_HDD/tg/" \
