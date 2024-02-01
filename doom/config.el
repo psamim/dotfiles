@@ -663,6 +663,8 @@ current time."
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
+;; (setq ns-use-proxy-icon nil)
+;; (setq frame-title-format nil)
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
