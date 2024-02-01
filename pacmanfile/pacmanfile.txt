@@ -421,8 +421,8 @@ jre-openjdk
 quarto-cli-bin
 hunspell-fa
 cloudflare-warp-bin
-torbrowser-launcher
-hurl-bin
+# torbrowser-launcher
+# hurl-bin
 # torbrowser-launcher
 # nekoray
 curl-impersonate-bin

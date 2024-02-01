@@ -661,6 +661,8 @@ current time."
 (add-to-list 'default-frame-alist '(alpha-background . 94))
 (add-to-list 'default-frame-alist '(undecorated-round . t))
 
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
