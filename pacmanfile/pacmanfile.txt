@@ -446,6 +446,8 @@ asdf-vm
 anki-bin
 google-chrome
 breaktimer-bin
+devbox-bin
+libinput-gestures
 
 # It seems it is needed for paru
 openssl-1.1
