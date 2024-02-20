@@ -266,3 +266,6 @@ alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected -
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+eval "$(devbox completion zsh)"
+eval "$(devbox global shellenv)"
+
