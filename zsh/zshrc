@@ -260,19 +260,16 @@ verify_os () {
     export GPG_TTY=$(tty)
     # gpg-connect-agent updatestartuptty /bye >/dev/null&
     source /usr/bin/virtualenvwrapper_lazy.sh
+
+    eval "$(devbox completion zsh)"
+    # eval "$(devbox global shellenv)"
   fi
 }
 
 verify_os
 
-
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-eval "$(devbox completion zsh)"
-eval "$(devbox global shellenv)"
