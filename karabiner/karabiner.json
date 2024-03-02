@@ -18,6 +18,23 @@
                 },
                 "rules": [
                     {
+                        "description": "Disable Cmd+H Hide (rev 2)",
+                        "manipulators": [
+                            {
+                                "description": "",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ]
+                                    }
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Open Emacs",
                         "manipulators": [
                             {
@@ -185,7 +202,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.microsoft\\.VSCode$"
+                                            "^com\\.microsoft\\.VSCode$",
+                                            "^com\\.jetbrains\\.intellij$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }

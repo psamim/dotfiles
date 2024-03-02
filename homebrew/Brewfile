@@ -29,7 +29,9 @@ brew direnv
 brew dnsmasq
 brew docutils
 brew fasd
+brew fd
 brew ffmpeg
+brew ffmpegthumbnailer
 brew flac
 brew fontconfig
 brew freetds
@@ -52,6 +54,7 @@ brew gnu-sed
 brew gnu-tar
 brew gnupg
 brew gnutls
+brew gpgme
 brew graphite2
 brew graphviz
 brew grep
@@ -60,6 +63,7 @@ brew harfbuzz
 brew helm
 brew highway
 brew httpd
+brew hwloc
 brew icu4c
 brew imagemagick
 brew imath
@@ -111,6 +115,7 @@ brew libsamplerate
 brew libsndfile
 brew libsodium
 brew libsoxr
+brew libssh
 brew libssh2
 brew libtasn1
 brew libtermkey
@@ -150,16 +155,22 @@ brew mpg123
 brew msgpack
 brew ncurses
 brew neovim
+brew neovim-remote
 brew netpbm
 brew nettle
 brew npth
+brew nspr
+brew nss
+brew numpy
 brew oniguruma
+brew openblas
 brew opencore-amr
 brew openexr
 brew openjpeg
 brew openldap
 brew openssl@1.1
 brew openssl@3
+brew openvino
 brew opus
 brew p11-kit
 brew pango
@@ -170,7 +181,9 @@ brew pinentry
 brew pinentry-mac
 brew pixman
 brew pkg-config
+brew poppler
 brew protobuf
+brew pugixml
 brew pycparser
 brew python-psutil
 brew python-setuptools
@@ -191,6 +204,7 @@ brew speex
 brew sqlite
 brew srt
 brew svt-av1
+brew tbb
 brew telnet
 brew tesseract
 brew texinfo
@@ -200,6 +214,7 @@ brew tidy-html5
 brew tmux
 brew trash-cli
 brew tree-sitter
+brew unar
 brew unbound
 brew unibilium
 brew unixodbc
@@ -213,10 +228,12 @@ brew xorgproto
 brew xvid
 brew xz
 brew yarn
+brew yazi
 brew z3
 brew zeromq
 brew zimg
 brew zlib
+brew zoxide
 brew zstd
 
 tap homebrew/cask
@@ -238,6 +255,7 @@ cask font-iosevka
 cask font-iosevka-etoile
 cask font-noto-color-emoji
 cask font-pacifico
+cask font-symbols-only-nerd-font
 cask font-vazirmatn
 
 tap homebrew/services
@@ -260,10 +278,12 @@ tap railwaycat/emacsmacport
 tap rcmdnk/file
 brew brew-file
 
+tap sj14/tap
+
 # App Store applications
 appstore 682658836 GarageBand (10.4.5)
 appstore 408981434 iMovie (10.3.1)
 appstore 409183694 Keynote (11.2)
 appstore 409203825 Numbers (11.2)
 appstore 409201541 Pages (11.2)
-appstore 1233965871 ScreenBrush (1.8.8)
+appstore 1233965871 ScreenBrush (1.8.10)
