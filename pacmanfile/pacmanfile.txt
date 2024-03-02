@@ -189,9 +189,6 @@ nodejs-lua-fmt
 npm
 nsnake
 ntfs-3g
-nvidia-lts
-nvidia-prime
-nvidia-settings
 nyx
 obfs4proxy
 ocs-url
@@ -418,7 +415,7 @@ jre-openjdk
 
 # Tools
 # gum-git
-quarto-cli-bin
+# quarto-cli-bin
 hunspell-fa
 cloudflare-warp-bin
 # torbrowser-launcher
@@ -441,7 +438,7 @@ telegram-desktop
 webkit2gtk
 bruno-bin
 firefox-extension-passff
-hledger
+# hledger
 asdf-vm
 anki-bin
 google-chrome
@@ -453,3 +450,5 @@ libinput-gestures
 openssl-1.1
 # openssl-1.0
 
+# Graphics
+xf86-video-nouveau
