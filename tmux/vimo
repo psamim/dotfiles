@@ -1,2 +1,2 @@
-splitw -v -p 20           # Split pane 1 horizontally by 20%
+splitw -v -l 20%           # Split pane 1 horizontally by 20%
 #selectp -t 0              # Select pane 0
