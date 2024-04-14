@@ -7,7 +7,6 @@ alsa-utils
 althttpd-fossil
 android-file-transfer
 android-studio
-anydesk-bin
 appmenu-gtk-module
 arandr
 arch-hs
@@ -332,7 +331,8 @@ unzip
 usbutils
 util-linux
 v4l2loopback-dkms
-vazir-fonts
+#vazir-fonts
+vazirmatn-fonts
 vdpauinfo
 vi
 vlc
@@ -347,7 +347,6 @@ woeusb-ng
 x86_energy_perf_policy
 xcape
 xclip
-xf86-input-synaptics
 xf86-video-intel
 xfburn
 xfsprogs
@@ -414,7 +413,7 @@ jre-openjdk
 # jdk8-openjdk
 
 # Tools
-# gum-git
+gum
 # quarto-cli-bin
 hunspell-fa
 cloudflare-warp-bin
@@ -422,7 +421,7 @@ cloudflare-warp-bin
 # hurl-bin
 # torbrowser-launcher
 # nekoray
-curl-impersonate-bin
+# curl-impersonate-bin
 dnscrypt-proxy
 python-twisted
 # tailscale
@@ -438,13 +437,14 @@ telegram-desktop
 webkit2gtk
 bruno-bin
 firefox-extension-passff
-# hledger
+hledger
 asdf-vm
 anki-bin
 google-chrome
 breaktimer-bin
 devbox-bin
 libinput-gestures
+# anydesk-bin
 
 # It seems it is needed for paru
 openssl-1.1
