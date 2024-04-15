@@ -45,3 +45,5 @@ nnoremap <c-i> :action Forward<cr>
 " nnoremap <Space>o :action GotoClass<CR>
 " nnoremap <Space>O :action GotoFile<CR>
 " nnoremap <Space>h :action QuickJavaDoc<CR>
+
+set clipboard+=unnamed
