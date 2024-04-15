@@ -659,12 +659,17 @@ current time."
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 94)
 (add-to-list 'default-frame-alist '(alpha-background . 94))
-(add-to-list 'default-frame-alist '(undecorated-round . t))
+
+;; macos
+(if (eq system-type 'darwin)
+  (progn
+  (setq-hook! org-mode org-archive-location "~/Notes/archive/todo.org::")
+  (add-to-list 'default-frame-alist '(undecorated-round . t))
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil)))
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
-;; (setq ns-use-proxy-icon nil)
-;; (setq frame-title-format nil)
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
