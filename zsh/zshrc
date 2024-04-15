@@ -251,6 +251,13 @@ verify_os () {
     export HOMEBREW_BREWFILE=~/.dotfiles/homebrew/Brewfile
     export XDG_CONFIG_HOME="$HOME/.config"
 
+
+    # Configure Colima as Docker Host for applications which don't respect Docker Contexts
+    export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+
+    # Testcontainers should use the default Docker Socket
+    export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+
   elif [[ $myos == "Linux" ]] then
     # GPG Agent
     unset SSH_AGENT_PID
