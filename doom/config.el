@@ -33,7 +33,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-one)
 
 (setq org-agenda-clock-report-header "Report\n")
 
@@ -660,6 +660,12 @@ current time."
 (set-frame-parameter nil 'alpha-background 94)
 (add-to-list 'default-frame-alist '(alpha-background . 94))
 
+(add-to-list 'default-frame-alist '(undecorated . t))
+(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+(add-to-list 'default-frame-alist '(internal-border-width . 5))
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
 ;; macos
 (if (eq system-type 'darwin)
   (progn
@@ -667,9 +673,6 @@ current time."
   (add-to-list 'default-frame-alist '(undecorated-round . t))
   (setq ns-use-proxy-icon nil)
   (setq frame-title-format nil)))
-
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
