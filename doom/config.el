@@ -42,19 +42,14 @@
   (cl-reduce (lambda (cur acc)
                (concat acc "\\|" cur))
              (mapcar (lambda (entry) (concat "\\* " entry))
-                     '("TODO" "ACTIVE" "WAIT" "BLOCKED" "DONE" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
+                     '("TODO" "PROJ" "NEXT" "ACTIVE" "WAIT" "BLOCKED" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
   "Regex which filters all TODO keywords")
-
-(defvar org-agenda--last-months-regex
-  (cl-reduce (lambda (cur acc)
-               (concat acc "\\|" cur))
-             '("2021-06" "2021-07" "2021-08" "2021-09")))
 
 (defun org-agenda--calculate-files-for-regex (regex)
   "Yields a fresh array with all files containing todos which match REGEX.
 
-Uses grep to discover all files containing anything stored in
-org-agenda--todo-keyword-regex."
+  Uses grep to discover all files containing anything stored in
+  org-agenda--todo-keyword-regex."
   (let ((files
          (cl-remove-if #'file-directory-p
                        (split-string
@@ -74,45 +69,6 @@ org-agenda--todo-keyword-regex."
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 ;;
-(setq
- org-startup-with-inline-images t
- org-agenda-clockreport-parameter-plist
- '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
- org-crypt-key "psamim@gmail.com"
- org-clock-persist t
- org-tags-exclude-from-inheritance '("project" "crypt")
- ;; org-duration-format 'h:mm
- org-tag-alist '(("crypt" . ?c) ("project" . ?p))
- org-duration-format '((special . h:mm))
- org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
- org-export-with-section-numbers nil
- org-export-with-broken-links 't
- org-agenda-diary-file "~/Notes/diary.org"
- org-roam-directory "~/Notes/roam"
- plstore-cache-passphrase-for-symmetric-encryption t
- password-cache-expiry nil
- org-ellipsis "…"
- ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
- ;; org-agenda-files (quote ("~/Notes/projects"
- ;;                          "~/Notes/roam"
- ;;                          "~/Notes/calendar-inbox.org"
- ;;                          "~/Notes/roam/20210625224916-areas.org"
- ;;                          "~/Notes/roam/20210507181408-people.gpg.org"
- ;;                          "~/Notes/study.org"
- ;;                          "~/Notes/events.org"))
- org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
- org-file-apps
- '((remote . emacs)
-   (auto-mode . emacs)
-   (directory . emacs)
-   ("\\.mm\\'" . default)
-   ("\\.x?html?\\'" . default)
-   ("\\.pdf\\'" . "xournalpp %s"))
- org-deadline-warning-days 7
- org-agenda-breadcrumbs-separator " ❱ "
- org-export-in-background nil
- org-fold-catch-invisible-edits 'smart
- org-directory "~/Notes")
 
 (setq mixed-pitch-fixed-pitch-faces
       (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
@@ -184,7 +140,7 @@ org-agenda--todo-keyword-regex."
 
 (defun my-org-agenda-format-date-aligned (date)
   "Format a DATE string for display in the daily/weekly agenda, or timeline.
-This function makes sure that dates are aligned for easy reading."
+                     This function makes sure that dates are aligned for easy reading."
   (require 'cal-iso)
   (let* ((dayname (calendar-day-name date 1 nil))
          (day (cadr date))
@@ -693,21 +649,61 @@ This function makes sure that dates are aligned for easy reading."
               (file+headline "~/Notes/events.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
              ))))
 
-  (setq org-agenda-block-separator nil)
-  (setq org-habit-today-glyph ?◌)
-  (setq org-habit-graph-column 40)
-  (setq org-habit-following-days 1)
-  (setq org-habit-show-habits t)
-  (setq org-habit-completed-glyph ?●)
-  (setq org-habit-preceding-days 10)
-  (setq org-habit-show-habits-only-for-today t)
-  (setq org-habit-missed-glyph ?○)
-  (setq org-agenda-block-separator (string-to-char " "))
-  (setq org-agenda-format-date 'my-org-agenda-format-date-aligned)
-  (setq org-agenda-hidden-separator "‌‌ ")
-  (setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
-  (setq org-agenda-clock-report-header "Report\n")
-  (setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘"))
+
+  (setq
+   org-agenda-block-separator nil
+   org-habit-today-glyph ?◌
+   org-habit-graph-column 40
+   org-habit-following-days 1
+   org-habit-show-habits t
+   org-habit-completed-glyph ?●
+   org-habit-preceding-days 10
+   org-habit-show-habits-only-for-today t
+   org-habit-missed-glyph ?○
+   org-agenda-block-separator (string-to-char " ")
+   org-agenda-format-date 'my-org-agenda-format-date-aligned
+   org-agenda-hidden-separator "‌‌ "
+   org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}"
+   org-agenda-clock-report-header "Report\n"
+   org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘")
+   org-startup-with-inline-images t
+   org-agenda-clockreport-parameter-plist
+   '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
+   org-crypt-key "psamim@gmail.com"
+   org-clock-persist t
+   org-tags-exclude-from-inheritance '("project" "crypt")
+   ;; org-duration-format 'h:mm
+   org-tag-alist '(("crypt" . ?c) ("project" . ?p))
+   org-duration-format '((special . h:mm))
+   org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
+   org-export-with-section-numbers nil
+   org-export-with-broken-links 't
+   org-agenda-diary-file "~/Notes/diary.org"
+   org-roam-directory "~/Notes/roam"
+   plstore-cache-passphrase-for-symmetric-encryption t
+   password-cache-expiry nil
+   org-ellipsis "…"
+   ;; ➡, ⚡, ▼, ↴, , ∞, ⬎, ⤷, ⤵
+   ;; org-agenda-files (quote ("~/Notes/projects"
+   ;;                          "~/Notes/roam"
+   ;;                          "~/Notes/calendar-inbox.org"
+   ;;                          "~/Notes/roam/20210625224916-areas.org"
+   ;;                          "~/Notes/roam/20210507181408-people.gpg.org"
+   ;;                          "~/Notes/study.org"
+   ;;                          "~/Notes/events.org"))
+   org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
+   org-file-apps
+   '((remote . emacs)
+     (auto-mode . emacs)
+     (directory . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "xournalpp %s"))
+   org-deadline-warning-days 7
+   org-agenda-breadcrumbs-separator " ❱ "
+   org-export-in-background nil
+   org-fold-catch-invisible-edits 'smart
+   org-directory "~/Notes")
 
   (setq org-todo-keywords
         '((sequence
@@ -781,13 +777,13 @@ This function makes sure that dates are aligned for easy reading."
                                                       (org-agenda-todo-keyword-format "")))
 
 
-            (tags "+project-CATEGORY=\"work\"" (
-                                                (org-agenda-overriding-header "\n⚡ Projects")
-                                                (org-agenda-remove-tags t)
-                                                (org-tags-match-list-sublevels nil)
-                                                (org-agenda-show-inherited-tags nil)
-                                                (org-agenda-prefix-format "   %-2i %?b")
-                                                (org-agenda-todo-keyword-format "")))
+            (tags "-CATEGORY=\"work\"+TODO=\"PROJ\"" (
+                                                      (org-agenda-overriding-header "\n⚡ Projects")
+                                                      (org-agenda-remove-tags t)
+                                                      (org-tags-match-list-sublevels nil)
+                                                      (org-agenda-show-inherited-tags nil)
+                                                      (org-agenda-prefix-format "   %-2i %?b")
+                                                      (org-agenda-todo-keyword-format "")))
             ))
 
           ("w" "Work Agenda"
@@ -838,13 +834,13 @@ This function makes sure that dates are aligned for easy reading."
                                                       (org-agenda-prefix-format "   %-2i %?b")
                                                       (org-agenda-todo-keyword-format "")))
 
-            (tags "+project+CATEGORY=\"work\"" (
-                                                (org-agenda-overriding-header "\n⚡ Projects")
-                                                (org-agenda-remove-tags t)
-                                                (org-tags-match-list-sublevels nil)
-                                                (org-agenda-show-inherited-tags nil)
-                                                (org-agenda-prefix-format "   %-2i %?b")
-                                                (org-agenda-todo-keyword-format "")))
+            (tags "+CATEGORY=\"work\"+TODO=\"PROJ\"" (
+                                                      (org-agenda-overriding-header "\n⚡ Projects")
+                                                      (org-agenda-remove-tags t)
+                                                      (org-tags-match-list-sublevels nil)
+                                                      (org-agenda-show-inherited-tags nil)
+                                                      (org-agenda-prefix-format "   %-2i %?b")
+                                                      (org-agenda-todo-keyword-format "")))
             ))
 
 
@@ -1187,7 +1183,8 @@ according to the value of `org-display-remote-inline-images'."
 		    :width width :mask 'heuristic :ascent 'center))))
 
 (defun org-hide-properties ()
-  "Hide all org-mode headline property drawers in buffer. Could be slow if it has a lot of overlays."
+  "Hide all org-mode headline property drawers in buffer.
+Could be slow if it has a lot of overlays."
   (interactive)
   (save-excursion
     (goto-char (point-min))
