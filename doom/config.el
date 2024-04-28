@@ -35,14 +35,6 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
-(setq org-agenda-clock-report-header "Report\n")
-
-;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
-(setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                     priority-down category-keep)
-                                    (todo priority-down category-keep)
-                                    (tags priority-down category-keep)
-                                    (search category-keep)))
 
 ;; https://github.com/d12frosted/d12frosted.io/issues/15#issuecomment-908260553
 (require 'cl-lib)
@@ -130,20 +122,6 @@ org-agenda--todo-keyword-regex."
   (interactive)
   (org-set-property "CREATED" (format-time-string "%F")))
 
-(add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
-
-(custom-set-variables
- '(org-capture-templates
-   (quote (
-           ("t" "todo" entry
-            (file "~/Notes/projects/misc.org") "* TODO %?\n%a\n" :clock-keep t)
-           ("e" "event" entry
-            (file+headline "~/Notes/events.org" "Inbox") "* %?\n" :clock-keep t)
-           ("s" "schedule" entry
-            (file+headline "~/Notes/events.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
-           ))))
-
-(setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
 
 (setq-hook! org-mode
   org-log-done t
@@ -189,7 +167,6 @@ org-agenda--todo-keyword-regex."
    ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
    ("archive" "~/.dotfiles/icons/archive.svg" nil nil :ascent center :mask heuristic)
    ))
-(setq org-agenda-hidden-separator "‌‌ ")
 (defun agenda-color-char ()
   (save-excursion
     (goto-char (point-min))
@@ -204,8 +181,6 @@ org-agenda--todo-keyword-regex."
   ;;                        'face '(:foreground "red"))))
   )
 
-(setq org-agenda-block-separator (string-to-char " "))
-(setq org-agenda-format-date 'my-org-agenda-format-date-aligned)
 
 (defun my-org-agenda-format-date-aligned (date)
   "Format a DATE string for display in the daily/weekly agenda, or timeline.
@@ -231,124 +206,114 @@ This function makes sure that dates are aligned for easy reading."
     (format " %-2s. %2d %s, %s"
             dayname day monthname persian)))
 
-(setq org-agenda-block-separator nil)
-(setq org-habit-today-glyph ?◌)
-(setq org-habit-graph-column 40)
-(setq org-habit-following-days 1)
-(setq org-habit-show-habits t)
-(setq org-habit-completed-glyph ?●)
-(setq org-habit-preceding-days 10)
-(setq org-habit-show-habits-only-for-today t)
-
-(setq org-habit-missed-glyph ?○)
 
 ;; https://github.com/koddo/.emacs.d/blob/427aa248fcaf3c4f7cc827015b188e25161b1b5c/init-habits.el
-(after! org-habit
-  (defun org-habit-build-graph (habit starting current ending)
-    "Build a graph for the given HABIT, from STARTING to ENDING.
-CURRENT gives the current time between STARTING and ENDING, for
-the purpose of drawing the graph.  It need not be the actual
-current time."
-    (let* ((all-done-dates (sort (org-habit-done-dates habit) #'<))
-	   (done-dates all-done-dates)
-	   (scheduled (org-habit-scheduled habit))
-	   (s-repeat (org-habit-scheduled-repeat habit))
-	   (start (time-to-days starting))
-	   (now (time-to-days current))
-	   (end (time-to-days ending))
-	   (graph (make-string (1+ (- end start)) org-habit-missed-glyph))
-	   (index 0)
-	   last-done-date)
-      (while (and done-dates (< (car done-dates) start))
-        (setq last-done-date (car done-dates)
-	      done-dates (cdr done-dates)))
-      (while (< start end)
-        (let* ((in-the-past-p (< start now))
-	       (todayp (= start now))
-	       (donep (and done-dates (= start (car done-dates))))
-	       (faces
-	        (if (and in-the-past-p
-		         (not last-done-date)
-		         (not (< scheduled now)))
-		    (if (and all-done-dates (= (car all-done-dates) start))
-		        ;; This is the very first done of this habit.
-		        '(org-habit-ready-face . org-habit-ready-future-face)
-		      '(org-habit-clear-face . org-habit-clear-future-face))
-		  (org-habit-get-faces
-		   habit start
-		   (and in-the-past-p
-		        last-done-date
-		        ;; Compute scheduled time for habit at the time
-		        ;; START was current.
-		        (let ((type (org-habit-repeat-type habit)))
-			  (cond
-			   ;; At the last done date, use current
-			   ;; scheduling in all cases.
-			   ((null done-dates) scheduled)
-			   ((equal type ".+") (+ last-done-date s-repeat))
-			   ((equal type "+")
-			    ;; Since LAST-DONE-DATE, each done mark
-			    ;; shifted scheduled date by S-REPEAT.
-			    (- scheduled (* (length done-dates) s-repeat)))
-			   (t
-			    ;; Compute the scheduled time after the
-			    ;; first repeat.  This is the closest time
-			    ;; past FIRST-DONE which can reach SCHEDULED
-			    ;; by a number of S-REPEAT hops.
-			    ;;
-			    ;; Then, play TODO state change history from
-			    ;; the beginning in order to find current
-			    ;; scheduled time.
-			    (let* ((first-done (car all-done-dates))
-				   (s (let ((shift (mod (- scheduled first-done)
-						        s-repeat)))
-				        (+ (if (= shift 0) s-repeat shift)
-					   first-done))))
-			      (if (= first-done last-done-date) s
-			        (catch :exit
-				  (dolist (done (cdr all-done-dates) s)
-				    ;; Each repeat shifts S by any
-				    ;; number of S-REPEAT hops it takes
-				    ;; to get past DONE, with a minimum
-				    ;; of one hop.
-				    (cl-incf s (* (1+ (/ (max (- done s) 0)
-						         s-repeat))
-						  s-repeat))
-				    (when (= done last-done-date)
-				      (throw :exit s))))))))))
-		   donep)))
-	       markedp face)
-	  (cond
-	   (donep
-	    (aset graph index org-habit-completed-glyph)
-	    (setq markedp t)
-	    (while (and done-dates (= start (car done-dates)))
-	      (setq last-done-date (car done-dates))
-	      (setq done-dates (cdr done-dates))))
-	   (todayp
-	    (aset graph index org-habit-today-glyph)))
-	  (setq face (if (or in-the-past-p todayp)
-		         (car faces)
-		       (cdr faces)))
-	  (when (and in-the-past-p
-		     (not (eq face 'org-habit-overdue-face))
-		     (not markedp))
-	    (setq face (cdr faces)))
-	  (put-text-property index (1+ index) 'face face graph)
-	  (put-text-property index (1+ index)
-			     'help-echo
-			     (concat (format-time-string
-				      (org-time-stamp-format)
-				      (time-add starting (days-to-time (- start (time-to-days starting)))))
-				     (if donep " DONE" ""))
-			     graph))
-        (setq start (1+ start)
-	      index (1+ index)))
-      graph))
-  )
+;; (after! org-habit
+;;   (defun org-habit-build-graph (habit starting current ending)
+;;     "Build a graph for the given HABIT, from STARTING to ENDING.
+;; CURRENT gives the current time between STARTING and ENDING, for
+;; the purpose of drawing the graph.  It need not be the actual
+;; current time."
+;;     (let* ((all-done-dates (sort (org-habit-done-dates habit) #'<))
+;; 	   (done-dates all-done-dates)
+;; 	   (scheduled (org-habit-scheduled habit))
+;; 	   (s-repeat (org-habit-scheduled-repeat habit))
+;; 	   (start (time-to-days starting))
+;; 	   (now (time-to-days current))
+;; 	   (end (time-to-days ending))
+;; 	   (graph (make-string (1+ (- end start)) org-habit-missed-glyph))
+;; 	   (index 0)
+;; 	   last-done-date)
+;;       (while (and done-dates (< (car done-dates) start))
+;;         (setq last-done-date (car done-dates)
+;; 	      done-dates (cdr done-dates)))
+;;       (while (< start end)
+;;         (let* ((in-the-past-p (< start now))
+;; 	       (todayp (= start now))
+;; 	       (donep (and done-dates (= start (car done-dates))))
+;; 	       (faces
+;; 	        (if (and in-the-past-p
+;; 		         (not last-done-date)
+;; 		         (not (< scheduled now)))
+;; 		    (if (and all-done-dates (= (car all-done-dates) start))
+;; 		        ;; This is the very first done of this habit.
+;; 		        '(org-habit-ready-face . org-habit-ready-future-face)
+;; 		      '(org-habit-clear-face . org-habit-clear-future-face))
+;; 		  (org-habit-get-faces
+;; 		   habit start
+;; 		   (and in-the-past-p
+;; 		        last-done-date
+;; 		        ;; Compute scheduled time for habit at the time
+;; 		        ;; START was current.
+;; 		        (let ((type (org-habit-repeat-type habit)))
+;; 			  (cond
+;; 			   ;; At the last done date, use current
+;; 			   ;; scheduling in all cases.
+;; 			   ((null done-dates) scheduled)
+;; 			   ((equal type ".+") (+ last-done-date s-repeat))
+;; 			   ((equal type "+")
+;; 			    ;; Since LAST-DONE-DATE, each done mark
+;; 			    ;; shifted scheduled date by S-REPEAT.
+;; 			    (- scheduled (* (length done-dates) s-repeat)))
+;; 			   (t
+;; 			    ;; Compute the scheduled time after the
+;; 			    ;; first repeat.  This is the closest time
+;; 			    ;; past FIRST-DONE which can reach SCHEDULED
+;; 			    ;; by a number of S-REPEAT hops.
+;; 			    ;;
+;; 			    ;; Then, play TODO state change history from
+;; 			    ;; the beginning in order to find current
+;; 			    ;; scheduled time.
+;; 			    (let* ((first-done (car all-done-dates))
+;; 				   (s (let ((shift (mod (- scheduled first-done)
+;; 						        s-repeat)))
+;; 				        (+ (if (= shift 0) s-repeat shift)
+;; 					   first-done))))
+;; 			      (if (= first-done last-done-date) s
+;; 			        (catch :exit
+;; 				  (dolist (done (cdr all-done-dates) s)
+;; 				    ;; Each repeat shifts S by any
+;; 				    ;; number of S-REPEAT hops it takes
+;; 				    ;; to get past DONE, with a minimum
+;; 				    ;; of one hop.
+;; 				    (cl-incf s (* (1+ (/ (max (- done s) 0)
+;; 						         s-repeat))
+;; 						  s-repeat))
+;; 				    (when (= done last-done-date)
+;; 				      (throw :exit s))))))))))
+;; 		   donep)))
+;; 	       markedp face)
+;; 	  (cond
+;; 	   (donep
+;; 	    (aset graph index org-habit-completed-glyph)
+;; 	    (setq markedp t)
+;; 	    (while (and done-dates (= start (car done-dates)))
+;; 	      (setq last-done-date (car done-dates))
+;; 	      (setq done-dates (cdr done-dates))))
+;; 	   (todayp
+;; 	    (aset graph index org-habit-today-glyph)))
+;; 	  (setq face (if (or in-the-past-p todayp)
+;; 		         (car faces)
+;; 		       (cdr faces)))
+;; 	  (when (and in-the-past-p
+;; 		     (not (eq face 'org-habit-overdue-face))
+;; 		     (not markedp))
+;; 	    (setq face (cdr faces)))
+;; 	  (put-text-property index (1+ index) 'face face graph)
+;; 	  (put-text-property index (1+ index)
+;; 			     'help-echo
+;; 			     (concat (format-time-string
+;; 				      (org-time-stamp-format)
+;; 				      (time-add starting (days-to-time (- start (time-to-days starting)))))
+;; 				     (if donep " DONE" ""))
+;; 			     graph))
+;;         (setq start (1+ start)
+;; 	      index (1+ index)))
+;;       graph))
+;;   )
 
-(after! org
-  (add-to-list 'org-modules 'org-habit))
+;; (after! org
+;;   (add-to-list 'org-modules 'org-habit))
 
 ;; (defun org-agenda-highlight-todo (x)
 ;;   (let ((org-done-keywords org-done-keywords-for-agenda)
@@ -403,154 +368,6 @@ current time."
 ;;                    (substring x (match-end 3)))))))
 ;;       x)))
 
-(setq org-agenda-custom-commands
-      '(
-        ("a" "My Agenda"
-         (
-          (agenda "" (
-                      (org-agenda-skip-scheduled-if-done nil)
-                      (org-agenda-time-leading-zero t)
-                      (org-agenda-timegrid-use-ampm nil)
-                      (org-agenda-skip-timestamp-if-done t)
-                      (org-agenda-skip-deadline-if-done t)
-                      (org-agenda-start-day "+0d")
-                      (org-agenda-span 2)
-                      (org-agenda-overriding-header "⚡ Calendar")
-                      (org-agenda-repeating-timestamp-show-all nil)
-                      (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "   %i %?-2 t%s")
-                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
-                      ;; (org-agenda-todo-keyword-format " ☐ ")
-                      (org-agenda-todo-keyword-format "")
-                      (org-agenda-time)
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
-                      (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
-                      (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
-
-          (tags "+TODO=\"TODO\"" (
-                                  (org-agenda-overriding-header "\n⚡ Today")
-                                  (org-agenda-sorting-strategy '(priority-down))
-                                  (org-agenda-remove-tags t)
-                                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
-                                  ;; (org-agenda-todo-ignore-scheduled 'all)
-                                  (org-agenda-prefix-format "   %-2i ")
-                                  ;; (org-agenda-todo-keyword-format "")
-                                  ))
-
-          (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                                    (org-agenda-overriding-header "\n⚡ Next")
-                                                    (org-agenda-sorting-strategy '(priority-down))
-                                                    (org-agenda-remove-tags t)
-                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                                    (org-agenda-todo-ignore-scheduled 'all)
-                                                    (org-agenda-prefix-format "   %-2i %?b")
-                                                    (org-agenda-todo-keyword-format "")))
-
-
-          (tags "+project-CATEGORY=\"work\"" (
-                                              (org-agenda-overriding-header "\n⚡ Projects")
-                                              (org-agenda-remove-tags t)
-                                              (org-tags-match-list-sublevels nil)
-                                              (org-agenda-show-inherited-tags nil)
-                                              (org-agenda-prefix-format "   %-2i %?b")
-                                              (org-agenda-todo-keyword-format "")))
-          ))
-
-        ("w" "Work Agenda"
-         (
-          (agenda "" (
-                      ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
-                      (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                                      priority-down category-keep)
-                                                     (todo priority-down category-keep)
-                                                     (tags priority-down category-keep)
-                                                     (search category-keep)))
-
-                      (org-agenda-skip-scheduled-if-done nil)
-                      (org-agenda-time-leading-zero t)
-                      (org-agenda-timegrid-use-ampm nil)
-                      (org-agenda-skip-timestamp-if-done t)
-                      (org-agenda-skip-deadline-if-done t)
-                      (org-agenda-start-day "+0d")
-                      (org-agenda-span 2)
-                      (org-agenda-overriding-header "⚡ Calendar")
-                      (org-agenda-repeating-timestamp-show-all nil)
-                      (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "   %i %?-2 t%s")
-                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
-                      ;; (org-agenda-todo-keyword-format " ☐ ")
-                      (org-agenda-todo-keyword-format "")
-                      (org-agenda-time)
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
-                      (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
-                      (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
-
-          (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
-                                                    (org-agenda-overriding-header "\n⚡ To Do")
-                                                    (org-agenda-sorting-strategy '(priority-down))
-                                                    (org-agenda-remove-tags t)
-                                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                                    (org-agenda-todo-ignore-scheduled 'all)
-                                                    (org-agenda-prefix-format "   %-2i %?b")
-                                                    (org-agenda-todo-keyword-format "")))
-
-          (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                                    (org-agenda-overriding-header "\n⚡ Next")
-                                                    (org-agenda-sorting-strategy '(priority-down))
-                                                    (org-agenda-remove-tags t)
-                                                    (org-agenda-todo-ignore-scheduled 'all)
-                                                    (org-agenda-prefix-format "   %-2i %?b")
-                                                    (org-agenda-todo-keyword-format "")))
-
-          (tags "+project+CATEGORY=\"work\"" (
-                                              (org-agenda-overriding-header "\n⚡ Projects")
-                                              (org-agenda-remove-tags t)
-                                              (org-tags-match-list-sublevels nil)
-                                              (org-agenda-show-inherited-tags nil)
-                                              (org-agenda-prefix-format "   %-2i %?b")
-                                              (org-agenda-todo-keyword-format "")))
-          ))
-
-
-        ("mo" "My Agenda"
-         (
-          (agenda "" (
-                      (org-agenda-skip-scheduled-if-done nil)
-                      (org-agenda-time-leading-zero nil)
-                      (org-agenda-timegrid-use-ampm nil)
-                      (org-agenda-skip-timestamp-if-done t)
-                      (org-agenda-skip-deadline-if-done t)
-                      (org-agenda-start-day "+0d")
-                      (org-agenda-span 3)
-                      (org-agenda-overriding-header "⚡ Calendar")
-                      (org-agenda-repeating-timestamp-show-all nil)
-                      (org-agenda-remove-tags t)
-                      (org-agenda-prefix-format "   %i %?-2 t%s")
-                      ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                      ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
-                      ;; (org-agenda-todo-keyword-format " ☐ ")
-                      (org-agenda-todo-keyword-format "")
-                      (org-agenda-time)
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
-                      (org-agenda-scheduled-leaders '("" ""))
-                      (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
-                      (org-agenda-time-grid nil)))
-
-          (todo "TODO" (
-                        (org-agenda-overriding-header "\n⚡ To Do")
-                        (org-agenda-sorting-strategy '(priority-down))
-                        (org-agenda-remove-tags t)
-                        ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                        (org-agenda-todo-ignore-scheduled 'all)
-                        (org-agenda-prefix-format "   %-2i %?b")
-                        (org-agenda-todo-keyword-format "")))
-
-          ))
-        ))
 
 (defun psamim-journal-prefix (time)
   (let*
@@ -862,7 +679,216 @@ current time."
 
 (doom-modeline-mode 0)
 
+(add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+
 (after! org
+  (custom-set-variables
+   '(org-capture-templates
+     (quote (
+             ("t" "todo" entry
+              (file "~/Notes/projects/misc.org") "* TODO %?\n%a\n" :clock-keep t)
+             ("e" "event" entry
+              (file+headline "~/Notes/events.org" "Inbox") "* %?\n" :clock-keep t)
+             ("s" "schedule" entry
+              (file+headline "~/Notes/events.org" "Inbox") "* %?\nSCHEDULED: %t" :clock-keep t)
+             ))))
+
+  (setq org-agenda-block-separator nil)
+  (setq org-habit-today-glyph ?◌)
+  (setq org-habit-graph-column 40)
+  (setq org-habit-following-days 1)
+  (setq org-habit-show-habits t)
+  (setq org-habit-completed-glyph ?●)
+  (setq org-habit-preceding-days 10)
+  (setq org-habit-show-habits-only-for-today t)
+  (setq org-habit-missed-glyph ?○)
+  (setq org-agenda-block-separator (string-to-char " "))
+  (setq org-agenda-format-date 'my-org-agenda-format-date-aligned)
+  (setq org-agenda-hidden-separator "‌‌ ")
+  (setq org-columns-default-format "%ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Clock Sum){:}")
+  (setq org-agenda-clock-report-header "Report\n")
+  (setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘"))
+
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; A project, which usually contains other tasks
+           "STRT(s)"  ; A task that is in progress
+           "WAIT(w)"  ; Something external is holding up this task
+           "HOLD(h)"  ; This task is paused/on hold because of me
+           "NEXT(n)"  ; This task going to be done thiw iteration (week)
+           "|"
+           "DONE(d)"  ; Task successfully completed
+           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-todo-keyword-faces
+        '(("[-]"  . +org-todo-active)
+          ("STRT" . +org-todo-active)
+          ("[?]"  . +org-todo-onhold)
+          ("WAIT" . +org-todo-onhold)
+          ("HOLD" . +org-todo-onhold)
+          ("NEXT" . +org-todo-project)
+          ("PROJ" . +org-todo-project)))
+
+  (setq org-agenda-custom-commands
+        '(
+          ("a" "My Agenda"
+           (
+            (agenda "" (
+                        (org-agenda-skip-scheduled-if-done nil)
+                        (org-agenda-time-leading-zero t)
+                        (org-agenda-timegrid-use-ampm nil)
+                        (org-agenda-skip-timestamp-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-agenda-start-day "+0d")
+                        (org-agenda-span 2)
+                        (org-agenda-overriding-header "⚡ Calendar")
+                        (org-agenda-repeating-timestamp-show-all nil)
+                        (org-agenda-remove-tags t)
+                        (org-agenda-prefix-format "   %i %?-2 t%s")
+                        ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                        ;; (org-agenda-todo-keyword-format " ☐ ")
+                        (org-agenda-todo-keyword-format "")
+                        (org-agenda-time)
+                        (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                        (org-agenda-scheduled-leaders '("" ""))
+                        (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
+                        (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+
+            (tags "+TODO=\"TODO\"" (
+                                    (org-agenda-overriding-header "\n⚡ Today")
+                                    (org-agenda-sorting-strategy '(priority-down))
+                                    (org-agenda-remove-tags t)
+                                    (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp 'scheduled))
+                                    ;; (org-agenda-todo-ignore-scheduled 'all)
+                                    (org-agenda-prefix-format "   %-2i ")
+                                    ;; (org-agenda-todo-keyword-format "")
+                                    ))
+
+            (tags "-CATEGORY=\"work\"+TODO=\"NEXT\"" (
+                                                      (org-agenda-overriding-header "\n⚡ Next")
+                                                      (org-agenda-sorting-strategy '(priority-down))
+                                                      (org-agenda-remove-tags t)
+                                                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                      (org-agenda-todo-ignore-scheduled 'all)
+                                                      (org-agenda-prefix-format "   %-2i %?b")
+                                                      (org-agenda-todo-keyword-format "")))
+
+
+            (tags "+project-CATEGORY=\"work\"" (
+                                                (org-agenda-overriding-header "\n⚡ Projects")
+                                                (org-agenda-remove-tags t)
+                                                (org-tags-match-list-sublevels nil)
+                                                (org-agenda-show-inherited-tags nil)
+                                                (org-agenda-prefix-format "   %-2i %?b")
+                                                (org-agenda-todo-keyword-format "")))
+            ))
+
+          ("w" "Work Agenda"
+           (
+            (agenda "" (
+                        ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+                        (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+                                                        priority-down category-keep)
+                                                       (todo priority-down category-keep)
+                                                       (tags priority-down category-keep)
+                                                       (search category-keep)))
+
+                        (org-agenda-skip-scheduled-if-done nil)
+                        (org-agenda-time-leading-zero t)
+                        (org-agenda-timegrid-use-ampm nil)
+                        (org-agenda-skip-timestamp-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-agenda-start-day "+0d")
+                        (org-agenda-span 2)
+                        (org-agenda-overriding-header "⚡ Calendar")
+                        (org-agenda-repeating-timestamp-show-all nil)
+                        (org-agenda-remove-tags t)
+                        (org-agenda-prefix-format "   %i %?-2 t%s")
+                        ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                        ;; (org-agenda-todo-keyword-format " ☐ ")
+                        (org-agenda-todo-keyword-format "")
+                        (org-agenda-time)
+                        (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                        (org-agenda-scheduled-leaders '("" ""))
+                        (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
+                        (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+
+            (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
+                                                      (org-agenda-overriding-header "\n⚡ To Do")
+                                                      (org-agenda-sorting-strategy '(priority-down))
+                                                      (org-agenda-remove-tags t)
+                                                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                                      (org-agenda-todo-ignore-scheduled 'all)
+                                                      (org-agenda-prefix-format "   %-2i %?b")
+                                                      (org-agenda-todo-keyword-format "")))
+
+            (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
+                                                      (org-agenda-overriding-header "\n⚡ Next")
+                                                      (org-agenda-sorting-strategy '(priority-down))
+                                                      (org-agenda-remove-tags t)
+                                                      (org-agenda-todo-ignore-scheduled 'all)
+                                                      (org-agenda-prefix-format "   %-2i %?b")
+                                                      (org-agenda-todo-keyword-format "")))
+
+            (tags "+project+CATEGORY=\"work\"" (
+                                                (org-agenda-overriding-header "\n⚡ Projects")
+                                                (org-agenda-remove-tags t)
+                                                (org-tags-match-list-sublevels nil)
+                                                (org-agenda-show-inherited-tags nil)
+                                                (org-agenda-prefix-format "   %-2i %?b")
+                                                (org-agenda-todo-keyword-format "")))
+            ))
+
+
+          ("mo" "My Agenda"
+           (
+            (agenda "" (
+                        (org-agenda-skip-scheduled-if-done nil)
+                        (org-agenda-time-leading-zero nil)
+                        (org-agenda-timegrid-use-ampm nil)
+                        (org-agenda-skip-timestamp-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-agenda-start-day "+0d")
+                        (org-agenda-span 3)
+                        (org-agenda-overriding-header "⚡ Calendar")
+                        (org-agenda-repeating-timestamp-show-all nil)
+                        (org-agenda-remove-tags t)
+                        (org-agenda-prefix-format "   %i %?-2 t%s")
+                        ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+                        ;; (org-agenda-todo-keyword-format " ☐ ")
+                        (org-agenda-todo-keyword-format "")
+                        (org-agenda-time)
+                        (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                        (org-agenda-scheduled-leaders '("" ""))
+                        (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
+                        (org-agenda-time-grid nil)))
+
+            (todo "TODO" (
+                          (org-agenda-overriding-header "\n⚡ To Do")
+                          (org-agenda-sorting-strategy '(priority-down))
+                          (org-agenda-remove-tags t)
+                          ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                          (org-agenda-todo-ignore-scheduled 'all)
+                          (org-agenda-prefix-format "   %-2i %?b")
+                          (org-agenda-todo-keyword-format "")))
+
+            ))))
+
+  ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+  (setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+                                       priority-down category-keep)
+                                      (todo priority-down category-keep)
+                                      (tags priority-down category-keep)
+                                      (search category-keep)))
   ;; ⧗             ―               ﮸          λ ◁ ▷ ✧ ✦
   (appendq! +ligatures-extra-symbols
             `(:clock      "⧗ "
@@ -898,39 +924,13 @@ current time."
     :shogi "#+name:"
     ;; :tags "keywords:"
     :black_shogi "#+roam_tags:"
-    ))
+    )
+  )
 
 (use-package! org-fancy-priorities ; priority icons
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚑" "⬆" "⬇")))
 
-(setq org-superstar-headline-bullets-list '("◯" "∙" "∘" "∘" "∘" "∘" "∘" "∘"))
-
-(setq org-todo-keywords
-      '((sequence
-         "TODO(t)"  ; A task that needs doing & is ready to do
-         "PROJ(p)"  ; A project, which usually contains other tasks
-         "STRT(s)"  ; A task that is in progress
-         "WAIT(w)"  ; Something external is holding up this task
-         "HOLD(h)"  ; This task is paused/on hold because of me
-         "NEXT(n)"  ; This task going to be done thiw iteration (week)
-         "|"
-         "DONE(d)"  ; Task successfully completed
-         "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-        (sequence
-         "[ ](T)"   ; A task that needs doing
-         "[-](S)"   ; Task is in progress
-         "[?](W)"   ; Task is being held up or paused
-         "|"
-         "[X](D)")) ; Task was completed
-      org-todo-keyword-faces
-      '(("[-]"  . +org-todo-active)
-        ("STRT" . +org-todo-active)
-        ("[?]"  . +org-todo-onhold)
-        ("WAIT" . +org-todo-onhold)
-        ("HOLD" . +org-todo-onhold)
-        ("NEXT" . +org-todo-project)
-        ("PROJ" . +org-todo-project)))
 
 (custom-theme-set-faces!
   'doom-solarized-light
