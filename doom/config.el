@@ -376,7 +376,9 @@
 
 (defun my-org-agenda ()
   (interactive)
-  (org-agenda nil "a"))
+  (if (eq system-type 'darwin)  ;; Work laptop
+      (org-agenda nil "w")
+    (org-agenda nil "a")))
 
 (defun my-org-index ()
   (interactive)
@@ -788,34 +790,34 @@
 
           ("w" "Work Agenda"
            (
-            (agenda "" (
-                        ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
-                        (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
-                                                        priority-down category-keep)
-                                                       (todo priority-down category-keep)
-                                                       (tags priority-down category-keep)
-                                                       (search category-keep)))
+            ;; (agenda "" (
+            ;;             ;; https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode
+            ;;             (org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+            ;;                                             priority-down category-keep)
+            ;;                                            (todo priority-down category-keep)
+            ;;                                            (tags priority-down category-keep)
+            ;;                                            (search category-keep)))
 
-                        (org-agenda-skip-scheduled-if-done nil)
-                        (org-agenda-time-leading-zero t)
-                        (org-agenda-timegrid-use-ampm nil)
-                        (org-agenda-skip-timestamp-if-done t)
-                        (org-agenda-skip-deadline-if-done t)
-                        (org-agenda-start-day "+0d")
-                        (org-agenda-span 2)
-                        (org-agenda-overriding-header "⚡ Calendar")
-                        (org-agenda-repeating-timestamp-show-all nil)
-                        (org-agenda-remove-tags t)
-                        (org-agenda-prefix-format "   %i %?-2 t%s")
-                        ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
-                        ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
-                        ;; (org-agenda-todo-keyword-format " ☐ ")
-                        (org-agenda-todo-keyword-format "")
-                        (org-agenda-time)
-                        (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
-                        (org-agenda-scheduled-leaders '("" ""))
-                        (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
-                        (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
+            ;;             (org-agenda-skip-scheduled-if-done nil)
+            ;;             (org-agenda-time-leading-zero t)
+            ;;             (org-agenda-timegrid-use-ampm nil)
+            ;;             (org-agenda-skip-timestamp-if-done t)
+            ;;             (org-agenda-skip-deadline-if-done t)
+            ;;             (org-agenda-start-day "+0d")
+            ;;             (org-agenda-span 2)
+            ;;             (org-agenda-overriding-header "⚡ Calendar")
+            ;;             (org-agenda-repeating-timestamp-show-all nil)
+            ;;             (org-agenda-remove-tags t)
+            ;;             (org-agenda-prefix-format "   %i %?-2 t%s")
+            ;;             ;; (org-agenda-prefix-format "  %-3i  %-15b%t %s")
+            ;;             ;; (concat "  %-3i  %-15b %t%s" org-agenda-hidden-separator))
+            ;;             ;; (org-agenda-todo-keyword-format " ☐ ")
+            ;;             (org-agenda-todo-keyword-format "")
+            ;;             (org-agenda-time)
+            ;;             (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+            ;;             (org-agenda-scheduled-leaders '("" ""))
+            ;;             (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
+            ;;             (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
             (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
                                                       (org-agenda-overriding-header "\n⚡ To Do")
@@ -1402,3 +1404,10 @@ Could be slow if it has a lot of overlays."
 
 
 (pixel-scroll-precision-mode)
+
+;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
+(setq org-roam-node-display-template
+      #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
+        (face font-lock-keyword-face)
+        36 51
+        (face org-tag)))
