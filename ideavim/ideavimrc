@@ -46,4 +46,7 @@ nnoremap <c-i> :action Forward<cr>
 " nnoremap <Space>O :action GotoFile<CR>
 " nnoremap <Space>h :action QuickJavaDoc<CR>
 
+" Commenting
+nnoremap gcc :action CommentByLineComment<cr>
+
 set clipboard+=unnamed
