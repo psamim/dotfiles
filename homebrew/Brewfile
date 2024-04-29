@@ -29,7 +29,7 @@ brew colima
 brew coreutils
 brew curl
 brew dav1d
-brew deno
+brew dexter
 brew direnv
 brew dnsmasq
 brew docker
@@ -216,6 +216,7 @@ brew readline
 brew ripgrep
 brew rtmpdump
 brew rubberband
+brew ruby
 brew rust
 brew sdl2
 brew shared-mime-info
@@ -226,6 +227,7 @@ brew speex
 brew sponge
 brew sqlite
 brew srt
+brew starship
 brew svt-av1
 brew tbb
 brew telnet
