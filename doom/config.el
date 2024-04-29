@@ -60,7 +60,6 @@
      'list
      files
      '("~/Notes/calendar-inbox.org"
-       "~/Notes/roam/20210507181408-people.gpg.org"
        "~/Notes/study.org"
        "~/Notes/events.org"
        "~/Notes/projects"))))
