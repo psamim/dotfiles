@@ -173,7 +173,6 @@ export PATH="/opt/brew/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export TERM=xterm
-# source <(kubectl completion zsh)
 
 # if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -210,6 +209,13 @@ export POWERLEVEL9K_LEGACY_ICON_SPACING=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+function kc() {
+  echo "Changing to $1 k8s context"
+  kubectl-ctx $1;
+
+  echo "Changing to $1 k8s namespace"
+  kubectl-ns $1;
+}
 
 function os {
   case "$(uname -s)" in
@@ -257,6 +263,8 @@ verify_os () {
 
     # Testcontainers should use the default Docker Socket
     export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+    source <(kubectl completion zsh)
+    export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
   elif [[ $myos == "Linux" ]] then
     # GPG Agent
