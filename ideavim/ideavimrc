@@ -1,39 +1,63 @@
-" https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
-" https://gist.github.com/VoldikSS/da3a3e97ee612b1cd9ab1add6e8e9e77
+" https://github.com/JetBrains/ideavim/discussions/303
 
-inoremap jj <Esc> :action EditorCompleteStatement<CR>
+let mapleader=" "
 
-nnoremap q :action ShowErrorDescription <CR>
-nnoremap <Space>k :action FileStructurePopup<CR>
-nnoremap <Space><Space> :action SearchEverywhere<CR>
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+set exchange
+" Trying the new syntax
+Plug 'machakann/vim-highlightedyank'
 
-nnoremap <Space>pp :action ManageRecentProjects<CR>
-nnoremap <Space>pr :action Run<cr>
-nnoremap <Space>pd :action Debug<cr>
-nnoremap <Space>pn :action WelcomeScreen.OpenProject<CR>
-
-" nnoremap <Space>gs :action ChangesView.Commit<CR>
-nnoremap <Space>gs :action Vcs.QuickListPopupAction<CR>
-
-nnoremap <Space>en :action GotoNextError<CR>
-nnoremap <Space>ep :action GotoPreviousError<CR>
-nnoremap <Space>d :action SelectInProjectView<CR>
-nnoremap <Space>wh :action HideAllWindows<CR>
-
-nnoremap ,f :action ReformatCode<CR>
-nnoremap ,r :action Refactorings.QuickListPopupAction<CR>
-nnoremap ,g :action Generate<CR>
-
-" Find
-" nnoremap / :action Find<CR>
-nnoremap <SPACE>/ :action FindInPath<CR>
-" nnoremap n :action FindNext<CR>
-" nnoremap N :action FindPrevious<CR>
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+set nu
 set ignorecase smartcase
 set hlsearch
 
-" Reload .ideavimrc
-nnoremap <Space>rr :source ~/.ideavimrc<CR>
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set clipboard+=unnamed
+
+""" My Mappings -----------------------------
+inoremap jj <Esc> :action EditorCompleteStatement<CR>
+
+nnoremap q :action ShowErrorDescription <CR>
+nnoremap <leader>k :action FileStructurePopup<CR>
+nnoremap <leader><leader> :action SearchEverywhere<CR>
+
+nnoremap <leader>pp :action ManageRecentProjects<CR>
+nnoremap <leader>pr :action Run<cr>
+nnoremap <leader>pd :action Debug<cr>
+nnoremap <leader>pn :action WelcomeScreen.OpenProject<CR>
+
+" nnoremap <leader>gs :action ChangesView.Commit<CR>
+nnoremap <leader>gs :action Vcs.QuickListPopupAction<CR>
+
+nnoremap <leader>en :action GotoNextError<CR>
+nnoremap <leader>ep :action GotoPreviousError<CR>
+nnoremap <leader>d :action SelectInProjectView<CR>
+nnoremap <leader>wh :action HideAllWindows<CR>
+
+nnoremap ,f :action ReformatCode<CR>
+nnoremap ,r :action jefactorings.QuickListPopupAction<CR>
+nnoremap ,g :action Generate<CR>
+
+""" Find ---------------------------------------
+nnoremap <leader>/ :action FindInPath<CR>
+" nnoremap / :action Find<CR>
+" nnoremap n :action FindNext<CR>
+" nnoremap N :action FindPrevious<CR>
+
+nnoremap <leader>rr :source ~/.ideavimrc<CR>
 
 " built-in navigation to navigated items works better
 nnoremap <c-o> :action Back<cr>
@@ -42,11 +66,11 @@ nnoremap <c-i> :action Forward<cr>
 
 " nnoremap U :action $Redo<CR>
 " nnoremap ; :action AceJumpAction<CR>
-" nnoremap <Space>o :action GotoClass<CR>
-" nnoremap <Space>O :action GotoFile<CR>
-" nnoremap <Space>h :action QuickJavaDoc<CR>
+" nnoremap <leader>o :action GotoClass<CR>
+" nnoremap <leader>O :action GotoFile<CR>
+" nnoremap <leader>h :action QuickJavaDoc<CR>
 
-" Commenting
-nnoremap gcc :action CommentByLineComment<cr>
-
-set clipboard+=unnamed
+" window
+nmap <A-h> <Action>(PreviousTab)
+nmap <A-l> <Action>(NextTab)
+nmap <A-q> <Action>(CloseEditor)
