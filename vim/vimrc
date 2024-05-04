@@ -48,9 +48,8 @@ Plug 'tommcdo/vim-exchange'
 Plug 'romgrk/lib.kom'
 " highlight for a unique character in every word on a line
 Plug 'unblevable/quick-scope'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim'
 " Plug 'Chiel92/vim-autoformat'
 Plug 'sbdchd/neoformat'
@@ -113,7 +112,7 @@ Plug 'xiyaowong/nvim-transparent'
 Plug 'ful1e5/onedark.nvim'
 
 " Tab line
-Plug 'akinsho/bufferline.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Plug 'pacha/vem-tabline'
 " Plug 'romgrk/barbar.nvim'
 
