@@ -78,6 +78,11 @@
   (org-set-property "CREATED" (format-time-string "%F")))
 
 
+;; Compute agenda files more frequently
+(setq-hook! org-agenda-mode
+  org-agenda-files
+  (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex))
+
 (setq-hook! org-mode
   org-log-done t
   org-log-reschedule 'time
@@ -818,30 +823,30 @@
             ;;             (org-agenda-deadline-leaders '("Deadline:  " "In %3d d.: " "%2d d. ago: "))
             ;;             (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))
 
-            (tags "+CATEGORY=\"work\"+TODO=\"TODO\"" (
-                                                      (org-agenda-overriding-header "\n⚡ To Do")
-                                                      (org-agenda-sorting-strategy '(priority-down))
-                                                      (org-agenda-remove-tags t)
-                                                      ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                                                      (org-agenda-todo-ignore-scheduled 'all)
-                                                      (org-agenda-prefix-format "   %-2i %?b")
-                                                      (org-agenda-todo-keyword-format "")))
+            (tags "+TODO=\"TODO\"" (
+                                    (org-agenda-overriding-header "\n⚡ To Do")
+                                    (org-agenda-sorting-strategy '(priority-down))
+                                    (org-agenda-remove-tags t)
+                                    ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                    (org-agenda-todo-ignore-scheduled 'all)
+                                    (org-agenda-prefix-format "   %-2i %?b")
+                                    (org-agenda-todo-keyword-format "")))
 
-            (tags "+CATEGORY=\"work\"+TODO=\"NEXT\"" (
-                                                      (org-agenda-overriding-header "\n⚡ Next")
-                                                      (org-agenda-sorting-strategy '(priority-down))
-                                                      (org-agenda-remove-tags t)
-                                                      (org-agenda-todo-ignore-scheduled 'all)
-                                                      (org-agenda-prefix-format "   %-2i %?b")
-                                                      (org-agenda-todo-keyword-format "")))
+            (tags "+TODO=\"NEXT\"" (
+                                    (org-agenda-overriding-header "\n⚡ Next")
+                                    (org-agenda-sorting-strategy '(priority-down))
+                                    (org-agenda-remove-tags t)
+                                    (org-agenda-todo-ignore-scheduled 'all)
+                                    (org-agenda-prefix-format "   %-2i %?b")
+                                    (org-agenda-todo-keyword-format "")))
 
-            (tags "+CATEGORY=\"work\"+TODO=\"PROJ\"" (
-                                                      (org-agenda-overriding-header "\n⚡ Projects")
-                                                      (org-agenda-remove-tags t)
-                                                      (org-tags-match-list-sublevels nil)
-                                                      (org-agenda-show-inherited-tags nil)
-                                                      (org-agenda-prefix-format "   %-2i %?b")
-                                                      (org-agenda-todo-keyword-format "")))
+            (tags "+TODO=\"PROJ\"" (
+                                    (org-agenda-overriding-header "\n⚡ Projects")
+                                    (org-agenda-remove-tags t)
+                                    (org-tags-match-list-sublevels nil)
+                                    (org-agenda-show-inherited-tags nil)
+                                    (org-agenda-prefix-format "   %-2i %?b")
+                                    (org-agenda-todo-keyword-format "")))
             ))
 
 
@@ -1404,9 +1409,11 @@ Could be slow if it has a lot of overlays."
 
 (pixel-scroll-precision-mode)
 
-;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
-(setq org-roam-node-display-template
-      #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
-        (face font-lock-keyword-face)
-        36 51
-        (face org-tag)))
+
+(after! org-roam
+  ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
+  (setq org-roam-node-display-template
+        #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
+          (face font-lock-keyword-face)
+          36 51
+          (face org-tag))))
