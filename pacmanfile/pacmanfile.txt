@@ -396,6 +396,7 @@ zip
 zsh
 iproute2
 iptables-nft
+pipewire-alsa
 
 # VPN
 # xray-bin
@@ -444,6 +445,7 @@ google-chrome
 breaktimer-bin
 devbox-bin
 libinput-gestures
+localsend-bin
 # anydesk-bin
 
 # It seems it is needed for paru
