@@ -94,13 +94,12 @@
   ;; org-plantuml-jar-path (expand-file-name "~/Downloads/plantuml.jar")
   ;; org-export-babel-evaluate nil
   org-confirm-babel-evaluate nil
-  org-archive-location "~/Notes/archive/todo.org.gpg::"
+  org-archive-location "~/Notes/archive/todo.org.gpg::datetree/"
   bidi-paragraph-direction t
   org-hide-emphasis-markers t
   org-fontify-done-headline t
   org-fontify-whole-heading-line t
-  org-fontify-quote-and-verse-blocks t
-  )
+  org-fontify-quote-and-verse-blocks t)
 
 (customize-set-value
  'org-agenda-category-icon-alist
@@ -447,7 +446,8 @@
 ;; macos
 (if (eq system-type 'darwin)
     (progn
-      (setq-hook! org-mode org-archive-location "~/Notes/archive/todo.org::")
+      (setq-hook! org-mode
+        org-archive-location "~/Notes/archive/todo.org::datetree/")
       (add-to-list 'default-frame-alist '(undecorated-round . t))
       (setq ns-use-proxy-icon nil)
       (setq frame-title-format nil))
@@ -719,6 +719,8 @@
            "WAIT(w)"  ; Something external is holding up this task
            "HOLD(h)"  ; This task is paused/on hold because of me
            "NEXT(n)"  ; This task going to be done thiw iteration (week)
+           "NOTE(o)"  ; This task going to be done thiw iteration (week)
+           "IDEA(i)"  ; This task going to be done thiw iteration (week)
            "|"
            "DONE(d)"  ; Task successfully completed
            "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
@@ -734,7 +736,8 @@
           ("[?]"  . +org-todo-onhold)
           ("WAIT" . +org-todo-onhold)
           ("HOLD" . +org-todo-onhold)
-          ("NEXT" . +org-todo-project)
+          ("IDEA" . +org-todo-project)
+          ("NOTE" . +org-todo-project)
           ("PROJ" . +org-todo-project)))
 
   (setq org-agenda-custom-commands
