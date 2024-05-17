@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 
 let o = new Intl.DateTimeFormat("fa", {
   dateStyle: "short",
