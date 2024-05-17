@@ -42,7 +42,7 @@
   (cl-reduce (lambda (cur acc)
                (concat acc "\\|" cur))
              (mapcar (lambda (entry) (concat "\\* " entry))
-                     '("TODO" "PROJ" "NEXT" "ACTIVE" "WAIT" "BLOCKED" "DISPATCHED" "REFILE" "CLARIFY" "NODO" "DUPLICATE" "SOMEDAY" "MAYBE")))
+                     '("TODO" "PROJ" "NEXT")))
   "Regex which filters all TODO keywords")
 
 (defun org-agenda--calculate-files-for-regex (regex)
@@ -1091,6 +1091,7 @@
 (map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 (map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
+(map! :localleader (:map org-mode-map :desc "roam-refile-to-today" :nvg "rt" 'psamim/org-roam-refile-to-today))
 
 (custom-theme-set-faces!
   'doom-one-light
@@ -1414,12 +1415,39 @@ Could be slow if it has a lot of overlays."
 
 
 (after! org-roam
-  ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
-  (setq org-roam-node-display-template
-        #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
-          (face font-lock-keyword-face)
-          36 51
-          (face org-tag))))
+  (setq
+   org-roam-dailies-directory "journal"
+   org-roam-dailies-capture-templates
+   '(
+     ("b" "archive-to-today" entry "* %?" :target
+      (file+datetree "%<%Y>.org" "week"))
+     )
+
+   ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
+   org-roam-node-display-template
+   #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
+     (face font-lock-keyword-face)
+     36 51
+     (face org-tag))
+   )
+  )
+
+;; https://systemcrafters.net/build-a-second-brain-in-emacs/5-org-roam-hacks/#automatically-copy-or-move-completed-tasks-to-dailies
+(defun psamim/org-roam-refile-to-today ()
+  (interactive)
+  (let ((org-refile-keep nil) ;; Set this to nil to delete the original!
+        (org-after-refile-insert-hook #'save-buffer)
+        today-file
+        pos)
+    (save-window-excursion
+      (org-roam-dailies--capture (current-time) t)
+      (setq today-file (buffer-file-name))
+      (setq pos (point)))
+
+    ;; Only refile if the target file is different than the current file
+    (unless (equal (file-truename today-file)
+                   (file-truename (buffer-file-name)))
+      (org-refile nil nil (list "" today-file nil pos)))))
 
 (after! git-gutter
   (setq git-gutter:disabled-modes '(org-mode image-mode)))
