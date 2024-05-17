@@ -39,7 +39,7 @@ Plug 'tpope/vim-surround'
 Plug 'farmergreg/vim-lastplace'
 Plug 'LnL7/vim-nix'
 " cycle through lists of keywords such as true/false, yes/no
-Plug 'Konfekt/vim-CtrlXA'
+" Plug 'Konfekt/vim-CtrlXA'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'nelstrom/vim-visual-star-search'
 " Automatic closing of quotes, parenthesis, brackets, etc.,
