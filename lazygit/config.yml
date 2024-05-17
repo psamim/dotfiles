@@ -1,3 +1,5 @@
 os:
-  editCommand: "nvim"
-  editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
+  # editPreset: "nvim-remote"
+  editPreset: "nvim"
+  # edit: "nvim"
+  # editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
