@@ -685,7 +685,6 @@
    org-export-with-section-numbers nil
    org-export-with-broken-links 't
    org-agenda-diary-file "~/Notes/diary.org"
-   org-roam-directory "~/Notes/roam"
    plstore-cache-passphrase-for-symmetric-encryption t
    password-cache-expiry nil
    org-ellipsis "…"
@@ -1415,7 +1414,9 @@ Could be slow if it has a lot of overlays."
 
 
 (after! org-roam
+  (require 'org-roam-dailies)
   (setq
+   org-roam-directory "~/Notes/roam"
    org-roam-dailies-directory "journal"
    org-roam-dailies-capture-templates
    '(
