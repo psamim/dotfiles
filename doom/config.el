@@ -1420,3 +1420,6 @@ Could be slow if it has a lot of overlays."
           (face font-lock-keyword-face)
           36 51
           (face org-tag))))
+
+(after! git-gutter
+  (setq git-gutter:disabled-modes '(org-mode image-mode)))
