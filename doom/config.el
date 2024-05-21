@@ -1425,6 +1425,7 @@ Could be slow if it has a lot of overlays."
 (after! org-roam
   (require 'org-roam-dailies)
   (setq
+   org-roam-db-location "~/Notes/roam/db.sqlite"
    org-roam-directory "~/Notes/roam"
    org-roam-dailies-directory "journal"
    org-roam-dailies-capture-templates
