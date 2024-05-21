@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
 let o = new Intl.DateTimeFormat("fa", {
-  dateStyle: "short",
+  dateStyle: "long",
 });
 console.log(o.format(Date.now()));

@@ -342,10 +342,14 @@
      )
     ))
 
-(defun psamim-insert-persian-time ()
+(defun psamim/insert-persian-date ()
   (interactive)
-  (shell-command-to-string "~/.bin/persian-date")
-  )
+  (insert
+   (shell-command-to-string "~/.bin/persian-date")))
+
+(defun psamim/insert-time ()
+  (interactive)
+  (insert (format-time-string " [%I:%M]" (current-time))))
 
 (setq org-journal-enable-agenda-integration t)
 (customize-set-variable 'org-journal-file-type 'yearly)
@@ -448,12 +452,13 @@
 (if (eq system-type 'darwin)
     (progn
       (setq-hook! org-mode
-        org-archive-location "~/Notes/archive/todo.org::datetree/")
-      (add-to-list 'default-frame-alist '(undecorated-round . t))
-      (setq ns-use-proxy-icon nil)
-      (setq frame-title-format nil))
+        epa-file-encrypt-to "psamim+personio@gmail.com"
+        org-crypt-key "psamim+personio@gmail.com"
+        ;; org-archive-location "~/Notes/archive/todo.org::datetree/")
+        ns-use-proxy-icon nil
+        frame-title-format nil)
 
-  (progn (add-to-list 'default-frame-alist '(undecorated . t))))
+      (add-to-list 'default-frame-alist '(undecorated-round . t))))
 
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
@@ -677,6 +682,7 @@
    org-agenda-clockreport-parameter-plist
    '(:stepskip0 t :link t :maxlevel 2 :fileskip0 t :hidefiles t :properties ("EFFORT"))
    org-crypt-key "psamim@gmail.com"
+   epa-file-encrypt-to "psamim@gmail.com"
    org-clock-persist t
    org-tags-exclude-from-inheritance '("project" "crypt")
    ;; org-duration-format 'h:mm
@@ -1092,6 +1098,8 @@
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 (map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
 (map! :localleader (:map org-mode-map :desc "roam-refile-to-today" :nvg "rt" 'psamim/org-roam-refile-to-today))
+(map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
+(map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
 
 (custom-theme-set-faces!
   'doom-one-light
@@ -1422,7 +1430,7 @@ Could be slow if it has a lot of overlays."
    org-roam-dailies-capture-templates
    '(
      ("b" "archive-to-today" entry "* %?" :target
-      (file+datetree "%<%Y>.org" "week"))
+      (file+datetree "%<%Y>.org.gpg" "week"))
      )
 
    ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
@@ -1453,4 +1461,3 @@ Could be slow if it has a lot of overlays."
 
 (after! git-gutter
   (setq git-gutter:disabled-modes '(org-mode image-mode)))
-
