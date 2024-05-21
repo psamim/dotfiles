@@ -203,7 +203,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.VSCode$",
-                                            "^com\\.jetbrains\\.intellij$"
+                                            "^com\\.jetbrains\\.intellij$",
+                                            "^org\\.gnu\\.Emacs$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
