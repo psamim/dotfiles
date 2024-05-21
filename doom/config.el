@@ -437,6 +437,7 @@
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 94)
 (add-to-list 'default-frame-alist '(alpha-background . 94))
+(set-frame-parameter (selected-frame) 'alpha '(94 94))
 
 (add-to-list 'default-frame-alist '(drag-internal-border . 1))
 (add-to-list 'default-frame-alist '(internal-border-width . 5))
@@ -1452,3 +1453,4 @@ Could be slow if it has a lot of overlays."
 
 (after! git-gutter
   (setq git-gutter:disabled-modes '(org-mode image-mode)))
+
