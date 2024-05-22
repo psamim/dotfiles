@@ -686,7 +686,7 @@
    org-clock-persist t
    org-tags-exclude-from-inheritance '("project" "crypt")
    ;; org-duration-format 'h:mm
-   org-tag-alist '(("crypt" . ?c) ("project" . ?p))
+   org-tag-alist '(("crypt" . ?c) ("project" . ?p) ("weekly" . ?w) ("monthly" . ?m))
    org-duration-format '((special . h:mm))
    org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar"
    org-export-with-section-numbers nil
