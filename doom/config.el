@@ -61,8 +61,7 @@
      files
      '("~/Notes/calendar-inbox.org"
        "~/Notes/study.org"
-       "~/Notes/events.org"
-       "~/Notes/projects"))))
+       "~/Notes/events.org"))))
 
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -654,7 +653,7 @@
    '(org-capture-templates
      (quote (
              ("t" "todo" entry
-              (file "~/Notes/projects/misc.org") "* TODO %?\n%a\n" :clock-keep t)
+              (file "~/Notes/roam/20240521180636-focus_board.org") "* TODO %?\n%a\n" :clock-keep t)
              ("e" "event" entry
               (file+headline "~/Notes/events.org" "Inbox") "* %?\n" :clock-keep t)
              ("s" "schedule" entry
@@ -1358,22 +1357,19 @@ Could be slow if it has a lot of overlays."
       )
 
 (setq org-caldav-calendars
-      '(
-        (:calendar-id "org-2"
+      '((:calendar-id "org-2"
          ;; :sync-direction 'org->cal
-         :files ("~/Notes/projects/projects.org"
-                 "~/Notes/projects/misc.org"
+         :files ("~/Notes/roam/20240521180636-focus_board.org"
                  "~/Notes/events.org")
-         :inbox "~/Notes/calendar-org-inbox.org")
+         :inbox "~/Notes/calendar/org-inbox.org")
         (:calendar-id "people"
-         :sync-direction 'org->cal
-         :files ("~/Notes/roam/20210507181408-people.gpg.org")
-         :inbox "~/Notes/calendar-people-inbox.org")
+         ;; :sync-direction 'org->cal
+         :files ("~/Notes/roam/people.org.gpg")
+         :inbox "~/Notes/calendar/people-inbox.org")
         (:calendar-id "personal-1_shared_by_raffi"
          ;; :sync-direction 'cal->org
-         :files ("~/Notes/org-inbox.org")
-         :inbox "~/Notes/calendar-inbox.org")
-        ))
+         :files ()
+         :inbox "~/Notes/calendar/shared-inbox.org")))
 
 
 ;; (use-package! org-xournalpp
