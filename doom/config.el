@@ -1444,10 +1444,15 @@ Could be slow if it has a lot of overlays."
   (interactive)
   (let ((org-refile-keep nil) ;; Set this to nil to delete the original!
         (org-after-refile-insert-hook #'save-buffer)
+        (date
+         (time-convert
+          (org-time-string-to-seconds
+           (org-read-date t nil (or (org-entry-get nil "CREATED" t) "now")))
+          1))
         today-file
         pos)
     (save-window-excursion
-      (org-roam-dailies--capture (current-time) t)
+      (org-roam-dailies--capture date t)
       (setq today-file (buffer-file-name))
       (setq pos (point)))
 
