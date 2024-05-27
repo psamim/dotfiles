@@ -235,7 +235,7 @@ nnoremap <silent> <leader>bp :BufferLinePick<CR>
 " nmap <leader>o :History<CR>
 nmap <leader>o :Telescope oldfiles<CR>
 " nmap <leader>p :GFiles<CR>
-nmap <leader>p :Telescope find_files prompt_prefix=🔍<CR>
+nmap <leader>p :Telescope find_files<CR>
 let g:fzf_preview_use_dev_icons = 1
 nmap <C-p> :GFiles<CR>
 nmap <leader>/ :Telescope live_grep<CR>
@@ -601,6 +601,13 @@ require('neoscroll').setup({
     easing_function = nil,        -- Default easing function
     pre_hook = nil,              -- Function to run before the scrolling animation starts
     post_hook = nil,              -- Function to run after the scrolling animation ends
+})
+
+require("telescope").load_extension "frecency"
+require("telescope").setup({
+  defaults = {
+    path_display = {"smart"}
+  }
 })
 EOF
 
