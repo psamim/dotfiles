@@ -31,3 +31,5 @@
 	defaultBranch = main
 [credential]
 	helper = cache --timeout=3600
+[diff "gpg"]
+	textconv = gpg --no-tty --decrypt
