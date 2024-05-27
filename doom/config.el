@@ -1096,7 +1096,7 @@
 (map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 (map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
-(map! :localleader (:map org-mode-map :desc "roam-refile-to-today" :nvg "rt" 'psamim/org-roam-refile-to-today))
+(map! :localleader (:map org-mode-map :desc "roam-refile-to-date" :nvg "rt" 'psamim/org-roam-refile-to-date))
 (map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
 (map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
 (map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
@@ -1441,7 +1441,7 @@ Could be slow if it has a lot of overlays."
   )
 
 ;; https://systemcrafters.net/build-a-second-brain-in-emacs/5-org-roam-hacks/#automatically-copy-or-move-completed-tasks-to-dailies
-(defun psamim/org-roam-refile-to-today ()
+(defun psamim/org-roam-refile-to-date ()
   (interactive)
   (let ((org-refile-keep nil) ;; Set this to nil to delete the original!
         (org-after-refile-insert-hook #'save-buffer)
