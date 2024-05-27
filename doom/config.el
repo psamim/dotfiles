@@ -1097,6 +1097,7 @@
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 (map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
 (map! :localleader (:map org-mode-map :desc "roam-refile-to-today" :nvg "rt" 'psamim/org-roam-refile-to-today))
+(map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
 (map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
 (map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
 
@@ -1447,7 +1448,7 @@ Could be slow if it has a lot of overlays."
         (date
          (time-convert
           (org-time-string-to-seconds
-           (org-read-date t nil (or (org-entry-get nil "CREATED" t) "now")))
+           (org-read-date t nil (org-entry-get nil "CREATED" nil)))
           1))
         today-file
         pos)
@@ -1463,3 +1464,17 @@ Could be slow if it has a lot of overlays."
 
 (after! git-gutter
   (setq git-gutter:disabled-modes '(org-mode image-mode)))
+
+(require 'org-expiry)
+(setq
+ org-expiry-created-property-name "CREATED" ; Name of property when an item is created
+ org-expiry-inactive-timestamps   t         ; Don't have everything in the agenda view
+ )
+
+(defun psamim/insert-created-property()
+  "Insert a CREATED property using org-expiry.el"
+  (interactive)
+  (org-expiry-insert-created)
+  (org-back-to-heading)
+  (org-end-of-line)
+  (insert " "))
