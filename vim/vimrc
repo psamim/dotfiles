@@ -63,6 +63,8 @@ Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'tami5/sqlite.lua'
 Plug 'isobit/vim-caddyfile'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 " Plug 'Valloric/ListToggle'
 " Plug 'AndrewRadev/tagalong.vim'
 " Plug 'machakann/vim-sandwich'
