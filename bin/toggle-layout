@@ -1,9 +1,9 @@
 #!/bin/bash
-CURRENT_WIN=$(xdotool getactivewindow)
-EMACS=$(xdotool search --name 'Doom Emacs')
+CURRENT_WIN=$(kdotool getactivewindow)
+EMACS=$(kdotool search --name 'Doom Emacs')
 
 if echo $EMACS|grep -q $CURRENT_WIN; then
-  xdotool key --delay 300 Caps_Lock+backslash
+  ydotool key --key-delay=200 29:1 43:1 43:0 29:0
 else
-  xkb-switch -n
+  ydotool key --key-delay=200 56:1 54:1 54:0 56:0                                                                                                       ─╯
 fi
