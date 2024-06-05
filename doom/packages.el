@@ -77,6 +77,7 @@
 ;; (package! org-mind-map)
 (package! solaire-mode :disable t)
 (package! websocket)
+(package! org-tidy)
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 (disable-packages! diff-hl)
 ;; (package! calibredb)
