@@ -161,6 +161,7 @@ brew lima
 brew little-cms2
 brew llvm
 brew llvm@16
+brew lpeg
 brew luajit
 brew luv
 brew lz4
@@ -274,12 +275,20 @@ tap homebrew/cask
 cask alacritty
 cask db-browser-for-sqlite
 cask flameshot
+cask font-iosevka
+cask font-iosevka-etoile
+cask font-iosevka-nerd-font
+cask font-noto-color-emoji
+cask font-pacifico
+cask font-symbols-only-nerd-font
+cask font-vazirmatn
 cask graphql-playground
 cask hiddenbar
 cask hummingbird
 cask jetbrains-toolbox
 cask karabiner-elements
 cask libreoffice
+cask lyricsx
 cask macfuse
 cask middleclick
 cask syncthing
@@ -291,13 +300,6 @@ tap homebrew/bundle
 tap homebrew/cask-drivers
 
 tap homebrew/cask-fonts
-cask font-iosevka
-cask font-iosevka-etoile
-cask font-iosevka-nerd-font
-cask font-noto-color-emoji
-cask font-pacifico
-cask font-symbols-only-nerd-font
-cask font-vazirmatn
 
 tap homebrew/cask-versions
 
