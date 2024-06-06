@@ -173,17 +173,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-
-;; (after! org-mode
-;;   (set-company-backend! 'company-dabbrev)
-;;   )
-;;
-;; (after! company
-;;   (setq company-idle-delay 0.3
-;;         company-minimum-prefix-length 1
-;;   company-dabbrev-code-everywhere t
-;;   company-dabbrev-code-other-buffers 'all))
-
 (set-company-backend!
   '(text-mode
     markdown-mode
@@ -195,7 +184,6 @@
 
 (add-hook 'text-mode-hook
           (lambda ()
-            ;; (set-farsi-font)
             (setq olivetti-body-width 0.91)
             (olivetti-mode)
             (setq header-line-format " ")
@@ -217,7 +205,6 @@
       (setq-hook! org-mode
         epa-file-encrypt-to "psamim+personio@gmail.com"
         org-crypt-key "psamim+personio@gmail.com"
-        ;; org-archive-location "~/Notes/archive/todo.org::datetree/")
         ns-use-proxy-icon nil
         frame-title-format nil)
 
@@ -226,18 +213,12 @@
 (defun my-org-mode-autosave-settings ()
   (add-hook 'auto-save-hook 'org-save-all-org-buffers nil nil))
 
-(add-hook 'org-agenda-finalize-hook #'set-window-clean)
+(add-hook 'org-agenda-finalize-hook #'psamim/set-agenda-window-clean)
 (add-hook! 'org-mode-hook #'my-org-mode-autosave-settings)
 
 (add-hook 'org-mode-local-vars-hook #'(lambda () (eldoc-mode -1)))
 
-;; (add-hook! 'mu4e-view-mode-hook
-;;            #'olivetti-mode)
-
-;; (use-package! org-pretty-table
-;;   :commands (org-pretty-table-mode global-org-pretty-table-mode))
-
-(defun agenda-color-char ()
+(defun psamim/agenda-color-char ()
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward "⚡" nil t)
@@ -251,9 +232,9 @@
   ;;                        'face '(:foreground "red"))))
   )
 
-(defun set-window-clean ()
+(defun psamim/set-agenda-window-clean ()
   (setq line-spacing 2)
-  (agenda-color-char)
+  (psamim/agenda-color-char)
   (+bidi-mode -1)
   (setq mode-line-format nil)
   ;; (mixed-pitch-mode 1)
@@ -262,8 +243,6 @@
   (set-face-attribute 'header-line nil :background "#00000000")
   (set-window-margins (frame-selected-window) 4))
 
-
-;; (global-activity-watch-mode)
 
 (defun string-to-int (s) (string-to-number s))
 
@@ -283,25 +262,10 @@
 ;;            (concat "[" clocksum  "/" effort "] ")
 ;;          (concat "[" clocksum "] "))))))
 
-;; (use-package! mu4e
-;;   :config
-;;   (setq mu4e-use-fancy-chars nil
-;;         mu4e-update-interval 300
-;;         mu4e-headers-draft-mark '("D" . "")
-;;         mu4e-headers-flagged-mark '("F" . "")
-;;         mu4e-headers-new-mark '("N" . "✱")
-;;         mu4e-headers-passed-mark '("P" . "❯")
-;;         mu4e-headers-replied-mark '("R" . "❮")
-;;         mu4e-headers-seen-mark '("S" . "✔")
-;;         mu4e-headers-trashed-mark '("T" . "")
-;;         mu4e-headers-attach-mark '("a" . "")
-;;         mu4e-headers-encrypted-mark '("x" . "")
-;;         mu4e-headers-signed-mark '("s" . "☡")
-;;         mu4e-headers-unread-mark '("u" . "⎕")))
-
+(doom-modeline-mode 0)
 (use-package! doom-modeline
   :init
-  (setq doom-modeline-checker-simple-format t)
+  (setq doom-modeline-check-simple-format t)
   (setq doom-modeline-percent-position nil)
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode)))
@@ -312,15 +276,12 @@
   '(misc-info input-method process))
 
 ;; Add to `doom-modeline-mode-hook` or other hooks
-(defun setup-custom-doom-modeline ()
+(defun psamim/setup-custom-doom-modeline ()
   (doom-modeline-set-modeline 'my-simple-line 'default))
-(add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+(add-hook 'doom-modeline-mode-hook 'psamim/setup-custom-doom-modeline)
 
-
-;; (mu4e-alert-set-default-style 'libnotify)
-;; (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-
-(use-package unidecode
+;; Use visual mode and "gt" to make Arabic numbers into Latin
+(use-package! unidecode
   :defer t
   :commands unidecode-region unidecode-sanitize-region
   :config
@@ -344,92 +305,19 @@
    :states '(normal visual)
    "gt" 'evil-unidecode))
 
-;; (require 'notmuch)
-;; (add-to-list 'auto-mode-alist '("psamim@gmail.com" . notmuch-message-mode))
-
-(setq sendmail-program "gmi")
-(setq message-sendmail-extra-arguments '("send" "--quiet" "-t" "-C" "~/.mail/account.gmail"))
-
-;; (require 'org-msg)
-;; (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-;;       org-msg-startup "hidestars indent inlineimages"
-;;       ;; org-msg-greeting-fmt "<div dir='rtl'>\n\n</div>"
-;;       org-msg-greeting-name-limit 3
-;;       org-msg-text-plain-alternative t
-;;       org-msg-signature "
-;;
-;;  Regards,
-;;
-;;  #+begin_signature
-;;  -- *Samim Pezeshki* \\\\
-;;  #+end_signature")
-;; (org-msg-mode)
-
-;; (after! evil-org (progn
-;;                    (map! :map evil-org-mode-map :n "M-l" #'centaur-tabs-forward)
-;;                    (map! :map evil-org-mode-map :n "M-h" #'centaur-tabs-backward)))
-;; (map! "M-l" #'centaur-tabs-forward)
-;; (map! "M-h" #'centaur-tabs-backward)
 (map! "M-q" #'kill-current-buffer)
 (map! "M-n" #'vterm)
-
-;; (add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)
 
 (setq evil-normal-state-cursor '(box "light blue")
       evil-insert-state-cursor '(bar "medium sea green")
       evil-visual-state-cursor '(hollow "orange"))
 
-;; (defun org-toggle-tag-visibility (state)
-;;   "Run in `org-cycle-hook'."
-;;   (message "%s" state)
-;;   (cond
-;;    ;; global cycling
-;;    ((memq state '(overview contents showall))
-;;     (org-map-entries
-;;      (lambda ()
-;;        (let ((tagstring (nth 5 (org-heading-components)))
-;;          start end)
-;;      (when tagstring
-;;        (save-excursion
-;;          (beginning-of-line)
-;;          (re-search-forward tagstring)
-;;          (setq start (match-beginning 0)
-;;            end (match-end 0)))
-;;        (cond
-;;         ((memq state '(overview contents))
-;;          (outline-flag-region start end t))
-;;         (t
-;;          (outline-flag-region start end nil))))))))
-;;    ;; local cycling
-;;    ((memq state '(folded children subtree))
-;;     (save-restriction
-;;       (org-narrow-to-subtree)
-;;       (org-map-entries
-;;        (lambda ()
-;;      (let ((tagstring (nth 5 (org-heading-components)))
-;;            start end)
-;;        (when tagstring
-;;          (save-excursion
-;;            (beginning-of-line)
-;;            (re-search-forward tagstring)
-;;            (setq start (match-beginning 0)
-;;              end (match-end 0)))
-;;          (cond
-;;           ((memq state '(folded children))
-;;            (outline-flag-region start end t))
-;;           (t
-;;            (outline-flag-region start end nil)))))))))))
-
-;; (add-hook 'org-cycle-hook 'org-toggle-tag-visibility)
-
-(doom-modeline-mode 0)
-
-(defun add-property-with-date-captured ()
+(defun psamim/add-property-with-date-captured ()
   "Add DATE_CAPTURED property to the current item."
   (interactive)
   (org-set-property "CREATED" (format-time-string "%F")))
 
-(add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+(add-hook 'org-capture-before-finalize-hook 'psamim/add-property-with-date-captured)
 
 (after! org
   (custom-set-variables
@@ -725,6 +613,94 @@
   :config (setq org-fancy-priorities-list '("⚑" "⬆" "⬇")))
 
 
+
+(map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
+
+(setq ispell-dictionary "en_US")
+
+
+(defun load-secrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
+
+;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
+(defun my-auto-exclude-fn (tag)
+  (when (member tag '("work" "global"))
+    (concat "-" tag)))
+
+(setq org-agenda-auto-exclude-function #'my-auto-exclude-fn)
+
+(defun psamim/do-not-display-work ()
+  (interactive)
+  (org-agenda-filter-apply '("-work") 'category))
+
+(defun psamim/save-screenshot-svg ()
+  "Save a screenshot of the current frame as an SVG image.
+  Saves to a chosen file and puts the filename in the kill ring."
+  (interactive)
+  (let* ((file-name (concat
+                     (make-temp-name "Emacs-") ".svg"))
+         (path "~/Notes/html/agenda/")
+         (full-file-name (concat path file-name))
+         (data (x-export-frames nil 'svg))
+         (index-file-template "~/.dotfiles/doom/org-agenda.html.template")
+         (index-file (concat path "index.html")))
+    (dolist
+        (var (directory-files path t "Emacs.*svg"))
+      (delete-file var))
+    (with-temp-file full-file-name
+      (insert data))
+    (with-temp-file index-file
+      (progn
+        (insert-file-contents index-file-template)
+        (goto-char (point-min))
+        (while (search-forward "{{ FILENAME }}" nil t)
+          (replace-match file-name t))))
+    (message (concat "Saved screenshot to " file-name))))
+
+(defun psamim/sync-agenda-svg ()
+  "Save a screenshot of the current frame as an SVG image.
+  Saves to a chosen file and puts the filename in the kill ring."
+  (interactive)
+  (progn
+    (org-agenda nil "mo")
+    (hl-line-mode -1)
+    (org-agenda-redo-all)
+    (goto-char 100000)
+    (setq cursor-type nil)
+    (psamim/save-screenshot-svg)
+    (setq cursor-type 'box)))
+
+(defun psamim/sync ()
+  (interactive)
+  (progn
+    ;; (load-theme 'doom-one-light)
+    ;; (global-hl-line-mode -1)
+    (run-at-time
+     "5 sec"
+     nil
+     '(lambda () (progn
+                   ;; (psamim-sync-agenda-svg)
+                   ;; (psamim-sync-calendars)
+                   ;; (psamim-org-ical-export)
+                   (org-caldav-sync)
+                   (kill-emacs))))))
+
+(map! :localleader
+      (:map ledger-mode-map
+            "c" #'ledger-mode-clean-buffer))
+
+(map! :localleader (:map org-agenda-mode-map "f p" #'psamim/do-not-display-work))
+(map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
+(map! :localleader (:map org-agenda-mode-map "c" #'org-agenda-columns))
+(map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
+(map! :leader :desc "Dired" :nvg "d" #'ranger)
+(map! :leader :desc "my-org-agenda" :nvg "na" 'psamim/my-org-agenda)
+(map! :leader :desc "my-org-index" :nvg "ni" 'psamim/my-org-index)
+(map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim/sync-agenda-svg)
+(map! :localleader (:map org-mode-map :desc "roam-refile-to-date" :nvg "rt" 'psamim/org-roam-refile-to-date))
+(map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
+(map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
+(map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
+
 (custom-theme-set-faces!
   'doom-solarized-light
   ;; '((org-agenda-date org-agenda-date-weekend) :foreground "#586e75"
@@ -757,127 +733,6 @@
   ;; '((org-block-begin-line org-block-end-line) :foreground "dark gray" :background "#f7edd0" :extend t)
   ;; '((org-table) :background "#f7edd0")
   )
-
-(map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
-
-(setq ispell-dictionary "en_US")
-
-;; (use-package! nroam
-;;   :after org-roam
-;;   :config
-;;   (add-hook 'org-mode-hook #'nroam-setup-maybe))
-
-(setq +org-roam-open-buffer-on-find-file nil)
-
-;; (use-package! org-mind-map
-;;   :init
-;;   (require 'ox-org)
-;;   :ensure t
-;;   ;; Uncomment the below if 'ensure-system-packages` is installed
-;;   ;;:ensure-system-package (gvgen . graphviz)
-;;   :config
-;;   (setq org-mind-map-engine "dot")       ; Default. Directed Graph
-;;   ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
-;;   ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
-;;   ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
-;;   ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
-;;   ;; (setq org-mind-map-engine "twopi")  ; Radial layouts
-;;   ;; (setq org-mind-map-engine "circo")  ; Circular Layout
-;;   )
-
-(defun load-secrets () (interactive) (load "~/.doom.d/secrets.el.gpg"))
-
-(defun psamim-sync-calendars ()
-  (interactive)
-  (progn
-    (load-secrets)
-    (org-gcal-sync-tokens-clear)
-    (org-gcal-fetch)))
-
-;; https://orgmode.org/manual/Filtering_002flimiting-agenda-items.html
-(defun my-auto-exclude-fn (tag)
-  (when (member tag '("work" "global"))
-    (concat "-" tag)))
-
-(setq org-agenda-auto-exclude-function #'my-auto-exclude-fn)
-
-(defun do-not-display-work ()
-  (interactive)
-  (org-agenda-filter-apply '("-work") 'category))
-
-(defun only-display-work ()
-  (interactive)
-  (org-agenda-filter-apply '("+work") 'category))
-
-(defun save-screenshot-svg ()
-  "Save a screenshot of the current frame as an SVG image.
-  Saves to a chosen file and puts the filename in the kill ring."
-  (interactive)
-  (let* ((file-name (concat
-                     (make-temp-name "Emacs-") ".svg"))
-         (path "~/Notes/html/agenda/")
-         (full-file-name (concat path file-name))
-         (data (x-export-frames nil 'svg))
-         (index-file-template "~/.dotfiles/doom/org-agenda.html.template")
-         (index-file (concat path "index.html")))
-    (dolist
-        (var (directory-files path t "Emacs.*svg"))
-      (delete-file var))
-    (with-temp-file full-file-name
-      (insert data))
-    (with-temp-file index-file
-      (progn
-        (insert-file-contents index-file-template)
-        (goto-char (point-min))
-        (while (search-forward "{{ FILENAME }}" nil t)
-          (replace-match file-name t))))
-    (message (concat "Saved screenshot to " file-name))))
-
-(defun psamim-sync-agenda-svg ()
-  "Save a screenshot of the current frame as an SVG image.
-  Saves to a chosen file and puts the filename in the kill ring."
-  (interactive)
-  (progn
-    (org-agenda nil "mo")
-    (hl-line-mode -1)
-    (org-agenda-redo-all)
-    (goto-char 100000)
-    (setq cursor-type nil)
-    (save-screenshot-svg)
-    (setq cursor-type 'box)))
-
-(defun psamim-sync ()
-  (interactive)
-  (progn
-    ;; (load-theme 'doom-one-light)
-    ;; (global-hl-line-mode -1)
-    (run-at-time
-     "5 sec"
-     nil
-     '(lambda () (progn
-                   ;; (psamim-sync-agenda-svg)
-                   ;; (psamim-sync-calendars)
-                   ;; (psamim-org-ical-export)
-                   (org-caldav-sync)
-                   (kill-emacs))))))
-
-(map! :localleader
-      (:map ledger-mode-map
-            "c" #'ledger-mode-clean-buffer))
-
-(map! :localleader (:map org-agenda-mode-map "f p" #'do-not-display-work))
-(map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
-(map! :localleader (:map org-agenda-mode-map "c" #'org-agenda-columns))
-(map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
-(map! :leader :desc "Dired" :nvg "d" #'ranger)
-(map! :leader :desc "my-org-agenda" :nvg "na" 'psamim/my-org-agenda)
-(map! :leader :desc "my-org-index" :nvg "ni" 'psamim/my-org-index)
-(map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
-(map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
-(map! :localleader (:map org-mode-map :desc "roam-refile-to-date" :nvg "rt" 'psamim/org-roam-refile-to-date))
-(map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
-(map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
-(map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
 
 (custom-theme-set-faces!
   'doom-one-light
@@ -926,58 +781,6 @@
   ;; '((org-table) :background "#f7edd0")
   )
 
-;; (use-package! org-roam-server
-;;   :ensure t
-;;   :config
-;;   (setq org-roam-server-host "127.0.0.1"
-;;         org-roam-server-port 8181
-;;         org-roam-server-authenticate nil
-;;         org-roam-server-export-inline-images t
-;;         org-roam-server-serve-files nil
-;;         org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-;;         org-roam-server-network-poll t
-;;         org-roam-server-network-arrows nil
-;;         org-roam-server-network-label-truncate t
-;;         org-roam-server-network-label-truncate-length 60
-;;         org-roam-server-network-label-wrap-length 20))
-
-(use-package! websocket
-  :after org-roam)
-
-(use-package! org-roam-ui
-  :after org-roam ;; or :after org
-  :hook (org-roam . org-roam-ui-mode)
-  :config
-  )
-
-(defun org--create-inline-image (file width)
-  "Create image located at FILE, or return nil.
-WIDTH is the width of the image.  The image may not be created
-according to the value of `org-display-remote-inline-images'."
-  (let* ((remote? (file-remote-p file))
-	 (file-or-data
-	  (pcase org-display-remote-inline-images
-	    ((guard (not remote?)) file)
-	    (`download (with-temp-buffer
-			 (set-buffer-multibyte nil)
-			 (insert-file-contents-literally file)
-			 (buffer-string)))
-	    (`cache (let ((revert-without-query '(".")))
-		      (with-current-buffer (find-file-noselect file)
-			(buffer-string))))
-	    (`skip nil)
-	    (other
-	     (message "Invalid value of `org-display-remote-inline-images': %S"
-		      other)
-	     nil))))
-    (when file-or-data
-      (create-image file-or-data
-		    (and (image-type-available-p 'imagemagick)
-			 width
-			 'imagemagick)
-		    remote?
-		    :width width :mask 'heuristic :ascent 'center))))
-
 (setq ivy-use-selectable-prompt t)
 
 (setq
@@ -989,114 +792,6 @@ according to the value of `org-display-remote-inline-images'."
  org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
  org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
  org-icalendar-with-timestamps 'active)
-
-;;; define categories that should be excluded
-;; (setq org-export-exclude-category (list "sample"))
-
-;;; define filter. The filter is called on each entry in the agenda.
-;;; It defines a regexp to search for two timestamps, gets the start
-;;; and end point of the entry and does a regexp search. It also
-;;; checks if the category of the entry is in an exclude list and
-;;; returns either t or nil to skip or include the entry.
-
-;; (defun org-mycal-export-limit ()
-;;   "Limit the export to items that have a date, time and a range. Also exclude certain categories."
-;;   (setq org-tst-regexp "<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ... [0-9]\\{2\\}:[0-9]\\{2\\}[^\r\n>]*?\
-;; \)>")
-;;   (setq org-tstr-regexp (concat org-tst-regexp "--?-?" org-tst-regexp))
-;;   (save-excursion
-;;                                         ; get categories
-;;     (setq mycategory (org-get-category))
-;;                                         ; get start and end of tree
-;;     (org-back-to-heading t)
-;;     (setq mystart    (point))
-;;     (org-end-of-subtree)
-;;     (setq myend      (point))
-;;     (goto-char mystart)
-;;                                         ; search for timerange
-;;     (setq myresult (re-search-forward org-tstr-regexp myend t))
-;;                                         ; search for categories to exclude
-;;     (setq mycatp (member mycategory org-export-exclude-category))
-;;                                         ; return t if ok, nil when not ok
-;;     (if (and myresult (not mycatp)) t nil)))
-
-;;; activate filter and call export function
-;; (defun psamim-org-ical-export ()
-;;   (interactive)
-;;   (save-excursion
-;;     (org-icalendar-combine-agenda-files)))
-;; (let ((org-icalendar-verify-function 'org-mycal-export-limit))
-;;   (org-icalendar-combine-agenda-files))))
-
-;; (use-package! calibredb
-;;   :defer t
-;;   :config
-;;   (setq calibredb-format-all-the-icons t)
-;;   (setq calibredb-root-dir "~/Calibre/calibre-web/")
-;;   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-;;   (setq calibredb-library-alist '(("~/Calibre/calibre-web/")
-;;                                   ("~/Calibre/fidibo")))
-;;   (map! :map calibredb-show-mode-map
-;;         :ne "?" #'calibredb-entry-dispatch
-;;         :ne "o" #'calibredb-find-file
-;;         :ne "O" #'calibredb-find-file-other-frame
-;;         :ne "V" #'calibredb-open-file-with-default-tool
-;;         :ne "s" #'calibredb-set-metadata-dispatch
-;;         :ne "e" #'calibredb-export-dispatch
-;;         :ne "q" #'calibredb-entry-quit
-;;         :ne "." #'calibredb-open-dired
-;;         :ne [tab] #'calibredb-toggle-view-at-point
-;;         :ne "M-t" #'calibredb-set-metadata--tags
-;;         :ne "M-a" #'calibredb-set-metadata--author_sort
-;;         :ne "M-A" #'calibredb-set-metadata--authors
-;;         :ne "M-T" #'calibredb-set-metadata--title
-;;         :ne "M-c" #'calibredb-set-metadata--comments)
-;;   (map! :map calibredb-search-mode-map
-;;         :ne [mouse-3] #'calibredb-search-mouse
-;;         :ne "RET" #'calibredb-find-file
-;;         :ne "?" #'calibredb-dispatch
-;;         :ne "a" #'calibredb-add
-;;         :ne "A" #'calibredb-add-dir
-;;         :ne "c" #'calibredb-clone
-;;         :ne "d" #'calibredb-remove
-;;         :ne "D" #'calibredb-remove-marked-items
-;;         :ne "j" #'calibredb-next-entry
-;;         :ne "k" #'calibredb-previous-entry
-;;         :ne "l" #'calibredb-virtual-library-list
-;;         :ne "L" #'calibredb-library-list
-;;         :ne "n" #'calibredb-virtual-library-next
-;;         :ne "N" #'calibredb-library-next
-;;         :ne "p" #'calibredb-virtual-library-previous
-;;         :ne "P" #'calibredb-library-previous
-;;         :ne "s" #'calibredb-set-metadata-dispatch
-;;         :ne "S" #'calibredb-switch-library
-;;         :ne "o" #'calibredb-find-file
-;;         :ne "O" #'calibredb-find-file-other-frame
-;;         :ne "v" #'calibredb-view
-;;         :ne "V" #'calibredb-open-file-with-default-tool
-;;         :ne "." #'calibredb-open-dired
-;;         :ne "b" #'calibredb-catalog-bib-dispatch
-;;         :ne "e" #'calibredb-export-dispatch
-;;         :ne "r" #'calibredb-search-refresh-and-clear-filter
-;;         :ne "R" #'calibredb-search-clear-filter
-;;         :ne "q" #'calibredb-search-quit
-;;         :ne "m" #'calibredb-mark-and-forward
-;;         :ne "f" #'calibredb-toggle-favorite-at-point
-;;         :ne "x" #'calibredb-toggle-archive-at-point
-;;         :ne "h" #'calibredb-toggle-highlight-at-point
-;;         :ne "u" #'calibredb-unmark-and-forward
-;;         :ne "i" #'calibredb-edit-annotation
-;;         :ne "DEL" #'calibredb-unmark-and-backward
-;;         :ne [backtab] #'calibredb-toggle-view
-;;         :ne [tab] #'calibredb-toggle-view-at-point
-;;         :ne "M-n" #'calibredb-show-next-entry
-;;         :ne "M-p" #'calibredb-show-previous-entry
-;;         :ne "/" #'calibredb-search-live-filter
-;;         :ne "M-t" #'calibredb-set-metadata--tags
-;;         :ne "M-a" #'calibredb-set-metadata--author_sort
-;;         :ne "M-A" #'calibredb-set-metadata--authors
-;;         :ne "M-T" #'calibredb-set-metadata--title
-;;         :ne "M-c" #'calibredb-set-metadata--comments))
 
 (setq org-re-reveal-theme "white"
       org-re-reveal-transition "slide"
@@ -1129,20 +824,6 @@ according to the value of `org-display-remote-inline-images'."
 ;;   :config
 ;;   (add-hook 'org-mode-hook 'org-xournalpp-mode))
 
-;; (after! citar
-;;   (setq! citar-bibliography '("/home/samim/workspace/thesis/References.bib"))
-;;   (map! :localleader
-;;         :map LaTeX-mode-map
-;;         :desc "Insert cite"  "t" #'citar-insert-citation)
-;;   (map! :localleader
-;;         :map latex-mode-map
-;;         :desc "Insert cite"  "t" #'citar-insert-citation)
-;;   (setq citar-symbols
-;;         `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
-;;           (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
-;;           (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
-;;   (setq citar-symbol-separator "  "))
-
 ;; https://www.reddit.com/r/orgmode/comments/ub1fuk/new_workflow_for_reading_epubs_and_taking_notes/
 ;; (org-link-set-parameters
 ;;  "calibre"
@@ -1170,6 +851,15 @@ according to the value of `org-display-remote-inline-images'."
 
 (pixel-scroll-precision-mode)
 
+(setq +org-roam-open-buffer-on-find-file nil)
+(use-package! websocket
+  :after org-roam)
+
+(use-package! org-roam-ui
+  :after org-roam ;; or :after org
+  :hook (org-roam . org-roam-ui-mode)
+  :config
+  )
 
 (after! org-roam
   (require 'org-roam-dailies)
