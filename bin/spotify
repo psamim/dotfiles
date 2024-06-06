@@ -1,4 +1,0 @@
-#!/bin/sh
-# /usr/bin/blockify &
-/usr/bin/spotify "$@"
-

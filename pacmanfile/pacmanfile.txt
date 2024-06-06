@@ -24,7 +24,6 @@ bc
 bdf-unifont
 binutils
 bison
-blueman
 bluez-hid2hci
 bluez-utils
 borg
@@ -418,7 +417,6 @@ gum
 # quarto-cli-bin
 hunspell-fa
 cloudflare-warp-bin
-# torbrowser-launcher
 # hurl-bin
 # torbrowser-launcher
 # nekoray
@@ -446,7 +444,10 @@ breaktimer-bin
 devbox-bin
 libinput-gestures
 localsend-bin
-# anydesk-bin
+anydesk-bin
+kdotool-git
+ydotool
+# clash-verge-rev-bin
 
 # It seems it is needed for paru
 openssl-1.1

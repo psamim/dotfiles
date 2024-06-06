@@ -23,7 +23,7 @@
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Iosevka" :size 22)
       doom-variable-pitch-font (font-spec :family "Iosevka Etoile")
-      doom-unicode-font (font-spec :family "Iosevka")
+      doom-symbol-font (font-spec :family "Iosevka")
       ;; doom-big-font (font-spec :family "Fira Mono" :size 19)
       )
 
@@ -64,17 +64,8 @@
        "~/Notes/events.org"))))
 
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-;;
-
 (setq mixed-pitch-fixed-pitch-faces
       (quote (line-number-current-line line-number font-lock-comment-face org-done org-todo org-todo-keyword-outd org-todo-keyword-kill org-todo-keyword-wait org-todo-keyword-done org-todo-keyword-habt org-todo-keyword-todo org-tag org-ref-cite-face org-property-value org-special-keyword org-date diff-added org-drawer diff-context diff-file-header diff-function diff-header diff-hunk-header diff-removed font-latex-math-face font-latex-sedate-face font-latex-warning-face font-latex-sectioning-5-face font-lock-builtin-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-doc-face font-lock-function-name-face font-lock-keyword-face font-lock-negation-char-face font-lock-preprocessor-face font-lock-regexp-grouping-backslash font-lock-regexp-grouping-construct font-lock-string-face font-lock-type-face font-lock-variable-name-face markdown-code-face markdown-gfm-checkbox-face markdown-inline-code-face markdown-language-info-face markdown-language-keyword-face markdown-math-face message-header-name message-header-to message-header-cc message-header-newsgroups message-header-xheader message-header-subject message-header-other mu4e-header-key-face mu4e-header-value-face mu4e-link-face mu4e-contact-face mu4e-compose-separator-face mu4e-compose-header-face org-block org-block-begin-line org-block-end-line org-document-info-keyword org-code org-indent org-latex-and-related org-checkbox org-formula org-meta-line org-table org-verbatim)))
-
-(defun add-property-with-date-captured ()
-  "Add DATE_CAPTURED property to the current item."
-  (interactive)
-  (org-set-property "CREATED" (format-time-string "%F")))
 
 
 ;; Compute agenda files more frequently
@@ -125,19 +116,6 @@
    ("shower" "~/.dotfiles/icons/shower.svg" nil nil :ascent center :mask heuristic)
    ("archive" "~/.dotfiles/icons/archive.svg" nil nil :ascent center :mask heuristic)
    ))
-(defun agenda-color-char ()
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward "⚡" nil t)
-      (put-text-property (match-beginning 0) (match-end 0)
-                         'face '(:height 220 :foreground "gold2" :bold t))))
-
-  ;; (save-excursion
-  ;;   (goto-char (point-min))
-  ;;   (while (re-search-forward org-agenda-hidden-separator nil t)
-  ;;     (put-text-property (match-beginning 0) (- (match-end 0) 20)
-  ;;                        'face '(:foreground "red"))))
-  )
 
 
 (defun my-org-agenda-format-date-aligned (date)
@@ -350,15 +328,6 @@
   (interactive)
   (insert (format-time-string " [%I:%M]" (current-time))))
 
-(setq org-journal-enable-agenda-integration t)
-(customize-set-variable 'org-journal-file-type 'yearly)
-(setq!
- org-journal-dir "~/Notes/journal/yearly"
- org-journal-start-on-weekday 6 ; Saturday
- ;; org-journal-enable-cache t
- org-journal-encrypt-journal t
- org-journal-file-header 'psamim-journal-prefix)
-
 ;; (set-email-account! "psamim@gmail.com"
 ;;   '((mu4e-sent-folder       . "/[Gmail].Sent Mail")
 ;;     (mu4e-drafts-folder     . "/[Gmail].Drafts")
@@ -473,6 +442,20 @@
 ;; (use-package! org-pretty-table
 ;;   :commands (org-pretty-table-mode global-org-pretty-table-mode))
 
+(defun agenda-color-char ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "⚡" nil t)
+      (put-text-property (match-beginning 0) (match-end 0)
+                         'face '(:height 220 :foreground "gold2" :bold t))))
+
+  ;; (save-excursion
+  ;;   (goto-char (point-min))
+  ;;   (while (re-search-forward org-agenda-hidden-separator nil t)
+  ;;     (put-text-property (match-beginning 0) (- (match-end 0) 20)
+  ;;                        'face '(:foreground "red"))))
+  )
+
 (defun set-window-clean ()
   (setq line-spacing 2)
   (agenda-color-char)
@@ -526,7 +509,7 @@
   (setq doom-modeline-checker-simple-format t)
   (setq doom-modeline-percent-position nil)
   (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode org-journal-mode)))
+  (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode)))
 
 ;; Define your custom doom-modeline
 (doom-modeline-def-modeline 'my-simple-line
@@ -645,6 +628,11 @@
 ;; (add-hook 'org-cycle-hook 'org-toggle-tag-visibility)
 
 (doom-modeline-mode 0)
+
+(defun add-property-with-date-captured ()
+  "Add DATE_CAPTURED property to the current item."
+  (interactive)
+  (org-set-property "CREATED" (format-time-string "%F")))
 
 (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
 
@@ -1095,7 +1083,6 @@
 (map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
-(map! :leader :desc "open-org-journal" :nvg "njo" 'org-journal-open-current-journal-file)
 (map! :localleader (:map org-mode-map :desc "roam-refile-to-date" :nvg "rt" 'psamim/org-roam-refile-to-date))
 (map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
 (map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
@@ -1199,32 +1186,6 @@ according to the value of `org-display-remote-inline-images'."
 			 'imagemagick)
 		    remote?
 		    :width width :mask 'heuristic :ascent 'center))))
-
-(defun org-hide-properties ()
-  "Hide all org-mode headline property drawers in buffer.
-Could be slow if it has a lot of overlays."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward
-            "^ *:properties:\n\\( *:.+?:.*\n\\)+ *:end:\n" nil t)
-      (let ((ov_this (make-overlay (match-beginning 0) (match-end 0))))
-        (overlay-put ov_this 'display "")
-        (overlay-put ov_this 'hidden-prop-drawer t))))
-  (put 'org-toggle-properties-hide-state 'state 'hidden))
-
-(defun org-show-properties ()
-  "Show all org-mode property drawers hidden by org-hide-properties."
-  (interactive)
-  (remove-overlays (point-min) (point-max) 'hidden-prop-drawer t)
-  (put 'org-toggle-properties-hide-state 'state 'shown))
-
-(defun org-toggle-properties ()
-  "Toggle visibility of property drawers."
-  (interactive)
-  (if (eq (get 'org-toggle-properties-hide-state 'state) 'hidden)
-      (org-show-properties)
-    (org-hide-properties)))
 
 (setq ivy-use-selectable-prompt t)
 
@@ -1478,3 +1439,9 @@ Could be slow if it has a lot of overlays."
   (org-back-to-heading)
   (org-end-of-line)
   (insert " "))
+
+(use-package! org-tidy
+  :ensure t
+  :config (setq org-tidy-properties-style 'invisible)
+  :hook
+  (org-mode . org-tidy-mode))

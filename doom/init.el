@@ -160,7 +160,7 @@
         ;; +gnuplot
         ;;+jupyter        ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
-        +journal
+        ;; +journal
         +pretty
         ;; +pomodoro        ; be fruitful with the tomato technique
         ;; +present
