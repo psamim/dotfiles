@@ -60,7 +60,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-frecency.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'tami5/sqlite.lua'
 Plug 'isobit/vim-caddyfile'
 " Plug 'Valloric/ListToggle'
