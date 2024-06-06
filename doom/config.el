@@ -30,6 +30,10 @@
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
 (custom-set-variables '(emojify-display-style 'unicode))
 
+(+bidi-global-mode 1)
+(setq +bidi-want-smart-fontify nil)
+(setq +bidi-arabic-font (font-spec :family "Mikhak"))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -143,74 +147,6 @@
             dayname day monthname persian)))
 
 
-;; (defun org-agenda-highlight-todo (x)
-;;   (let ((org-done-keywords org-done-keywords-for-agenda)
-;; 	(case-fold-search nil)
-;; 	re)
-;;     (if (eq x 'line)
-;; 	(save-excursion
-;; 	  (beginning-of-line 1)
-;; 	  (setq re (org-get-at-bol 'org-todo-regexp))
-;; 	  (goto-char (or (text-property-any (point-at-bol) (point-at-eol) 'org-heading t) (point)))
-;; 	  (when (looking-at (concat "[ \t]*\\.*\\(" re "\\) +"))
-;; 	    (add-text-properties (match-beginning 0) (match-end 1)
-;; 				 (list 'face (org-get-todo-face 1)))
-;; 	    (let ((s (buffer-substring (match-beginning 1) (match-end 1))))
-;; 	      (delete-region (match-beginning 1) (1- (match-end 0)))
-;; 	      (goto-char (match-beginning 1))
-;;                    (unless (string= org-agenda-todo-keyword-format "")
-;; 	      (insert (format org-agenda-todo-keyword-format s)))
-;;               )))
-;;       (let ((pl (text-property-any 0 (length x) 'org-heading t x)))
-;; 	(setq re (get-text-property 0 'org-todo-regexp x))
-;; 	(when (and re
-;; 		   ;; Test `pl' because if there's no heading content,
-;; 		   ;; there's no point matching to highlight.  Note
-;; 		   ;; that if we didn't test `pl' first, and there
-;; 		   ;; happened to be no keyword from `org-todo-regexp'
-;; 		   ;; on this heading line, then the `equal' comparison
-;; 		   ;; afterwards would spuriously succeed in the case
-;; 		   ;; where `pl' is nil -- causing an args-out-of-range
-;; 		   ;; error when we try to add text properties to text
-;; 		   ;; that isn't there.
-;; 		   pl
-;; 		   (equal (string-match (concat "\\(\\.*\\)" re "\\( +\\)")
-;; 					x pl)
-;; 			  pl))
-;; 	  (add-text-properties
-;; 	   (or (match-end 1) (match-end 0)) (match-end 0)
-;; 	   (list 'face (org-get-todo-face (match-string 2 x)))
-;; 	   x)
-;; 	  (when (match-end 1)
-;; 	    (setq x
-;; 		  (concat
-;; 		   (substring x 0 (match-end 1))
-;;                    (unless (string= org-agenda-todo-keyword-format "")
-;; 		     (format org-agenda-todo-keyword-format
-;; 			     (match-string 2 x)
-;;                    ;; Remove `display' property as the icon could leak
-;; 		   ;; on the white space.
-;; 		   (org-add-props " " (org-plist-delete (text-properties-at 0 x)
-;;                                                         'display)))
-;;                              )
-;;                    (substring x (match-end 3)))))))
-;;       x)))
-
-
-(defun psamim-journal-prefix (time)
-  (let*
-      (
-       (decodedTime (decode-time time))
-       (now (list (nth 4 decodedTime) (nth 3 decodedTime) (nth 5 decodedTime))))
-    (concat
-     ;; (format-time-string "%B %e, %Y" time) "\n"
-     ;; (format-time-string "%A" time)
-     "# " (calendar-persian-date-string now) "\n"
-     "# " (calendar-bahai-date-string now) "\n\n"
-     "#+CATEGORY: check"
-     )
-    ))
-
 (defun psamim/insert-persian-date ()
   (interactive)
   (insert
@@ -220,34 +156,16 @@
   (interactive)
   (insert (format-time-string " [%I:%M]" (current-time))))
 
-;; (set-email-account! "psamim@gmail.com"
-;;   '((mu4e-sent-folder       . "/[Gmail].Sent Mail")
-;;     (mu4e-drafts-folder     . "/[Gmail].Drafts")
-;;     (mu4e-trash-folder      . "/[Gmail].Bin")
-;;     (mu4e-refile-folder     . "/[Gmail].All Mail")
-;;     (smtpmail-smtp-user     . "psamim@gmail.com")
-;;     (smtpmail-default-smtp-server . "smtp.gmail.com")
-;;     (smtpmail-smtp-server . "smtp.gmail.com")
-;;     (smtpmail-smtp-service . 587)
-;;     (mu4e-compose-signature . "---\nSamim Pezeshki"))
-;;   t)
-
-
 (add-hook! '(org-clock-out-hook org-clock-in-hook) #'org-save-all-org-buffers)
 (advice-add 'org-archive-subtree :after #'org-save-all-org-buffers)
 
-
-(defun export-clock ()
-  (interactive)
-  (org-clock-csv-to-file "~/clock.csv" "~/Notes/clock.org"))
-
-(defun my-org-agenda ()
+(defun psamim/my-org-agenda ()
   (interactive)
   (if (eq system-type 'darwin)  ;; Work laptop
       (org-agenda nil "w")
     (org-agenda nil "a")))
 
-(defun my-org-index ()
+(defun psamim/my-org-index ()
   (interactive)
   (find-file "~/Notes/roam/20210625224818-index.org"))
 
@@ -255,21 +173,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-;; (defun set-farsi-font ()
-;;   (interactive)
-;;   (progn
-;;     (set-fontset-font
-;;      "fontset-default"
-;;      'arabic
-;;      ;; (cons (decode-char 'ucs #x0600) (decode-char 'ucs #x06ff)) ; arabic
-;;      ;; "Vazir Code-13")
-;;      ;; "Tanha-16"))
-;;      ;; "Mikhak-15"
-;;       )
-
-(+bidi-global-mode 1)
-(setq +bidi-want-smart-fontify nil)
-(setq +bidi-arabic-font (font-spec :family "Mikhak"))
 
 ;; (after! org-mode
 ;;   (set-company-backend! 'company-dabbrev)
@@ -959,10 +862,6 @@
                    (kill-emacs))))))
 
 (map! :localleader
-      (:map org-mode-map
-            "c e" #'export-clock))
-
-(map! :localleader
       (:map ledger-mode-map
             "c" #'ledger-mode-clean-buffer))
 
@@ -971,8 +870,8 @@
 (map! :localleader (:map org-agenda-mode-map "c" #'org-agenda-columns))
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
 (map! :leader :desc "Dired" :nvg "d" #'ranger)
-(map! :leader :desc "my-org-agenda" :nvg "na" 'my-org-agenda)
-(map! :leader :desc "my-org-index" :nvg "ni" 'my-org-index)
+(map! :leader :desc "my-org-agenda" :nvg "na" 'psamim/my-org-agenda)
+(map! :leader :desc "my-org-index" :nvg "ni" 'psamim/my-org-index)
 (map! :leader :desc "sync-calendar" :nvg "rc" 'psamim-sync-calendars)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim-sync-agenda-svg)
 (map! :localleader (:map org-mode-map :desc "roam-refile-to-date" :nvg "rt" 'psamim/org-roam-refile-to-date))
