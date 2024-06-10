@@ -65,6 +65,7 @@
      files
      '("~/Notes/calendar-inbox.org"
        "~/Notes/study.org"
+       "~/Notes/roam/people.org.gpg"
        "~/Notes/events.org"))))
 
 
@@ -173,13 +174,21 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
+(after! company
+  (setq company-idle-delay 0.3
+        company-minimum-prefix-length 1
+        company-dabbrev-code-everywhere t
+        company-dabbrev-code-other-buffers 'all))
+
 (set-company-backend!
   '(text-mode
     markdown-mode
+    org-mode
     gfm-mode)
   '(:seperate
     company-ispell
     company-files
+    company-dabbrev
     company-yasnippet))
 
 (add-hook 'text-mode-hook
@@ -922,7 +931,8 @@
   (insert " "))
 
 (use-package! org-tidy
-  :ensure t
-  :config (setq org-tidy-properties-style 'invisible)
+  :config (setq
+           org-tidy-properties-style 'invisible
+           org-tidy-protect-overlay nil)
   :hook
   (org-mode . org-tidy-mode))
