@@ -183,7 +183,6 @@ nfs-utils
 nftables
 nmap
 nodejs
-nodejs-lua-fmt
 npm
 nsnake
 ntfs-3g
@@ -239,7 +238,6 @@ psmisc
 pulseaudio-control
 pv
 pyenv
-pyside2
 python-axolotl
 python-brotli
 python-click
@@ -389,7 +387,6 @@ xss-lock
 xterm
 yajl
 yapf
-youtube-dl
 zbar
 zip
 zsh
