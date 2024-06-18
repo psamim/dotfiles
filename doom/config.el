@@ -78,6 +78,8 @@
   org-agenda-files
   (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex))
 
+(setq org-attach-id-dir "attachments")
+
 (setq-hook! org-mode
   org-log-done t
   org-log-reschedule 'time
