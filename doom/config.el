@@ -387,6 +387,7 @@
    org-agenda-files (org-agenda--calculate-files-for-regex org-agenda--todo-keyword-regex)
    org-file-apps
    '((remote . emacs)
+     ("\\.jpe?g\\'" . default)
      (auto-mode . emacs)
      (directory . emacs)
      ("\\.mm\\'" . default)
