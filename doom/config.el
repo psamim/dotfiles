@@ -392,7 +392,7 @@
      (directory . emacs)
      ("\\.mm\\'" . default)
      ("\\.x?html?\\'" . default)
-     ("\\.pdf\\'" . "xournalpp %s"))
+     ("\\.pdf\\'" . "okular %s"))
    org-deadline-warning-days 7
    org-agenda-breadcrumbs-separator " ❱ "
    org-export-in-background nil
@@ -439,7 +439,7 @@
                         (org-agenda-skip-timestamp-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-start-day "+0d")
-                        (org-agenda-span 2)
+                        (org-agenda-span 5)
                         (org-agenda-overriding-header "⚡ Calendar")
                         (org-agenda-repeating-timestamp-show-all nil)
                         (org-agenda-remove-tags t)
@@ -550,7 +550,7 @@
                         (org-agenda-skip-timestamp-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-start-day "+0d")
-                        (org-agenda-span 3)
+                        (org-agenda-span 5)
                         (org-agenda-overriding-header "⚡ Calendar")
                         (org-agenda-repeating-timestamp-show-all nil)
                         (org-agenda-remove-tags t)
