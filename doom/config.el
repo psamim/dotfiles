@@ -183,15 +183,15 @@
         company-dabbrev-code-other-buffers 'all))
 
 (set-company-backend!
-  '(text-mode
-    markdown-mode
-    org-mode
-    gfm-mode)
-  '(:seperate
-    company-ispell
-    company-files
-    company-dabbrev
-    company-yasnippet))
+ '(text-mode
+   markdown-mode
+   org-mode
+   gfm-mode)
+ '(:seperate
+   company-ispell
+   company-files
+   company-dabbrev
+   company-yasnippet))
 
 (add-hook 'text-mode-hook
           (lambda ()
@@ -950,3 +950,6 @@
            org-tidy-protect-overlay nil)
   :hook
   (org-mode . org-tidy-mode))
+
+(setq +ligatures-in-modes '())
+(setq +ligatures-extras-in-modes '(org-mode))
