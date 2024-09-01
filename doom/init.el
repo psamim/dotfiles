@@ -20,17 +20,16 @@
        ;;japanese
 
        :completion
-       (company +childframe)           ; the ultimate code completion backend
+       (corfu +orderless +dabbrev)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +icons +prescient +fuzzy)               ; a search engine for love and life
-       ;; (vertico +icons)
+       (vertico +icons +childframe)
 
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       ;; doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
@@ -42,8 +41,7 @@
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
-       ;;pretty-code       ; replace bits of code with pretty symbols
-       ;; tabs              ; an tab bar for Emacs
+       tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;; unicode           ; extended unicode support for various languages
        (vc-gutter +pretty)         ; vcs diff in the fringe
@@ -52,7 +50,7 @@
        ;; workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
        (emoji +unicode +github +ascii)
-       (ligatures +iosevka +extra)
+       (ligatures +extra)
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -69,7 +67,7 @@
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +icons +ranger)             ; making dired pretty [functional]
+       (dired +icons +dirvish)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ;; ibuffer           ; interactive buffer management
        vc                ; version-control and Emacs, sitting in a tree
@@ -100,17 +98,18 @@
        ;; (lookup           ; helps you navigate your code and documentation
        ;;  +dictionary
        ;;  +docsets)        ; ...or in Dash docsets locally
-       ;; (lsp +peek)
+       (lsp +peek)
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;; pass              ; password manager for nerds
        ;; pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
-       rgb               ; creating color strings
+       ;; rgb               ; creating color strings
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
+       tree-sitter
 
        :lang
        ;;agda              ; types of types of types of types...
@@ -135,7 +134,7 @@
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       ;; (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp +tree-sitter)        ; all(hope(abandon(ye(who(enter(here))))))
        (json)
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
@@ -197,7 +196,8 @@
        ;;twitter           ; twitter client https://twitter.com/vnought
 
        :os
-       tty
+       (:if (featurep :system 'macos) macos)  ; improve compatibility with macOS
+       tty               ; improve the terminal Emacs experience
 
        :config
        ;;literate
