@@ -23,7 +23,7 @@
        (corfu +orderless +dabbrev)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (vertico +icons +childframe)
+       (vertico +icons)
 
        :ui
        ;;deft              ; notational velocity for Emacs

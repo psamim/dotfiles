@@ -205,6 +205,18 @@
 (add-to-list 'default-frame-alist '(alpha-background . 94))
 (set-frame-parameter (selected-frame) 'alpha '(94 94))
 
+(defun psamim/toggle-transparency ()
+  "Toggle transparency"
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (if (eq
+         (if (numberp alpha)
+             alpha
+           (cdr alpha)) ; may also be nil
+         100)
+        (set-frame-parameter nil 'alpha '(94 . 94))
+      (set-frame-parameter nil 'alpha '(100 . 100)))))
+
 (add-to-list 'default-frame-alist '(drag-internal-border . 1))
 (add-to-list 'default-frame-alist '(internal-border-width . 5))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -314,10 +326,8 @@
   :general
   (general-define-key
    :states '(normal visual)
-   "gt" 'evil-unidecode))
+   "gu" 'evil-unidecode))
 
-(map! "M-q" #'kill-current-buffer)
-(map! "M-n" #'vterm)
 
 (setq evil-normal-state-cursor '(box "light blue")
       evil-insert-state-cursor '(bar "medium sea green")
@@ -626,7 +636,6 @@
 
 
 
-(map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
 
 (setq ispell-dictionary "en_US")
 
@@ -696,15 +705,17 @@
                    (org-caldav-sync)
                    (kill-emacs))))))
 
+(map! :map magit-status-mode-map :n "<tab>" 'magit-section-toggle)
+(map! "M-q" #'kill-current-buffer)
+(map! "M-n" #'vterm)
 (map! :localleader
       (:map ledger-mode-map
             "c" #'ledger-mode-clean-buffer))
-
 (map! :localleader (:map org-agenda-mode-map "f p" #'psamim/do-not-display-work))
 (map! :localleader (:map org-agenda-mode-map "o" #'org-agenda-set-property))
 (map! :localleader (:map org-agenda-mode-map "c" #'org-agenda-columns))
 (map! :leader :desc "Org clock context" :nvg "n c" #'counsel-org-clock-context)
-(map! :leader :desc "Dired" :nvg "d" #'ranger)
+(map! :leader :desc "Dired" :nvg "d" #'dirvish-dwim)
 (map! :leader :desc "my-org-agenda" :nvg "na" 'psamim/my-org-agenda)
 (map! :leader :desc "my-org-index" :nvg "ni" 'psamim/my-org-index)
 (map! :leader :desc "sync-agenda-svg" :nvg "ra" 'psamim/sync-agenda-svg)
