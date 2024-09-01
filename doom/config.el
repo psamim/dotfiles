@@ -170,7 +170,7 @@
 
 (defun psamim/my-org-index ()
   (interactive)
-  (find-file "~/Notes/roam/20210625224818-index.org"))
+  (find-file "~/Notes/roam/20210625-index.org"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -345,7 +345,7 @@
    '(org-capture-templates
      (quote (
              ("t" "todo" entry
-              (file "~/Notes/roam/20240521180636-focus_board.org") "* TODO %?\n%a\n" :clock-keep t)
+              (file "~/Notes/roam/20240521-focus_board.org") "* TODO %?\n%a\n" :clock-keep t)
              ("e" "event" entry
               (file+headline "~/Notes/events.org" "Inbox") "* %?\n" :clock-keep t)
              ("s" "schedule" entry
@@ -830,7 +830,7 @@
 (setq org-caldav-calendars
       '((:calendar-id "org-2"
          ;; :sync-direction 'org->cal
-         :files ("~/Notes/roam/20240521180636-focus_board.org"
+         :files ("~/Notes/roam/20240521-focus_board.org"
                  "~/Notes/events.org")
          :inbox "~/Notes/calendar/org-inbox.org")
         (:calendar-id "people"
@@ -890,20 +890,20 @@
    org-roam-db-location "~/Notes/roam/db.sqlite"
    org-roam-directory "~/Notes/roam"
    org-roam-dailies-directory "journal"
+   org-roam-capture-templates
+   '(("d" "default" plain "%?" :target (file+head "%<%Y%m%d>-${slug}.org" "#+title: ${title}\n")))
+
    org-roam-dailies-capture-templates
-   '(
-     ("b" "archive-to-today" entry "* %?" :target
-      (file+datetree "%<%Y>.org.gpg" "week"))
-     )
+   '(("b" "archive-to-today" entry "* %?" :target
+      (file+datetree "%<%Y>.org.gpg" "week")))
 
    ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
-   org-roam-node-display-template
-   #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
-     (face font-lock-keyword-face)
-     36 51
-     (face org-tag))
-   )
-  )
+   ;; org-roam-node-display-template
+   ;; #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
+   ;;   (face font-lock-keyword-face)
+   ;;   36 51
+   ;;   (face org-tag))
+   ))
 
 ;; https://systemcrafters.net/build-a-second-brain-in-emacs/5-org-roam-hacks/#automatically-copy-or-move-completed-tasks-to-dailies
 (defun psamim/org-roam-refile-to-date ()
