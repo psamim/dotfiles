@@ -55,7 +55,6 @@ ebook-tools
 ebtables
 efibootmgr
 electrum
-emacs-nativecomp
 ethtool
 exfat-utils
 exodus
@@ -122,7 +121,6 @@ kde-utilities-meta
 kernel-modules-hook
 khotkeys
 kscreen
-kwin-bismuth
 landrop
 laptop-mode-tools
 lazygit
@@ -420,7 +418,6 @@ cloudflare-warp-bin
 # curl-impersonate-bin
 dnscrypt-proxy
 python-twisted
-# tailscale
 # python-plotly
 # robo3t-bin
 # docker
@@ -444,7 +441,18 @@ localsend-bin
 anydesk-bin
 kdotool-git
 ydotool
-# clash-verge-rev-bin
+clash-verge-rev-bin
+drawio-desktop
+wl-clipboard
+wayland-protocols
+# kwin-polonium
+teamviewer
+dmenu-wayland-git
+spotx-linux
+
+# Emacs
+typescript-language-server
+emacs-nativecomp
 
 # It seems it is needed for paru
 openssl-1.1

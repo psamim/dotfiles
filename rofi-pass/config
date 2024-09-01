@@ -3,7 +3,7 @@
 
 # rofi command. Make sure to have "$@" as last argument
 _rofi () {
-    rofi -i -no-auto-select -kb-mode-previous "" -kb-mode-next "" -width 700 -no-levenshtein-sort "$@"      
+    rofi -i -no-auto-select -kb-mode-previous "" -kb-mode-next "" -width 700 -no-levenshtein-sort -normal-window -steal-focus "$@"      
 }
 
 # keyboard layout (set this to your actual layout. E.g. keyboard="de us"
@@ -61,4 +61,5 @@ help="Alt+h"
 # switch="Alt+x"
 # insert_pass="Alt+i"
 
-
+backend=wtype
+clibpoard_backend=wl-clipboard
