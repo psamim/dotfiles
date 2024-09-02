@@ -84,6 +84,8 @@
 ;; (package! org-analyzer)
 ;; (package! org-inline-pdf)
 (package! org-appear :recipe (:host github :repo "awth13/org-appear"))
+(package! jest-test-mode)
+
 ;; (package! org-modern :recipe (:host github :repo "minad/org-modern"))
 ;; (setq org-xournalpp-image-type 'png)
 ;; (package! org-xournalpp
