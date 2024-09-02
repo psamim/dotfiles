@@ -28,6 +28,7 @@ brew cjson
 brew colima
 brew cookiecutter
 brew coreutils
+brew cryptography
 brew curl
 brew dav1d
 brew dexter
@@ -39,9 +40,7 @@ brew docker-completion
 brew docker-compose
 brew docker-credential-helper
 brew docker-credential-helper-ecr
-brew docutils
 brew dtc
-brew fasd
 brew fd
 brew ffmpeg
 brew ffmpeg@6
@@ -79,7 +78,6 @@ brew harfbuzz
 brew helm
 brew highway
 brew htop
-brew httpd
 brew hwloc
 brew icu4c
 brew imagemagick
@@ -93,7 +91,6 @@ brew jpeg
 brew jpeg-turbo
 brew jpeg-xl
 brew jq
-brew jsoncpp
 brew kompose
 brew krb5
 brew krew
@@ -104,6 +101,7 @@ brew leptonica
 brew libarchive
 brew libass
 brew libassuan
+brew libassuan@2
 brew libavif
 brew libb2
 brew libbluray
@@ -112,7 +110,7 @@ brew libevent
 brew libgccjit
 brew libgcrypt
 brew libgit2
-brew libgit2@1.6
+brew libgit2@1.7
 brew libgpg-error
 brew libheif
 brew libidn
@@ -160,7 +158,6 @@ brew libzip
 brew lima
 brew little-cms2
 brew llvm
-brew llvm@16
 brew lpeg
 brew luajit
 brew luv
@@ -189,7 +186,6 @@ brew opencore-amr
 brew openexr
 brew openjpeg
 brew openldap
-brew openssl@1.1
 brew openssl@3
 brew openvino
 brew opus
@@ -211,7 +207,6 @@ brew pugixml
 brew pycparser
 brew python-packaging
 brew python-psutil
-brew python-setuptools
 brew python@3.11
 brew python@3.12
 brew python@3.9
@@ -227,7 +222,6 @@ brew rust
 brew sdl2
 brew shared-mime-info
 brew shellcheck
-brew six
 brew snappy
 brew sops
 brew speex
@@ -264,6 +258,7 @@ brew xz
 brew yarn
 brew yazi
 brew yq
+brew yt-dlp
 brew z3
 brew zeromq
 brew zimg
@@ -272,7 +267,6 @@ brew zoxide
 brew zstd
 
 tap homebrew/cask
-cask alacritty
 cask db-browser-for-sqlite
 cask flameshot
 cask font-iosevka
@@ -283,14 +277,16 @@ cask font-pacifico
 cask font-symbols-only-nerd-font
 cask font-vazirmatn
 cask graphql-playground
-cask hiddenbar
 cask hummingbird
 cask jetbrains-toolbox
+cask jordanbaird-ice
 cask karabiner-elements
 cask libreoffice
 cask lyricsx
 cask macfuse
 cask middleclick
+cask spotify
+cask syncplay
 cask syncthing
 cask whatsapp
 cask xpra
@@ -326,6 +322,9 @@ tap rcmdnk/file
 brew brew-file
 
 tap sj14/tap
+
+# Other Homebrew packages
+brew fasd
 
 # App Store applications
 appstore 682658836 GarageBand (10.4.5)
