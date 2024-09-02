@@ -1,3 +1,5 @@
+gui:
+  language: en
 os:
   # editPreset: "nvim-remote"
   editPreset: "nvim"
