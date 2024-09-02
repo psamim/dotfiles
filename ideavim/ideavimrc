@@ -1,5 +1,15 @@
 " https://github.com/JetBrains/ideavim/discussions/303
 
+source ~/.intellimacs/spacemacs.vim
+
+" (Optional) Enable other Intellimacs modules
+source ~/.intellimacs/extra.vim
+source ~/.intellimacs/major.vim
+" source ~/.intellimacs/hybrid.vim
+
+" (Optional) Enable which-key plugin
+source ~/.intellimacs/which-key.vim
+
 let mapleader=" "
 
 """ Plugins  --------------------------------
@@ -26,13 +36,15 @@ set hlsearch
 set ideajoin
 set ideastatusicon=gray
 set clipboard+=unnamed
+set which-key
 
 """ My Mappings -----------------------------
 inoremap jj <Esc> :action EditorCompleteStatement<CR>
 
 nnoremap q :action ShowErrorDescription <CR>
 nnoremap <leader>k :action FileStructurePopup<CR>
-nnoremap <leader><leader> :action SearchEverywhere<CR>
+" nnoremap <leader><leader> :action SearchEverywhere<CR>
+nnoremap <leader>aw :action ShowIntentionActions<CR>
 
 nnoremap <leader>pp :action ManageRecentProjects<CR>
 nnoremap <leader>pr :action Run<cr>
@@ -40,22 +52,22 @@ nnoremap <leader>pd :action Debug<cr>
 nnoremap <leader>pn :action WelcomeScreen.OpenProject<CR>
 
 " nnoremap <leader>gs :action ChangesView.Commit<CR>
-nnoremap <leader>gs :action Vcs.QuickListPopupAction<CR>
+" nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
 
-nnoremap <leader>en :action GotoNextError<CR>
-nnoremap <leader>ep :action GotoPreviousError<CR>
+" nnoremap <leader>en :action GotoNextError<CR>
+" nnoremap <leader>ep :action GotoPreviousError<CR>
 nnoremap <leader>d :action SelectInProjectView<CR>
-nnoremap <leader>wh :action HideAllWindows<CR>
+" nnoremap <leader>wh :action HideAllWindows<CR>
 
 nnoremap ,f :action ReformatCode<CR>
-nnoremap ,r :action jefactorings.QuickListPopupAction<CR>
+nnoremap ,r :action Refactorings.QuickListPopupAction<CR>
 nnoremap ,g :action Generate<CR>
 
 """ Find ---------------------------------------
 nnoremap <leader>/ :action FindInPath<CR>
 " nnoremap / :action Find<CR>
 " nnoremap n :action FindNext<CR>
-" nnoremap N :action FindPrevious<CR>
+" nnoremap N :actjon FindPrevious<CR>
 
 nnoremap <leader>rr :source ~/.ideavimrc<CR>
 
