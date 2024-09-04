@@ -898,11 +898,11 @@
       (file+datetree "%<%Y>.org.gpg" "week")))
 
    ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
-   ;; org-roam-node-display-template
-   ;; #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
-   ;;   (face font-lock-keyword-face)
-   ;;   36 51
-   ;;   (face org-tag))
+   org-roam-node-display-template
+   #("${doom-hierarchy:*} ${doom-type:10} ${doom-tags:10}" 20 35
+     (face font-lock-keyword-face)
+     36 51
+     (face org-tag))
    ))
 
 ;; https://systemcrafters.net/build-a-second-brain-in-emacs/5-org-roam-hacks/#automatically-copy-or-move-completed-tasks-to-dailies
