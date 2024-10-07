@@ -723,7 +723,7 @@
 (map! :localleader (:map org-mode-map :desc "insert-created-property" :nvg "dc" 'psamim/insert-created-property))
 (map! :localleader (:map org-mode-map :desc "insert Persian date" :nvg "dp" 'psamim/insert-persian-date))
 (map! :localleader (:map org-mode-map :desc "insert time" :nvg "dn" 'psamim/insert-time))
-(map! (:map typescript-mode-map :nvg "gh" 'lsp-ui-doc-glance))
+(map! :map typescript-mode-map :nv "gh" 'lsp-ui-doc-glance)
 
 (custom-theme-set-faces!
   'doom-solarized-light
