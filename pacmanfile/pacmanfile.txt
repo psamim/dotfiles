@@ -139,7 +139,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvncserver
 licenses
-light
 linux-lts
 linux-lts-headers
 logrotate
