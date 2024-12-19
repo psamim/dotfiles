@@ -32,7 +32,6 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/asdf
 #   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
-    zgen oh-my-zsh plugins/asdf
     # zgen oh-my-zsh plugins/npx
     # zgen oh-my-zsh plugins/keychain
     zgen oh-my-zsh plugins/pass
@@ -65,6 +64,7 @@ if ! zgen saved; then
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
+    zgen load jscutlery/nx-completion / main
     # zgen load lukechilds/zsh-nvm
     # zgen load ~/.zgen/deno
     # zgen load marlonrichert/zsh-autocomplete 
@@ -259,12 +259,28 @@ verify_os () {
 
 
     # Configure Colima as Docker Host for applications which don't respect Docker Contexts
-    export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+    export DOCKER_HOST=unix://${HOME}/.config/colima/docker.sock
 
-    # Testcontainers should use the default Docker Socket
-    export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+    # Testcontainers should use the Colima VM instance local address as host
+    export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address // ""')
     source <(kubectl completion zsh)
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+    source ~/.zgen/jscutlery/nx-completion-main/nx-completion.plugin.zsh
+    export PATH="/opt/homebrew/bin:$PATH"
+    export AWS_VAULT_KEYCHAIN_NAME="login"
+    export AWS_SESSION_TTL="12h"
+    export GRADLE_USER_HOME="$HOME/.gradle"
+    export GOPRIVATE=gitlab.personio-internal.de
+
+    alias pc=$(which perctl)
+    alias mc=~/dev/personio/monolith-cli
+    alias kubectx="kubectl-ctx"
+    alias kubens="kubectl-ns"
+
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+    . ~/.asdf/plugins/java/set-java-home.zsh
+    . ~/.asdf/plugins/golang/set-env.zsh
 
   elif [[ $myos == "Linux" ]] then
     # GPG Agent
@@ -286,7 +302,5 @@ verify_os
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-# eval "$(devbox global shellenv)"
+# export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

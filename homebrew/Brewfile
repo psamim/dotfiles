@@ -80,6 +80,7 @@ brew highway
 brew htop
 brew hwloc
 brew icu4c
+brew icu4c@75
 brew imagemagick
 brew imath
 brew isl
@@ -106,6 +107,7 @@ brew libavif
 brew libb2
 brew libbluray
 brew libde265
+brew libdeflate
 brew libevent
 brew libgccjit
 brew libgcrypt
@@ -135,7 +137,6 @@ brew libsoxr
 brew libssh
 brew libssh2
 brew libtasn1
-brew libtermkey
 brew libtiff
 brew libtool
 brew libunibreak
@@ -157,7 +158,7 @@ brew libyaml
 brew libzip
 brew lima
 brew little-cms2
-brew llvm
+brew llvm@18
 brew lpeg
 brew luajit
 brew luv
@@ -206,7 +207,6 @@ brew protobuf
 brew pugixml
 brew pycparser
 brew python-packaging
-brew python-psutil
 brew python@3.11
 brew python@3.12
 brew python@3.9
@@ -259,7 +259,6 @@ brew yarn
 brew yazi
 brew yq
 brew yt-dlp
-brew z3
 brew zeromq
 brew zimg
 brew zlib
@@ -282,6 +281,7 @@ cask jetbrains-toolbox
 cask jordanbaird-ice
 cask karabiner-elements
 cask libreoffice
+cask localsend
 cask lyricsx
 cask macfuse
 cask middleclick
@@ -289,7 +289,6 @@ cask spotify
 cask syncplay
 cask syncthing
 cask whatsapp
-cask xpra
 
 tap homebrew/bundle
 
@@ -314,7 +313,6 @@ brew perctl-cde
 tap finestructure/hummingbird
 
 tap localsend/localsend
-cask localsend
 
 tap railwaycat/emacsmacport
 
@@ -332,4 +330,4 @@ appstore 408981434 iMovie (10.3.1)
 appstore 409183694 Keynote (11.2)
 appstore 409203825 Numbers (11.2)
 appstore 409201541 Pages (11.2)
-appstore 1233965871 ScreenBrush (1.8.10)
+appstore 1233965871 ScreenBrush (1.9.2)
