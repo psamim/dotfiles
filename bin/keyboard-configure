@@ -2,10 +2,11 @@
 # Keyboard layout
 
 # Also have this under /etc/udev/rules.d/60-usb-keyboard.rules
-# ACTION=="add", ATTRS{phys}=="usb-0000:00:14.0-3/input0", RUN="/home/samim/.bin/keyboard-configure" 
+# ACTION=="add", ATTRS{phys}=="usb-0000:00:14.0-3/input0", RUN="/home/samim/.bin/keyboard-configure"
 
 export DISPLAY=:0
-export XAUTHORITY=/home/samim/.Xauthority 
+export XAUTHORITY=/home/samim/.Xauthority
 setxkbmap -layout us,ir -option ''
 setxkbmap -option caps:ctrl_modifier
 xmodmap ~/.Xmodmap
+echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
