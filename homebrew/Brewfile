@@ -18,10 +18,10 @@ brew aws-vault
 brew awscli
 brew bash
 brew bat
+brew borgbackup
 brew brotli
 brew ca-certificates
 brew cairo
-brew capstone
 brew certifi
 brew cffi
 brew cjson
@@ -40,7 +40,6 @@ brew docker-completion
 brew docker-compose
 brew docker-credential-helper
 brew docker-credential-helper-ecr
-brew dtc
 brew fd
 brew ffmpeg
 brew ffmpeg@6
@@ -79,7 +78,6 @@ brew helm
 brew highway
 brew htop
 brew hwloc
-brew icu4c
 brew icu4c@75
 brew imagemagick
 brew imath
@@ -112,7 +110,7 @@ brew libevent
 brew libgccjit
 brew libgcrypt
 brew libgit2
-brew libgit2@1.7
+brew libgit2@1.8
 brew libgpg-error
 brew libheif
 brew libidn
@@ -130,7 +128,6 @@ brew libraw
 brew librist
 brew librsvg
 brew libsamplerate
-brew libslirp
 brew libsndfile
 brew libsodium
 brew libsoxr
@@ -158,7 +155,7 @@ brew libyaml
 brew libzip
 brew lima
 brew little-cms2
-brew llvm@18
+brew llvm
 brew lpeg
 brew luajit
 brew luv
@@ -182,6 +179,7 @@ brew nspr
 brew nss
 brew numpy
 brew oniguruma
+brew onnx
 brew openblas
 brew opencore-amr
 brew openexr
@@ -200,7 +198,6 @@ brew pinentry
 brew pinentry-mac
 brew pipenv
 brew pixman
-brew pkg-config
 brew poppler
 brew popt
 brew protobuf
@@ -209,8 +206,8 @@ brew pycparser
 brew python-packaging
 brew python@3.11
 brew python@3.12
+brew python@3.13
 brew python@3.9
-brew qemu
 brew rav1e
 brew readline
 brew ripgrep
@@ -239,13 +236,13 @@ brew theora
 brew tidy-html5
 brew tmux
 brew trash-cli
+brew tree
 brew tree-sitter
 brew unar
 brew unbound
 brew unibilium
 brew unixodbc
 brew utf8proc
-brew vde
 brew watch
 brew webp
 brew wget
@@ -259,6 +256,7 @@ brew yarn
 brew yazi
 brew yq
 brew yt-dlp
+brew z3
 brew zeromq
 brew zimg
 brew zlib
@@ -266,6 +264,7 @@ brew zoxide
 brew zstd
 
 tap homebrew/cask
+cask 1password-cli
 cask db-browser-for-sqlite
 cask flameshot
 cask font-iosevka
@@ -285,6 +284,7 @@ cask localsend
 cask lyricsx
 cask macfuse
 cask middleclick
+cask monitorcontrol
 cask spotify
 cask syncplay
 cask syncthing
@@ -323,6 +323,8 @@ tap sj14/tap
 
 # Other Homebrew packages
 brew fasd
+brew icu4c
+brew pkg-config
 
 # App Store applications
 appstore 682658836 GarageBand (10.4.5)
@@ -330,4 +332,4 @@ appstore 408981434 iMovie (10.3.1)
 appstore 409183694 Keynote (11.2)
 appstore 409203825 Numbers (11.2)
 appstore 409201541 Pages (11.2)
-appstore 1233965871 ScreenBrush (1.9.2)
+appstore 1233965871 ScreenBrush (1.9.3)
