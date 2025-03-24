@@ -44,8 +44,10 @@ if (window.location.origin === "https://mail.google.com") {
 }
 settings.modeAfterYank = "Normal";
 settings.showModeStatus = true;
+settings.hintShiftNonActive = true;
 
-settings.theme = "\
+settings.theme =
+  "\
 #sk_omnibar {\
   width: 100%;\
   top: 0px;\

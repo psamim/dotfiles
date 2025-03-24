@@ -120,6 +120,8 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Snippets
 Plug 'honza/vim-snippets'
 Plug 'diepm/vim-rest-console'
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+Plug 'rmagatti/auto-session'
 call plug#end()
 
 set number
@@ -611,5 +613,20 @@ require("telescope").setup({
   }
 })
 EOF
+
+
+lua << EOF
+require('auto-session').setup {
+  log_level = 'error',
+  -- auto_session_enable_last_session = true,
+  -- auto_session_enabled = true,
+  -- auto_save_enabled = true,
+  -- auto_restore_enabled = true,
+  auto_session_use_git_branch = true,
+}
+EOF
+
+let g:codeium_no_map_tab = 1
+imap <script><silent><nowait><expr> <M-CR> codeium#Accept()
 
 let g:lazygit_use_neovim_remote = 1
