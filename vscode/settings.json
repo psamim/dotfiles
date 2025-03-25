@@ -1,0 +1,96 @@
+{
+  "window.commandCenter": false,
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.codeActionsOnSave.rules": null,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autofetch": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "f", "s"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<leader>", "p"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<leader>", "a", "w"],
+      "commands": ["editor.action.quickFix"]
+    },
+    {
+      "before": ["<leader>", "g", "s"],
+      "commands": ["git.showGitStatus"]
+    },
+    {
+      "before": ["<leader>", "g", "t"],
+      "commands": ["workbench.action.nextEditor"]
+    },
+    {
+      "before": ["<leader>", "b", "d"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    }
+  ],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "diffEditor.renderSideBySide": false,
+  "terminal.integrated.scrollback": 100000,
+  "editor.formatOnSave": true,
+  "nxConsole.showNodeVersionOnStartup": false,
+  "vim.digraphs": {},
+  "workbench.settings.openDefaultKeybindings": true,
+  "vim.commandLineModeKeyBindingsNonRecursive": [],
+  "tabnine.experimentalAutoImports": true,
+  "remote.SSH.defaultExtensions": ["gitpod.gitpod-remote-ssh"],
+  "redhat.telemetry.enabled": true,
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim,.enableNeovim": true,
+  "mermaid.vscode.minimap": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vim.enableNeovim": true,
+  "window.zoomLevel": 2,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "standard",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.menuBarVisibility": "toggle",
+  "notebook.lineNumbers": "on",
+  "remote.SSH.remotePlatform": {
+    "*.gitpod.io": "linux"
+  },
+  "editor.fontFamily": "Iosevka Etoile, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 14,
+  "workbench.colorTheme": "Gruvbox Material Dark",
+  "gruvboxMaterial.colorfulSyntax": true,
+  "gruvboxMaterial.darkWorkbench": "flat",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.fontFamily": "Iosevka Nerd Font Mono",
+  "gitlab.duo.enabledWithoutGitlabProject": false,
+  "gitlab.duoChat.enabled": false,
+  "gitlab.duoCodeSuggestions.openTabsContext": false,
+  "gitlab.duoCodeSuggestions.enabled": false,
+  "jest.virtualFolders": [],
+  "jestrunner.runOptions": ["--no-coverage"],
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "jestrunner.debugOptions": {},
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "workbench.startupEditor": "none"
+}
