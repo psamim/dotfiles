@@ -6,11 +6,12 @@
   editor = nvim
 	excludesfile = ~/.gitignore
   autocrlf = input
-  ; pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 [interactive]
   diffFilter = delta --color-only
 [alias]
   st = status
+  mr = push -u origin HEAD -o merge_request.create -o merge_request.draft
+  recent = !git for-each-ref --sort=-committerdate refs/heads/ | head -n 5
 [push]
   default = simple
 	autoSetupRemote = true
@@ -21,10 +22,6 @@
 [magit]
   hideCampaign = true
 
-; [pager]
-;   log = /usr/share/git/diff-highlight/diff-highlight | less
-;   show = /usr/share/git/diff-highlight/diff-highlight | less
-;   diff = /usr/share/git/diff-highlight/diff-highlight | less
 [pull]
 	rebase = false
 [init]
