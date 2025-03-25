@@ -13,6 +13,8 @@ fi
 
 source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
+export ZOXIDE_CMD_OVERRIDE="j"
+
 # check if there's no init script
 
 if ! zgen saved; then
@@ -43,7 +45,8 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/docker-compose
-    zgen oh-my-zsh plugins/fasd
+    # zgen oh-my-zsh plugins/fasd
+    zgen oh-my-zsh plugins/zoxide
     zgen oh-my-zsh plugins/nmap
     zgen oh-my-zsh plugins/last-working-dir
     # zgen oh-my-zsh plugins/themes
@@ -144,8 +147,8 @@ alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --
 alias fly='sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0'
 alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
-alias j='fasd_cd -d'
-alias jj='fasd_cd -d -i'
+# alias j='fasd_cd -d'
+# alias jj='fasd_cd -d -i'
 alias tmux='TERM=screen-256color-bce direnv exec / tmux'
 alias magit='emacsclient -nw -e \(magit-status\)'
 alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
@@ -299,7 +302,7 @@ verify_os () {
 
 verify_os
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="$HOME/.sdkman"
