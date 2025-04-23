@@ -102,6 +102,8 @@
  'org-agenda-category-icon-alist
  `(
    ("work" "~/.dotfiles/icons/work.svg" nil nil :ascent center :mask heuristic)
+   ("chat" "~/.dotfiles/icons/chat.svg" nil nil :ascent center :mask heuristic)
+   ("letter" "~/.dotfiles/icons/letter.svg" nil nil :ascent center :mask heuristic)
    ("music" "~/.dotfiles/icons/music.svg" nil nil :ascent center :mask heuristic)
    ("chore" "~/.dotfiles/icons/chore.svg" nil nil :ascent center :mask heuristic)
    ("events" "~/.dotfiles/icons/events.svg" nil nil :ascent center :mask heuristic)
