@@ -947,12 +947,12 @@
   (org-end-of-line)
   (insert " "))
 
-(use-package! org-tidy
-  :config (setq
-           org-tidy-properties-style 'invisible
-           org-tidy-protect-overlay nil)
-  :hook
-  (org-mode . org-tidy-mode))
+;; (use-package! org-tidy
+;;   :config (setq
+;;            org-tidy-properties-style 'invisible
+;;            org-tidy-protect-overlay nil)
+;;   :hook
+;;   (org-mode . org-tidy-mode))
 
 (setq +ligatures-in-modes '())
 (setq +ligatures-extras-in-modes '(org-mode))
