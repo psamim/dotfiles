@@ -5,15 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# load zgen  -*- mode: sh; -*-
-
-# These lines needs to be before loading oh-my-zsh
-# zstyle :omz:plugins:keychain options --quiet
-# zstyle :omz:plugins:keychain agents gpg,ssh
-
-source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
 export ZOXIDE_CMD_OVERRIDE="j"
+
+# load zgen  -*- mode: sh; -*-
+source "${HOME}/.dotfiles/zgen/zgen.zsh"
 
 # check if there's no init script
 
@@ -139,7 +135,7 @@ alias vi=nvim
 export VISUAL="nvim"
 export EDITOR="nvim"
 alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected --target=type-check && pnpm exec nx affected --target=test'
-alias cat=bat
+# alias cat=bat
 alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
 alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
 alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
@@ -261,8 +257,6 @@ verify_os () {
     export XDG_CONFIG_HOME="$HOME/.config"
 
 
-    # Configure Colima as Docker Host for applications which don't respect Docker Contexts
-    export DOCKER_HOST=unix://${HOME}/.config/colima/docker.sock
 
     # Testcontainers should use the Colima VM instance local address as host
     export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address // ""')
@@ -275,6 +269,9 @@ verify_os () {
     export AWS_SESSION_TTL="12h"
     export GRADLE_USER_HOME="$HOME/.gradle"
     export GOPRIVATE=gitlab.personio-internal.de
+    # Configure Colima as Docker Host for applications which don't respect Docker Contexts
+    # export DOCKER_HOST=unix://${HOME}/.config/colima/docker.sock
+    export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 
     alias pc=$(which perctl)
     alias mc=~/dev/personio/monolith-cli
