@@ -53,9 +53,8 @@ ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
 
 # Vim
 rm -rf "$HOME/.vimrc"
-ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 rm -rf "$HOME/.config/nvim"
-ln -sf "$PWD/nvim" "$HOME/.config/nvim"
+ln -sf "$PWD/astronvim" "$HOME/.config/nvim"
 
 # Install vim plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
