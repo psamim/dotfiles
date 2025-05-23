@@ -6,14 +6,6 @@
 mkdir -p "$HOME/.aria2"
 ln -sf $PWD/aria2/* $HOME/.aria2/
 
-# tridactyl
-rm -f "$HOME/.tridactylrc"
-ln -sf $PWD/tridactyl/tridactylrc $HOME/.tridactylrc 
-
-# roffi pass
-mkdir -p "$HOME/.config/rofi-pass"
-ln -sf $PWD/rofi-pass/config $HOME/.config/rofi-pass/config
-
 # bin
 rm -rf "$HOME/.bin"
 ln -sf "$PWD/bin" "$HOME/.bin"
@@ -33,15 +25,7 @@ ln -sf $PWD/tpm $HOME/.tmux/plugins/tpm
 # emacs
 rm -rf "$HOME/.emacs.d"
 rm -rf "$HOME/.doom.d"
-# ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
-# ln -sf "$PWD/spacemacs/exclude" "$PWD/.git/modules/emacs.d/info/exclude"
-# ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
-# rm -rf "$HOME/.emacs.d/private"
-# ln -sf "$PWD/spacemacs/private" "$HOME/.emacs.d/private"
 ln -sf "$PWD/doom" "$HOME/.doom.d"
-
-# vrapperrc
-ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
 
 # zsh
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
@@ -56,41 +40,10 @@ rm -rf "$HOME/.vimrc"
 rm -rf "$HOME/.config/nvim"
 ln -sf "$PWD/astronvim" "$HOME/.config/nvim"
 
-# Install vim plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Muttator
-rm -rf "$HOME/.muttator"
-ln -sf "$PWD/muttator" "$HOME/.muttator"
-ln -sf "$PWD/muttator/muttatorrc" "$HOME/.muttatorrc"
-
-# i3
-rm -rf "$HOME/.i3"
-ln -sf "$PWD/i3" "$HOME/.i3"
-ln -sf "$PWD/i3/i3blocks.conf" "$HOME/.i3blocks.conf"
-
-# picomm
-mkdir -p "$HOME/.config/picom"
-ln -sf $PWD/picom/picom.conf $HOME/.config/picom/picom.conf
-
 # X
 ln -sf "$PWD/X/Xresources" "$HOME/.Xresources"
 ln -sf "$PWD/X/xinitrc" "$HOME/.xinitrc"
 ln -sf "$PWD/X/Xmodmap" "$HOME/.Xmodmap"
-
-# dunst
-rm -rf "$HOME/.config/dunst"
-ln -sf "$PWD/dunst" "$HOME/.config/dunst"
-
-# phpcs
-# rm -rf "$HOME/.phpcs"
-# ln -sf "$PWD/phpcs" "$HOME/.phpcs"
-# ~/.phpcs/commands.sh
-
-# password-store
-# rm -rf "$HOME/.password-store"
-# ln -sf "$PWD/password-store" "$HOME/.password-store"
 
 # systemd
 rm -rf "$HOME/.config/systemd"
@@ -130,10 +83,6 @@ ln -sf $PWD/pacman $HOME/.config/pacman
 rm -rf $HOME/.config/ledger-autosync
 ln -sf $PWD/ledger-autosync $HOME/.config/ledger-autosync
 
-# yaourt
-rm -rf $HOME/.config/yaourt
-ln -sf $PWD/yaourt $HOME/.config/yaourt
-
 # ideavim
 ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
 
@@ -143,13 +92,7 @@ for f in $PWD/desktop-files/*.desktop; do
     ln -sf $f $HOME/.local/share/applications/
 done
 
-
 kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-
-# xmonad
-mkdir -p "$HOME/.xmonad"
-ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.hs
-ln -sf $PWD/xmobar/xmobarrc $HOME/.xmobarrc
 
 # rofi
 rm -rf $HOME/.config/rofi
@@ -163,29 +106,8 @@ ln -sf $PWD/alacritty $HOME/.config/alacritty
 rm -rf $HOME/.config/autorandr
 ln -sf $PWD/autorandr $HOME/.config/autorandr
 
-rm -rf $HOME/.mbsyncrc
-ln -sf $PWD/mbsync/mbsyncrc $HOME/.mbsyncrc
-
-rm -rf $HOME/.config/astroid
-ln -sf $PWD/astroid $HOME/.config/astroid
-
-rm -rf $HOME/.notmuch-config
-ln -sf $PWD/notmuch/notmuch-config $HOME/.notmuch-config
-
 rm -rf "$HOME/.config/fontconfig"
 ln -sf $PWD/fontconfig $HOME/.config/fontconfig
-
-rm -rf "$HOME/.config/polybar"
-ln -sf $PWD/polybar $HOME/.config/polybar
-
-rm -rf "$HOME/.config/kmonad"
-ln -sf $PWD/kmonad $HOME/.config/kmonad
-
-mkdir -p "$HOME/.config/awesome"
-ln -sf $PWD/awesomewm/rc.lua $HOME/.config/awesome/rc.lua
-
-rm -rf "$HOME/.config/awesome"
-ln -sf "$PWD/awesomewm" "$HOME/.config/awesome"
 
 rm -rf "$HOME/.config/paru"
 ln -sf "$PWD/paru" "$HOME/.config/paru"

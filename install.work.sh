@@ -6,10 +6,6 @@
 mkdir -p "$HOME/.aria2"
 ln -sf $PWD/aria2/* $HOME/.aria2/
 
-# tridactyl
-rm -f "$HOME/.tridactylrc"
-ln -sf $PWD/tridactyl/tridactylrc $HOME/.tridactylrc 
-
 # bin
 rm -rf "$HOME/.bin"
 ln -sf "$PWD/bin" "$HOME/.bin"
@@ -29,33 +25,15 @@ ln -sf $PWD/tpm $HOME/.tmux/plugins/tpm
 # emacs
 rm -rf "$HOME/.emacs.d"
 rm -rf "$HOME/.doom.d"
-# ln -sf "$PWD/emacs.d" "$HOME/.emacs.d"
-# ln -sf "$PWD/spacemacs/exclude" "$PWD/.git/modules/emacs.d/info/exclude"
-# ln -sf "$PWD/spacemacs/spacemacs" "$HOME/.spacemacs"
-# rm -rf "$HOME/.emacs.d/private"
-# ln -sf "$PWD/spacemacs/private" "$HOME/.emacs.d/private"
 ln -sf "$PWD/doom" "$HOME/.doom.d"
-
-# vrapperrc
-ln -sf "$PWD/vrapper/vrapperrc.vim" "$HOME/.vrapperrc"
 
 # zsh
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
 
-# Vimperator
-rm -rf "$HOME/.vimperator"
-ln -sf "$PWD/vimperator" "$HOME/.vimperator"
-ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
-
 # Vim
 rm -rf "$HOME/.vimrc"
-ln -sf "$PWD/vim/vimrc" "$HOME/.vimrc"
 rm -rf "$HOME/.config/nvim"
-ln -sf "$PWD/nvim" "$HOME/.config/nvim"
-
-# Install vim plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -sf "$PWD/astronvim" "$HOME/.config/nvim"
 
 # ideavim
 ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc

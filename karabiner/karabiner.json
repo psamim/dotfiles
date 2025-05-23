@@ -189,7 +189,9 @@
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.VSCode$",
                                             "^com\\.jetbrains\\.intellij$",
-                                            "^org\\.gnu\\.Emacs$"
+                                            "^org\\.gnu\\.Emacs$",
+                                            "^com\\.todesktop\\.230313mzl4w4u92$",
+                                            "^org\\.alacritty$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -263,7 +265,9 @@
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.VSCode$",
                                             "^com\\.googlecode\\.iterm2$",
-                                            "^org\\.gnu\\.Emacs$"
+                                            "^org\\.gnu\\.Emacs$",
+                                            "^com\\.todesktop\\.230313mzl4w4u92$",
+                                            "^org\\.alacritty$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
