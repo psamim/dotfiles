@@ -241,6 +241,7 @@ verify_os () {
   if [[ $myos == "OSX" ]]
   then
     tmux set -g @thumbs-command "echo {} | tr -d '[:cntrl:]' | pbcopy"
+    tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
     export GPG_TTY=`tty`
     export GPG_TTY=`tty`

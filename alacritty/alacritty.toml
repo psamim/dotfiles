@@ -602,6 +602,7 @@ dynamic_padding = false
 dynamic_title = true
 opacity = 0.93
 startup_mode = "Windowed"
+option_as_alt = "Both"
 
 [window.dimensions]
 columns = 0
