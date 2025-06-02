@@ -30,8 +30,8 @@ borg
 borna-fonts
 breeze-gtk
 breeze-icons
-browserpass-chrome
-browserpass-firefox
+# browserpass-chrome
+# browserpass-firefox
 bzip2
 calibre
 cdrdao
@@ -121,7 +121,7 @@ kde-utilities-meta
 kernel-modules-hook
 khotkeys
 kscreen
-landrop
+# landrop
 laptop-mode-tools
 lazygit
 ledger
@@ -180,6 +180,7 @@ nfs-utils
 nftables
 nmap
 nodejs
+nodejs-nopt
 npm
 nsnake
 ntfs-3g
@@ -239,10 +240,10 @@ python-axolotl
 python-brotli
 python-click
 python-gobject
-python-icsv2ledger-git
+# python-icsv2ledger-git
 python-llfuse
 python-lsp-server
-python-m2crypto
+# python-m2crypto
 python-pip
 python-pyflakes
 python-pynvim
@@ -428,12 +429,12 @@ visual-studio-code-bin
 telegram-desktop
 webkit2gtk
 bruno-bin
-firefox-extension-passff
+# firefox-extension-passff
 hledger
-asdf-vm
+# asdf-vm
 anki-bin
 google-chrome
-breaktimer-bin
+# breaktimer-bin
 devbox-bin
 libinput-gestures
 localsend-bin
@@ -443,15 +444,19 @@ ydotool
 clash-verge-rev-bin
 drawio-desktop
 wl-clipboard
-wayland-protocols
+# wayland-protocols
 # kwin-polonium
-teamviewer
-dmenu-wayland-git
-spotx-linux
+# teamviewer
+# dmenu-wayland-git
+# spotx-linux
+alacritty
+signal-desktop
+zoxide
+torbrowser-launcher
 
 # Emacs
 typescript-language-server
-emacs-nativecomp
+emacs
 
 # It seems it is needed for paru
 openssl-1.1
