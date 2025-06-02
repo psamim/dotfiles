@@ -2,8 +2,8 @@
 return {
   "vim-test/vim-test",
   config = function()
-    vim.g["test#javascript#runner"] = "jest"
-    vim.g["test#javascript#jest#executable"] = "pnpm exec jest"
+    vim.g["test#javascript#runner"] = "nx"
+    -- vim.g["test#javascript#jest#executable"] = "pnpm exec jest"
     vim.g["test#strategy"] = "neovim"
     vim.g["test#echo_command"] = 1
 
