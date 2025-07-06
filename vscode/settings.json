@@ -28,7 +28,7 @@
       "commands": ["workbench.action.quickOpen"]
     },
     {
-      "before": ["<leader>", "a", "w"],
+      "before": ["<leader>", "l", "a"],
       "commands": ["editor.action.quickFix"]
     },
     {
@@ -50,30 +50,19 @@
   "diffEditor.renderSideBySide": false,
   "terminal.integrated.scrollback": 100000,
   "editor.formatOnSave": true,
-  "nxConsole.showNodeVersionOnStartup": false,
   "vim.digraphs": {},
   "workbench.settings.openDefaultKeybindings": true,
   "vim.commandLineModeKeyBindingsNonRecursive": [],
-  "tabnine.experimentalAutoImports": true,
-  "remote.SSH.defaultExtensions": ["gitpod.gitpod-remote-ssh"],
   "redhat.telemetry.enabled": true,
   "vim.leader": "<space>",
   "vim.useSystemClipboard": true,
-  "vim,.enableNeovim": true,
-  "mermaid.vscode.minimap": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "vim.enableNeovim": true,
   "window.zoomLevel": 2,
-  "python.analysis.autoImportCompletions": true,
-  "python.analysis.typeCheckingMode": "standard",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.menuBarVisibility": "toggle",
   "notebook.lineNumbers": "on",
-  "remote.SSH.remotePlatform": {
-    "*.gitpod.io": "linux"
-  },
   "editor.fontFamily": "Iosevka Etoile, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 14,
   "workbench.colorTheme": "Gruvbox Material Dark",
@@ -85,21 +74,14 @@
   "gitlab.duoChat.enabled": false,
   "gitlab.duoCodeSuggestions.openTabsContext": false,
   "gitlab.duoCodeSuggestions.enabled": false,
-  "jest.virtualFolders": [],
   "jestrunner.runOptions": ["--no-coverage"],
   "typescript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.importModuleSpecifier": "relative",
   "jestrunner.debugOptions": {},
   "javascript.updateImportsOnFileMove.enabled": "always",
   "diffEditor.hideUnchangedRegions.enabled": true,
-  "workbench.startupEditor": "none",
-  "github.copilot.chat.scopeSelection": true,
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "github.copilot.chat.codesearch.enabled": true,
-  "github.copilot.chat.agent.thinkingTool": true,
-  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
-  "github.copilot.chat.generateTests.codeLens": true,
-  "github.copilot.chat.languageContext.typescript.enabled": true,
-  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
-  "github.copilot.chat.search.keywordSuggestions": true
+  "diffEditor.ignoreTrimWhitespace": false,
+  "cursor.terminal.usePreviewBox": true,
+  "php.validate.executablePath": "/opt/homebrew/opt/php@8.2/bin/php",
+  "git.autorefresh": false
 }
