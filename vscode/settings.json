@@ -32,6 +32,11 @@
       "commands": ["editor.action.quickFix"]
     },
     {
+      "before": ["<leader>", "l", "r"],
+      "commands": ["editor.action.rename"],
+      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
       "before": ["<leader>", "g", "s"],
       "commands": ["git.showGitStatus"]
     },
