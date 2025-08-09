@@ -16,3 +16,6 @@
 	path = awesomewm/revelation
 	url = https://github.com/guotsuan/awesome-revelation.git
 	branch = master
+[submodule "alacritty/catppuccin"]
+	path = alacritty/catppuccin
+	url = git@github.com:catppuccin/alacritty.git

@@ -8,5 +8,7 @@ return {
   { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.test.vim-test" },
+  { import = "astrocommunity.utility.noice-nvim" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
   -- import/override with your plugins folder
 }
