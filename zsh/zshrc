@@ -293,7 +293,10 @@ verify_os () {
     # gpg-connect-agent updatestartuptty /bye >/dev/null&
     # source /usr/bin/virtualenvwrapper_lazy.sh
 
-    eval "$(devbox completion zsh)"
+    if type "devbox" > /dev/null; then
+      eval "$(devbox completion zsh)"
+    fi
+
     # eval "$(devbox global shellenv)"
     export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   fi
