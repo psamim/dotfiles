@@ -540,7 +540,7 @@ print_events = false
 render_timer = false
 
 [font]
-size = 14.0
+size = 18.0
 
 [font.bold]
 family = "Iosevka Nerd Font Mono"
@@ -578,6 +578,7 @@ dynamic_title = true
 opacity = 0.93
 startup_mode = "Windowed"
 option_as_alt = "Both"
+blur = true
 
 [window.dimensions]
 columns = 0

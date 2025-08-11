@@ -5,7 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 export ZOXIDE_CMD_OVERRIDE="j"
 
 # load zgen  -*- mode: sh; -*-
@@ -20,18 +19,11 @@ if ! zgen saved; then
 
     # plugins
     zgen oh-my-zsh plugins/git
-    # zgen oh-my-zsh plugins/adb
     zgen oh-my-zsh plugins/aws
-    # zgen oh-my-zsh plugins/deno
     zgen oh-my-zsh plugins/direnv
-    # zgen oh-my-zsh plugins/tig
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/fzf
-    # zgen oh-my-zsh plugins/asdf
-#   zgen oh-my-zsh plugins/gpg-agent
     zgen oh-my-zsh plugins/npm
-    # zgen oh-my-zsh plugins/npx
-    # zgen oh-my-zsh plugins/keychain
     zgen oh-my-zsh plugins/pass
     zgen oh-my-zsh plugins/archlinux
     zgen oh-my-zsh plugins/vi-mode
@@ -41,36 +33,24 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/docker-compose
-    # zgen oh-my-zsh plugins/fasd
     zgen oh-my-zsh plugins/zoxide
     zgen oh-my-zsh plugins/nmap
     zgen oh-my-zsh plugins/last-working-dir
-    # zgen oh-my-zsh plugins/themes
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/cp
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/history-substring-search
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/python
-    # zgen oh-my-zsh plugins/poetry
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zaw
     zgen load zsh-users/zsh-completions src
     zgen load zsh-users/zsh-autosuggestions
     zgen load changyuheng/zsh-interactive-cd
-    # zgen load marzocchi/zsh-notify
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
-    # zgen load jscutlery/nx-completion / main
-    # zgen load lukechilds/zsh-nvm
-    # zgen load ~/.zgen/deno
-    # zgen load marlonrichert/zsh-autocomplete 
-    # zgen load chisui/zsh-nix-shell
-    # zgen load spwhitt/nix-zsh-completions
-    # zgen load Aloxaf/fzf-tab fzf-tab.zsh master
-    # zgen load olets/zsh-abbr zsh-abbr.zsh
 
     # theme
     # zgen oh-my-zsh themes/agnoster
@@ -126,36 +106,12 @@ export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
 export BORG_CONFIG_DIR="/home/samim/borg"
 export BORG_CACHE_DIR="/home/samim/borg/cache"
 export PIPENV_VENV_IN_PROJECT=1
-# export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500' "
-# export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-#alias nvim='nvim --listen /tmp/nvim-server.pipe'
-alias vim=nvim
-alias vi=nvim
+export WORKON_HOME=~/.virtualenvs
+export TERM=xterm
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 export VISUAL="nvim"
 export EDITOR="nvim"
-alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected --target=type-check && pnpm exec nx affected --target=test'
-# alias cat=bat
-alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
-alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
-alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
-alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --conf-path=${HOME}/.aria2/down.conf"
-alias fly='sshuttle  --dns -r 52565751e0b8cd99d30001ba@private-psamim.rhcloud.com 0/0'
-alias o='xdg-open'
-alias xclip='xclip -selection clipboard'
-# alias j='fasd_cd -d'
-# alias jj='fasd_cd -d -i'
-alias tmux='TERM=screen-256color-bce direnv exec / tmux'
-alias magit='emacsclient -nw -e \(magit-status\)'
-alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
-alias ledger="ledger --pedantic --explicit --strict"
-# alias hledger="~/.local/bin/hledger --strict"
-alias org-csv="emacs -batch -l ~/.emacs.d/core/core.el -l ~/.emacs.d/core/core-packages.el -l "~/.emacs.d/init.el" -f org-clock-csv-batch-and-exit ~/Notes/todo.org"
-alias nmup="nmcli con up"
-alias nmdown="nmcli con down"
-alias nord="sudo --user=nordvpnteams nordvpnteams"
-alias ledger-import-main='env LEDGER_ACCOUNT="Assets:Bank:Mellat" ledger-autosync /home/samim/mellat.csv -a assets:bank --unknown-account Expenses:Adjustment -L >> Notes/accounting/ledger.ledger'
-alias ledger-import-shared='env LEDGER_ACCOUNT="Assets:Bank:Shared" ledger-autosync /home/samim/mellat.csv -a assets:bank --unknown-account Expenses:Adjustment -L >> Notes/accounting/ledger.ledger'
 
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$HOME/.bin:$PATH
@@ -167,21 +123,33 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.doom.d/bin
-export WORKON_HOME=~/.virtualenvs
-export PATH="/opt/brew/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export TERM=xterm
+alias vim=nvim
+alias vi=nvim
+alias pnpm-check='pnpm exec nx affected --target=lint && pnpm exec nx affected --target=type-check && pnpm exec nx affected --target=test'
+alias cat=bat
+alias down="aria2c --conf-path=${HOME}/.aria2/down.conf"
+alias bdown="aria2c --conf-path=${HOME}/.aria2/bersam.conf"
+alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2/down.conf"
+alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --conf-path=${HOME}/.aria2/down.conf"
+alias o='xdg-open'
+alias xclip='xclip -selection clipboard'
+alias tmux='TERM=screen-256color-bce direnv exec / tmux'
+alias magit='emacsclient -nw -e \(magit-status\)'
+alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
+alias ledger="ledger --pedantic --explicit --strict"
+alias dc=docker-compose
+alias gp='git push'
+alias gl='git pull'
+alias gs='git status'
+alias logs='docker-compose logs --tail=10 -f'
 
-# if [ -e /home/samim/.nix-profile/etc/profile.d/nix.sh ]; then . /home/samim/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+export POWERLEVEL9K_LEGACY_ICON_SPACING=true
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export MANPAGER='nvim +Man!'
-export MANWIDTH=999
-# [ -f "/home/samim/.ghcup/env" ] && source "/home/samim/.ghcup/env" # ghcup-env
-
-# eval "$(pyenv init -)"
-
-tmb() {
+function tmb() {
     local WHERE=$TOMBS/$1
     tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
 }
@@ -203,10 +171,6 @@ function connect() {
   systemctl --user start http.service
   systemctl --user stop sync-agenda-svg.service && systemctl --user start sync-agenda-svg.timer
 }
-
-export POWERLEVEL9K_LEGACY_ICON_SPACING=true
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 function kc() {
   echo "Changing to $1 k8s context"
@@ -236,7 +200,7 @@ function os {
  esac
 }
 
-verify_os () {
+function verify_os () {
   myos=$(os)
   if [[ $myos == "OSX" ]]
   then
@@ -257,14 +221,11 @@ verify_os () {
     export HOMEBREW_BREWFILE=~/.dotfiles/homebrew/Brewfile
     export XDG_CONFIG_HOME="$HOME/.config"
 
-
-
     # Testcontainers should use the Colima VM instance local address as host
     export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address // ""')
     source <(kubectl completion zsh)
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-    source ~/.zgen/jscutlery/nx-completion-main/nx-completion.plugin.zsh
     export PATH="/opt/homebrew/bin:$PATH"
     export AWS_VAULT_KEYCHAIN_NAME="login"
     export AWS_SESSION_TTL="12h"
@@ -297,30 +258,27 @@ verify_os () {
       eval "$(devbox completion zsh)"
     fi
 
-    # eval "$(devbox global shellenv)"
     export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   fi
 }
 
 verify_os
 
-# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-alias dc=docker-compose
-alias gp='git push'
-alias gl='git pull'
-alias gs='git status'
-alias logs='docker-compose logs --tail=10 -f'
-alias tis='tig status'
-alias beet='docker-compose exec beets beet'
-
 function dcr {
 	cd /home/pi/server-compose
   echo Restarting $1
 	docker-compose stop $1
-	docker-compose up --force-recreate -d --remove-orphans $1
+	./scripts/dc.sh up --force-recreate -d --remove-orphans $1
 }
+
+DISABLE_AUTO_TITLE="true"
+function set_tmux_title {
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    # SSH session: show user@host:cwd
+    print -Pn "\e]2;%n@%m:%~\a"
+  else
+    # Local: show only cwd
+    print -Pn "\e]2;%~\a"
+  fi
+}
+precmd_functions+=(set_tmux_title)
