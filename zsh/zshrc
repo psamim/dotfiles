@@ -51,6 +51,7 @@ if ! zgen saved; then
     zgen load djui/alias-tips
     zgen load Tarrasch/zsh-bd
     zgen load larkery/zsh-histdb
+    zgen load Aloxaf/fzf-tab fzf-tab.zsh master
 
     # theme
     # zgen oh-my-zsh themes/agnoster
