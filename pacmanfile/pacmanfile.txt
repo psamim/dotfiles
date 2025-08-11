@@ -192,6 +192,7 @@ openssh
 openvpn-update-resolv-conf-git
 otf-fantasque-sans-mono
 otf-font-awesome
+woff2-font-awesome
 package-query
 pacman
 pacmanfile
@@ -236,7 +237,7 @@ psmisc
 pulseaudio-control
 pv
 pyenv
-python-axolotl
+# python-axolotl
 python-brotli
 python-click
 python-gobject
@@ -430,7 +431,7 @@ telegram-desktop
 webkit2gtk
 bruno-bin
 # firefox-extension-passff
-hledger
+hledger-bin
 # asdf-vm
 anki-bin
 google-chrome
@@ -453,6 +454,7 @@ alacritty
 signal-desktop
 zoxide
 torbrowser-launcher
+pacman-contrib
 
 # Emacs
 typescript-language-server
