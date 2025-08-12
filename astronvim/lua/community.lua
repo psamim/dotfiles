@@ -10,5 +10,6 @@ return {
   { import = "astrocommunity.test.vim-test" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.motion.nvim-surround" },
   -- import/override with your plugins folder
 }
