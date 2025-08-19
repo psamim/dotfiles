@@ -21,7 +21,6 @@
 # 	proxy = http://127.0.0.1:7777
 [magit]
   hideCampaign = true
-
 [pull]
 	rebase = false
 [init]
@@ -30,3 +29,5 @@
 	helper = cache --timeout=3600
 [diff "gpg"]
 	textconv = gpg --no-tty --decrypt
+[url "git@github.com:"]
+	insteadOf = https://github.com/
