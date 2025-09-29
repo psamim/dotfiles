@@ -6,7 +6,6 @@
                 "rules": [
                     {
                         "description": "Map F1 to Command+F1, F2 to Command+F2, ..., F4 to Command+F4",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": { "key_code": "f1" },
@@ -300,7 +299,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^org\\.gnu\\.Emacs$"
+                                            "^org\\.gnu\\.Emacs$",
+                                            "^org\\.alacritty$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
