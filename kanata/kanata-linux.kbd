@@ -1,0 +1,48 @@
+;; Guide
+;;; lbrc: [,  rbrc: ]
+;;; bksl: \,  scln: ;
+(defcfg
+ log-layer-changes yes
+ process-unmapped-keys yes
+ linux-continue-if-no-devs-found yes)
+
+(defsrc caps    a      s      d      f      g      h      j      k      l      scln   '      ret    c)
+
+(deflayer base @cap    @a     @s     @d     @f     g      @h-safe @j     @k     @l     @sc    '      ret    c)
+
+(deflayer navigation @cap    lctl   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    C-c)
+
+(defvar
+  tap-timeout         100
+  hold-timeout        200
+  tap-repress-timeout 150
+  tt                  $tap-timeout
+  ht                  $hold-timeout
+  trt                 $tap-repress-timeout
+  left-hand           ( q w e r t
+                        #|   |# g
+                        z x c v b)
+  left-hand-dual      (a s d f)
+  right-hand          ( y u i o p lbrc rbrc
+                        h
+                        n m , .)
+  right-hand-dual     (j k l scln ' /)
+  mods                ( lmet lalt lsft lctl
+                        rmet ralt rsft rctl))
+
+
+(defalias
+  nav    (layer-while-held navigation)
+  base   (layer-switch base)
+
+  ;; tap-dancing
+  cap (tap-hold-press $tt $ht esc @nav)
+
+  a  (tap-hold-release-tap-keys-release $trt $ht a    lmet $left-hand $left-hand-dual)
+  s  (tap-hold-release-tap-keys-release $trt $ht s    lalt $left-hand $left-hand-dual)
+  d  (tap-hold-release-tap-keys-release $trt $ht d    lctl $left-hand $left-hand-dual)
+  f  (tap-hold-release-tap-keys-release $trt $ht f    lsft $left-hand $left-hand-dual)
+  j  (tap-hold-release-tap-keys-release $trt $ht j    rsft $right-hand $right-hand-dual)
+  k  (tap-hold-release-tap-keys-release $trt $ht k    rctl $right-hand $right-hand-dual)
+  l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
+  sc (tap-hold-release-tap-keys-release $trt $ht scln lmet $right-hand $right-hand-dual))
