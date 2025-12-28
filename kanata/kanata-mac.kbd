@@ -21,17 +21,17 @@
 
 (defsrc f1     f2     f3     f4
         nubs
-        caps    a      s      d      f      g      h      j      k      l      scln   '      ret    esc    i)
+        caps    a      s      d      f      g      h      j      k      l      scln   '      ret    esc)
 
 (deflayer base
        M-f1   M-f2   M-f3   M-f4
        @plusminus
-       @cap    @a     @s     @d     @f     g      @h-safe @j     @k     @l     @sc    '      ret    C-c   i)
+       @cap    @a     @s     @d     @f     g      @h-safe @j     @k     @l     @sc    '      ret    C-c)
 
 (deflayer navigation
        _      _      _      _
        _
-       @cap    lmet   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    _    _)
+       @cap    lmet   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    _)
 
 (defvar
   tap-timeout         100
@@ -66,6 +66,4 @@
   j  (tap-hold-release-tap-keys-release $trt $ht j    rsft $right-hand $right-hand-dual)
   k  (tap-hold-release-tap-keys-release $trt $ht k    rmet $right-hand $right-hand-dual)
   l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
-  sc (tap-hold-release-tap-keys-release $trt $ht scln lctl $right-hand $right-hand-dual)
-  c  (fork c C-c (lctl rctl lmet rmet))
-  i  (fork i C-d (lctl rctl lmet rmet)))
+  sc (tap-hold-release-tap-keys-release $trt $ht scln lctl $right-hand $right-hand-dual))
