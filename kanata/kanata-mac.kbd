@@ -21,12 +21,12 @@
 
 (defsrc f1     f2     f3     f4
         nubs
-        caps    a      s      d      f      g      h      j      k      l      scln   '      ret    c    i)
+        caps    a      s      d      f      g      h      j      k      l      scln   '      ret    esc    i)
 
 (deflayer base
        M-f1   M-f2   M-f3   M-f4
        @plusminus
-       @cap    @a     @s     @d     @f     g      @h-safe @j     @k     @l     @sc    '      ret    @c   i)
+       @cap    @a     @s     @d     @f     g      @h-safe @j     @k     @l     @sc    '      ret    C-c   i)
 
 (deflayer navigation
        _      _      _      _

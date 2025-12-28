@@ -6,9 +6,9 @@
  process-unmapped-keys yes
  linux-continue-if-no-devs-found yes)
 
-(defsrc caps    a      s      d      f      g      h      j      k      l      scln   '      ret    c    i)
+(defsrc caps    a      s      d      f      g      h      j      k      l      scln   '      ret    esc    i)
 
-(deflayer base @cap    @a     @s     @d     @f     g     h    @j     @k     @l     @sc    '      ret    @c   @i)
+(deflayer base @cap    @a     @s     @d     @f     g     h    @j     @k     @l     @sc    '      ret    C-c   @i)
 
 (deflayer navigation @cap    lctl   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    _    _)
 
@@ -46,5 +46,4 @@
   k  (tap-hold-release-tap-keys-release $trt $ht k    rctl $right-hand $right-hand-dual)
   l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
   sc (tap-hold-release-tap-keys-release $trt $ht scln lmet $right-hand $right-hand-dual)
-  c  (fork c C-c (lctl rctl lmet rmet))
   i  (fork i C-d (lctl rctl lmet rmet)))
