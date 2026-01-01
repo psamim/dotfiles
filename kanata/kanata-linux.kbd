@@ -12,6 +12,8 @@
 
 (deflayer navigation @cap    lctl   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    C-c)
 
+(deflayer desktops _  f4    f3    f2    f1      _      _      _      _      _      @sc   _      _    _)
+
 (defvar
   tap-timeout         100
   hold-timeout        200
@@ -33,10 +35,12 @@
 
 (defalias
   nav    (layer-while-held navigation)
+  desktops (layer-while-held desktops)
   base   (layer-switch base)
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)
+  sc (tap-hold-press $tt $ht scln @desktops)
 
   a  (tap-hold-release-tap-keys-release $trt $ht a    lmet $left-hand $left-hand-dual)
   s  (tap-hold-release-tap-keys-release $trt $ht s    lalt $left-hand $left-hand-dual)
@@ -45,4 +49,5 @@
   j  (tap-hold-release-tap-keys-release $trt $ht j    rsft $right-hand $right-hand-dual)
   k  (tap-hold-release-tap-keys-release $trt $ht k    rctl $right-hand $right-hand-dual)
   l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
-  sc (tap-hold-release-tap-keys-release $trt $ht scln lmet $right-hand $right-hand-dual))
+  ;; sc (tap-hold-release-tap-keys-release $trt $ht scln lmet $right-hand $right-hand-dual)
+  )
