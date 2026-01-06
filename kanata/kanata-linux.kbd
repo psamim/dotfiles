@@ -2,17 +2,42 @@
 ;;; lbrc: [,  rbrc: ]
 ;;; bksl: \,  scln: ;
 (defcfg
- log-layer-changes yes
- process-unmapped-keys yes
- linux-continue-if-no-devs-found yes)
+  log-layer-changes yes
+  process-unmapped-keys yes
+  linux-continue-if-no-devs-found yes
+)
 
-(defsrc caps    a      s      d      f      g      h      j      k      l      scln   '      ret    c)
+;; Extended src for F-row + fn for Linux media shortcuts
+(defsrc
+  f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  fn
+  caps   a      s      d      f      g      h      j      k      l      scln  '      ret   c
+)
 
-(deflayer base @cap    @a     @s     @d     @f     g     h    @j     @k     @l     @sc    '      ret    _)
+(deflayer base
+  f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  @fnl
+  @cap   @a     @s     @d     @f     g      h      @j     @k     @l     @sc   '      ret   _
+)
 
-(deflayer navigation @cap    lctl   lalt   C-d     lsft   _      left   down   up     rght   bspc   tab    ret    C-c)
+(deflayer navigation
+  _      _      _      _      _      _      _      _      _      _      _      _
+  @fnl
+  @cap   lctl   lalt   C-d    lsft   _      left   down   up     rght   bspc  tab    ret   C-c
+)
 
-(deflayer desktops _  f4    f3    f2    f1      _      _      _      _      _      @sc   _      _    _)
+(deflayer desktops
+  _      _      _      _      _      _      _      _      _      _      _      _
+  @fnl
+  _      f4     f3     f2     f1     _      _      _      _      _      @sc   _      _     _
+)
+
+;; Fn layer for media/brightness controls on Linux
+(deflayer fnmedia
+  brup   brdn   _      _      bldn   blup   prev   pp     next   mute   vold   volu
+  _
+  _      _      _      _      _      _      _      _      _      _      _      _      _     _
+)
 
 (defvar
   tap-timeout         100
@@ -30,13 +55,14 @@
                         n m , .)
   right-hand-dual     (j k l scln ' /)
   mods                ( lmet lalt lsft lctl
-                        rmet ralt rsft rctl))
-
+                        rmet ralt rsft rctl)
+)
 
 (defalias
   nav    (layer-while-held navigation)
   desktops (layer-while-held desktops)
   base   (layer-switch base)
+  fnl    (layer-while-held fnmedia)
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)
@@ -49,5 +75,4 @@
   j  (tap-hold-release-tap-keys-release $trt $ht j    rsft $right-hand $right-hand-dual)
   k  (tap-hold-release-tap-keys-release $trt $ht k    rctl $right-hand $right-hand-dual)
   l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
-  ;; sc (tap-hold-release-tap-keys-release $trt $ht scln lmet $right-hand $right-hand-dual)
-  )
+)
