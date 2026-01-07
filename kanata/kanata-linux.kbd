@@ -11,32 +11,36 @@
 (defsrc
   f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
   fn
-  caps   a      s      d      f      g      h      j      k      l      scln  '      ret   c
+  caps   a      s      d      f      g      h      j      k      l      scln  '      ret   
+                       c
 )
 
 (deflayer base
   f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
   @fnl
-  @cap   @a     @s     @d     @f     g      h      @j     @k     @l     @sc   '      ret   _
+  @cap   @a     @s     @d     @f     g      h      @j     @k     @l     @sc   '      ret   
+                        _
 )
 
 (deflayer navigation
   _      _      _      _      _      _      _      _      _      _      _      _
   @fnl
-  @cap   lctl   lalt   C-d    lsft   _      left   down   up     rght   bspc  tab    ret   C-c
+  @cap   lctl   lalt   C-d    lsft   _      left   down   up     rght   bspc  tab    ret   
+                       C-c
 )
 
 (deflayer desktops
   _      _      _      _      _      _      _      _      _      _      _      _
   @fnl
-  _      f4     f3     f2     f1     _      _      _      _      _      @sc   _      _     _
+  _      f4     f3     f2     f1     _      _      _      _      _      @sc   _      _     
+                        _
 )
 
-;; Fn layer for media/brightness controls on Linux
 (deflayer fnmedia
-  brup   brdn   _      _      bldn   blup   prev   pp     next   mute   vold   volu
+  brdn   brup   _      _      bldn   blup   prev   pp     next   mute   vold   volu
   _
-  _      _      _      _      _      _      _      _      _      _      _      _      _     _
+  _      _      _      _      _      _      _      _      _      _      _      _      _     
+                       _
 )
 
 (defvar
