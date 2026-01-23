@@ -10,7 +10,7 @@
 ;; Extended src for F-row + fn for Linux media shortcuts
 (defsrc
   f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
-  fn
+  ;; fn
   tab    q      w             r                    u
   caps   a      s      d      f      g      h      j      k      l      scln  '      ret   
                        c
@@ -19,7 +19,7 @@
 
 (deflayer base
   f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
-  @fnl
+  ;; @fnl
   _      _      _             _                     _
   @cap   @a     @s     @d     @f     g      h      @j     @k     @l     @sc   '      ret   
                         _
@@ -28,7 +28,7 @@
 
 (deflayer navigation
   _      _      _      _      _      _      _      _      _      _      _      _
-  @fnl
+  ;; @fnl
   C-tab  A-F4    C-w           C-r                  C-u
   @cap   lctl   lalt   C-d    lsft   _      left   down   up     rght   bspc  tab    ret   
                        C-c
@@ -37,7 +37,7 @@
 
 (deflayer desktops
   _      _      _      _      _      _      _      _      _      _      _      _
-  @fnl
+  ;; @fnl
   _      _      _             _                     _
   _      f4     f3     f2     f1     _      _      _      _      _      @sc   _      _     
                         _
@@ -46,7 +46,7 @@
 
 (deflayer fnmedia
   brdn   brup   _      _      bldn   blup   prev   pp     next   mute   vold   volu
-  _
+  ;; _
   _      _      _             _                     _
   _      _      _      _      _      _      _      _      _      _      _      _      _     
                        _
