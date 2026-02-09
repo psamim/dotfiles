@@ -308,7 +308,6 @@ brew data-access
 brew hammock-district
 brew huproxy
 brew perctl
-brew perctl-cde
 
 tap finestructure/hummingbird
 
