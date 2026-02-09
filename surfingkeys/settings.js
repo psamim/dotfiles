@@ -1,24 +1,27 @@
+const { mapkey, map, unmap, iunmap } = api;
+
 // an example to create a new mapping `ctrl-y`
-
-const { mapkey, map, unmap } = api;
-
 mapkey("<Ctrl-y>", "Show me the money", function () {
   Front.showPopup(
-    "a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close)."
+    "a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close).",
   );
 });
 
-// an example to replace `T` with `gt`, click `Default mappings` to see how `T` works.
+settings.tabsThreshold = 0;
+
 map("<Ctrl-u>", "u");
 map("<Ctrl-d>", "d");
 unmap("d");
+
 map("d", "x");
 map("<Alt-l>", "R");
 map("<Alt-h>", "E");
 map("L", "D");
 map("H", "S");
-settings.tabsThreshold = 0;
 map("u", "X");
+
+iunmap("<Ctrl-a>");
+iunmap("<Ctrl-e>");
 
 // removeSearchAliasX("w");
 // addSearchAliasX(
@@ -42,6 +45,7 @@ if (window.location.origin === "https://mail.google.com") {
   unmap("r");
   unmap("m");
 }
+
 settings.modeAfterYank = "Normal";
 settings.showModeStatus = true;
 settings.hintShiftNonActive = true;
