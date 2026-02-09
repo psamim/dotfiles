@@ -91,7 +91,6 @@
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)
-  sc (tap-hold-press $tt $ht scln @desktops)
 
   a  (tap-hold-release-tap-keys-release $trt $ht a    lctl $left-hand $left-hand-dual)
   s  (tap-hold-release-tap-keys-release $trt $ht s    lalt $left-hand $left-hand-dual)
@@ -100,4 +99,5 @@
   j  (tap-hold-release-tap-keys-release $trt $ht j    rsft $right-hand $right-hand-dual)
   k  (tap-hold-release-tap-keys-release $trt $ht k    rmet $right-hand $right-hand-dual)
   l  (tap-hold-release-tap-keys-release $trt $ht l    lalt $right-hand $right-hand-dual)
+  sc (tap-hold-release-tap-keys-release $trt $ht scln @desktops $right-hand $right-hand-dual)
 )
