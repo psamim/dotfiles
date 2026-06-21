@@ -191,7 +191,7 @@ openssh
 openvpn-update-resolv-conf-git
 otf-fantasque-sans-mono
 otf-font-awesome
-woff2-font-awesome
+# woff2-font-awesome
 package-query
 pacman
 pacmanfile
@@ -217,7 +217,7 @@ perl-net-smtp-ssl
 perwindowlayoutd
 pipewire-pulse
 pkgconf
-plasma5-applets-virtual-desktop-bar-git
+# plasma5-applets-virtual-desktop-bar-git
 plasma-desktop
 plasma-meta
 plasma-nm
@@ -327,7 +327,7 @@ v4l2loopback-dkms
 #vazir-fonts
 vazirmatn-fonts
 vdpauinfo
-vi
+# vi
 vlc
 vokoscreen
 wd719x-firmware
@@ -424,7 +424,7 @@ docker
 # deno
 visual-studio-code-bin
 telegram-desktop
-webkit2gtk
+# webkit2gtk
 bruno-bin
 # firefox-extension-passff
 hledger-bin
