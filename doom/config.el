@@ -858,7 +858,7 @@ from VEVENT to keep it a simple personal event."
          :files ("~/Notes/roam/people.org.gpg")
          :inbox "~/Notes/calendar/people-inbox.org")
         (:calendar-id "personal-1_shared_by_raffi"
-         ;; :sync-direction 'cal->org
+         :sync-direction 'cal->org
          :files ()
          :inbox "~/Notes/calendar/shared-inbox.org")))
 

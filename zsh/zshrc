@@ -102,8 +102,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export LEDGER_FILE="$HOME/Notes/accounting/ledger.ledger"
 export LEDGER_PRICE_DB="$HOME/Notes/accounting/price-db.ledger"
 export TOMBS="$HOME/tombs"
-export PASSWORD_STORE_TOMB_FILE="$TOMBS/pass.tomb" # for pass-tomb
-export PASSWORD_STORE_TOMB_KEY="$TOMBS/pass.tomb.key" # for pass-tomb
 export BORG_CONFIG_DIR="/home/samim/borg"
 export BORG_CACHE_DIR="/home/samim/borg/cache"
 export PIPENV_VENV_IN_PROJECT=1
@@ -150,10 +148,6 @@ export POWERLEVEL9K_LEGACY_ICON_SPACING=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-function tmb() {
-    local WHERE=$TOMBS/$1
-    tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
-}
 
 function vpn {
   env ID="$1" bash -c 'nmcli con down id "$ID"; sleep 1; nmcli con up id "$ID"'
@@ -163,11 +157,16 @@ function cpr() {
   rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
 }
 
+function tmb() {
+    local WHERE=$TOMBS/$1
+    tomb open "$TOMBS/$1.tomb" $WHERE -k "$TOMBS/$1.tomb.key" -g
+}
+
 function connect() {
   systemctl --user stop gpg-agent.service gpg-agent.socket gpg-agent-extra.socket gpg-agent-browser.socket gpg-agent-ssh.socket
   sleep 4 
   sudo swapoff -a
-  tmb pass && tmb mozilla && tmb backups && tmb other
+  tmb mozilla && tmb backups && tmb other
   sleep 2
   systemctl --user start http.service
   systemctl --user stop sync-agenda-svg.service && systemctl --user start sync-agenda-svg.timer
@@ -246,19 +245,12 @@ function verify_os () {
     . ~/.asdf/plugins/golang/set-env.zsh
 
   elif [[ $myos == "Linux" ]] then
-    # GPG Agent
-    unset SSH_AGENT_PID
-    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-      export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+      ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
     fi
-    export GPG_TTY=$(tty)
-    # gpg-connect-agent updatestartuptty /bye >/dev/null&
-    # source /usr/bin/virtualenvwrapper_lazy.sh
-
-    if type "devbox" > /dev/null; then
-      eval "$(devbox completion zsh)"
+    if [ ! -f "$SSH_AUTH_SOCK" ]; then
+      source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
     fi
-
     export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   fi
 }
