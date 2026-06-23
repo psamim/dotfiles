@@ -42,6 +42,11 @@ ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
 rm -rf $HOME/.config/alacritty
 ln -sf $PWD/alacritty $HOME/.config/alacritty
 
+# kitty
+mkdir -p $HOME/.config/kitty
+ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-terminal.conf
+
 # Karabiner
 rm -rf $HOME/.config/karabiner
 ln -sf $PWD/karabiner $HOME/.config/karabiner

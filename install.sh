@@ -102,6 +102,11 @@ ln -sf $PWD/rofi $HOME/.config/rofi
 rm -rf $HOME/.config/alacritty
 ln -sf $PWD/alacritty $HOME/.config/alacritty
 
+# kitty
+mkdir -p $HOME/.config/kitty
+ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-terminal.conf
+
 # autorandr
 rm -rf $HOME/.config/autorandr
 ln -sf $PWD/autorandr $HOME/.config/autorandr
