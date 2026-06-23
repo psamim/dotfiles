@@ -21,7 +21,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samim Pezeshki"
-      user-mail-address "psamim@gmail.com")
+      user-mail-address "p.samim@gmail.com")
 
 (setq doom-localleader-key ",")
 
@@ -844,6 +844,23 @@
       ;; org-caldav-sync-changes-to-org 'all
       )
 
+;; Personal CalDAV events must NOT have ORGANIZER or ATTENDEE.
+;; Events without those fields are treated as self-owned by DAVx5/Android
+;; (selfAttendeeStatus=NONE → "personal event" → filled/solid in Google Calendar).
+;; Adding ORGANIZER turns events into "invitations", causing them to show as
+;; unresponded (unfilled) unless the ATTENDEE email exactly matches DAVx5's
+;; internal account identifier. Strip any stale ORGANIZER/ATTENDEE on export.
+(defun psamim/org-icalendar--strip-organizer (vevent-string)
+  "Remove ORGANIZER and ATTENDEE lines (plus any RFC-5545 continuation lines)
+from VEVENT to keep it a simple personal event."
+  (when vevent-string
+    ;; Match the property line plus any folded continuation lines (leading space/tab)
+    (replace-regexp-in-string
+     "^\\(ORGANIZER\\|ATTENDEE\\)[^\n]*\n\\(?:[ \t][^\n]*\n\\)*" ""
+     vevent-string)))
+
+(advice-add 'org-icalendar--vevent :filter-return #'psamim/org-icalendar--strip-organizer)
+
 (setq org-caldav-calendars
       '((:calendar-id "org-2"
          ;; :sync-direction 'org->cal
@@ -855,7 +872,7 @@
          :files ("~/Notes/roam/people.org.gpg")
          :inbox "~/Notes/calendar/people-inbox.org")
         (:calendar-id "personal-1_shared_by_raffi"
-         ;; :sync-direction 'cal->org
+         :sync-direction 'cal->org
          :files ()
          :inbox "~/Notes/calendar/shared-inbox.org")))
 

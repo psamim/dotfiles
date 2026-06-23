@@ -119,7 +119,6 @@ kdeconnect
 kde-system-meta
 kde-utilities-meta
 kernel-modules-hook
-khotkeys
 kscreen
 # landrop
 laptop-mode-tools
@@ -179,9 +178,9 @@ networkmanager-strongswan
 nfs-utils
 nftables
 nmap
-nodejs
-nodejs-nopt
-npm
+# nodejs
+# nodejs-nopt
+# npm
 nsnake
 ntfs-3g
 nyx
@@ -192,7 +191,7 @@ openssh
 openvpn-update-resolv-conf-git
 otf-fantasque-sans-mono
 otf-font-awesome
-woff2-font-awesome
+# woff2-font-awesome
 package-query
 pacman
 pacmanfile
@@ -201,7 +200,7 @@ paprefs
 parallel
 parole
 parted
-paru-bin
+paru
 pass
 pass-otp
 pass-tomb
@@ -218,8 +217,7 @@ perl-net-smtp-ssl
 perwindowlayoutd
 pipewire-pulse
 pkgconf
-plasma5-applets-kargos-git
-plasma5-applets-virtual-desktop-bar-git
+# plasma5-applets-virtual-desktop-bar-git
 plasma-desktop
 plasma-meta
 plasma-nm
@@ -279,7 +277,6 @@ smartmontools
 s-nail
 soundfont-fluid
 sox
-spotify
 sqlitebrowser
 sshfs
 stress
@@ -330,7 +327,7 @@ v4l2loopback-dkms
 #vazir-fonts
 vazirmatn-fonts
 vdpauinfo
-vi
+# vi
 vlc
 vokoscreen
 wd719x-firmware
@@ -339,7 +336,6 @@ which
 wipe
 wireguard-tools
 wireless_tools
-woeusb-ng
 x86_energy_perf_policy
 xcape
 xclip
@@ -390,7 +386,7 @@ zbar
 zip
 zsh
 iproute2
-iptables-nft
+iptables
 pipewire-alsa
 
 # VPN
@@ -421,14 +417,14 @@ dnscrypt-proxy
 python-twisted
 # python-plotly
 # robo3t-bin
-# docker
+docker
 # docker-compose
 # dbeaver
 # handbrake
 # deno
 visual-studio-code-bin
 telegram-desktop
-webkit2gtk
+# webkit2gtk
 bruno-bin
 # firefox-extension-passff
 hledger-bin
@@ -436,13 +432,13 @@ hledger-bin
 anki-bin
 google-chrome
 # breaktimer-bin
-devbox-bin
+# devbox-bin
 libinput-gestures
 localsend-bin
-anydesk-bin
+# anydesk-bin
 kdotool-git
 ydotool
-clash-verge-rev-bin
+# clash-verge-rev-bin
 drawio-desktop
 wl-clipboard
 # wayland-protocols
@@ -455,14 +451,16 @@ signal-desktop
 zoxide
 torbrowser-launcher
 pacman-contrib
+yp-tools
+bitwarden-cli
+kanata-bin
+github-copilot-cli
 
 # Emacs
 typescript-language-server
 emacs
 
-# It seems it is needed for paru
-openssl-1.1
-# openssl-1.0
-
-# Graphics
+# Drivers
 xf86-video-nouveau
+linux-firmware-atheros
+linux-firmware-whence
