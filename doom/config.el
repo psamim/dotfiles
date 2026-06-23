@@ -4,6 +4,20 @@
 ;; sync' after modifying this file!
 (setq helm-ag-show-status-function nil)
 
+;; Native-comp on macOS / Homebrew gcc 15 fails to link with
+;; "ld: library 'emutls_w' not found" unless LIBRARY_PATH points at the gcc
+;; runtime libs. Setenv here so subprocesses spawned by libgccjit inherit it.
+(when (eq system-type 'darwin)
+  (let* ((gcc-prefix "/opt/homebrew/opt/gcc")
+         (gcc-libdir (car (file-expand-wildcards
+                           (concat gcc-prefix "/lib/gcc/current/gcc/*/*"))))
+         (sdk "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib")
+         (paths (delq nil (list (concat gcc-prefix "/lib/gcc/current")
+                                gcc-libdir
+                                sdk
+                                (getenv "LIBRARY_PATH")))))
+    (setenv "LIBRARY_PATH" (mapconcat #'identity paths ":"))))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Samim Pezeshki"
