@@ -231,12 +231,13 @@ function verify_os () {
     export AWS_VAULT_KEYCHAIN_NAME="login"
     export AWS_SESSION_TTL="12h"
     export GRADLE_USER_HOME="$HOME/.gradle"
-    export GOPRIVATE=gitlab.personio-internal.de
-    # Configure Colima as Docker Host for applications which don't respect Docker Contexts
-    # export DOCKER_HOST=unix://${HOME}/.config/colima/docker.sock
     export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
-
-    alias pc=$(which perctl)
+    export GOPROXY=https://personio.jfrog.io/artifactory/api/go/go-proxy
+    export GONOSUMDB=github.com/Personio-Internal
+    export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+    export AWS_DEFAULT_PROFILE=dev
+    export AWS_ECR_IGNORE_CREDS_STORAGE=true
+    export DD_SITE="datadoghq.eu"
     alias mc=~/dev/personio/monolith-cli
     alias kubectx="kubectl-ctx"
     alias kubens="kubectl-ns"
