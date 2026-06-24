@@ -42,6 +42,10 @@ ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
 rm -rf $HOME/.config/alacritty
 ln -sf $PWD/alacritty $HOME/.config/alacritty
 
+# lazygit
+mkdir -p $HOME/.config/lazygit
+ln -sf $PWD/lazygit/config.yml $HOME/.config/lazygit/config.yml
+
 # kitty
 mkdir -p $HOME/.config/kitty
 ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf

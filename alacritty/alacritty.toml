@@ -572,7 +572,7 @@ save_to_clipboard = false
 semantic_escape_chars = ''',│`|:"' ()[]{}<>'''
 
 [window]
-decorations = "none"
+decorations = "transparent"
 dynamic_padding = false
 dynamic_title = true
 opacity = 0.93
@@ -586,6 +586,6 @@ lines = 0
 
 [window.padding]
 x = 0
-y = 0
+y = 25
 
 [keyboard]
