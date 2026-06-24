@@ -88,5 +88,9 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "cursor.terminal.usePreviewBox": true,
   "php.validate.executablePath": "/opt/homebrew/opt/php@8.2/bin/php",
-  "git.autorefresh": false
+  "git.autorefresh": false,
+  "workbench.startupEditor": "none",
+  "claudeCode.preferredLocation": "sidebar",
+  "chat.extensionUnification.enabled": false,
+  "chat.disableAIFeatures": true
 }

@@ -60,5 +60,10 @@
   {
     "key": "alt+cmd+-",
     "command": "editor.action.fontZoomOut"
+  },
+  {
+    "key": "alt+cmd+s",
+    "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
+    "when": "!isAuxiliaryWindowFocusedContext"
   }
 ]
