@@ -1,0 +1,19 @@
+# Machine-specific git config — copy to ~/.gitconfig.local and customize.
+# This file is NOT committed to dotfiles.
+
+# [user]
+#   email = work@example.com
+
+# macOS + Homebrew gh credential helper
+# [credential "https://github.com"]
+#   helper =
+#   helper = !/opt/homebrew/bin/gh auth git-credential
+# [credential "https://gist.github.com"]
+#   helper =
+#   helper = !/opt/homebrew/bin/gh auth git-credential
+
+# macOS FSEvents performance
+# [core]
+#   excludesfile = /Users/yourname/.gitexclude
+#   fsmonitor = true
+#   untrackedcache = true

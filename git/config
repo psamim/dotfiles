@@ -4,7 +4,7 @@
   email = psamim@gmail.com
 [core]
   editor = nvim
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
   autocrlf = input
 [interactive]
   diffFilter = delta --color-only
@@ -14,7 +14,7 @@
   recent = !git for-each-ref --sort=-committerdate refs/heads/ | head -n 5
 [push]
   default = simple
-	autoSetupRemote = true
+  autoSetupRemote = true
 # [http]
 # 	proxy = http://127.0.0.1:7777
 # [https]
@@ -22,12 +22,15 @@
 [magit]
   hideCampaign = true
 [pull]
-	rebase = false
+  rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [credential]
-	helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [diff "gpg"]
-	textconv = gpg --no-tty --decrypt
+  textconv = gpg --no-tty --decrypt
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
+
+[include]
+  path = ~/.gitconfig.local

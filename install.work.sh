@@ -14,6 +14,10 @@ ln -sf "$PWD/bin" "$HOME/.bin"
 ln -sf "$PWD/git/config" "$HOME/.gitconfig"
 ln -sf "$PWD/git/ignore" "$HOME/.gitignore"
 git config --global core.excludesfile '~/.gitignore'
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+  cp "$PWD/git/config.local.example" "$HOME/.gitconfig.local"
+  echo "Created ~/.gitconfig.local from example — edit it for this machine."
+fi
 
 # tmux
 ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
