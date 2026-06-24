@@ -10,7 +10,7 @@
     ((input virtual org.mozilla.firefox)) 3 break
     () 1 break
   )
-  plusminus (fork grv (unicode U+007e) (lsft rsft))
+  plusminus (fork grv (macro lsft grv) (lsft rsft))
   h-safe (fork h nop0 (lctl rctl))
 )
 
