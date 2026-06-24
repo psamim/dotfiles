@@ -16,7 +16,8 @@
 
 (defcfg
   log-layer-changes yes
-  process-unmapped-keys yes)
+  process-unmapped-keys yes
+  danger-enable-cmd yes)
 
 (defsrc
   f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
@@ -28,7 +29,7 @@
 )
 
 (deflayer base
-  M-f1   M-f2   M-f3   M-f4   f5     f6     f7     f8     f9     f10    f11    f12
+  M-f1   M-f2   M-f3   M-f4   f5     f6     f7     f8     f9     f10    f11    @qt
   @fnl   @plusminus
   _      _      _             _      _              _
   @cap   @a     @s     @d     @f     g      @h-safe @j  @k     @l     @sc   '      ret  
@@ -88,6 +89,7 @@
   base   (layer-switch base)
   desktops (layer-while-held desktops)
   fnl    (layer-while-held fnmedia)
+  qt     (cmd launchctl asuser 502 sudo -u samim.pezeshki /Users/samim.pezeshki/.dotfiles/kanata/toggle-kitty.sh)
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)

@@ -5,6 +5,7 @@
   log-layer-changes yes
   process-unmapped-keys yes
   linux-continue-if-no-devs-found yes
+  danger-enable-cmd yes
 )
 
 ;; Extended src for F-row + fn for Linux media shortcuts
@@ -18,7 +19,7 @@
 )
 
 (deflayer base
-  f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    @qt
   ;; @fnl
   _      _      _             _                     _
   @cap   @a     @s     @d     @f     g      h      @j     @k     @l     @sc   '      ret   
@@ -77,6 +78,7 @@
   desktops (layer-while-held desktops)
   base   (layer-switch base)
   fnl    (layer-while-held fnmedia)
+  qt     (cmd sh -c "kitten quick-access-terminal")
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)

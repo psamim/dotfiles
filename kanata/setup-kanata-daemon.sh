@@ -6,7 +6,7 @@ set -euo pipefail
 ###############################################################################
 
 # Where Kanata binary lives (Homebrew default on Apple Silicon)
-KANATA_PATH="/opt/homebrew/bin/kanata"
+KANATA_PATH="${HOME}/.cargo/bin/kanata"
 
 # Your Kanata config file
 KANATA_CFG_PATH="${HOME}/.dotfiles/kanata/kanata-mac.kbd"
