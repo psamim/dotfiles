@@ -111,6 +111,11 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export VISUAL="nvim"
 export EDITOR="nvim"
+
+if [[ -z "$KITTY_LISTEN_ON" ]]; then
+  local _kitty_sock=$(ls /tmp/kitty-main-* 2>/dev/null | head -1)
+  [[ -n "$_kitty_sock" ]] && export KITTY_LISTEN_ON="unix:$_kitty_sock"
+fi
 if [ -n "$NVIM" ]; then
   export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
   export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
