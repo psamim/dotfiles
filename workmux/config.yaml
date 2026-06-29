@@ -1,0 +1,16 @@
+nerdfont: true
+merge_strategy: rebase
+agent: claude
+
+# panes:
+#   - command: <agent>
+#     focus: true
+#   - command: pnpm install
+#     split: horizontal
+
+sidebar:
+  templates:
+    tiles:
+      - "{primary} {pane_suffix} {fill} {elapsed}"
+      - "{secondary} {fill} {git_stats}"
+      - "{pane_title} {fill} {pr_number} {pr_checks}"

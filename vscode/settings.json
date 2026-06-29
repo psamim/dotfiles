@@ -1,56 +1,56 @@
 {
   "window.commandCenter": false,
   "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "eslint.codeActionsOnSave.rules": null,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "git.autofetch": true,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["<leader>", "f", "s"],
-      "commands": ["workbench.action.files.save"]
+      "commands": ["workbench.action.files.save"],
     },
     {
       "before": ["<leader>", "d"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "commands": ["workbench.action.toggleSidebarVisibility"],
     },
     {
       "before": ["<leader>", "p"],
-      "commands": ["workbench.action.quickOpen"]
+      "commands": ["workbench.action.quickOpen"],
     },
     {
       "before": ["<leader>", "l", "a"],
-      "commands": ["editor.action.quickFix"]
+      "commands": ["editor.action.quickFix"],
     },
     {
       "before": ["<leader>", "l", "r"],
       "commands": ["editor.action.rename"],
-      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly",
     },
     {
       "before": ["<leader>", "g", "s"],
-      "commands": ["git.showGitStatus"]
+      "commands": ["git.showGitStatus"],
     },
     {
       "before": ["<leader>", "g", "t"],
-      "commands": ["workbench.action.nextEditor"]
+      "commands": ["workbench.action.nextEditor"],
     },
     {
       "before": ["<leader>", "b", "d"],
-      "commands": ["workbench.action.closeActiveEditor"]
-    }
+      "commands": ["workbench.action.closeActiveEditor"],
+    },
   ],
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "diffEditor.renderSideBySide": false,
   "terminal.integrated.scrollback": 100000,
@@ -62,7 +62,7 @@
   "vim.leader": "<space>",
   "vim.useSystemClipboard": true,
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "vim.enableNeovim": true,
   "window.zoomLevel": 2,
@@ -70,7 +70,7 @@
   "notebook.lineNumbers": "on",
   "editor.fontFamily": "Iosevka Etoile, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 14,
-  "workbench.colorTheme": "Gruvbox Material Dark",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "gruvboxMaterial.colorfulSyntax": true,
   "gruvboxMaterial.darkWorkbench": "flat",
   "editor.minimap.enabled": false,
@@ -92,5 +92,5 @@
   "workbench.startupEditor": "none",
   "claudeCode.preferredLocation": "sidebar",
   "chat.extensionUnification.enabled": false,
-  "chat.disableAIFeatures": true
+  "chat.disableAIFeatures": true,
 }

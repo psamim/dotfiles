@@ -235,6 +235,7 @@ function verify_os () {
     # Testcontainers should use the Colima VM instance local address as host
     export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j 2>/dev/null | jq -r '.address // ""')
     source <(kubectl completion zsh)
+    source <(workmux completions zsh)
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
     export PATH="/opt/homebrew/bin:$PATH"

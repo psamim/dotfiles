@@ -59,6 +59,10 @@ ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-te
 rm -rf $HOME/.config/karabiner
 ln -sf $PWD/karabiner $HOME/.config/karabiner
 
+# workmux
+mkdir -p "$HOME/.config/workmux"
+ln -sf "$PWD/workmux/config.yaml" "$HOME/.config/workmux/config.yaml"
+
 # Code
 ln -sf $PWD/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 ln -sf $PWD/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"

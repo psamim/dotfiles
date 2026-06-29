@@ -119,6 +119,10 @@ mkdir -p $HOME/.config/kitty
 ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
 ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-terminal.conf
 
+# workmux
+mkdir -p "$HOME/.config/workmux"
+ln -sf "$PWD/workmux/config.yaml" "$HOME/.config/workmux/config.yaml"
+
 # autorandr
 rm -rf $HOME/.config/autorandr
 ln -sf $PWD/autorandr $HOME/.config/autorandr
