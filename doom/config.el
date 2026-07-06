@@ -918,6 +918,21 @@ from VEVENT to keep it a simple personal event."
   :config
   )
 
+(defun psamim/org-roam-dailies-yearly-file ()
+  "Return the yearly journal file name for the current capture.
+Prefer an existing plain `.org' file, then an existing encrypted
+`.org.gpg'; otherwise create a new plain `.org' file.  Called by
+`file+datetree'; at call time `org-roam-directory' is bound to the
+dailies directory."
+  (let* ((time  (or (org-capture-get :default-time) (current-time)))
+         (year  (format-time-string "%Y" time))
+         (plain (concat year ".org"))
+         (crypt (concat year ".org.gpg")))
+    (cond
+     ((file-exists-p (expand-file-name plain org-roam-directory)) plain)
+     ((file-exists-p (expand-file-name crypt org-roam-directory)) crypt)
+     (t plain))))
+
 (after! org-roam
   (require 'org-roam-dailies)
   (setq
@@ -929,7 +944,7 @@ from VEVENT to keep it a simple personal event."
 
    org-roam-dailies-capture-templates
    '(("b" "archive-to-today" entry "* %?" :target
-      (file+datetree "%<%Y>.org.gpg" "week")))
+      (file+datetree psamim/org-roam-dailies-yearly-file "week")))
 
    ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
    org-roam-node-display-template
