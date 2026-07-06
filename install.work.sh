@@ -63,6 +63,10 @@ ln -sf $PWD/karabiner $HOME/.config/karabiner
 mkdir -p "$HOME/.config/workmux"
 ln -sf "$PWD/workmux/config.yaml" "$HOME/.config/workmux/config.yaml"
 
+# emacs-plus
+mkdir -p "$HOME/.config/emacs-plus"
+ln -sf "$PWD/emacs-plus/build.yml" "$HOME/.config/emacs-plus/build.yml"
+
 # Code
 ln -sf $PWD/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 ln -sf $PWD/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"

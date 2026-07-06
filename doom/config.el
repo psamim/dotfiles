@@ -944,7 +944,7 @@ dailies directory."
 
    org-roam-dailies-capture-templates
    '(("b" "archive-to-today" entry "* %?" :target
-      (file+datetree psamim/org-roam-dailies-yearly-file "week")))
+      (file+datetree psamim/org-roam-dailies-yearly-file week)))
 
    ;; https://github.com/org-roam/org-roam/issues/2143#issuecomment-1357558467
    org-roam-node-display-template
