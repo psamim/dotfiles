@@ -29,7 +29,7 @@
 )
 
 (deflayer base
-  M-f1   M-f2   M-f3   M-f4   f5     f6     f7     f8     f9     f10    f11    @qt
+  M-f1   M-f2   M-f3   M-f4   f5     f6     f7     f8     f9     f10    f11    f12
   @fnl   @plusminus
   _      _      _             _      _              _
   @cap   @a     @s     @d     @f     g      @h-safe @j  @k     @l     @sc   '      ret  
@@ -89,7 +89,6 @@
   base   (layer-switch base)
   desktops (layer-while-held desktops)
   fnl    (layer-while-held fnmedia)
-  qt     (cmd launchctl asuser 502 sudo -u samim.pezeshki /Users/samim.pezeshki/.dotfiles/kanata/toggle-kitty.sh)
 
   ;; tap-dancing
   cap (tap-hold-press $tt $ht esc @nav)

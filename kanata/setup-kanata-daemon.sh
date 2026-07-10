@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-###############################################################################
-# Configuration – change these if needed
-###############################################################################
-
-# Where Kanata binary lives (Homebrew default on Apple Silicon)
-KANATA_PATH="${HOME}/.cargo/bin/kanata"
-
-# Your Kanata config file
+KANATA_PATH="/opt/homebrew/bin/kanata"
 KANATA_CFG_PATH="${HOME}/.dotfiles/kanata/kanata-mac.kbd"
 
 # Karabiner VirtualHIDDevice paths (from standalone pkg install)

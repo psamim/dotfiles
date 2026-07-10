@@ -106,7 +106,6 @@ export BORG_CONFIG_DIR="/home/samim/borg"
 export BORG_CACHE_DIR="/home/samim/borg/cache"
 export PIPENV_VENV_IN_PROJECT=1
 export WORKON_HOME=~/.virtualenvs
-export TERM=xterm
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export VISUAL="nvim"
@@ -144,7 +143,6 @@ alias tdown="aria2c --all-proxy=http://127.0.0.1:7777 --conf-path=${HOME}/.aria2
 alias rdown="aria2c --enable-rpc --rpc-listen-port=6800 --rpc-listen-all=true --conf-path=${HOME}/.aria2/down.conf"
 alias o='xdg-open'
 alias xclip='xclip -selection clipboard'
-alias tmux='TERM=screen-256color-bce direnv exec / tmux'
 alias magit='emacsclient -nw -e \(magit-status\)'
 alias tags="grep -orh '@.*' ~/Notes/journal | sort | uniq -c"
 alias ledger="ledger --pedantic --explicit --strict"
