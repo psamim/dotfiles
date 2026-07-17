@@ -5,9 +5,9 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
+  { import = "astrocommunity.pack.lua" },
   -- AI
-  { import = "astrocommunity.completion.copilot-vim" },
-  { import = "astrocommunity.programming-language-support.csv-vim" },
+  -- { import = "astrocommunity.completion.copilot-vim" },
   { import = "astrocommunity.ai.sidekick-nvim" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   -- { import = "astrocommunity.completion.avante-nvim" },
@@ -17,6 +17,7 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.php" },
   { import = "astrocommunity.pack.kotlin" },
+  -- { import = "astrocommunity.programming-language-support.csv-vim" },
 
   -- Lint & Test
   { import = "astrocommunity.pack.eslint" },
