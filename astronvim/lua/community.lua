@@ -26,11 +26,10 @@ return {
   -- { import = "astrocommunity.pack.prettier" },
 
   -- Utility
-  { import = "astrocommunity.utility.noice-nvim" },
-  { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.git.gitlinker-nvim" },
+  -- { import = "astrocommunity.utility.noice-nvim" },
   -- { import = "astrocommunity.scrolling.satellite-nvim" },
   -- { import = "astrocommunity.editing-support.nvim-treesitter-context" },
 }
