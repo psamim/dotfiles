@@ -86,6 +86,7 @@ brew jpeg
 brew jpeg-turbo
 brew jpeg-xl
 brew jq
+brew json-c
 brew kanata
 brew kompose
 brew krb5
@@ -125,6 +126,7 @@ brew libomp
 brew libplacebo
 brew libpng
 brew libpq
+brew libpsl
 brew libraw
 brew librist
 brew librsvg
@@ -182,7 +184,6 @@ brew nettle
 brew npth
 brew nspr
 brew nss
-brew oh-my-posh
 brew oniguruma
 brew opencore-amr
 brew openexr
@@ -210,6 +211,7 @@ brew pugixml
 brew pup
 brew python-yq
 brew python@3.14
+brew qrencode
 brew qtbase
 brew rav1e
 brew rclone
@@ -218,7 +220,6 @@ brew reattach-to-user-namespace
 brew resvg
 brew ripgrep
 brew rsync
-brew rtmpdump
 brew rubberband
 brew rust
 brew sdl2
@@ -232,7 +233,6 @@ brew speex
 brew sponge
 brew sqlite
 brew srt
-brew starship
 brew svt-av1
 brew syncthing
 brew tesseract
@@ -243,7 +243,6 @@ brew tidy-html5
 brew tmux
 brew tree
 brew tree-sitter
-brew tree-sitter@0.25
 brew unibilium
 brew unixodbc
 brew utf8proc
@@ -274,7 +273,6 @@ cask alacritty
 cask alt-tab
 cask cursor
 cask firefox
-cask flameshot
 cask font-dejavu
 cask font-iosevka
 cask font-iosevka-etoile
@@ -296,7 +294,6 @@ cask raycast
 cask signal
 cask spotify
 cask stats
-cask telegram
 cask the-unarchiver
 cask visual-studio-code
 cask whatsapp
