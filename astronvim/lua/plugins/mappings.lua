@@ -29,6 +29,24 @@ return {
             end,
             desc = "Find commands",
           },
+          ["<Leader>ff"] = {
+            function()
+              require("snacks").picker.smart {
+                multi = { "buffers", "recent", "files" },
+                format = "file",
+                matcher = {
+                  fuzzy = true,
+                  smartcase = true,
+                  ignorecase = true,
+                  cwd_bonus = true,
+                  frecency = true,
+                  sort_empty = true,
+                },
+                transform = "unique_file",
+              }
+            end,
+            desc = "Find files",
+          },
           ["<Leader>d"] = {
             function()
               if vim.bo.filetype == "neo-tree" then
