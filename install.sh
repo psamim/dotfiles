@@ -33,6 +33,7 @@ ln -sf "$PWD/doom" "$HOME/.doom.d"
 
 # zsh
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
+ln -sf "$PWD/zsh/p10k.zsh" "$HOME/.p10k.zsh"
 
 # Vimperator
 rm -rf "$HOME/.vimperator"
