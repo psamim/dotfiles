@@ -9,7 +9,17 @@ return {
     -- pinned: codediff.nvim v2.50.0+ refactored to a typed Path object for
     -- get_paths(), which review.nvim v1.9.1's hooks.lua doesn't handle yet,
     -- crashing on `:Review` (attempt to call method 'gsub' on a table)
-    { "esmuellert/codediff.nvim", version = "v2.49.2" },
+    {
+      "esmuellert/codediff.nvim",
+      version = "v2.49.2",
+      -- review.nvim only forwards `readonly` from its own `codediff` opts
+      -- table to review.nvim internals; it never calls codediff.setup()
+      -- with the rest, so codediff-native options must be set here.
+      opts = {
+        explorer = { view_mode = "tree" }, -- "list" (flat file list) or "tree" (directory tree)
+        history = { view_mode = "tree" }, -- "list" or "tree" for files under commits
+      },
+    },
     "MunifTanjim/nui.nvim",
   },
   cmd = { "Review" },
@@ -26,7 +36,7 @@ return {
       -- registered immediately; review.nvim only binds them when NOT
       -- readonly (readonly mode uses bare i/d/e/c instead). Toggle back
       -- to readonly with <leader>rt if you want buffers non-editable.
-      readonly = false,
+      readonly = true,
     },
     keymaps = {
       -- Under the <leader>r review prefix instead of bare <leader>c, since
