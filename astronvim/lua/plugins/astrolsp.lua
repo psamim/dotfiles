@@ -33,6 +33,14 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
+        -- vtsls (the TS/JS language server from astrocommunity.pack.typescript) has
+        -- its own built-in formatter with different defaults than the project's
+        -- Prettier/ESLint config. With format_on_save enabled globally, it would
+        -- run alongside the eslint_fix_on_save autocmd below and clobber its
+        -- output, reformatting files in a way that fails `eslint`/CI lint.
+        -- eslint's fixAll (which enforces Prettier via eslint-plugin-prettier)
+        -- must be the only formatter touching these filetypes.
+        "vtsls",
       },
       timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
