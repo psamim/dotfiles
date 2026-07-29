@@ -112,8 +112,8 @@ export VISUAL="nvim"
 export EDITOR="nvim"
 
 if [[ -z "$KITTY_LISTEN_ON" ]]; then
-  local _kitty_sock=$(ls /tmp/kitty-main-* 2>/dev/null | head -1)
-  [[ -n "$_kitty_sock" ]] && export KITTY_LISTEN_ON="unix:$_kitty_sock"
+  local -a socks=( /tmp/kitty-main-*(N) )
+  [[ ${#socks} -gt 0 ]] && export KITTY_LISTEN_ON="unix:${socks[1]}"
 fi
 if [ -n "$NVIM" ]; then
   export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
