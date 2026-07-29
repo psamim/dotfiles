@@ -28,6 +28,14 @@ return {
             end,
             desc = "Find files",
           },
+          ["<Leader>fp"] = {
+            function()
+              local path = vim.fn.expand "%:p"
+              vim.fn.setreg("+", path)
+              vim.notify(path)
+            end,
+            desc = "Copy full file path",
+          },
           ["<Leader>d"] = {
             function()
               if vim.bo.filetype == "neo-tree" then
