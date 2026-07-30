@@ -2,11 +2,11 @@ nerdfont: true
 merge_strategy: rebase
 agent: claude
 
-# panes:
-#   - command: <agent>
-#     focus: true
-#   - command: pnpm install
-#     split: horizontal
+panes:
+  - command: <agent>
+    focus: false
+  - split: horizontal
+    focus: true
 
 sidebar:
   templates:
@@ -14,3 +14,9 @@ sidebar:
       - "{primary} {pane_suffix} {fill} {elapsed}"
       - "{secondary} {fill} {git_stats}"
       - "{pane_title} {fill} {pr_number} {pr_checks}"
+
+files:
+  copy:
+    - .env
+  # symlink:
+  #   - .next/cache
