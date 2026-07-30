@@ -112,8 +112,8 @@ export VISUAL="nvim"
 export EDITOR="nvim"
 
 if [[ -z "$KITTY_LISTEN_ON" ]]; then
-  local _kitty_sock=$(ls /tmp/kitty-main-* 2>/dev/null | head -1)
-  [[ -n "$_kitty_sock" ]] && export KITTY_LISTEN_ON="unix:$_kitty_sock"
+  local -a socks=( /tmp/kitty-main-*(N) )
+  [[ ${#socks} -gt 0 ]] && export KITTY_LISTEN_ON="unix:${socks[1]}"
 fi
 if [ -n "$NVIM" ]; then
   export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
@@ -256,12 +256,7 @@ function verify_os () {
     [ -f ~/.asdf/plugins/golang/set-env.zsh ] && . ~/.asdf/plugins/golang/set-env.zsh
 
   elif [[ $myos == "Linux" ]] then
-    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-      ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-    fi
-    if [ ! -f "$SSH_AUTH_SOCK" ]; then
-      source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-    fi
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/rbw/ssh-agent-socket"
     export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   fi
 }
