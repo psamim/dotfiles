@@ -30,6 +30,7 @@ return {
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.git.gitlinker-nvim" },
+  { import = "astrocommunity.bars-and-lines.vim-illuminate" },
   -- { import = "astrocommunity.utility.noice-nvim" },
   -- { import = "astrocommunity.scrolling.satellite-nvim" },
   -- { import = "astrocommunity.editing-support.nvim-treesitter-context" },
