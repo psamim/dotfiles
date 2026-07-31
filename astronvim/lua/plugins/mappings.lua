@@ -36,16 +36,7 @@ return {
             end,
             desc = "Copy full file path",
           },
-          ["<Leader>d"] = {
-            function()
-              if vim.bo.filetype == "neo-tree" then
-                vim.cmd.wincmd "p"
-              else
-                vim.cmd.Neotree "focus"
-              end
-            end,
-            desc = "Toggle Explorer Focus",
-          },
+          ["<Leader>d"] = { "<Cmd>Yazi<CR>", desc = "Open yazi at the current file" },
         },
         t = {
           ["jk"] = [[<C-\><C-n>]],

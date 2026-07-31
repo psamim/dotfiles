@@ -26,6 +26,7 @@ return {
   -- { import = "astrocommunity.pack.prettier" },
 
   -- Utility
+  { import = "astrocommunity.file-explorer.yazi-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.git.gitlinker-nvim" },
