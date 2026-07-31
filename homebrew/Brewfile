@@ -17,6 +17,7 @@ brew awscli
 brew bash
 brew bat
 brew boost
+brew broot
 brew brotli
 brew ca-certificates
 brew cairo
@@ -58,6 +59,7 @@ brew giflib
 brew git
 brew git-delta
 brew git-lfs
+brew gitui
 brew glib
 brew glow
 brew gmp
