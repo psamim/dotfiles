@@ -1,6 +1,8 @@
 gui:
   language: en
   showBottomLine: false
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 10
   theme:
     activeBorderColor:
       - '#89b4fa'

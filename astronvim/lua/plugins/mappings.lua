@@ -11,22 +11,12 @@ return {
           ["<A-h>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
           ["<Leader>bd"] = { function() require("astrocore.buffer").close() end, desc = "Close buffer" },
           ["<Leader>ff"] = {
-            function()
-              require("snacks").picker.smart {
-                multi = { "buffers", "recent", "files" },
-                format = "file",
-                matcher = {
-                  fuzzy = true,
-                  smartcase = true,
-                  ignorecase = true,
-                  cwd_bonus = true,
-                  frecency = true,
-                  sort_empty = true,
-                },
-                transform = "unique_file",
-              }
-            end,
+            function() require("fff").find_files() end,
             desc = "Find files",
+          },
+          ["<Leader>fw"] = {
+            function() require("fff").live_grep_under_cursor() end,
+            desc = "Search word/selection",
           },
           ["<Leader>fp"] = {
             function()
@@ -37,6 +27,12 @@ return {
             desc = "Copy full file path",
           },
           ["<Leader>d"] = { "<Cmd>Yazi<CR>", desc = "Open yazi at the current file" },
+        },
+        x = {
+          ["<Leader>fw"] = {
+            function() require("fff").live_grep_under_cursor() end,
+            desc = "Search selection",
+          },
         },
         t = {
           ["jk"] = [[<C-\><C-n>]],

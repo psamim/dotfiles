@@ -3,5 +3,8 @@ return {
   name = "catppuccin",
   opts = {
     transparent_background = true,
+    integrations = {
+      barbar = true,
+    },
   },
 }
