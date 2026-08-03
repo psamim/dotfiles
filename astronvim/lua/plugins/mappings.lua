@@ -7,8 +7,8 @@ return {
         -- first key is the mode
         n = {
           ["<Leader>fs"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
-          ["<A-l>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-          ["<A-h>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+          ["<A-l>"] = { "<Cmd>BufferNext<CR>", desc = "Next buffer" },
+          ["<A-h>"] = { "<Cmd>BufferPrevious<CR>", desc = "Previous buffer" },
           ["<Leader>bd"] = { function() require("astrocore.buffer").close() end, desc = "Close buffer" },
           ["<Leader>ff"] = {
             function() require("fff").find_files() end,
