@@ -245,6 +245,8 @@ brew tidy-html5
 brew tmux
 brew tree
 brew tree-sitter
+brew tree-sitter@0.25
+brew tuicr
 brew unibilium
 brew unixodbc
 brew utf8proc
@@ -336,4 +338,4 @@ brew brew-file
 tap withgraphite/tap
 
 # App Store applications
-appstore 490179405 Okta Verify (9.65.2)
+appstore 490179405 Okta Verify (9.67.1)
