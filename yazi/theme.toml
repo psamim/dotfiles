@@ -1,2 +1,5 @@
 [flavor]
 dark = "catppuccin-mocha"
+
+[indicator]
+preview = { fg = "#303446", bg = "#babbf1" } 
