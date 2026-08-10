@@ -114,6 +114,7 @@ ln -sf $PWD/lazygit/config.yml $HOME/.config/lazygit/config.yml
 # yazi
 rm -rf $HOME/.config/yazi
 ln -sf $PWD/yazi $HOME/.config/yazi
+ya pkg install
 
 # kitty
 mkdir -p $HOME/.config/kitty
