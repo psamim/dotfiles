@@ -3,6 +3,11 @@ use = "yazi-rs/plugins:no-status"
 rev = "0be29a9"
 hash = "3e023d31f29201efdac2a6ae35fedb78"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "0be29a9"
+hash = "fbb53c3c04f816d737f9f4b1d29f3310"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "be0b21d"
