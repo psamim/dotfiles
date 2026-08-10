@@ -51,6 +51,11 @@ ln -sf $PWD/alacritty $HOME/.config/alacritty
 mkdir -p $HOME/.config/lazygit
 ln -sf $PWD/lazygit/config.yml $HOME/.config/lazygit/config.yml
 
+# yazi
+rm -rf $HOME/.config/yazi
+ln -sf $PWD/yazi $HOME/.config/yazi
+ya pkg install
+
 # kitty
 mkdir -p $HOME/.config/kitty
 ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
