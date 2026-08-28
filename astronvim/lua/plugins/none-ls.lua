@@ -3,6 +3,7 @@ return {
   "nvimtools/none-ls.nvim",
   opts = function(_, opts)
     local null_ls = require "null-ls"
+    local null_ls_utils = require "null-ls.utils"
     local prettier_disabled_root_prefixes = {}
     local exclusions_file = vim.fn.stdpath "config" .. "/lua/plugins/.prettier-disabled-root-prefixes"
     if vim.fn.filereadable(exclusions_file) == 1 then
@@ -29,8 +30,8 @@ return {
         -- Prefer a project-local Prettier, but fall back to the system
         -- formatter for standalone files without a package.json.
         prefer_local = "node_modules/.bin",
-        condition = function(utils)
-          local root = vim.fs.normalize(utils.root())
+        condition = function()
+          local root = vim.fs.normalize(null_ls_utils.get_root())
           for _, prefix in ipairs(prettier_disabled_root_prefixes) do
             prefix = vim.fs.normalize(prefix):gsub("/$", "")
             if root == prefix or vim.startswith(root, prefix .. "/") then return false end
