@@ -3,6 +3,17 @@ return {
   "nvimtools/none-ls.nvim",
   opts = function(_, opts)
     local null_ls = require "null-ls"
+    local null_ls_utils = require "null-ls.utils"
+    local prettier_disabled_root_prefixes = {}
+    local exclusions_file = vim.fn.stdpath "config" .. "/lua/plugins/.prettier-disabled-root-prefixes"
+    if vim.fn.filereadable(exclusions_file) == 1 then
+      for _, line in ipairs(vim.fn.readfile(exclusions_file)) do
+        line = vim.fn.expand(vim.trim(line))
+        if line ~= "" and not vim.startswith(line, "#") then
+          table.insert(prettier_disabled_root_prefixes, line)
+        end
+      end
+    end
 
     -- Check supported formatters and linters
     -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -16,21 +27,17 @@ return {
       -- null_ls.builtins.formatting.prettier,
       --
       null_ls.builtins.formatting.prettier.with {
-        -- Use ONLY the project-local prettier; never fall back to a global
-        -- (e.g. Mason's prettier 3.x), which would drift from the version a
-        -- project pins and enforces via eslint-plugin-prettier.
-        only_local = "node_modules/.bin",
-        -- JS/TS/TSX are formatted via `eslint --fix` on save instead (see the
-        -- eslint_fix_on_save autocmd in astrolsp.lua). In repos like personio-web,
-        -- prettier is enforced THROUGH eslint-plugin-prettier, so running eslint's
-        -- fix is the single source of truth and matches CI lint exactly. Letting
-        -- none-ls prettier also touch these would risk a version/format mismatch.
-        disabled_filetypes = {
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-        },
+        -- Prefer a project-local Prettier, but fall back to the system
+        -- formatter for standalone files without a package.json.
+        prefer_local = "node_modules/.bin",
+        condition = function()
+          local root = vim.fs.normalize(null_ls_utils.get_root())
+          for _, prefix in ipairs(prettier_disabled_root_prefixes) do
+            prefix = vim.fs.normalize(prefix):gsub("/$", "")
+            if root == prefix or vim.startswith(root, prefix .. "/") then return false end
+          end
+          return true
+        end,
       },
     })
   end,

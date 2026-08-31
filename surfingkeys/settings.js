@@ -1,12 +1,5 @@
 const { mapkey, map, unmap, iunmap } = api;
 
-// an example to create a new mapping `ctrl-y`
-mapkey("<Ctrl-y>", "Show me the money", function () {
-  Front.showPopup(
-    "a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close).",
-  );
-});
-
 settings.tabsThreshold = 0;
 
 map("<Ctrl-u>", "u");
@@ -62,3 +55,8 @@ settings.theme =
 if (window.location.origin === "https://meet.google.com") {
   unmap("<Ctrl-d>");
 }
+
+settings.blocklist = {
+  "https://docs.google.com": 1,
+  "https://sheets.google.com": 1,
+};

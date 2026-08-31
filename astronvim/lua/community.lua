@@ -3,11 +3,10 @@
 -- This guarantees that the specs are processed before any user plugins.
 
 ---@type LazySpec
-return {
+local specs = {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
   -- AI
-  -- { import = "astrocommunity.completion.copilot-vim" },
   { import = "astrocommunity.ai.sidekick-nvim" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   -- { import = "astrocommunity.completion.avante-nvim" },
@@ -36,3 +35,10 @@ return {
   -- { import = "astrocommunity.scrolling.satellite-nvim" },
   -- { import = "astrocommunity.editing-support.nvim-treesitter-context" },
 }
+
+local copilot_disabled_file = vim.fn.stdpath "config" .. "/lua/plugins/.copilot-disabled"
+if vim.fn.filereadable(copilot_disabled_file) == 0 then
+  table.insert(specs, 3, { import = "astrocommunity.completion.copilot-vim" })
+end
+
+return specs

@@ -1,0 +1,6 @@
+# One absolute directory prefix per line.
+# Projects and worktrees below these directories skip none-ls Prettier.
+#
+# Examples:
+# ~/src/company
+# /home/samim/worktrees

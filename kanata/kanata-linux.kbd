@@ -31,7 +31,7 @@
   _      _      _      _      _      _      _      _      _      _      _      _
   ;; @fnl
   C-tab  A-F4    C-w           C-r                  C-u    C-r
-  @cap   lctl   lalt   C-d    lsft   C-z    left   down   up     rght   bspc  tab    ret
+  @cap   lctl   lalt   C-d    lsft   C-A-z    left   down   up     rght   bspc  tab    ret
                        C-c    C-j    C-k
   C-spc
 )
