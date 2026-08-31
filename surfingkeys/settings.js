@@ -40,7 +40,7 @@ if (window.location.origin === "https://mail.google.com") {
 }
 
 settings.modeAfterYank = "Normal";
-settings.showModeStatus = true;
+settings.showModeStatus = false;
 settings.hintShiftNonActive = true;
 
 settings.theme =
@@ -49,6 +49,11 @@ settings.theme =
   width: 100%;\
   top: 0px;\
   left: 0;\
+}\
+#sk_status {\
+  left: auto !important;\
+  right: 5px !important;\
+  bottom: 5px !important;\
 }\
 ";
 
@@ -60,3 +65,5 @@ settings.blocklist = {
   "https://docs.google.com": 1,
   "https://sheets.google.com": 1,
 };
+
+
