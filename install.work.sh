@@ -76,3 +76,10 @@ ln -sf "$PWD/emacs-plus/build.yml" "$HOME/.config/emacs-plus/build.yml"
 # Code
 ln -sf $PWD/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 ln -sf $PWD/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+# claude
+mkdir -p "$HOME/.claude"
+ln -sf "$PWD/agents/agents.md" "$HOME/.claude/CLAUDE.md"
+
+# eslint
+ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js

@@ -35,11 +35,6 @@ ln -sf "$PWD/doom" "$HOME/.doom.d"
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
 ln -sf "$PWD/zsh/p10k.zsh" "$HOME/.p10k.zsh"
 
-# Vimperator
-rm -rf "$HOME/.vimperator"
-ln -sf "$PWD/vimperator" "$HOME/.vimperator"
-ln -sf "$PWD/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
-
 # Vim
 rm -rf "$HOME/.vimrc"
 rm -rf "$HOME/.config/nvim"
@@ -56,23 +51,6 @@ mkdir -p "$HOME/.config/systemd/"
 cp -r "$PWD/systemd/user" "$HOME/.config/systemd/user"
 cp -r "$PWD/systemd/system/*" "/etc/systemd/system"
 
-# beets
-mkdir -p "$HOME/.config/beets"
-cp -r "$PWD/beets/config.yaml" "$HOME/.config/beets/config.yaml"
-
-# arbtt
-mkdir -p "$HOME/.arbtt/"
-ln -sf "$PWD/arbtt/categorize.cfg" "$HOME/.arbtt/categorize.cfg"
-
-# tint2
-mkdir -p "$HOME/.config/tint2/"
-ln -sf $PWD/tint2/tint2rc $HOME/.config/tint2/tint2rc
-
-# vimfx
-echo "vimfx: Remember to change config_file_directory prop in Firefox"
-rm -rf "$HOME/.config/vimfx"
-ln -sf "$PWD/vimfx" "$HOME/.config/vimfx"
-
 # gpg
 ln -sf $PWD/pam_environment $HOME/.pam_environment
 ln -sf $PWD/gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
@@ -80,13 +58,13 @@ ln -sf $PWD/gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 # eslint
 ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js
 
+# claude
+mkdir -p "$HOME/.claude"
+ln -sf "$PWD/agents/agents.md" "$HOME/.claude/CLAUDE.md"
+
 # pacman
 rm -rf $HOME/.config/pacman
 ln -sf $PWD/pacman $HOME/.config/pacman
-
-# ledger-autosync
-rm -rf $HOME/.config/ledger-autosync
-ln -sf $PWD/ledger-autosync $HOME/.config/ledger-autosync
 
 # ideavim
 ln -sf $PWD/ideavim/ideavimrc $HOME/.ideavimrc
@@ -98,10 +76,6 @@ for f in $PWD/desktop-files/*.desktop; do
 done
 
 kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-
-# rofi
-rm -rf $HOME/.config/rofi
-ln -sf $PWD/rofi $HOME/.config/rofi
 
 # alacritty
 rm -rf $HOME/.config/alacritty
@@ -124,10 +98,6 @@ ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-te
 # workmux
 mkdir -p "$HOME/.config/workmux"
 ln -sf "$PWD/workmux/config.yaml" "$HOME/.config/workmux/config.yaml"
-
-# autorandr
-rm -rf $HOME/.config/autorandr
-ln -sf $PWD/autorandr $HOME/.config/autorandr
 
 rm -rf "$HOME/.config/fontconfig"
 ln -sf $PWD/fontconfig $HOME/.config/fontconfig
