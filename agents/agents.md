@@ -9,6 +9,18 @@
 - High Information Density: If a phrase provides zero new data, delete it entirely.
 - No Conversational Fluff: Skip preambles, introductory commentary, and polite summaries. 
   (Do not say: "Sure, let's explore that...", "Here is a breakdown...").
+- Write so a competent non-native reader gets it on the first pass.
+- Plain, common words. If a short everyday word works, use it.
+- Short sentences.
+- Concrete over abstract: name the file, the function, the value.
+- No metaphors, no idioms, no wordplay, no "elegant" phrasing.
+
+Examples of what I want:
+- "This runs twice because the effect has no dependency array." —
+  not "the effect's unbounded reactivity precipitates a redundant pass."
+- "I changed X. It fixes Y. Z is still open." —
+  not "I've gone ahead and made a targeted adjustment to X, which should
+  address the underlying concern around Y."
 
 # Coding
 - Surgical changes. Touch only what you must.
@@ -30,6 +42,9 @@
 - Never `git push --force` / `--force-with-lease`, and never push a rebase,
   without asking first.
 
-# Stop-and-ask
+## During a task
 - Two strikes. A command failing twice the same way → stop. Give me the exact
   command, the error, and your two best hypotheses.
+- One sentence before the first tool call saying what you're doing.
+- While working, speak up only when you find something important or
+  change direction.
