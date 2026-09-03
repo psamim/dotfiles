@@ -1,0 +1,35 @@
+# Font
+font-family = Iosevka Nerd Font Mono
+font-size = 20
+
+# Theme
+theme = Catppuccin Mocha
+
+# Window
+background-opacity = 0.99
+background-blur = 64
+window-padding-x = 8
+window-padding-y = 8
+window-decoration = false
+macos-titlebar-style = hidden
+macos-option-as-alt = true
+background-image = ~/.config/kitty/background.png
+
+# Scrollback
+scrollback-limit = 10000000
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+custom-shader = shaders/cursor_tail.glsl
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Misc
+copy-on-select = false
+
+# Let tmux handle Cmd+M (prefix key) and Cmd+T (new window), not Ghostty's tabs
+keybind = cmd+m=unbind
+keybind = cmd+t=text:\x14
+keybind = cmd+c=text:\x03
