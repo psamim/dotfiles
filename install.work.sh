@@ -56,10 +56,12 @@ rm -rf $HOME/.config/yazi
 ln -sf $PWD/yazi $HOME/.config/yazi
 ya pkg install
 
-# kitty
-mkdir -p $HOME/.config/kitty
-ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
-ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-terminal.conf
+# ghostty
+mkdir -p $HOME/.config/ghostty
+ln -sf $PWD/ghostty/config $HOME/.config/ghostty/config
+if [ ! -d "$HOME/.config/ghostty/shaders" ]; then
+  git clone https://github.com/sahaj-b/ghostty-cursor-shaders "$HOME/.config/ghostty/shaders"
+fi
 
 # Karabiner
 rm -rf $HOME/.config/karabiner
