@@ -2,6 +2,9 @@
 # This scripts installs all conf files
 # by creating appropriate symbolic links
 
+git submodule update --init --recursive --force
+git submodule foreach --recursive git checkout -- .
+
 # aria2
 mkdir -p "$HOME/.aria2"
 ln -sf $PWD/aria2/* $HOME/.aria2/
@@ -24,7 +27,8 @@ ln -sf "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
 rm -rf "$HOME/.tmux"
 ln -sf "$PWD/tmux" "$HOME/.tmux"
 mkdir -p $HOME/.tmux/plugins
-ln -sf $PWD/tpm $HOME/.tmux/plugins/tpm
+ln -sfn $PWD/tpm $HOME/.tmux/plugins/tpm
+$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 # emacs
 rm -rf "$HOME/.emacs.d"
@@ -82,9 +86,8 @@ ln -sf $PWD/eslintrc.js $HOME/.eslintrc.js
 # ghostty
 mkdir -p $HOME/.config/ghostty
 ln -sf $PWD/ghostty/config $HOME/.config/ghostty/config
-if [ ! -d "$HOME/.config/ghostty/shaders" ]; then
-  git clone https://github.com/sahaj-b/ghostty-cursor-shaders "$HOME/.config/ghostty/shaders"
-fi
+rm -rf $HOME/.config/ghostty/shaders
+ln -sf $PWD/ghostty/shaders $HOME/.config/ghostty/shaders
 
 # tuicr
 mkdir -p $HOME/.config/tuicr
