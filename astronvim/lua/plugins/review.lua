@@ -16,8 +16,13 @@ return {
       -- table to review.nvim internals; it never calls codediff.setup()
       -- with the rest, so codediff-native options must be set here.
       opts = {
+        diff = { layout = "inline" }, -- default to single-pane inline diff instead of side-by-side
         explorer = { view_mode = "tree" }, -- "list" (flat file list) or "tree" (directory tree)
         history = { view_mode = "tree" }, -- "list" or "tree" for files under commits
+        keymaps = {
+          -- match AstroNvim's gitsigns [g/]g hunk nav instead of the default ]c/[c
+          view = { next_hunk = "]g", prev_hunk = "[g" },
+        },
       },
     },
     "MunifTanjim/nui.nvim",

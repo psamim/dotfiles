@@ -90,11 +90,6 @@ rm -rf $HOME/.config/yazi
 ln -sf $PWD/yazi $HOME/.config/yazi
 ya pkg install
 
-# kitty
-mkdir -p $HOME/.config/kitty
-ln -sf $PWD/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
-ln -sf $PWD/kitty/quick-access-terminal.conf $HOME/.config/kitty/quick-access-terminal.conf
-
 # ghostty
 mkdir -p $HOME/.config/ghostty
 ln -sf $PWD/ghostty/config $HOME/.config/ghostty/config
@@ -114,3 +109,7 @@ ln -sf "$PWD/paru" "$HOME/.config/paru"
 
 rm -rf "$HOME/.config/pacmanfile"
 ln -sf "$PWD/pacmanfile" "$HOME/.config/pacmanfile"
+
+# tuicr
+mkdir -p $HOME/.config/tuicr
+ln -sf $PWD/tuicr/config.toml $HOME/.config/tuicr/config.toml
