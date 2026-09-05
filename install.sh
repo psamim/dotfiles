@@ -87,7 +87,9 @@ ln -sf $PWD/alacritty $HOME/.config/alacritty
 
 # lazygit
 mkdir -p $HOME/.config/lazygit
+mkdir -p $HOME/.config/jesseduffield/lazygit
 ln -sf $PWD/lazygit/config.yml $HOME/.config/lazygit/config.yml
+ln -sf $PWD/lazygit/config.yml $HOME/.config/jesseduffield/lazygit/config.yml
 
 # yazi
 rm -rf $HOME/.config/yazi

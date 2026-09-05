@@ -6,8 +6,8 @@ font-size = 20
 theme = Catppuccin Mocha
 
 # Window
-background-opacity = 0.99
-background-blur = 64
+# background-opacity = 0.99
+# background-blur = 64
 window-padding-x = 8
 window-padding-y = 8
 window-decoration = false

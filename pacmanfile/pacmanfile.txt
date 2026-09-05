@@ -429,7 +429,7 @@ bruno-bin
 # firefox-extension-passff
 hledger-bin
 # asdf-vm
-anki-bin
+anki
 google-chrome
 # breaktimer-bin
 # devbox-bin
@@ -446,15 +446,23 @@ wl-clipboard
 # teamviewer
 # dmenu-wayland-git
 # spotx-linux
-alacritty
 signal-desktop
 zoxide
 torbrowser-launcher
 pacman-contrib
 yp-tools
-bitwarden-cli
 kanata-bin
 github-copilot-cli
+ghostty
+rbw
+yazi
+zen-browser-bin
+git-delta
+python-libtmux
+
+kitty
+kitty-terminfo
+kitty-shell-integration
 
 # Emacs
 typescript-language-server
