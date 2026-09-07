@@ -154,7 +154,7 @@
        (org              ; organize your plain life in plain text
         +dragndrop       ; drag & drop files/images into org buffers
         ;;+hugo            ; use Emacs for hugo blogging
-        +roam2
+        +roam
         +crypt
         ;; +gnuplot
         ;;+jupyter        ; ipython/jupyter support for babel

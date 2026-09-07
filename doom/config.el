@@ -609,8 +609,8 @@
                                       (tags priority-down category-keep)
                                       (search category-keep)))
   ;; ⧗             ―               ﮸          λ ◁ ▷ ✧ ✦
-  (appendq! +ligatures-extra-symbols
-            `(:clock      "⧗ "
+  (cl-callf append +ligatures-extra-symbols
+            '(:clock      "⧗ "
               :circle "⚫"
               :shogi "⛊"
               :white_shogi "☖"
@@ -1004,6 +1004,5 @@ dailies directory."
 (setq +ligatures-extras-in-modes '(org-mode))
 
 (use-package! jest-test-mode
-  :ensure t
   :commands jest-test-mode
   :hook (typescript-mode js-mode typescript-tsx-mode))

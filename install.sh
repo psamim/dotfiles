@@ -31,9 +31,15 @@ ln -sfn $PWD/tpm $HOME/.tmux/plugins/tpm
 $HOME/.tmux/plugins/tpm/bin/install_plugins
 
 # emacs
-rm -rf "$HOME/.emacs.d"
 rm -rf "$HOME/.doom.d"
 ln -sf "$PWD/doom" "$HOME/.doom.d"
+if [ ! -x "$HOME/.emacs.d/bin/doom" ]; then
+  rm -rf "$HOME/.emacs.d"
+  git clone --depth 1 https://github.com/doomemacs/core "$HOME/.emacs.d"
+fi
+# doomemacs/core keeps official modules in the sources/doom+ submodule
+git -C "$HOME/.emacs.d" submodule update --init --recursive --depth 1
+"$HOME/.emacs.d/bin/doom" sync
 
 # zsh
 ln -sf "$PWD/zsh/zshrc" "$HOME/.zshrc"
