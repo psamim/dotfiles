@@ -12,6 +12,17 @@ brew aribb24
 brew asdf
 brew aspell
 brew autoconf
+brew aws-c-auth
+brew aws-c-cal
+brew aws-c-common
+brew aws-c-compression
+brew aws-c-event-stream
+brew aws-c-http
+brew aws-c-io
+brew aws-c-mqtt
+brew aws-c-s3
+brew aws-c-sdkutils
+brew aws-checksums
 brew aws-vault
 brew awscli
 brew bash
@@ -84,6 +95,7 @@ brew imagemagick-full
 brew imath
 brew isl
 brew jbig2dec
+brew jemalloc
 brew jpeg
 brew jpeg-turbo
 brew jpeg-xl
@@ -162,8 +174,9 @@ brew libyaml
 brew libzip
 brew lima
 brew little-cms2
+brew llama.cpp
 brew llhttp
-brew llvm
+brew llvm@22
 brew lpeg
 brew luajit
 brew luv
@@ -224,6 +237,7 @@ brew ripgrep
 brew rsync
 brew rubberband
 brew rust
+brew s2n
 brew sdl2
 brew sdl3
 brew sevenzip
@@ -245,7 +259,6 @@ brew tidy-html5
 brew tmux
 brew tree
 brew tree-sitter
-brew tree-sitter@0.25
 brew tuicr
 brew unibilium
 brew unixodbc
@@ -257,6 +270,7 @@ brew watch
 brew webp
 brew wget
 brew whisper-cpp
+brew workmux
 brew x264
 brew x265
 brew xorgproto
@@ -264,7 +278,6 @@ brew xvid
 brew xxhash
 brew xz
 brew yazi
-brew z3
 brew zeromq
 brew zimg
 brew zlib
@@ -284,6 +297,8 @@ cask font-iosevka-nerd-font
 cask font-pacifico
 cask font-symbols-only-nerd-font
 cask font-vazirmatn
+cask ghostty
+cask home-assistant
 cask iina
 cask iterm2
 cask jetbrains-toolbox
@@ -302,6 +317,9 @@ cask the-unarchiver
 cask visual-studio-code
 cask whatsapp
 
+tap andrewmd5/tap
+brew dawn
+
 tap argoproj/tap
 brew kubectl-argo-rollouts
 
@@ -316,6 +334,7 @@ brew emacs-plus@31 --with-imagemagick
 tap datadog-labs/pack
 
 tap devsunb/tap
+brew kanata-vk-agent
 
 tap dx/tap
 brew data-access
@@ -330,12 +349,14 @@ brew mirrord
 tap railwaycat/emacsmacport
 
 tap raine/workmux
-brew workmux
 
 tap rcmdnk/file
 brew brew-file
 
+tap umputun/apps
+brew revdiff
+
 tap withgraphite/tap
 
 # App Store applications
-appstore 490179405 Okta Verify (9.67.1)
+appstore 490179405 Okta Verify (9.69.0)
