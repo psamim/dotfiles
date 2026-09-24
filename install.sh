@@ -60,6 +60,7 @@ rm -rf "$HOME/.config/systemd"
 mkdir -p "$HOME/.config/systemd/"
 cp -r "$PWD/systemd/user" "$HOME/.config/systemd/user"
 cp -r "$PWD/systemd/system/*" "/etc/systemd/system"
+systemctl --user enable --now ydotool kanata syncthing
 
 # gpg
 ln -sf $PWD/pam_environment $HOME/.pam_environment
