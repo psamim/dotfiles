@@ -1,2 +1,6 @@
 theme = "catppuccin-mocha"
 leader = " "
+
+[export]
+session_header = false
+comments_header="## Comments"
