@@ -41,6 +41,8 @@ Examples of what I want:
 # Tools
 - Never `git push --force` / `--force-with-lease`, and never push a rebase,
   without asking first.
+- Do not delete branches or commits without confirmation.
+- When creating a pull request, always make it a DRAFT. 
 
 ## During a task
 - Two strikes. A command failing twice the same way → stop. Give me the exact
