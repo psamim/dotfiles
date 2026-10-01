@@ -206,6 +206,7 @@ brew openjpeg
 brew openjph
 brew openldap
 brew openssl@3
+brew openssl@4
 brew opus
 brew p11-kit
 brew pango
@@ -287,7 +288,6 @@ brew zstd
 tap homebrew/cask
 cask 1password-cli
 cask alacritty
-cask alt-tab
 cask cursor
 cask firefox
 cask font-dejavu
@@ -345,6 +345,9 @@ tap krtirtho/apps
 
 tap metalbear-co/mirrord
 brew mirrord
+
+tap nikitabobko/tap
+cask aerospace
 
 tap railwaycat/emacsmacport
 

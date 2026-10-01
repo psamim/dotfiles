@@ -98,3 +98,7 @@ ln -sf $PWD/ghostty/shaders $HOME/.config/ghostty/shaders
 # tuicr
 mkdir -p $HOME/.config/tuicr
 ln -sf $PWD/tuicr/config.toml $HOME/.config/tuicr/config.toml
+
+# aerospace
+mkdir -p $HOME/.config/aerospace
+ln -sf $PWD/aerospace/aerospace.toml $HOME/.config/aerospace/aerospace.toml

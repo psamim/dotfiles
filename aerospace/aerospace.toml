@@ -1,0 +1,60 @@
+config-version = 2
+start-at-login = true
+default-root-container-layout = 'accordion'
+default-root-container-orientation = 'horizontal'
+automatically-unhide-macos-hidden-apps = true
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[mode.main.binding]
+cmd-f1 = 'workspace 1'
+cmd-f2 = 'workspace 2'
+cmd-f3 = 'workspace 3'
+cmd-f4 = 'workspace 4'
+
+alt-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
+alt-shift-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
+alt-backtick = 'focus-back-and-forth'
+
+cmd-shift-f1 ='move-node-to-workspace 1'
+cmd-shift-f2 = 'move-node-to-workspace 2'
+cmd-shift-f3 = 'move-node-to-workspace 3'
+cmd-shift-f4 = 'move-node-to-workspace 4'
+
+# 1: terminal
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 1'
+
+# 2: browsers
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 2'
+
+# 3: communication
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.app.kjgfgldnnfoeklkmfkjfagphfepbbdan'
+run = 'move-node-to-workspace 3'
+
+# 4: notes
+[[on-window-detected]]
+if.app-id = 'org.gnu.Emacs'
+run = 'move-node-to-workspace 4'
