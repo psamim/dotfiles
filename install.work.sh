@@ -102,3 +102,10 @@ ln -sf $PWD/tuicr/config.toml $HOME/.config/tuicr/config.toml
 # aerospace
 mkdir -p $HOME/.config/aerospace
 ln -sf $PWD/aerospace/aerospace.toml $HOME/.config/aerospace/aerospace.toml
+
+# aerospace-swipe
+# A rebuild resets the Accessibility permission, so build only once.
+# Run aerospace-swipe/setup.sh by hand to rebuild.
+if [ ! -d "$HOME/.local/share/aerospace-swipe/AerospaceSwipe.app" ]; then
+  "$PWD/aerospace-swipe/setup.sh"
+fi

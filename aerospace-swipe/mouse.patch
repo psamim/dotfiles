@@ -1,0 +1,235 @@
+diff --git a/src/config.h b/src/config.h
+index c3fbcbc..3bd69cf 100644
+--- a/src/config.h
++++ b/src/config.h
+@@ -19,6 +19,9 @@ typedef struct {
+ 	float distance_pct; // distance
+ 	float velocity_pct; // velocity
+ 	float settle_factor;
++	int mouse_fingers;
++	float mouse_distance_pct;
++	float mouse_velocity_pct;
+ 	float min_step;
+ 	float min_travel;
+ 	float min_step_fast;
+@@ -42,6 +45,9 @@ static Config default_config()
+ 	config.distance_pct = 0.08f; // ≥8 % travel triggers
+ 	config.velocity_pct = 0.30f; // ≥0.30 × w pts / s triggers
+ 	config.settle_factor = 0.15f; // ≤15 % of flick speed -> flick ended
++	config.mouse_fingers = 2;
++	config.mouse_distance_pct = 0.25f;
++	config.mouse_velocity_pct = 1.5f;
+ 	config.min_step = 0.005f;
+ 	config.min_travel = 0.015f;
+ 	config.min_step_fast = 0.0f;
+@@ -153,6 +159,18 @@ static Config load_config()
+ 	if (item && yyjson_is_real(item))
+ 		config.settle_factor = (float)yyjson_get_real(item);
+ 
++	item = yyjson_obj_get(root, "mouse_fingers");
++	if (item && yyjson_is_int(item))
++		config.mouse_fingers = (int)yyjson_get_int(item);
++
++	item = yyjson_obj_get(root, "mouse_distance_pct");
++	if (item && yyjson_is_real(item))
++		config.mouse_distance_pct = (float)yyjson_get_real(item);
++
++	item = yyjson_obj_get(root, "mouse_velocity_pct");
++	if (item && yyjson_is_real(item))
++		config.mouse_velocity_pct = (float)yyjson_get_real(item);
++
+ 	config.swipe_left = config.natural_swipe ? "next" : "prev";
+ 	config.swipe_right = config.natural_swipe ? "prev" : "next";
+ 
+diff --git a/src/main.m b/src/main.m
+index fae40b9..ce7b385 100644
+--- a/src/main.m
++++ b/src/main.m
+@@ -13,6 +13,9 @@ static CFTypeRef g_haptic = NULL;
+ static Config g_config;
+ static pthread_mutex_t g_gesture_mutex = PTHREAD_MUTEX_INITIALIZER;
+ static gesture_ctx g_gesture_ctx = { 0 };
++static gesture_ctx g_mouse_ctx = { 0 };
++static Config g_mouse_config;
++static const Config* g_active;
+ static CFMutableDictionaryRef g_tracks = NULL;
+ 
+ static void switch_workspace(const char* ws)
+@@ -112,7 +115,7 @@ static bool handle_committed_state(gesture_ctx* ctx, touch* touches, int count)
+ 		&min_x, &max_x, &min_y, &max_y);
+ 
+ 	float dx = avg_x - ctx->start_x;
+-	if ((dx * ctx->last_fire_dir) < 0 && fabsf(dx) >= g_config.min_travel) {
++	if ((dx * ctx->last_fire_dir) < 0 && fabsf(dx) >= g_active->min_travel) {
+ 		ctx->state = GS_ARMED;
+ 		ctx->start_x = avg_x;
+ 		ctx->start_y = avg_y;
+@@ -129,8 +132,8 @@ static bool handle_committed_state(gesture_ctx* ctx, touch* touches, int count)
+ static void handle_idle_state(gesture_ctx* ctx, touch* touches, int count,
+ 	float avg_x, float avg_y, float avg_vel)
+ {
+-	bool fast = fabsf(avg_vel) >= g_config.velocity_pct * FAST_VEL_FACTOR;
+-	float need = fast ? g_config.min_travel_fast : g_config.min_travel;
++	bool fast = fabsf(avg_vel) >= g_active->velocity_pct * FAST_VEL_FACTOR;
++	float need = fast ? g_active->min_travel_fast : g_active->min_travel;
+ 
+ 	bool moved = true;
+ 	for (int i = 0; i < count && moved; ++i)
+@@ -159,15 +162,15 @@ static void handle_armed_state(gesture_ctx* ctx, touch* touches, int count,
+ 		return;
+ 	}
+ 
+-	bool fast = fabsf(avg_vel) >= g_config.velocity_pct * FAST_VEL_FACTOR;
+-	float stepReq = fast ? g_config.min_step_fast : g_config.min_step;
++	bool fast = fabsf(avg_vel) >= g_active->velocity_pct * FAST_VEL_FACTOR;
++	float stepReq = fast ? g_active->min_step_fast : g_active->min_step;
+ 
+ 	int mismatch_count = 0;
+ 	for (int i = 0; i < count; ++i) {
+ 		float ddx = touches[i].x - ctx->prev_x[i];
+ 		if (fabsf(ddx) < stepReq || (ddx * dx) < 0) {
+ 			mismatch_count++;
+-			if (mismatch_count > g_config.swipe_tolerance) {
++			if (mismatch_count > g_active->swipe_tolerance) {
+ 				reset_gesture_state(ctx);
+ 				return;
+ 			}
+@@ -179,25 +182,25 @@ static void handle_armed_state(gesture_ctx* ctx, touch* touches, int count,
+ 		ctx->dir = (avg_vel >= 0) ? 1 : -1;
+ 	}
+ 
+-	if (fabsf(avg_vel) >= g_config.velocity_pct) {
++	if (fabsf(avg_vel) >= g_active->velocity_pct) {
+ 		fire_gesture(ctx, avg_vel > 0 ? 1 : -1);
+-	} else if (fabsf(dx) >= g_config.distance_pct && fabsf(avg_vel) <= g_config.velocity_pct * g_config.settle_factor) {
++	} else if (fabsf(dx) >= g_active->distance_pct && fabsf(avg_vel) <= g_active->velocity_pct * g_active->settle_factor) {
+ 		fire_gesture(ctx, dx > 0 ? 1 : -1);
+ 	}
+ }
+ 
+-static void gestureCallback(touch* touches, int count)
++static void gestureCallback(touch* touches, int count, const Config* cfg, gesture_ctx* ctx)
+ {
+ 	pthread_mutex_lock(&g_gesture_mutex);
+ 
+-	gesture_ctx* ctx = &g_gesture_ctx;
++	g_active = cfg;
+ 
+ 	if (ctx->state == GS_COMMITTED) {
+ 		if (handle_committed_state(ctx, touches, count))
+ 			goto unlock;
+ 	}
+ 
+-	if (count != g_config.fingers) {
++	if (count != g_active->fingers) {
+ 		if (ctx->state == GS_ARMED)
+ 			ctx->state = GS_IDLE;
+ 
+@@ -244,11 +247,87 @@ static void process_touches(NSSet<NSTouch*>* touches)
+ 	}
+ 
+ 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+-		gestureCallback(buf, (int)i);
++		gestureCallback(buf, (int)i, &g_config, &g_gesture_ctx);
+ 		free(buf);
+ 	});
+ }
+ 
++// Magic Mouse touches do not arrive as gesture events, so read them from MultitouchSupport.
++typedef void* MTDeviceRef;
++typedef struct {
++	int frame;
++	double timestamp;
++	int identifier, state, fingerId, handId;
++	float x, y, vx, vy;
++	float size;
++	int zero1;
++	float angle, majorAxis, minorAxis;
++	float absx, absy, absvx, absvy;
++	int zero2[2];
++	float zDensity;
++} MTTouch;
++#define MT_FAMILY_MAGIC_MOUSE 112
++#define MT_STATE_TOUCHING 4
++
++extern CFArrayRef MTDeviceCreateList(void);
++extern void MTRegisterContactFrameCallback(MTDeviceRef, void (*)(MTDeviceRef, MTTouch*, int, double, int));
++extern void MTDeviceStart(MTDeviceRef, int);
++extern void MTDeviceGetFamilyID(MTDeviceRef, int*);
++
++static void mouse_frame(__unused MTDeviceRef dev, MTTouch* mt, int n, double ts, __unused int frame)
++{
++	static float last_x[MAX_TOUCHES];
++	static double last_ts[MAX_TOUCHES];
++	static bool was_touching = false;
++
++	touch buf[MAX_TOUCHES];
++	int count = 0;
++
++	for (int i = 0; i < n && count < MAX_TOUCHES; ++i) {
++		if (mt[i].state != MT_STATE_TOUCHING)
++			continue;
++		int id = mt[i].fingerId % MAX_TOUCHES;
++		double dt = ts - last_ts[id];
++		bool known = last_ts[id] > 0 && dt > 0 && dt < 0.1;
++		buf[count] = (touch) {
++			.x = mt[i].x,
++			.y = mt[i].y,
++			.phase = 0,
++			.timestamp = ts,
++			.velocity = known ? (mt[i].x - last_x[id]) / dt : 0,
++		};
++		last_x[id] = mt[i].x;
++		last_ts[id] = ts;
++		count++;
++	}
++
++	if (!count) {
++		if (was_touching) {
++			memset(last_ts, 0, sizeof(last_ts));
++			was_touching = false;
++			gestureCallback(buf, 0, &g_mouse_config, &g_mouse_ctx);
++		}
++		return;
++	}
++
++	was_touching = true;
++	gestureCallback(buf, count, &g_mouse_config, &g_mouse_ctx);
++}
++
++static void start_mouse(void)
++{
++	CFArrayRef devices = MTDeviceCreateList();
++	for (CFIndex i = 0; devices && i < CFArrayGetCount(devices); ++i) {
++		MTDeviceRef dev = (MTDeviceRef)CFArrayGetValueAtIndex(devices, i);
++		int family = 0;
++		MTDeviceGetFamilyID(dev, &family);
++		if (family != MT_FAMILY_MAGIC_MOUSE)
++			continue;
++		MTRegisterContactFrameCallback(dev, mouse_frame);
++		MTDeviceStart(dev, 0);
++	}
++}
++
+ static CGEventRef key_handler(__unused CGEventTapProxy proxy, CGEventType type,
+ 	CGEventRef event, void* ref)
+ {
+@@ -347,6 +426,10 @@ int main(int argc, const char* argv[])
+ 		NSLog(@"Accessibility permission granted. Continuing app initialization...");
+ 
+ 		g_config = load_config();
++		g_mouse_config = g_config;
++		g_mouse_config.fingers = g_config.mouse_fingers;
++		g_mouse_config.distance_pct = g_config.mouse_distance_pct;
++		g_mouse_config.velocity_pct = g_config.mouse_velocity_pct;
+ 		NSLog(@"Loaded config: fingers=%d, skip_empty=%s, wrap_around=%s, haptic=%s, swipe_left='%s', swipe_right='%s'",
+ 			g_config.fingers,
+ 			g_config.skip_empty ? "YES" : "NO",
+@@ -372,6 +455,7 @@ int main(int argc, const char* argv[])
+ 			NULL);
+ 
+ 		event_tap_begin(&g_event_tap, key_handler);
++		start_mouse();
+ 
+ 		return NSApplicationMain(argc, argv);
+ 	}
