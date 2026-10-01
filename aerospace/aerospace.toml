@@ -22,10 +22,18 @@ alt-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-work
 alt-shift-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
 alt-backtick = 'focus-back-and-forth'
 
+ctrl-alt-o = 'fullscreen'
+ctrl-alt-l = 'move-workspace-to-monitor --wrap-around next'
+
 cmd-shift-f1 ='move-node-to-workspace 1'
 cmd-shift-f2 = 'move-node-to-workspace 2'
 cmd-shift-f3 = 'move-node-to-workspace 3'
 cmd-shift-f4 = 'move-node-to-workspace 4'
+
+# float everything
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
 
 # 1: terminal
 [[on-window-detected]]
