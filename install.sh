@@ -106,6 +106,7 @@ ya pkg install
 # ghostty
 mkdir -p $HOME/.config/ghostty
 ln -sf $PWD/ghostty/config $HOME/.config/ghostty/config
+echo "window-decoration = none" > $HOME/.config/ghostty/config.local
 rm -rf $HOME/.config/ghostty/shaders
 ln -sf $PWD/ghostty/shaders $HOME/.config/ghostty/shaders
 

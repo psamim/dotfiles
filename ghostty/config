@@ -10,7 +10,7 @@ theme = Catppuccin Mocha
 # background-blur = 64
 window-padding-x = 8
 window-padding-y = 8
-window-decoration = false
+window-decoration = true
 background-image-fit = cover
 background-image-position = top-right
 macos-titlebar-style = hidden
@@ -35,3 +35,6 @@ copy-on-select = false
 keybind = cmd+m=unbind
 keybind = cmd+t=text:\x14
 keybind = cmd+c=text:\x03
+
+# Per-machine overrides (Linux sets window-decoration = none here)
+config-file = ?~/.config/ghostty/config.local

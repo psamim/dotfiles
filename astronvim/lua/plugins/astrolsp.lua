@@ -3,6 +3,25 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local ts_root_markers = { { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }, { ".git" } }
+local ts7_bins = {} ---@type table<string, string|false>
+
+-- Returns the project's own `node_modules/.bin/tsc` if it is TypeScript 7+ (has `--lsp`).
+local function ts7_bin(root)
+  if ts7_bins[root] == nil then
+    local bin = vim.fs.joinpath(root, "node_modules/.bin/tsc")
+    ts7_bins[root] = false
+    if vim.fn.executable(bin) == 1 then
+      local out = vim.system({ bin, "--version" }, { text = true }):wait()
+      local version = vim.version.parse(out.stdout or "")
+      if out.code == 0 and version and version.major >= 7 then ts7_bins[root] = bin end
+    end
+  end
+  return ts7_bins[root] or nil
+end
+
+local function ts_root(bufnr) return vim.fs.root(bufnr, ts_root_markers) or vim.fn.getcwd() end
+
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -41,6 +60,7 @@ return {
         -- eslint's fixAll (which enforces Prettier via eslint-plugin-prettier)
         -- must be the only formatter touching these filetypes.
         "vtsls",
+        "tsc", -- same reason as vtsls
       },
       timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -50,12 +70,28 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "tsc", -- TypeScript 7 native server, uses the project's node_modules/.bin/tsc
     },
     -- customize language server configuration passed to `vim.lsp.config`
     -- client specific configuration can also go in `lsp/` in your configuration root (see `:h lsp-config`)
     config = {
       -- ["*"] = { capabilities = {} }, -- modify default LSP client settings such as capabilities
+      -- Projects with TypeScript 7 use tsc. All other projects use vtsls.
+      tsc = {
+        root_dir = function(bufnr, on_dir)
+          local root = ts_root(bufnr)
+          if ts7_bin(root) then on_dir(root) end
+        end,
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start({ ts7_bin(config.root_dir), "--lsp", "--stdio" }, dispatchers)
+        end,
+        settings = { ["js/ts"] = { referencesCodeLens = { enabled = false } } },
+      },
       vtsls = {
+        root_dir = function(bufnr, on_dir)
+          local root = ts_root(bufnr)
+          if not ts7_bin(root) then on_dir(root) end
+        end,
         settings = {
           typescript = { tsdk = "node_modules/typescript/lib" },
           vtsls = { autoUseWorkspaceTsdk = true },
