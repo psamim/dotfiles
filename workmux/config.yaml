@@ -1,5 +1,11 @@
 nerdfont: true
 merge_strategy: rebase
+
+status_icons:
+  working: " "
+  waiting: " "
+  done: " "
+
 agent: claude
 
 panes:
