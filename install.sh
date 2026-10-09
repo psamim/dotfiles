@@ -29,6 +29,7 @@ ln -sf "$PWD/tmux" "$HOME/.tmux"
 mkdir -p $HOME/.tmux/plugins
 ln -sfn $PWD/tpm $HOME/.tmux/plugins/tpm
 $HOME/.tmux/plugins/tpm/bin/install_plugins
+ln -sf $PWD/tmux/which-key.yaml $HOME/.tmux/plugins/tmux-which-key/config.yaml
 
 # emacs
 rm -rf "$HOME/.doom.d"
