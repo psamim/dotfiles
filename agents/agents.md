@@ -53,3 +53,6 @@ Applies everywhere: chat replies, code comments, names, commit messages, pull re
 - While working, speak up only when you find something important or change direction.
 - Two strikes. If a command fails twice the same way, stop. Report the exact
   command, the error, and your two best hypotheses.
+
+# Local instructions
+@~/.claude/CLAUDE-LOCAL.md
