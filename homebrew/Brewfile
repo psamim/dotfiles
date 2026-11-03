@@ -33,10 +33,12 @@ brew brotli
 brew ca-certificates
 brew cairo
 brew certifi
+brew cffi
 brew cjson
 brew colima
 brew cookiecutter
 brew coreutils
+brew cryptography
 brew curl
 brew dav1d
 brew dbus
@@ -89,7 +91,8 @@ brew helm
 brew highway
 brew hledger
 brew htop
-brew icu4c
+brew icu4c@78
+brew icu4c@79
 brew imagemagick
 brew imagemagick-full
 brew imath
@@ -176,7 +179,7 @@ brew lima
 brew little-cms2
 brew llama.cpp
 brew llhttp
-brew llvm@22
+brew llvm
 brew lpeg
 brew luajit
 brew luv
@@ -214,6 +217,7 @@ brew pcre
 brew pcre2
 brew php@8.2
 brew php@8.4
+brew phrase-cli
 brew pinentry
 brew pinentry-mac
 brew pipenv
@@ -225,8 +229,11 @@ brew powerlevel10k
 brew protobuf
 brew pugixml
 brew pup
+brew pycparser
+brew pydantic
 brew python-yq
 brew python@3.14
+brew python@3.15
 brew qrencode
 brew qtbase
 brew rav1e
@@ -235,6 +242,7 @@ brew readline
 brew reattach-to-user-namespace
 brew resvg
 brew ripgrep
+brew rpds-py
 brew rsync
 brew rubberband
 brew rust
@@ -279,6 +287,7 @@ brew xvid
 brew xxhash
 brew xz
 brew yazi
+brew z3
 brew zeromq
 brew zimg
 brew zlib
@@ -287,7 +296,7 @@ brew zstd
 
 tap homebrew/cask
 cask 1password-cli
-cask alacritty
+cask calibre
 cask cursor
 cask firefox
 cask font-dejavu
@@ -310,8 +319,6 @@ cask libreoffice
 cask localsend
 cask monitorcontrol
 cask raycast
-cask signal
-cask spotify
 cask stats
 cask the-unarchiver
 cask visual-studio-code
@@ -349,6 +356,9 @@ brew mirrord
 tap nikitabobko/tap
 cask aerospace
 
+tap omnigent-ai/tap
+brew omnigent
+
 tap railwaycat/emacsmacport
 
 tap raine/workmux
@@ -362,4 +372,4 @@ brew revdiff
 tap withgraphite/tap
 
 # App Store applications
-appstore 490179405 Okta Verify (9.69.0)
+appstore 490179405 Okta Verify (9.73.0)
