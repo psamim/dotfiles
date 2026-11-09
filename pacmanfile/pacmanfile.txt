@@ -6,7 +6,6 @@ aic94xx-firmware
 alsa-utils
 althttpd-fossil
 android-file-transfer
-android-studio
 appmenu-gtk-module
 arandr
 arch-hs
@@ -459,10 +458,12 @@ yazi
 zen-browser-bin
 git-delta
 python-libtmux
+glab
+tuicr
 
-kitty
-kitty-terminfo
-kitty-shell-integration
+# kitty
+# kitty-terminfo
+# kitty-shell-integration
 
 # Emacs
 typescript-language-server
