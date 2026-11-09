@@ -280,3 +280,13 @@ function set_tmux_title {
   fi
 }
 precmd_functions+=(set_tmux_title)
+
+# In a tpad popup (scratch, lazygit), create workmux windows in the parent session
+function workmux {
+  if [[ -n "$TMUX" && ( "$1" == add || "$1" == open ) && "$(tmux display-message -p '#S')" == tpad_* ]]; then
+    local parent="$(tmux show-environment -g TPAD_PARENT_SESSION | cut -d= -f2)"
+    command workmux "$1" --parent-session "$parent" "${@:2}"
+  else
+    command workmux "$@"
+  fi
+}

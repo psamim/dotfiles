@@ -10,8 +10,6 @@ agent: claude
 
 panes:
   - command: <agent>
-    focus: false
-  - split: horizontal
     focus: true
 
 sidebar:
@@ -24,5 +22,3 @@ sidebar:
 files:
   copy:
     - .env
-  # symlink:
-  #   - .next/cache

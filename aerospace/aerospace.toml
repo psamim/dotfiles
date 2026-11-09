@@ -3,6 +3,7 @@ start-at-login = true
 default-root-container-layout = 'accordion'
 default-root-container-orientation = 'horizontal'
 automatically-unhide-macos-hidden-apps = true
+on-focus-changed = ['exec-and-forget $HOME/.dotfiles/aerospace/mru-focus.sh record']
 
 [gaps]
 inner.horizontal = 8
@@ -18,8 +19,8 @@ cmd-f2 = 'workspace 2'
 cmd-f3 = 'workspace 3'
 cmd-f4 = 'workspace 4'
 
-alt-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
-alt-shift-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
+alt-tab = 'exec-and-forget $HOME/.dotfiles/aerospace/mru-focus.sh next'
+alt-shift-tab = 'exec-and-forget $HOME/.dotfiles/aerospace/mru-focus.sh prev'
 alt-backtick = 'focus-back-and-forth'
 
 ctrl-alt-o = 'fullscreen'
